@@ -1,0 +1,78 @@
+{
+  "clause.title": "LAST WILL AND TESTAMENT OF {{personal.full_name}}",
+
+  "clause.declaration": "I, {{personal.full_name}}{{frag:relation}}{{frag:age}}{{frag:occupation}}{{frag:residence}}{{frag:id}}, do hereby declare this to be my LAST WILL AND TESTAMENT, made on this {{today.day}} day of {{today.month}}, {{today.year}} at ____________________.",
+  "frag.decl.residence": ", residing at {{personal.address}}",
+  "frag.decl.relation.son_of": ", son of {{personal.relation_name}}",
+  "frag.decl.relation.daughter_of": ", daughter of {{personal.relation_name}}",
+  "frag.decl.relation.wife_of": ", wife of {{personal.relation_name}}",
+  "frag.decl.relation.husband_of": ", husband of {{personal.relation_name}}",
+  "frag.decl.age": ", aged {{age}} years",
+  "frag.decl.occupation": ", {{personal.occupation}} by occupation",
+  "frag.decl.id": ", holding {{label:personal.id_type}} No. {{personal.id_value}}",
+
+  "clause.soundmind": "I declare that I am of sound mind, memory and understanding, and that I make this Will voluntarily, of my own free will, without any coercion, fraud or undue influence from any person.",
+
+  "clause.revocation": "I hereby revoke all Wills and Codicils heretofore made by me, and declare this to be my last Will.",
+
+  "clause.family": "My family consists of {{familyList}}.",
+
+  "part.wishes": "MY WISHES REGARDING MY REMAINS",
+
+  "clause.funeral.burial": "I desire and direct that my body be buried at {{frag:place}}{{frag:rites}}.",
+  "frag.burial.place.family_ground_at": "our family burial ground at {{funeral.burial.place_detail}}",
+  "frag.burial.place.family_ground": "our family burial ground",
+  "frag.burial.place.mosque_at": "the burial ground (qabristan) of {{funeral.burial.place_detail}}",
+  "frag.burial.place.mosque": "the burial ground (qabristan) of the mosque my family selects",
+  "frag.burial.place.church_at": "the cemetery of {{funeral.burial.place_detail}}",
+  "frag.burial.place.church": "the cemetery of the church my family selects",
+  "frag.burial.place.public": "a public burial ground near my residence",
+  "frag.burial.place.specific": "{{funeral.burial.place_detail}}",
+  "frag.burial.place.practical": "a place convenient to my family",
+  "frag.burial.rites.customs": ", with the customary rites of my faith",
+  "frag.burial.rites.simple": ", with a simple ceremony and without elaborate ritual",
+  "frag.burial.rites.custom": ", observing the following: {{funeral.burial.rites_custom}}",
+
+  "clause.funeral.cremation": "I desire and direct that my body be cremated at {{frag:place}}{{frag:rites}}.{{frag:ashes}}",
+  "frag.crem.place.local": "the local crematorium",
+  "frag.crem.place.specific_at": "{{funeral.cremation.place_detail}}",
+  "frag.crem.place.practical": "a place convenient to my family",
+  "frag.crem.rites.customs": ", with the customary rites of my faith",
+  "frag.crem.rites.simple": ", with a simple ceremony and without elaborate ritual",
+  "frag.crem.rites.custom": ", observing the following: {{funeral.cremation.rites_custom}}",
+  "frag.crem.ashes.immerse_at": " My ashes shall be immersed at {{funeral.cremation.ashes_place}}.",
+  "frag.crem.ashes.immerse": " My ashes shall be immersed as my family sees fit.",
+  "frag.crem.ashes.scatter_at": " My ashes shall be scattered at {{funeral.cremation.ashes_place}}.",
+  "frag.crem.ashes.scatter": " My ashes shall be scattered at a place my family selects.",
+  "frag.crem.ashes.kept": " My ashes shall be kept by my family.",
+
+  "clause.funeral.donation": "I desire and direct that my body be donated for medical education or research{{frag:institution}}. If the donation cannot be accepted for any reason, {{frag:fallback}}",
+  "frag.donation.institution.named": ", preferably to {{funeral.body_donation.institution_name}}",
+  "frag.donation.institution.executor": ", to an institution my Executor selects",
+  "frag.donation.fallback.burial": "the burial directions below shall apply.",
+  "frag.donation.fallback.cremation": "the cremation directions below shall apply.",
+  "frag.donation.fallback.family": "my family shall decide the arrangements.",
+
+  "clause.funeral.family_decides": "I desire that the arrangements for my remains be as my family decides.",
+
+  "clause.funeral.memorial": "As to any memorial, I wish for {{frag:memorial}}.",
+  "frag.memorial.customs": "observances according to the customs of my faith",
+  "frag.memorial.simple": "a simple gathering, without formal ceremony",
+  "frag.memorial.none": "no ceremony",
+  "frag.memorial.family": "whatever my family decides",
+
+  "clause.funeral.cost": "My funeral expenses shall {{frag:cost}}.",
+  "frag.cost.modest": "be kept modest",
+  "frag.cost.customary": "be as is customary",
+  "frag.cost.limit": "not exceed {{inr:funeral.cost_amount}}",
+
+  "clause.funeral.notes": "I further wish that: {{funeral.notes}}",
+
+  "clause.muslim": "I am aware that under the Muslim personal law applicable to me, bequests exceeding one-third of my net estate, and bequests in favour of my legal heirs, take effect only with the consent of my heirs. The bequests in this Will are intended to operate within that rule, and to the extent any bequest exceeds it, it shall take effect only so far as my heirs consent after my death; the remainder of my estate shall devolve upon my heirs in accordance with that law.",
+
+  "clause.general.single": "This Will is executed in a single original. Any photocopy or draft shall not be treated as my Will. If any provision of this Will is held invalid, the remaining provisions shall continue in full force.",
+
+  "clause.testimonium": "IN WITNESS WHEREOF I, {{personal.full_name}}, have signed this Will on this {{today.day}} day of {{today.month}}, {{today.year}} at ____________________, in the joint presence of the witnesses below, who have attested it in my presence and in the presence of each other.",
+
+  "clause.attestation": "ATTESTATION: Signed by the above-named Testator as the Testator's Last Will and Testament in our joint presence, and signed by us as witnesses in the Testator's presence and in the presence of each other, all being present at the same time. We believe the Testator to be of sound mind, memory and understanding."
+}

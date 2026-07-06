@@ -1,0 +1,48 @@
+{
+  "ui.appName": "LastWill",
+  "ui.tagline": "Make your will, simply.",
+  "ui.landing.lead": "Answer short questions, one at a time. Skip anything. At the end you get the full text of your will — ready to print, sign before two witnesses, and keep.",
+  "ui.landing.privacy": "Everything stays on this device. Nothing is uploaded, ever.",
+  "ui.landing.start": "Start my will",
+  "ui.landing.resume": "Continue where I left off",
+  "ui.landing.startOver": "Start over",
+
+  "ui.skip": "Skip this question",
+  "ui.back": "Back",
+  "ui.continue": "Continue",
+  "ui.understood": "Understood",
+  "ui.optionalHint": "Optional — leave blank to omit.",
+  "ui.addAnother": "Add another",
+  "ui.doneAdding": "Done",
+  "ui.remove": "Remove",
+
+  "ui.chapter.you": "You & Your Family",
+  "ui.chapter.wishes": "Final Wishes",
+  "ui.section.personal": "Personal details",
+  "ui.section.funeral": "Funeral & memorial",
+
+  "ui.startOver.confirm": "Delete all your answers and start fresh?",
+
+  "ui.done.title": "Your will is ready",
+  "ui.done.lead": "Review the text below. You can copy it, or print it to PDF. Then sign every page before two adult witnesses (who are not beneficiaries).",
+  "ui.done.copy": "Copy text",
+  "ui.done.copied": "Copied",
+  "ui.done.print": "Print / save as PDF",
+  "ui.done.back": "Back to questions",
+
+  "ui.blocked.title": "The will can't be generated yet",
+  "ui.blocked.underage": "You told us you are under 18 — a person must be 18 or older to make a valid will in India.",
+  "ui.blocked.soundMind": "The sound-mind confirmation is required. Go back and confirm it to generate your will.",
+
+  "ui.lang.mlSoon": "മലയാളം — coming soon",
+
+  "ui.disclaimer": "This is a document-drafting aid, not legal advice.",
+
+  "ui.will.witness": "Witness",
+  "ui.will.witnessName": "Name",
+  "ui.will.witnessAddress": "Address",
+  "ui.will.witnessOccupation": "Occupation",
+  "ui.will.witnessSignature": "Signature",
+  "ui.will.testatorSignature": "Signature of Testator",
+  "ui.will.testator": "(Testator)"
+}
