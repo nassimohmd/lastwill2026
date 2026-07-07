@@ -17,6 +17,12 @@ export function RepeaterAddMore({ repeaterId }: { repeaterId: string }) {
           {items.map((item, i) => (
             <li key={i}>
               <span>{def.summarize(item, locale)}</span>
+              <button
+                className="link"
+                onClick={() => dispatch({ type: 'REPEATER_REMOVE_ITEM', repeaterId, index: i })}
+              >
+                {t('ui.remove', locale)}
+              </button>
             </li>
           ))}
         </ul>

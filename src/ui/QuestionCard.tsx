@@ -29,6 +29,23 @@ export function QuestionCard({ question }: { question: Question }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question.id]);
 
+  // number keys 1–9 pick an option directly (the interview is long; this
+  // lets keyboard users power through without reaching for the mouse)
+  useEffect(() => {
+    if (question.type !== 'single' || !question.options) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const el = document.activeElement;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) return;
+      const idx = Number(e.key) - 1;
+      if (!Number.isInteger(idx) || idx < 0 || idx > 8) return;
+      const opt = question.options![idx];
+      if (opt) dispatch({ type: 'ANSWER', qid: question.id, value: opt.id, optionId: opt.id });
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [question, dispatch]);
+
   const skippable = question.skippable !== false;
 
   const submitText = () => {
@@ -66,7 +83,7 @@ export function QuestionCard({ question }: { question: Question }) {
       case 'single':
         return (
           <div className="options">
-            {question.options?.map((o) => (
+            {question.options?.map((o, i) => (
               <button
                 key={o.id}
                 className={`option ${existing === o.id ? 'selected' : ''}`}
@@ -74,6 +91,7 @@ export function QuestionCard({ question }: { question: Question }) {
                   dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })
                 }
               >
+                {i < 9 && <span className="option-key">{i + 1}</span>}
                 {t(o.label, locale)}
               </button>
             ))}

@@ -109,6 +109,26 @@ Selectors that matter:
   values) — the flex `min-width` is tuned to the sheet's inner width, and
   padding/max-width changes can silently wrap them into a vertical stack.
 
+## Review summaries, repeater editing, keyboard shortcuts
+
+- Review rows show a one-line answer gist (`.review-section-summary`) for
+  answered sections, falling back to the chapter caption for skipped ones.
+  Summaries come from `src/template/summaries.ts` — pure state → string,
+  reusing option-label keys, so they localize for free; unit-test new
+  sections there rather than screenshotting every row.
+- Re-answering a finished repeater's mode/gate **reopens** its items on the
+  add-more screen (they move from `answers[def.id]` into `repeaterItems`)
+  instead of wiping them; each row has a Remove link
+  (`REPEATER_REMOVE_ITEM`). RETURN_TO_REVIEW commits non-empty
+  `repeaterItems` back into `answers` — worth re-driving the
+  reopen → jump-to-Review path after touching the reducer, since items
+  living in `repeaterItems` are invisible to the will/checklist until
+  committed.
+- Number keys 1–9 answer single-choice questions (hints rendered as
+  `.option-key`, hidden on touch via `@media (hover: none)`). The listener
+  ignores keys while an input/textarea has focus — probe that by focusing
+  the date field and pressing a digit; the question must not advance.
+
 ## Phase 4: review screen, checklist, export/import, CSP
 
 - Finishing the interview lands on **Review** (`h2` "Review your answers"),

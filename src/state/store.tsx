@@ -4,7 +4,7 @@ import type { Locale } from '../i18n';
 import { graph } from '../data/graph';
 import { loadDraft, saveDraft, clearDraft } from './persistence';
 import { ITEM_END, addMoreScreenId } from '../engine/repeaters';
-import { repeaterRegistry } from '../data/repeaters';
+import { repeaterDefs, repeaterRegistry } from '../data/repeaters';
 
 export type Action =
   | { type: 'ANSWER'; qid: string; value: unknown; optionId?: string }
@@ -12,6 +12,7 @@ export type Action =
   | { type: 'ANSWER_PERSON'; qid: string; personId: string; newPerson?: Person }
   | { type: 'ANSWER_PEOPLE'; qid: string; personIds: string[]; newPeople?: Person[] }
   | { type: 'REPEATER_ADD_ANOTHER'; repeaterId: string }
+  | { type: 'REPEATER_REMOVE_ITEM'; repeaterId: string; index: number }
   | { type: 'REPEATER_FINISH'; repeaterId: string }
   | { type: 'BACK' }
   | { type: 'GOTO'; qid: string }
@@ -161,8 +162,7 @@ function purgeUnreachable(state: AppState): AppState {
 
 /** Snapshot the current repeater item into `repeaterItems`, clear its scratch
  *  keys from `answers`, and hand control to the built-in add-more screen. */
-function finishItem(state: AppState): AppState {
-  const repeaterId = state.repeaterSession!.repeaterId;
+function finishItem(state: AppState, repeaterId: string): AppState {
   const def = repeaterRegistry.byId.get(repeaterId)!;
   const prefix = def.keyPrefix + '.';
   const item: Record<string, unknown> = {};
@@ -179,6 +179,7 @@ function finishItem(state: AppState): AppState {
     ...state,
     answers,
     skipped,
+    repeaterSession: { repeaterId },
     repeaterItems: { ...state.repeaterItems, [repeaterId]: items },
     currentQuestionId: addMoreScreenId(repeaterId),
   };
@@ -186,11 +187,33 @@ function finishItem(state: AppState): AppState {
 
 /** Resolve what happens after an answer/skip: repeater entry, repeater exit
  *  (ITEM_END), or an ordinary question — folding all three into one state. */
-function routeAfter(state: AppState, rawNext: string | null): AppState {
-  if (rawNext === ITEM_END) return finishItem(state);
+function routeAfter(state: AppState, rawNext: string | null, fromQid?: string): AppState {
+  if (rawNext === ITEM_END) {
+    const repeaterId =
+      state.repeaterSession?.repeaterId ??
+      // no live session (e.g. Back into an item question after finishing):
+      // recover the repeater from the answered question's key prefix
+      repeaterDefs.find((d) => fromQid?.startsWith(d.keyPrefix + '.'))?.id;
+    if (!repeaterId) return { ...state, currentQuestionId: null };
+    return finishItem(state, repeaterId);
+  }
   if (rawNext) {
     const def = repeaterRegistry.byEntryId.get(rawNext);
     if (def && state.repeaterSession?.repeaterId !== def.id) {
+      const existing = state.answers[def.id];
+      if (Array.isArray(existing) && existing.length > 0) {
+        // re-entering an already-finished repeater: reopen its items on the
+        // add-more screen (with per-item Remove) instead of wiping them
+        const answers = { ...state.answers };
+        delete answers[def.id];
+        return {
+          ...state,
+          answers,
+          currentQuestionId: addMoreScreenId(def.id),
+          repeaterSession: { repeaterId: def.id },
+          repeaterItems: { ...state.repeaterItems, [def.id]: existing as Record<string, unknown>[] },
+        };
+      }
       return {
         ...state,
         currentQuestionId: rawNext,
@@ -223,7 +246,7 @@ export function reducer(state: AppState, action: Action): AppState {
       };
       next = purgeUnreachable(next);
       const raw = graph.resolveNext(action.qid, next, { chosenOptionId: action.optionId });
-      next = routeAfter(next, raw);
+      next = routeAfter(next, raw, action.qid);
       return touch({ ...next, history: [...state.history, action.qid] });
     }
 
@@ -237,7 +260,7 @@ export function reducer(state: AppState, action: Action): AppState {
       };
       next = purgeUnreachable(next);
       const raw = graph.resolveNext(action.qid, next, { skip: true });
-      next = routeAfter(next, raw);
+      next = routeAfter(next, raw, action.qid);
       return touch({ ...next, history: [...state.history, action.qid] });
     }
 
@@ -253,7 +276,7 @@ export function reducer(state: AppState, action: Action): AppState {
       };
       next = purgeUnreachable(next);
       const raw = graph.resolveNext(action.qid, next, {});
-      next = routeAfter(next, raw);
+      next = routeAfter(next, raw, action.qid);
       return touch({ ...next, history: [...state.history, action.qid] });
     }
 
@@ -269,7 +292,7 @@ export function reducer(state: AppState, action: Action): AppState {
       };
       next = purgeUnreachable(next);
       const raw = graph.resolveNext(action.qid, next, {});
-      next = routeAfter(next, raw);
+      next = routeAfter(next, raw, action.qid);
       return touch({ ...next, history: [...state.history, action.qid] });
     }
 
@@ -280,6 +303,17 @@ export function reducer(state: AppState, action: Action): AppState {
         ...state,
         currentQuestionId: def.entryId,
         history: [...state.history, addMoreScreenId(action.repeaterId)],
+      });
+    }
+
+    case 'REPEATER_REMOVE_ITEM': {
+      const items = state.repeaterItems[action.repeaterId] ?? [];
+      return touch({
+        ...state,
+        repeaterItems: {
+          ...state.repeaterItems,
+          [action.repeaterId]: items.filter((_, i) => i !== action.index),
+        },
       });
     }
 
@@ -330,18 +364,21 @@ export function reducer(state: AppState, action: Action): AppState {
       return touch({ ...state, meta: { ...state.meta, locale: action.locale } });
 
     case 'RETURN_TO_REVIEW': {
+      // commit any collected (or reopened) repeater lists back to answers
+      // first, so jumping away mid-collection doesn't lose finished items —
+      // only the current half-filled item's scratch keys are discarded
+      const answers = { ...state.answers };
+      for (const [rid, items] of Object.entries(state.repeaterItems)) {
+        if (items.length > 0) answers[rid] = items;
+      }
       // purgeUnreachable replays from the top regardless of where the
       // cursor currently sits, so this is safe even mid-edit: anything the
       // just-changed answer invalidated downstream is cleaned up without
       // requiring the user to click through every remaining question.
-      const next = purgeUnreachable(state);
+      const next = purgeUnreachable({ ...state, answers });
       return touch({
         ...next,
         currentQuestionId: null,
-        // an incomplete repeater item's own fields are preserved as loose
-        // top-level answers by the purge above (harmless — they render
-        // nothing since they're outside any `each` array); dropping the
-        // session itself avoids a stale repeaterId blocking re-entry later.
         repeaterSession: null,
         repeaterItems: {},
       });

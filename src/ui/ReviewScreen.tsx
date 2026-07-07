@@ -2,6 +2,7 @@ import { t } from '../i18n';
 import { useStore } from '../state/store';
 import { sections, chapters } from '../data/graph';
 import { getWarnings, getChecklist } from '../template/checklist';
+import { sectionSummary } from '../template/summaries';
 
 function sectionStatus(state: ReturnType<typeof useStore>['state'], gateId: string): 'done' | 'skipped' {
   if (state.skipped.includes(gateId)) return 'skipped';
@@ -40,11 +41,16 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
         {sections.map((s) => {
           const status = sectionStatus(state, s.order[0]);
           const chapter = chapters.find((c) => c.id === s.chapter);
+          const summary = status === 'done' ? sectionSummary(s.id, state, locale) : null;
           return (
             <li key={s.id} className="review-section-row">
               <div>
                 <span className="review-section-title">{t(s.title, locale)}</span>
-                <span className="review-section-chapter">{chapter ? t(chapter.title, locale) : ''}</span>
+                {summary ? (
+                  <span className="review-section-summary">{summary}</span>
+                ) : (
+                  <span className="review-section-chapter">{chapter ? t(chapter.title, locale) : ''}</span>
+                )}
               </div>
               <span className={`status-pill ${status}`}>
                 {t(status === 'done' ? 'ui.review.section.done' : 'ui.review.section.skipped', locale)}

@@ -128,6 +128,9 @@
   "ui.import.confirmOverwrite": "ഇത് നിലവിലുള്ള ഉത്തരങ്ങൾക്ക് പകരം ഇംപോർട്ട് ചെയ്ത ഡ്രാഫ്റ്റ് സ്ഥാപിക്കും. തുടരണോ?",
   "ui.import.error": "ഈ ഫയൽ ഒരു LastWill ഡ്രാഫ്റ്റ് ആയി തോന്നുന്നില്ല.",
 
+  "ui.summary.count": "{n} എണ്ണം ചേർത്തു",
+  "ui.summary.children": "{n} മക്കൾ",
+
   "ui.lang.toggle.en": "English",
   "ui.lang.toggle.ml": "മലയാളം",
   "ui.will.langLabel": "വിൽപത്രത്തിന്റെ ഭാഷ:",

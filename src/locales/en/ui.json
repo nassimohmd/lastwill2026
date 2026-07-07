@@ -128,6 +128,9 @@
   "ui.import.confirmOverwrite": "This will replace your current answers with the imported draft. Continue?",
   "ui.import.error": "That file doesn't look like a LastWill draft.",
 
+  "ui.summary.count": "{n} added",
+  "ui.summary.children": "{n} children",
+
   "ui.lang.toggle.en": "English",
   "ui.lang.toggle.ml": "മലയാളം",
   "ui.will.langLabel": "Will language:",
