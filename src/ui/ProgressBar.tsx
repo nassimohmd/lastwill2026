@@ -26,11 +26,16 @@ export function ProgressBar() {
       ? (currentSection.order.indexOf(current) + 1) / currentSection.order.length
       : 1;
 
+  // position within the current chapter, for the "(2/6)" chapter counter
+  const chapterSections = currentSection ? sections.filter((s) => s.chapter === currentSection.chapter) : [];
+  const chapterPos = currentSection ? chapterSections.indexOf(currentSection) + 1 : 0;
+
   return (
     <div className="progress">
       <div className="progress-labels">
         <span className="chapter-label">
           {chapter ? t(chapter.title, locale) : ''}
+          {chapterSections.length > 1 ? ` (${chapterPos}/${chapterSections.length})` : ''}
           {currentSection ? ` — ${t(currentSection.title, locale)}` : ''}
         </span>
         {currentSection && (
@@ -40,21 +45,36 @@ export function ProgressBar() {
         )}
       </div>
       <div className="progress-track">
-        {sections.map((s, i) => (
-          <div key={s.id} className="progress-seg">
+        {chapters.map((c) => {
+          const secs = sections.filter((s) => s.chapter === c.id);
+          if (secs.length === 0) return null;
+          return (
             <div
-              className="progress-fill"
-              style={{
-                width:
-                  i < currentSectionIdx
-                    ? '100%'
-                    : i === currentSectionIdx
-                      ? `${Math.round(withinSection * 100)}%`
-                      : '0%',
-              }}
-            />
-          </div>
-        ))}
+              key={c.id}
+              className={`progress-chapter ${chapter?.id === c.id ? 'current' : ''}`}
+              style={{ flexGrow: secs.length }}
+            >
+              {secs.map((s) => {
+                const i = sections.indexOf(s);
+                return (
+                  <div key={s.id} className="progress-seg">
+                    <div
+                      className="progress-fill"
+                      style={{
+                        width:
+                          i < currentSectionIdx
+                            ? '100%'
+                            : i === currentSectionIdx
+                              ? `${Math.round(withinSection * 100)}%`
+                              : '0%',
+                      }}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -46,6 +46,22 @@ describe('Malayalam locale', () => {
     );
   });
 
+  it('keeps UI chrome in English even when the locale is Malayalam', () => {
+    // chrome — buttons, navigation, review copy — always English
+    expect(t('ui.skip', 'ml')).toBe('Skip this question');
+    expect(t('ui.continue', 'ml')).toBe('Continue');
+    expect(t('ui.review.title', 'ml')).toBe('Review your answers');
+    expect(t('ui.summary.count', 'ml', { n: '2' })).toBe('2 added');
+    // content — questions and the will document — localizes
+    expect(t('q.funeral.method', 'ml')).toBe('നിങ്ങളുടെ ശരീരം എന്ത് ചെയ്യണം?');
+    expect(t('clause.revocation', 'ml')).toContain('റദ്ദാക്കുന്നു');
+    // the will's own labels count as content, not chrome
+    expect(t('ui.will.witness', 'ml')).toBe('സാക്ഷി');
+    // yes/no live in the ui namespace but are answer options — content
+    expect(t('ui.yes', 'ml')).toBe('അതെ');
+    expect(t('ui.no', 'ml')).toBe('ഇല്ല');
+  });
+
   it("renders the date as a plain number in Malayalam, not an English ordinal", () => {
     const s = stateWith({ 'personal.full_name': 'Test Person', 'personal.sound_mind': 'confirm' });
     const en = renderWill(clauseBlocks, s, 'en').find((b) => b.id === 'declaration')!;

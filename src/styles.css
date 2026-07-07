@@ -157,13 +157,17 @@ button:focus-visible, input:focus-visible, textarea:focus-visible {
   margin-bottom: 0.6rem;
 }
 .progress-count { color: var(--tx-3); letter-spacing: 0.05em; white-space: nowrap; }
-.progress-track { display: flex; gap: 4px; }
+/* two-level track: chapters are groups (wider gaps) of section segments
+   (hairline gaps), so per-chapter progress reads at a glance */
+.progress-track { display: flex; gap: 10px; }
+.progress-chapter { display: flex; gap: 3px; flex-basis: 0; min-width: 0; }
 .progress-seg {
   flex: 1;
   height: 2px;
   background: var(--border);
   overflow: hidden;
 }
+.progress-chapter.current .progress-seg { background: var(--border-strong); }
 .progress-fill {
   height: 100%;
   background: var(--tx);

@@ -129,6 +129,22 @@ Selectors that matter:
   ignores keys while an input/textarea has focus — probe that by focusing
   the date field and pressing a digit; the question must not advance.
 
+## Chapter progress + English-only chrome
+
+- The progress track is two-level: 8 `.progress-chapter` groups (wider
+  gaps, `flex-grow` = section count, `.current` gets a darker empty-track
+  tint) each containing per-section `.progress-seg`s. The label reads
+  "CHAPTER (2/6) — SECTION" for multi-section chapters (no counter when a
+  chapter has one section) with the overall "N / 18" on the right.
+- **Language rule**: only content localizes — keys under `q.*`, `clause.*`,
+  `frag.*`, `part.*`, `ui.will.*`, plus the exact keys `ui.yes`/`ui.no`
+  (they live in the ui namespace but are answer options). Everything else
+  is pinned to English inside `t()` itself regardless of locale. When
+  verifying Malayalam, assert the question/options are Malayalam while the
+  Skip link, header links, progress label, and review pills stay English.
+  Watch for the ui.yes/ui.no class of bug: a key's namespace doesn't
+  determine whether it's chrome — where it renders does.
+
 ## Phase 4: review screen, checklist, export/import, CSP
 
 - Finishing the interview lands on **Review** (`h2` "Review your answers"),
