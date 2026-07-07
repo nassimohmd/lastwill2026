@@ -66,6 +66,59 @@ export const clauseBlocks: ClauseBlock[] = [
   },
 
   {
+    id: 'executor.physical',
+    kind: 'clause',
+    text: 'clause.executor.physical',
+    when: { notEmpty: 'executors.physical.primary' },
+    fragments: {
+      secondary: [{ when: { notEmpty: 'executors.physical.secondary' }, text: 'frag.executor.physical.secondary' }],
+    },
+  },
+  {
+    id: 'executor.digital',
+    kind: 'clause',
+    text: 'clause.executor.digital',
+    when: {
+      and: [{ eq: ['executors.digital.same', 'other'] }, { notEmpty: 'executors.digital.primary' }],
+    },
+    fragments: {
+      secondary: [{ when: { notEmpty: 'executors.digital.secondary' }, text: 'frag.executor.digital.secondary' }],
+    },
+  },
+  {
+    id: 'executor.powers',
+    kind: 'clause',
+    text: 'clause.executor.powers',
+    when: { notEmpty: 'executors.physical.primary' },
+    fragments: {
+      notes: [
+        {
+          when: { and: [{ eq: ['executors.powers', 'notes'] }, { notEmpty: 'executors.powers_notes' }] },
+          text: 'frag.executor.powers.notes',
+        },
+      ],
+    },
+  },
+  {
+    id: 'executor.compensation',
+    kind: 'clause',
+    text: 'clause.executor.compensation',
+    when: { notEmpty: 'executors.compensation' },
+    fragments: {
+      comp: [
+        { when: { eq: ['executors.compensation', 'none'] }, text: 'clause.executor.compensation.none' },
+        {
+          when: { and: [{ eq: ['executors.compensation', 'fixed'] }, { notEmpty: 'executors.compensation_amount' }] },
+          text: 'clause.executor.compensation.fixed',
+        },
+        { text: 'clause.executor.compensation.reasonable' },
+      ],
+    },
+  },
+
+  { id: 'debts.first', kind: 'clause', text: 'clause.debts.first' },
+
+  {
     id: 'part.wishes',
     kind: 'heading',
     text: 'part.wishes',
@@ -214,6 +267,119 @@ export const clauseBlocks: ClauseBlock[] = [
     kind: 'clause',
     text: 'clause.funeral.notes',
     when: { notEmpty: 'funeral.notes' },
+  },
+
+  {
+    id: 'realestate.item',
+    kind: 'clause',
+    text: 'clause.realestate.item',
+    each: 'realestate.items',
+    itemKeyPrefix: 'realestate.item',
+    fragments: {
+      ownership: [
+        { when: { eq: ['item.ownership', 'sole'] }, text: 'frag.re.ownership.sole' },
+        { text: 'frag.re.ownership.share' },
+      ],
+      action: [
+        { when: { eq: ['item.action', 'one'] }, text: 'frag.re.action.one' },
+        { when: { eq: ['item.action', 'divide'] }, text: 'frag.re.action.divide' },
+        { when: { eq: ['item.action', 'life_interest'] }, text: 'frag.re.action.life' },
+        { when: { eq: ['item.action', 'sell'] }, text: 'frag.re.action.sell' },
+        { text: 'frag.re.action.residuary' },
+      ],
+      rented: [
+        { when: { eq: ['item.rented.instructions', 'continue_tenancy'] }, text: 'frag.re.rented.continue_tenancy' },
+        { when: { eq: ['item.rented.instructions', 'new_owner_decides'] }, text: 'frag.re.rented.new_owner_decides' },
+        {
+          when: { and: [{ eq: ['item.rented.instructions', 'custom'] }, { notEmpty: 'item.rented.instructions_text' }] },
+          text: 'frag.re.rented.custom',
+        },
+      ],
+      loan: [{ when: { eq: ['item.loan', 'yes'] }, text: 'frag.re.loan' }],
+    },
+  },
+
+  {
+    id: 'bank.all',
+    kind: 'clause',
+    text: 'clause.bank.all',
+    when: { eq: ['bank.mode', 'all'] },
+    fragments: {
+      tail: [
+        { when: { eq: ['bank.all.mode', 'one'] }, text: 'frag.bank.all.tail.one' },
+        { when: { eq: ['bank.all.mode', 'several'] }, text: 'frag.bank.all.tail.several' },
+        { when: { eq: ['bank.all.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+  {
+    id: 'bank.account',
+    kind: 'clause',
+    text: 'clause.bank.account',
+    each: 'bank.accounts',
+    itemKeyPrefix: 'bank.account',
+    fragments: {
+      branch: [{ when: { notEmpty: 'item.branch' }, text: 'frag.bank.account.branch' }],
+      last4: [{ when: { notEmpty: 'item.last4' }, text: 'frag.bank.account.last4' }],
+      joint: [{ when: { eq: ['item.type', 'joint'] }, text: 'frag.bank.account.joint' }],
+      tail: [
+        { when: { eq: ['item.beneficiary.mode', 'one'] }, text: 'frag.bank.account.tail.one' },
+        { when: { eq: ['item.beneficiary.mode', 'several'] }, text: 'frag.bank.account.tail.several' },
+        { when: { eq: ['item.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+  {
+    id: 'bank.locker',
+    kind: 'clause',
+    text: 'clause.bank.locker',
+    when: { notEmpty: 'bank.locker.bank' },
+    fragments: {
+      tail: [
+        { when: { eq: ['bank.locker.beneficiary.mode', 'one'] }, text: 'frag.bank.locker.tail.one' },
+        { when: { eq: ['bank.locker.beneficiary.mode', 'several'] }, text: 'frag.bank.locker.tail.several' },
+        { when: { eq: ['bank.locker.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+  {
+    id: 'bank.cash',
+    kind: 'clause',
+    text: 'clause.bank.cash',
+    when: { eq: ['bank.cash.gate', 'yes'] },
+    fragments: {
+      tail: [
+        { when: { eq: ['bank.cash.beneficiary.mode', 'one'] }, text: 'frag.bank.cash.tail.one' },
+        { when: { eq: ['bank.cash.beneficiary.mode', 'several'] }, text: 'frag.bank.cash.tail.several' },
+        { when: { eq: ['bank.cash.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+
+  {
+    id: 'residuary',
+    kind: 'clause',
+    text: 'clause.residuary',
+    when: { notEmpty: 'residuary.primary' },
+    fragments: {
+      primary: [
+        { when: { eq: ['residuary.primary', 'spouse'] }, text: 'frag.residuary.primary.spouse' },
+        { when: { eq: ['residuary.primary', 'children'] }, text: 'frag.residuary.primary.children' },
+        { when: { eq: ['residuary.primary', 'spouse_children'] }, text: 'frag.residuary.primary.spouse_children' },
+        { when: { eq: ['residuary.primary', 'one_person'] }, text: 'frag.residuary.primary.one_person' },
+        { when: { eq: ['residuary.primary', 'several_people'] }, text: 'frag.residuary.primary.several_people' },
+        { when: { eq: ['residuary.primary', 'charity'] }, text: 'frag.residuary.primary.charity' },
+      ],
+      contingent: [
+        { when: { eq: ['residuary.contingent', 'alt_person'] }, text: 'frag.residuary.contingent.alt_person' },
+        { when: { eq: ['residuary.contingent', 'alt_charity'] }, text: 'frag.residuary.contingent.alt_charity' },
+        { text: 'frag.residuary.contingent.legal_heirs' },
+      ],
+    },
   },
 
   {

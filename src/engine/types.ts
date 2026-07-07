@@ -18,7 +18,13 @@ export type QuestionType =
   | 'number'
   | 'date'
   | 'info'
-  | 'repeater';
+  | 'repeater'
+  /** pick one person from the People Registry, or add a new one (SF-PERSON) */
+  | 'person'
+  /** pick several people from the registry, or add new ones (SF-PERSON, multi) */
+  | 'personMulti'
+  /** equal / percentage / describe split across a personMulti answer (SF-SHARES) */
+  | 'shares';
 
 export interface Option {
   id: string;
@@ -71,7 +77,18 @@ export interface Question {
   addMore?: string;
   /** repeater-only: i18n key for the item label, {n} substituted */
   itemLabel?: string;
+  /** person/personMulti: ask for an address when adding someone new (executors, guardians) */
+  askAddress?: boolean;
+  /** personMulti: minimum number of people required before continuing (default 2) */
+  minPeople?: number;
+  /** shares-only: answer key holding the personMulti array to split between */
+  peopleSource?: string;
 }
+
+export type SharesAnswer =
+  | { mode: 'equal' }
+  | { mode: 'percentage'; splits: Record<string, number> }
+  | { mode: 'describe'; text: string };
 
 export interface Section {
   id: string;
@@ -109,9 +126,14 @@ export interface AppState {
   people: Person[];
   answers: Record<string, unknown>;
   skipped: string[];
-  /** id of the question currently on screen; null = interview finished */
+  /** id of the question currently on screen; null = interview finished.
+   *  May also be a synthetic "<repeaterId>.__addmore__" sentinel screen. */
   currentQuestionId: string | null;
-  /** stack of visited question ids, for Back */
+  /** stack of visited question ids (incl. sentinels), for Back */
   history: string[];
   sectionStatus: Record<string, SectionStatus>;
+  /** the flow-repeater currently being filled in, if any (see engine/repeaters.ts) */
+  repeaterSession: { repeaterId: string } | null;
+  /** items accumulated so far per flow-repeater id, before being committed to `answers` */
+  repeaterItems: Record<string, Record<string, unknown>[]>;
 }

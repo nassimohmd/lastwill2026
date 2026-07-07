@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { graph } from '../data/graph';
 import type { AppState } from './types';
 import { initialState } from '../state/store';
+import { ITEM_END } from './repeaters';
 
 function stateWith(answers: Record<string, unknown>): AppState {
   return { ...initialState(), answers };
@@ -37,8 +38,8 @@ describe('next-question resolution', () => {
 
   it('skipping a gate question skips its whole section', () => {
     const s = stateWith({});
-    // funeral is the last section in phase 1, so gate-skip ends the interview
-    expect(graph.resolveNext('funeral.method', s, { skip: true })).toBe(null);
+    // funeral's next section is bank — gate-skip jumps straight to its start
+    expect(graph.resolveNext('funeral.method', s, { skip: true })).toBe('bank.gate');
   });
 
   it('falls through to declared section order, crossing sections', () => {
@@ -75,7 +76,7 @@ describe('next-question resolution', () => {
     ).toBe('funeral.burial.place');
   });
 
-  it('every declared edge points at a real question', () => {
+  it('every declared edge points at a real question (or the repeater-end sentinel)', () => {
     for (const q of graph.questions.values()) {
       const targets = [
         q.next,
@@ -83,6 +84,7 @@ describe('next-question resolution', () => {
         ...(q.nextRules?.map((r) => r.goto) ?? []),
       ].filter((x): x is string => Boolean(x));
       for (const target of targets) {
+        if (target === ITEM_END) continue;
         expect(graph.questions.has(target), `${q.id} → ${target}`).toBe(true);
       }
     }

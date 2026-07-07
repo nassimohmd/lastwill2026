@@ -16,10 +16,36 @@
   "ui.doneAdding": "Done",
   "ui.remove": "Remove",
 
+  "ui.yes": "Yes",
+  "ui.no": "No",
+
   "ui.chapter.you": "You & Your Family",
   "ui.chapter.wishes": "Final Wishes",
+  "ui.chapter.money": "Money & Property",
+  "ui.chapter.residuary": "Everything Else",
+  "ui.chapter.incharge": "Who's In Charge",
   "ui.section.personal": "Personal details",
   "ui.section.funeral": "Funeral & memorial",
+  "ui.section.bank": "Bank accounts & money",
+  "ui.section.realestate": "Real estate",
+  "ui.section.residuary": "Residuary clause",
+  "ui.section.executors": "Executors",
+
+  "ui.person.someoneElse": "Someone else",
+  "ui.person.name": "Their name?",
+  "ui.person.relation": "Their relationship to you?",
+  "ui.person.address": "Their address?",
+  "ui.person.addressHint": "Optional, but helps identify them in the will.",
+  "ui.personMulti.min": "Choose at least {n} people.",
+
+  "ui.shares.equal": "Equally",
+  "ui.shares.percentage": "I'll set percentages",
+  "ui.shares.describe": "I'll describe it",
+  "ui.shares.percentTotal": "Total: {n}%",
+  "ui.shares.percentWarning": "Percentages must add up to 100.",
+
+  "ui.repeater.bank.addMore": "Account added ({n} so far). Add another?",
+  "ui.repeater.realestate.addMore": "Property added ({n} so far). Add another?",
 
   "ui.startOver.confirm": "Delete all your answers and start fresh?",
 

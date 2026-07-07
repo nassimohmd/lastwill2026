@@ -54,3 +54,29 @@ Selectors that matter:
   `browser.newContext()` per scenario.
 - The done screen has no `h2.question-text`; guard question-text reads with
   a short timeout + catch.
+- Autosave to localStorage is synchronous (on purpose) — a debounce here
+  silently loses the last answer on a fast reload-to-resume test.
+
+## Phase 2: flow-repeaters (bank accounts, real estate) and SF-PERSON
+
+- Person picker: `button.option` for existing registry people, "Someone
+  else" opens an inline form (`.freeform input` for name, `button.chip` for
+  relation); submit via `.freeform button.primary` "Continue".
+- Multi-person picker: `.chip-row button.chip` toggles existing people;
+  "Someone else" is `button.secondary`, appends and re-selects; a hint
+  (`p.hint`) blocks Continue below the minimum count.
+- Shares picker: click "I'll set percentages", then fill
+  `.freeform input[type=number]` per person in order; Continue is disabled
+  until they sum to 100.
+- The repeater's "add another?" screen has no `h2.question-text` matching a
+  known question — it's a synthetic `<repeaterId>.__addmore__` state, shown
+  as its own heading ("Account added (N so far). Add another?"). Look for
+  `button.secondary` "Add another" / `button.primary` "Done".
+- Worth driving: reload the page *mid-item* (after answering some but not
+  all of one repeater item's fields) — resume must land back inside the
+  item, not skip it or duplicate it.
+- When checking clause numbering from rendered HTML, read
+  `page.locator('.clause-no').allTextContents()` — don't regex the flattened
+  `.sheet` `textContent()` for `\d+\.`; sibling `<p>` tags have no separator
+  in `textContent`, so a fragile "digit preceded by whitespace" regex will
+  undercount or find nothing even when the numbering is correct.

@@ -74,5 +74,80 @@
 
   "clause.testimonium": "IN WITNESS WHEREOF I, {{personal.full_name}}, have signed this Will on this {{today.day}} day of {{today.month}}, {{today.year}} at ____________________, in the joint presence of the witnesses below, who have attested it in my presence and in the presence of each other.",
 
-  "clause.attestation": "ATTESTATION: Signed by the above-named Testator as the Testator's Last Will and Testament in our joint presence, and signed by us as witnesses in the Testator's presence and in the presence of each other, all being present at the same time. We believe the Testator to be of sound mind, memory and understanding."
+  "clause.attestation": "ATTESTATION: Signed by the above-named Testator as the Testator's Last Will and Testament in our joint presence, and signed by us as witnesses in the Testator's presence and in the presence of each other, all being present at the same time. We believe the Testator to be of sound mind, memory and understanding.",
+
+  "clause.executor.physical": "I appoint {{person:executors.physical.primary}} as the Executor of this Will.{{frag:secondary}}",
+  "frag.executor.physical.secondary": " If they are unable or unwilling to act, I appoint {{person:executors.physical.secondary}} as Executor in their place.",
+
+  "clause.executor.digital": "I appoint {{person:executors.digital.primary}} as my Digital Executor, to deal with my digital assets and online accounts as directed in this Will, and I direct my Executor to extend all necessary cooperation and authority to them.{{frag:secondary}}",
+  "frag.executor.digital.secondary": " If they are unable to act, {{person:executors.digital.secondary}} shall act in their place.",
+
+  "clause.executor.powers": "My Executor shall have full power to collect and realise my assets, to sell or convert any asset where necessary to give effect to this Will or to pay debts, to sign all documents, to engage professional assistance, to compromise claims, and to do all things necessary for the administration of my estate.{{frag:notes}}",
+  "frag.executor.powers.notes": " In addition: {{executors.powers_notes}}",
+
+  "clause.executor.compensation": "{{frag:comp}}",
+  "clause.executor.compensation.none": "My Executor shall receive no remuneration for acting as Executor, but shall be reimbursed all reasonable expenses incurred in the administration of my estate.",
+  "clause.executor.compensation.fixed": "My Executor shall be paid {{inr:executors.compensation_amount}} from my estate for acting as Executor.",
+  "clause.executor.compensation.reasonable": "My Executor shall be entitled to reasonable compensation from my estate for acting as Executor.",
+
+  "clause.debts.first": "I direct my Executor to first pay from my estate my funeral expenses, all my just debts, taxes and liabilities, and the costs of administering my estate.",
+
+  "frag.tail.sell": ", to be realised and the proceeds added to my residuary estate.",
+  "frag.tail.residuary": ", to be added to the rest of my estate.",
+  "frag.tail.one": "to {person} absolutely. If they do not survive me, this bequest shall {contingent}",
+  "frag.tail.several": "to {names}, {divide}. If any of them does not survive me, their share shall {contingent}",
+  "frag.tail.contingent.children": "pass to their children in equal shares.",
+  "frag.tail.contingent.person": "pass to {person}.",
+  "frag.tail.contingent.residuary": "fall into my residuary estate.",
+  "frag.tail.several.equal": "in equal shares",
+  "frag.tail.several.percentage": "in the following proportions: {list}",
+  "frag.tail.several.describe": "as follows: {text}",
+  "frag.tail.contingent.group.children": "pass to their children.",
+  "frag.tail.contingent.group.others": "be shared equally by the survivors.",
+  "frag.tail.contingent.group.residuary": "fall into my residuary estate.",
+  "frag.tail.life": "I give {occupant} the right to reside in and enjoy it for their lifetime, without power of sale, and upon their death it shall pass absolutely to {remainder}.",
+  "frag.names_with_shares": "{names}, {divide}",
+
+  "clause.bank.account": "I bequeath the balance in my {{label:item.type}} account with {{item.bank_name}}{{frag:branch}}{{frag:last4}}{{frag:joint}}{{frag:tail}}",
+  "frag.bank.account.branch": ", {{item.branch}} branch",
+  "frag.bank.account.last4": " (No. ending {{item.last4}})",
+  "frag.bank.account.joint": ", to the extent of my share therein",
+  "frag.bank.account.tail.one": " {{helper:beneficiaryTailOne:beneficiary}}",
+  "frag.bank.account.tail.several": " {{helper:beneficiaryTailSeveral:beneficiary}}",
+
+  "clause.bank.all": "I bequeath the balance standing to my credit in all my bank accounts{{frag:tail}}",
+  "frag.bank.all.tail.one": " {{helper:beneficiaryTailOne:bank.all}}",
+  "frag.bank.all.tail.several": " {{helper:beneficiaryTailSeveral:bank.all}}",
+
+  "clause.bank.locker": "I bequeath the contents of my locker at {{bank.locker.bank}}{{frag:tail}}",
+  "frag.bank.locker.tail.one": " {{helper:beneficiaryTailOne:bank.locker.beneficiary}}",
+  "frag.bank.locker.tail.several": " {{helper:beneficiaryTailSeveral:bank.locker.beneficiary}}",
+
+  "clause.bank.cash": "I bequeath any cash held at my residence or otherwise in my possession{{frag:tail}}",
+  "frag.bank.cash.tail.one": " {{helper:beneficiaryTailOne:bank.cash.beneficiary}}",
+  "frag.bank.cash.tail.several": " {{helper:beneficiaryTailSeveral:bank.cash.beneficiary}}",
+
+  "clause.realestate.item": "I give and bequeath {{frag:ownership}} {{item.desc}}{{frag:action}}{{frag:rented}}{{frag:loan}}",
+  "frag.re.ownership.sole": "my property, namely",
+  "frag.re.ownership.share": "my share, right, title and interest in",
+  "frag.re.action.one": " {{helper:beneficiaryTailOne:ben}}",
+  "frag.re.action.divide": " {{helper:beneficiaryTailSeveral:ben}}",
+  "frag.re.action.life": ". {{helper:lifeInterestTail:life}}",
+  "frag.re.action.sell": ", to be sold and the net proceeds added to my residuary estate.",
+  "frag.re.action.residuary": ", to be added to the rest of my estate.",
+  "frag.re.rented.continue_tenancy": " The existing tenancy shall continue, with rent accruing to the new owner.",
+  "frag.re.rented.new_owner_decides": " The new owner shall decide on the tenancy.",
+  "frag.re.rented.custom": " {{item.rented.instructions_text}}",
+  "frag.re.loan": " This bequest passes subject to any loan secured on the property being settled by my Executor.",
+
+  "clause.residuary": "All the rest and residue of my estate, whether movable or immovable, present or future, including any property not specifically dealt with in this Will and any bequest that fails, I give and bequeath {{frag:primary}}. If none of the above survive me, my residuary estate shall pass to {{frag:contingent}}.",
+  "frag.residuary.primary.spouse": "to my spouse",
+  "frag.residuary.primary.children": "to my children, in equal shares",
+  "frag.residuary.primary.spouse_children": "to my spouse and children, in equal shares",
+  "frag.residuary.primary.one_person": "to {{person:residuary.primary.person}}",
+  "frag.residuary.primary.several_people": "to {{helper:namesWithShares:residuary.primary}}",
+  "frag.residuary.primary.charity": "to {{residuary.primary.charity}}, for its general purposes",
+  "frag.residuary.contingent.alt_person": "{{person:residuary.contingent.person}}",
+  "frag.residuary.contingent.alt_charity": "{{residuary.contingent.charity}}",
+  "frag.residuary.contingent.legal_heirs": "my legal heirs, in accordance with the law applicable to me"
 }

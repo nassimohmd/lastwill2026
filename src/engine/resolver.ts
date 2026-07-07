@@ -1,5 +1,6 @@
 import type { AppState, Question, Section } from './types';
 import { evaluate } from './conditions';
+import { ITEM_END } from './repeaters';
 
 /**
  * The question graph: all questions by id plus the declared section order.
@@ -100,6 +101,9 @@ export class Graph {
       if (!candidate) candidate = this.nextInOrder(fromId);
     }
 
+    // ITEM_END is a repeater sentinel, not a real question id — the caller
+    // (the reducer) intercepts it; never attempt to look it up in the graph.
+    if (candidate === ITEM_END) return candidate;
     return this.firstVisible(candidate, state);
   }
 

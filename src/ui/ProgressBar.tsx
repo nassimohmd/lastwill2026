@@ -1,11 +1,16 @@
 import { sections, chapters } from '../data/graph';
 import { t } from '../i18n';
 import { useStore } from '../state/store';
+import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
+import { repeaterRegistry } from '../data/repeaters';
 
 export function ProgressBar() {
   const { state } = useStore();
   const locale = state.meta.locale;
-  const current = state.currentQuestionId;
+  // an add-more sentinel isn't a real question id — locate progress via the
+  // repeater's entry question instead, so the bar doesn't blank out mid-repeater
+  const repeaterId = state.currentQuestionId ? repeaterIdFromAddMoreScreen(state.currentQuestionId) : null;
+  const current = repeaterId ? repeaterRegistry.byId.get(repeaterId)?.entryId ?? null : state.currentQuestionId;
 
   const currentSectionIdx = current
     ? sections.findIndex((s) => s.order.includes(current))

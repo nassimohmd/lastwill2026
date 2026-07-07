@@ -5,7 +5,9 @@ import { t } from '../i18n';
 import { QuestionCard } from './QuestionCard';
 import { ProgressBar } from './ProgressBar';
 import { WillPreview } from './WillPreview';
+import { RepeaterAddMore } from './RepeaterAddMore';
 import { generationBlockers } from '../template/render';
+import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 
 export function App() {
   const { state, dispatch } = useStore();
@@ -80,8 +82,13 @@ export function App() {
         </div>
       );
   } else {
-    const q = state.currentQuestionId ? graph.get(state.currentQuestionId) : null;
-    view = q ? <QuestionCard question={q} /> : null;
+    const repeaterId = state.currentQuestionId ? repeaterIdFromAddMoreScreen(state.currentQuestionId) : null;
+    if (repeaterId) {
+      view = <RepeaterAddMore repeaterId={repeaterId} />;
+    } else {
+      const q = state.currentQuestionId ? graph.get(state.currentQuestionId) : null;
+      view = q ? <QuestionCard question={q} /> : null;
+    }
   }
 
   return (

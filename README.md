@@ -47,6 +47,28 @@ separate template layer assembles the will from conditional clause blocks.
 8. **Who's In Charge** — executors for physical and digital estates (primary + secondary)
 9. **Review & Download** — review answers, generate will, signing instructions
 
+## Status
+
+Implemented so far (Phases 1–2 of [docs/05-roadmap.md](docs/05-roadmap.md)):
+personal details & declaration, funeral/organ wishes, bank accounts (all-together
+or account-by-account), real estate (incl. life interest), the residuary clause,
+and executors (physical + digital) — enough to generate a legally complete will
+for a simple estate. The shared sub-flow machinery (SF-PERSON/BENEFICIARY/
+CONTINGENT/SHARES) and the flow-repeater engine that this is built on are meant
+to carry the remaining sections (investments, receivables, vehicles, jewellery,
+digital assets, guardianship...) in Phase 3 without further engine changes.
+
+## Development
+
+```bash
+npm install
+npm run dev        # local dev server
+npm run test       # unit tests (engine, template, reducer)
+npm run build      # production build
+```
+
+Deployed on Vercel (static build, no server) — `npm run build` output in `dist/`.
+
 ## Disclaimer
 
 This tool produces a draft document and general information, not legal advice.

@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import type { Question } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { useStore } from '../state/store';
+import { PersonPicker } from './PersonPicker';
+import { PersonMultiPicker } from './PersonMultiPicker';
+import { SharesPicker } from './SharesPicker';
 
 interface ItemRecord {
   [field: string]: string;
@@ -49,6 +52,15 @@ export function QuestionCard({ question }: { question: Question }) {
 
   const body = () => {
     switch (question.type) {
+      case 'person':
+        return <PersonPicker question={question} />;
+
+      case 'personMulti':
+        return <PersonMultiPicker question={question} />;
+
+      case 'shares':
+        return <SharesPicker question={question} />;
+
       case 'single':
         return (
           <div className="options">
