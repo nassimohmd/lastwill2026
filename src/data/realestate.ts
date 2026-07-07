@@ -14,7 +14,7 @@ export const realEstateQuestions: Question[] = [
       { id: 'yes', label: 'ui.yes', next: 'realestate.item.type' },
       { id: 'no', label: 'ui.no' },
     ],
-    next: 'residuary.primary',
+    next: 'vehicles.gate',
   },
 
   {

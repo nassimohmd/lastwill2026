@@ -169,8 +169,9 @@ const HELPERS: Record<string, (get: Get, people: Person[], locale: Locale) => st
 };
 
 function buildGetter(prefix: string, state: AppState, item?: Record<string, unknown>): Get {
-  if (item) return (field: string) => item[`${prefix}.${field}`];
-  return (field: string) => state.answers[`${prefix}.${field}`];
+  const key = (field: string) => (prefix ? `${prefix}.${field}` : field);
+  if (item) return (field: string) => item[key(field)];
+  return (field: string) => state.answers[key(field)];
 }
 
 function resolveVar(
@@ -193,8 +194,22 @@ function resolveVar(
   if (expr.startsWith('helper:')) {
     const [, name, prefix] = expr.split(':');
     const fn = name ? HELPERS[name] : undefined;
-    if (!fn || !prefix) return '';
-    return fn(buildGetter(prefix, state, item), state.people, locale);
+    if (!fn) return '';
+    return fn(buildGetter(prefix ?? '', state, item), state.people, locale);
+  }
+
+  if (expr.startsWith('labelList:')) {
+    const qid = expr.slice('labelList:'.length);
+    const q = graph.questions.get(qid);
+    const raw = answers[qid];
+    const ids = Array.isArray(raw) ? raw : [];
+    return ids
+      .map((id) => {
+        const opt = q?.options?.find((o) => o.id === id);
+        return opt ? t(opt.label, locale) : '';
+      })
+      .filter(Boolean)
+      .join(', ');
   }
 
   if (expr.startsWith('person:')) {

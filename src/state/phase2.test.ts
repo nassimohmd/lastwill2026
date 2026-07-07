@@ -116,7 +116,8 @@ describe('full simple-estate run (house, two accounts, executors, residuary)', (
     s = reducer(s, { type: 'START' });
     s = skipUntil(s, 'bank.gate');
     s = reducer(s, { type: 'ANSWER', qid: 'bank.gate', value: 'no', optionId: 'no' });
-    expect(s.currentQuestionId).toBe('realestate.gate');
+    expect(s.currentQuestionId).toBe('invest.gate');
+    s = skipUntil(s, 'realestate.gate');
 
     s = reducer(s, { type: 'ANSWER', qid: 'realestate.gate', value: 'yes', optionId: 'yes' });
     expect(s.repeaterSession).toEqual({ repeaterId: 'realestate.items' });
@@ -148,7 +149,8 @@ describe('full simple-estate run (house, two accounts, executors, residuary)', (
     s = reducer(s, { type: 'ANSWER', qid: 'realestate.item.loan', value: 'no', optionId: 'no' });
     expect(s.currentQuestionId).toBe('realestate.items.__addmore__');
     s = reducer(s, { type: 'REPEATER_FINISH', repeaterId: 'realestate.items' });
-    expect(s.currentQuestionId).toBe('residuary.primary');
+    expect(s.currentQuestionId).toBe('vehicles.gate');
+    s = skipUntil(s, 'residuary.primary');
 
     s = reducer(s, { type: 'ANSWER', qid: 'residuary.primary', value: 'one_person', optionId: 'one_person' });
     s = reducer(s, { type: 'ANSWER_PERSON', qid: 'residuary.primary.person', personId: 'p-anita' });

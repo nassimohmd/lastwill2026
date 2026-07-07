@@ -38,8 +38,8 @@ describe('next-question resolution', () => {
 
   it('skipping a gate question skips its whole section', () => {
     const s = stateWith({});
-    // funeral's next section is bank — gate-skip jumps straight to its start
-    expect(graph.resolveNext('funeral.method', s, { skip: true })).toBe('bank.gate');
+    // funeral's next section is organ — gate-skip jumps straight to its start
+    expect(graph.resolveNext('funeral.method', s, { skip: true })).toBe('organ.gate');
   });
 
   it('falls through to declared section order, crossing sections', () => {

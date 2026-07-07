@@ -119,6 +119,25 @@ export const clauseBlocks: ClauseBlock[] = [
   { id: 'debts.first', kind: 'clause', text: 'clause.debts.first' },
 
   {
+    id: 'debts.item',
+    kind: 'clause',
+    text: 'clause.debts.item',
+    each: 'debts.items',
+    itemKeyPrefix: 'debts.item',
+    fragments: {
+      amount: [
+        { when: { notEmpty: 'item.amount' }, text: 'frag.debts.amount.known' },
+        { text: 'frag.debts.amount.unknown' },
+      ],
+      insured: [{ when: { eq: ['item.insured', 'yes'] }, text: 'frag.debts.insured' }],
+      strategy: [
+        { when: { eq: ['item.secured_strategy', 'sell_asset'] }, text: 'frag.debts.strategy.sell_asset' },
+        { when: { eq: ['item.secured_strategy', 'keep_asset'] }, text: 'frag.debts.strategy.keep_asset' },
+      ],
+    },
+  },
+
+  {
     id: 'part.wishes',
     kind: 'heading',
     text: 'part.wishes',
@@ -270,6 +289,85 @@ export const clauseBlocks: ClauseBlock[] = [
   },
 
   {
+    id: 'organ',
+    kind: 'clause',
+    text: 'clause.organ',
+    when: { notEmpty: 'organ.gate' },
+    fragments: {
+      wish: [
+        { when: { eq: ['organ.gate', 'yes_any'] }, text: 'frag.organ.yes_any' },
+        { when: { eq: ['organ.gate', 'yes_specific'] }, text: 'frag.organ.yes_specific' },
+        { when: { eq: ['organ.gate', 'no'] }, text: 'frag.organ.no' },
+        { when: { eq: ['organ.gate', 'family_decides'] }, text: 'frag.organ.family_decides' },
+      ],
+      registered: [
+        {
+          when: { and: [{ eq: ['organ.registered', 'yes'] }, { notEmpty: 'organ.registered_details' }] },
+          text: 'frag.organ.registered.yes_details',
+        },
+        { when: { eq: ['organ.registered', 'yes'] }, text: 'frag.organ.registered.yes' },
+        { when: { eq: ['organ.registered', 'no'] }, text: 'frag.organ.registered.no' },
+      ],
+    },
+  },
+
+  {
+    id: 'guardianship.minors',
+    kind: 'clause',
+    text: 'clause.guardianship.minors',
+    when: { notEmpty: 'guardianship.primary' },
+    fragments: {
+      alt: [{ when: { notEmpty: 'guardianship.alternate' }, text: 'frag.guardianship.alt' }],
+    },
+  },
+  {
+    id: 'guardianship.property',
+    kind: 'clause',
+    text: 'clause.guardianship.property',
+    when: { notEmpty: 'guardianship.until_age' },
+    fragments: {
+      who: [
+        { when: { eq: ['guardianship.property_guardian', 'different'] }, text: 'frag.guardianship.property.different' },
+        { text: 'frag.guardianship.property.same' },
+      ],
+    },
+  },
+  {
+    id: 'guardianship.upbringing',
+    kind: 'clause',
+    text: 'clause.guardianship.upbringing',
+    when: { notEmpty: 'guardianship.upbringing' },
+  },
+  {
+    id: 'guardianship.provision',
+    kind: 'clause',
+    text: 'clause.guardianship.provision',
+    when: { and: [{ eq: ['guardianship.provision', 'amount'] }, { notEmpty: 'guardianship.provision_amount' }] },
+    fragments: {
+      source: [
+        { when: { eq: ['guardianship.provision_source', 'bank'] }, text: 'frag.guardianship.source.bank' },
+        {
+          when: { and: [{ eq: ['guardianship.provision_source', 'asset_sale'] }, { notEmpty: 'guardianship.provision_source_desc' }] },
+          text: 'frag.guardianship.source.asset_named',
+        },
+        { when: { eq: ['guardianship.provision_source', 'asset_sale'] }, text: 'frag.guardianship.source.asset' },
+        { text: 'frag.guardianship.source.executor' },
+      ],
+    },
+  },
+  {
+    id: 'guardianship.dependent',
+    kind: 'clause',
+    text: 'clause.guardianship.dependent',
+    each: 'guardianship.dependents',
+    itemKeyPrefix: 'guardianship.dependents.item',
+    fragments: {
+      provision: [{ when: { eq: ['item.provision', 'yes'] }, text: 'frag.guardianship.dependent.provision' }],
+      instructions: [{ when: { notEmpty: 'item.instructions' }, text: 'frag.guardianship.dependent.instructions' }],
+    },
+  },
+
+  {
     id: 'realestate.item',
     kind: 'clause',
     text: 'clause.realestate.item',
@@ -358,6 +456,296 @@ export const clauseBlocks: ClauseBlock[] = [
         { text: 'frag.tail.residuary' },
       ],
     },
+  },
+
+  {
+    id: 'invest.item',
+    kind: 'clause',
+    text: 'clause.invest.item',
+    each: 'invest.items',
+    itemKeyPrefix: 'invest.item',
+    fragments: {
+      tail: [
+        { when: { eq: ['item.type', 'insurance'] }, text: 'frag.invest.insurance' },
+        { when: { eq: ['item.beneficiary.mode', 'one'] }, text: 'frag.invest.tail.one' },
+        { when: { eq: ['item.beneficiary.mode', 'several'] }, text: 'frag.invest.tail.several' },
+        { when: { eq: ['item.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+
+  {
+    id: 'receivables.item',
+    kind: 'clause',
+    text: 'clause.receivables.item',
+    each: 'receivables.items',
+    itemKeyPrefix: 'receivables.item',
+    fragments: {
+      action: [
+        { when: { eq: ['item.action', 'collect_person'] }, text: 'clause.receivables.collect_person' },
+        { when: { eq: ['item.action', 'forgive'] }, text: 'clause.receivables.forgive' },
+        { text: 'clause.receivables.collect_estate' },
+      ],
+    },
+  },
+
+  {
+    id: 'vehicles.item',
+    kind: 'clause',
+    text: 'clause.vehicles.item',
+    each: 'vehicles.items',
+    itemKeyPrefix: 'vehicles.item',
+    fragments: {
+      action: [
+        { when: { eq: ['item.action', 'person'] }, text: 'frag.vehicles.action.person' },
+        { when: { eq: ['item.action', 'sell'] }, text: 'frag.tail.sell' },
+        { when: { eq: ['item.action', 'family_decides'] }, text: 'frag.vehicles.action.family_decides' },
+      ],
+      loan: [{ when: { eq: ['item.loan', 'yes'] }, text: 'frag.vehicles.loan' }],
+    },
+  },
+
+  {
+    id: 'collect',
+    kind: 'clause',
+    text: 'clause.collect',
+    when: { notEmpty: 'collect.beneficiary.mode' },
+    fragments: {
+      tail: [
+        { when: { eq: ['collect.beneficiary.mode', 'one'] }, text: 'frag.collect.tail.one' },
+        { when: { eq: ['collect.beneficiary.mode', 'several'] }, text: 'frag.collect.tail.several' },
+        { when: { eq: ['collect.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+
+  {
+    id: 'jewellery',
+    kind: 'clause',
+    text: 'clause.jewellery',
+    when: { notEmpty: 'jewellery.beneficiary.mode' },
+    fragments: {
+      tail: [
+        { when: { eq: ['jewellery.beneficiary.mode', 'one'] }, text: 'frag.jewellery.tail.one' },
+        { when: { eq: ['jewellery.beneficiary.mode', 'several'] }, text: 'frag.jewellery.tail.several' },
+        { when: { eq: ['jewellery.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+    },
+  },
+  {
+    id: 'jewellery.streedhan',
+    kind: 'clause',
+    text: 'clause.jewellery.streedhan',
+    when: {
+      and: [
+        { notEmpty: 'jewellery.beneficiary.mode' },
+        {
+          or: [
+            { in: ['personal.relation_line', ['wife_of', 'husband_of']] },
+            { notEmpty: 'personal.spouse_name' },
+          ],
+        },
+      ],
+    },
+  },
+
+  {
+    id: 'ip',
+    kind: 'clause',
+    text: 'clause.ip',
+    when: { notEmpty: 'ip.beneficiary.mode' },
+    fragments: {
+      tail: [
+        { when: { eq: ['ip.beneficiary.mode', 'one'] }, text: 'frag.ip.tail.one' },
+        { when: { eq: ['ip.beneficiary.mode', 'several'] }, text: 'frag.ip.tail.several' },
+        { when: { eq: ['ip.beneficiary.mode', 'sell'] }, text: 'frag.tail.sell' },
+        { text: 'frag.tail.residuary' },
+      ],
+      wishes: [{ when: { notEmpty: 'ip.wishes' }, text: 'frag.ip.wishes' }],
+    },
+  },
+
+  {
+    id: 'diaries.action',
+    kind: 'clause',
+    text: 'clause.diaries.action',
+    when: { notEmpty: 'diaries.action' },
+    fragments: {
+      action: [
+        { when: { eq: ['diaries.action', 'give_to_person'] }, text: 'frag.diaries.give_to_person' },
+        { when: { eq: ['diaries.action', 'destroy'] }, text: 'frag.diaries.destroy' },
+        { when: { eq: ['diaries.action', 'read_first'] }, text: 'frag.diaries.read_first' },
+        { when: { eq: ['diaries.action', 'keep_with_family'] }, text: 'frag.diaries.keep_with_family' },
+        { when: { eq: ['diaries.action', 'family_decides'] }, text: 'frag.diaries.family_decides' },
+      ],
+    },
+  },
+  {
+    id: 'diaries.notes',
+    kind: 'clause',
+    text: 'clause.diaries.notes',
+    when: { notEmpty: 'diaries.notes' },
+  },
+
+  {
+    id: 'gadgets.action',
+    kind: 'clause',
+    text: 'clause.gadgets.action',
+    when: { in: ['gadgets.gate', ['wipe_give_family', 'sell', 'recycle', 'family_decides']] },
+    fragments: {
+      action: [
+        { when: { eq: ['gadgets.gate', 'wipe_give_family'] }, text: 'frag.gadgets.wipe_give_family' },
+        { when: { eq: ['gadgets.gate', 'sell'] }, text: 'frag.gadgets.sell' },
+        { when: { eq: ['gadgets.gate', 'recycle'] }, text: 'frag.gadgets.recycle' },
+        { text: 'frag.gadgets.family_decides' },
+      ],
+    },
+  },
+  {
+    id: 'gadgets.item',
+    kind: 'clause',
+    text: 'clause.gadgets.item',
+    each: 'gadgets.items',
+    itemKeyPrefix: 'gadgets.item',
+  },
+  {
+    id: 'gadgets.data',
+    kind: 'clause',
+    text: 'clause.gadgets.data',
+    when: { notEmpty: 'gadgets.data' },
+    fragments: {
+      data: [
+        { when: { eq: ['gadgets.data', 'backup_then_wipe'] }, text: 'frag.gadgets.data.backup_then_wipe' },
+        { when: { eq: ['gadgets.data', 'wipe_no_backup'] }, text: 'frag.gadgets.data.wipe_no_backup' },
+        { when: { eq: ['gadgets.data', 'handed_as_is'] }, text: 'frag.gadgets.data.handed_as_is' },
+      ],
+    },
+  },
+
+  {
+    id: 'part.digital',
+    kind: 'heading',
+    text: 'part.digital',
+    when: { eq: ['digital.gate', 'yes'] },
+  },
+  { id: 'digital.intro', kind: 'clause', text: 'clause.digital.intro', when: { eq: ['digital.gate', 'yes'] } },
+  {
+    id: 'digital.subs',
+    kind: 'clause',
+    text: 'clause.digital.subs',
+    when: { eq: ['digital.gate', 'yes'] },
+    fragments: {
+      subs: [
+        {
+          when: { and: [{ eq: ['digital.subs', 'cancel_with_exceptions'] }, { notEmpty: 'digital.subs.exceptions' }] },
+          text: 'frag.digital.subs.exceptions',
+        },
+        { when: { eq: ['digital.subs', 'family_decides'] }, text: 'frag.digital.subs.family_decides' },
+        { text: 'frag.digital.subs.cancel_all' },
+      ],
+    },
+  },
+  {
+    id: 'digital.statements',
+    kind: 'clause',
+    text: 'clause.digital.statements',
+    when: { in: ['digital.statements', ['full_consent', 'narrow_consent']] },
+    fragments: {
+      statements: [
+        { when: { eq: ['digital.statements', 'full_consent'] }, text: 'frag.digital.statements.full_consent' },
+        { text: 'frag.digital.statements.narrow_consent' },
+      ],
+    },
+  },
+  {
+    id: 'digital.social',
+    kind: 'clause',
+    text: 'clause.digital.social',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.social' }] },
+    fragments: {
+      social: [
+        { when: { eq: ['digital.social', 'delete_all'] }, text: 'frag.digital.social.delete_all' },
+        { when: { eq: ['digital.social', 'memorialise'] }, text: 'frag.digital.social.memorialise' },
+        { when: { eq: ['digital.social', 'archive_then_delete'] }, text: 'frag.digital.social.archive_then_delete' },
+        { when: { eq: ['digital.social', 'leave_as_is'] }, text: 'frag.digital.social.leave_as_is' },
+        {
+          when: { and: [{ eq: ['digital.social', 'per_platform'] }, { notEmpty: 'digital.social.notes' }] },
+          text: 'frag.digital.social.per_platform',
+        },
+      ],
+    },
+  },
+  {
+    id: 'digital.email',
+    kind: 'clause',
+    text: 'clause.digital.email',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.email' }] },
+    fragments: {
+      email: [
+        { when: { eq: ['digital.email', 'keep_briefly'] }, text: 'frag.digital.email.keep_briefly' },
+        { when: { eq: ['digital.email', 'delete'] }, text: 'frag.digital.email.delete' },
+        { when: { eq: ['digital.email', 'hand_over'] }, text: 'frag.digital.email.hand_over' },
+        { text: 'frag.digital.email.leave_as_is' },
+      ],
+    },
+  },
+  {
+    id: 'digital.storage',
+    kind: 'clause',
+    text: 'clause.digital.storage',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.storage' }] },
+    fragments: {
+      storage: [
+        { when: { eq: ['digital.storage', 'trusted_review'] }, text: 'frag.digital.storage.trusted_review' },
+        { when: { eq: ['digital.storage', 'copy_for_family'] }, text: 'frag.digital.storage.copy_for_family' },
+        { when: { eq: ['digital.storage', 'delete_all'] }, text: 'frag.digital.storage.delete_all' },
+        { text: 'frag.digital.storage.family_decides' },
+      ],
+    },
+  },
+  {
+    id: 'digital.photos',
+    kind: 'clause',
+    text: 'clause.digital.photos',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.photos' }] },
+    fragments: {
+      photos: [
+        { when: { eq: ['digital.photos', 'share_with_family'] }, text: 'frag.digital.photos.share_with_family' },
+        { when: { eq: ['digital.photos', 'one_person'] }, text: 'frag.digital.photos.one_person' },
+        { when: { eq: ['digital.photos', 'review_first'] }, text: 'frag.digital.photos.review_first' },
+        { when: { eq: ['digital.photos', 'delete_all'] }, text: 'frag.digital.photos.delete_all' },
+        { text: 'frag.digital.photos.family_decides' },
+      ],
+    },
+  },
+  {
+    id: 'digital.backup',
+    kind: 'clause',
+    text: 'clause.digital.backup',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.backup' }, { notEmpty: 'digital.backup.recipient' }] },
+  },
+  {
+    id: 'digital.access',
+    kind: 'clause',
+    text: 'clause.digital.access',
+    when: { and: [{ eq: ['digital.gate', 'yes'] }, { notEmpty: 'digital.access' }] },
+    fragments: {
+      access: [
+        { when: { eq: ['digital.access', 'sealed_envelope'] }, text: 'frag.digital.access.sealed_envelope' },
+        { when: { eq: ['digital.access', 'password_manager'] }, text: 'frag.digital.access.password_manager' },
+        { when: { eq: ['digital.access', 'trusted_person'] }, text: 'frag.digital.access.trusted_person' },
+        { text: 'frag.digital.access.not_set' },
+      ],
+    },
+  },
+  {
+    id: 'digital.access.footer',
+    kind: 'clause',
+    text: 'clause.digital.access.footer',
+    when: { eq: ['digital.gate', 'yes'] },
   },
 
   {

@@ -80,3 +80,21 @@ Selectors that matter:
   `.sheet` `textContent()` for `\d+\.`; sibling `<p>` tags have no separator
   in `textContent`, so a fragile "digit preceded by whitespace" regex will
   undercount or find nothing even when the numbering is correct.
+
+## Phase 3: full 18-section interview, multi-select, Flexoki theme
+
+- The single most valuable regression test for wiring 12 sections at once is
+  a "skip everything" walk from start to done — it's in
+  `src/state/phase3.test.ts` as a unit test, and worth replaying in the
+  browser too (`button.link` "Skip this question" repeatedly, answering only
+  the name and sound-mind confirmation) to confirm the whole chain still
+  terminates and the progress bar/section labels track correctly.
+- `type: 'multi'` questions render as `.chip-row button.chip` (multi-select,
+  not mutually exclusive) + a `button.primary` "Continue". After clicking two
+  chips, wait ~100ms before asserting/screenshotting — a screenshot taken
+  immediately after the second click can catch React one render behind and
+  make the first chip look selected while the second doesn't (not a bug,
+  just a timing artifact in the driving script — verify via
+  `chip.getAttribute('class')` after a short wait, not visually mid-render).
+- Theme check: launch a `browser.newContext({ colorScheme: 'light' | 'dark' })`
+  — the app has no in-app toggle, it follows `prefers-color-scheme` only.

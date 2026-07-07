@@ -18,12 +18,14 @@ export function QuestionCard({ question }: { question: Question }) {
   const [text, setText] = useState('');
   const [items, setItems] = useState<ItemRecord[]>([]);
   const [draftItem, setDraftItem] = useState<ItemRecord>({});
+  const [selected, setSelected] = useState<string[]>([]);
 
   // reset local input state whenever the question changes
   useEffect(() => {
     setText(typeof existing === 'string' || typeof existing === 'number' ? String(existing) : '');
-    setItems(Array.isArray(existing) ? (existing as ItemRecord[]) : []);
+    setItems(Array.isArray(existing) && question.type === 'repeater' ? (existing as ItemRecord[]) : []);
     setDraftItem({});
+    setSelected(Array.isArray(existing) && question.type === 'multi' ? (existing as string[]) : []);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [question.id]);
 
@@ -75,6 +77,32 @@ export function QuestionCard({ question }: { question: Question }) {
                 {t(o.label, locale)}
               </button>
             ))}
+          </div>
+        );
+
+      case 'multi':
+        return (
+          <div className="freeform">
+            <div className="chip-row">
+              {question.options?.map((o) => (
+                <button
+                  key={o.id}
+                  className={`chip ${selected.includes(o.id) ? 'selected' : ''}`}
+                  onClick={() =>
+                    setSelected((s) => (s.includes(o.id) ? s.filter((x) => x !== o.id) : [...s, o.id]))
+                  }
+                >
+                  {t(o.label, locale)}
+                </button>
+              ))}
+            </div>
+            <button
+              className="primary"
+              disabled={selected.length === 0}
+              onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: selected })}
+            >
+              {t('ui.continue', locale)}
+            </button>
           </div>
         );
 

@@ -14,7 +14,7 @@ export const bankQuestions: Question[] = [
       { id: 'yes', label: 'ui.yes', next: 'bank.mode' },
       { id: 'no', label: 'ui.no' },
     ],
-    next: 'realestate.gate',
+    next: 'invest.gate',
   },
   {
     id: 'bank.mode',
@@ -111,12 +111,12 @@ export const bankQuestions: Question[] = [
       { id: 'yes', label: 'ui.yes', next: 'bank.cash.beneficiary.mode' },
       { id: 'no', label: 'ui.no' },
     ],
-    next: 'realestate.gate',
+    next: 'invest.gate',
   },
   ...makeBeneficiarySubflow({
     section: 'bank',
     prefix: 'bank.cash.beneficiary',
     questionText: 'q.bank.cash.beneficiary',
-    afterNext: 'realestate.gate',
+    afterNext: 'invest.gate',
   }),
 ];

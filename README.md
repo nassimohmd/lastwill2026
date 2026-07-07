@@ -49,14 +49,23 @@ separate template layer assembles the will from conditional clause blocks.
 
 ## Status
 
-Implemented so far (Phases 1–2 of [docs/05-roadmap.md](docs/05-roadmap.md)):
-personal details & declaration, funeral/organ wishes, bank accounts (all-together
-or account-by-account), real estate (incl. life interest), the residuary clause,
-and executors (physical + digital) — enough to generate a legally complete will
-for a simple estate. The shared sub-flow machinery (SF-PERSON/BENEFICIARY/
-CONTINGENT/SHARES) and the flow-repeater engine that this is built on are meant
-to carry the remaining sections (investments, receivables, vehicles, jewellery,
-digital assets, guardianship...) in Phase 3 without further engine changes.
+All 18 interview sections from [docs/03-question-flows.md](docs/03-question-flows.md)
+are implemented: personal details, funeral & organ donation, guardianship, debts,
+bank accounts, investments, receivables, real estate, vehicles, collectibles,
+jewellery, intellectual property, diaries, gadgets, digital life, the residuary
+clause, and executors. The interview end-to-end produces a legally complete will.
+
+A few sections were intentionally simplified versus the full docs spec to keep
+the question graph maintainable (see comments in `src/data/*.ts`): per-child
+guardian choice collapsed to one guardian pair for all minors; investments'
+nine per-type mini-flows collapsed into one generic repeater; collectibles,
+jewellery, and IP each collapsed to a single beneficiary pick rather than an
+itemised list. These are straightforward to expand later using the same
+`makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
+
+UI theme: [Flexoki](https://stephango.com/flexoki) (Kepano), light/dark via
+`prefers-color-scheme`. The generated will itself always renders in Flexoki's
+paper tone regardless of app theme, since it represents a printed document.
 
 ## Development
 
