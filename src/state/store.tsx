@@ -16,7 +16,8 @@ export type Action =
   | { type: 'GOTO'; qid: string }
   | { type: 'START' }
   | { type: 'RESET' }
-  | { type: 'LOAD_STATE'; state: AppState };
+  | { type: 'LOAD_STATE'; state: AppState }
+  | { type: 'RETURN_TO_REVIEW' };
 
 export function initialState(): AppState {
   const now = new Date().toISOString();
@@ -322,6 +323,24 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'LOAD_STATE':
       return touch(action.state);
+
+    case 'RETURN_TO_REVIEW': {
+      // purgeUnreachable replays from the top regardless of where the
+      // cursor currently sits, so this is safe even mid-edit: anything the
+      // just-changed answer invalidated downstream is cleaned up without
+      // requiring the user to click through every remaining question.
+      const next = purgeUnreachable(state);
+      return touch({
+        ...next,
+        currentQuestionId: null,
+        // an incomplete repeater item's own fields are preserved as loose
+        // top-level answers by the purge above (harmless — they render
+        // nothing since they're outside any `each` array); dropping the
+        // session itself avoids a stale repeaterId blocking re-entry later.
+        repeaterSession: null,
+        repeaterItems: {},
+      });
+    }
 
     default:
       return state;

@@ -143,11 +143,18 @@ export function App() {
     <div className="app">
       <header className="no-print">
         <span className="brand">{t('ui.appName', locale)}</span>
-        {(inProgress || finished) && started && (
-          <button className="link" onClick={startOver}>
-            {t('ui.landing.startOver', locale)}
-          </button>
-        )}
+        <div className="header-links">
+          {inProgress && started && (
+            <button className="link" onClick={() => dispatch({ type: 'RETURN_TO_REVIEW' })}>
+              {t('ui.review.backLink', locale)}
+            </button>
+          )}
+          {(inProgress || finished) && started && (
+            <button className="link" onClick={startOver}>
+              {t('ui.landing.startOver', locale)}
+            </button>
+          )}
+        </div>
       </header>
       {inProgress && started && (
         <div className="no-print">

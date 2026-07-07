@@ -98,6 +98,7 @@
   "ui.review.section.done": "Answered",
   "ui.review.section.skipped": "Skipped",
   "ui.review.section.review": "Review",
+  "ui.review.backLink": "Review answers",
   "ui.review.checklist.title": "Before you finish",
   "ui.review.checklist.lead": "A few things a will alone can't finish:",
   "ui.review.generate": "Generate my will",

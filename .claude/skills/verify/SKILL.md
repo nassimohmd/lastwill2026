@@ -129,3 +129,9 @@ Selectors that matter:
   `connect-src 'self'` (Vite HMR needs it) — don't flag that as a
   regression, it's swapped only at build time by the `strict-production-csp`
   Vite plugin.
+- **"Review answers" header link**: always visible while `inProgress` (any
+  question or the repeater add-more screen), dispatches `RETURN_TO_REVIEW` —
+  jumps straight back to Review in one step, purging anything the edit made
+  stale, without requiring the user to click/skip through every remaining
+  downstream question first. Worth re-checking after any change to the
+  purge/reachability logic, since this action reuses it directly.
