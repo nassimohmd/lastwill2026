@@ -77,6 +77,20 @@ import for moving a draft between devices without a backend; and a strict
 `connect-src 'none'` CSP on the production build (dev keeps `'self'` for
 Vite's HMR websocket).
 
+**Malayalam (Phase 5)**: the full interview, all UI chrome, and the
+generated-will clause templates are translated (`src/locales/ml/*.json`,
+809 keys, zero missing, placeholder-token parity checked by
+`src/i18n/malayalam.test.ts`). Two independent language toggles: one for
+the interview/UI (landing page + header, sticky, switch anytime without
+losing progress), and a separate one on the will screen for the *document
+text itself*, which always defaults to English — the highest-stakes text
+stays in the language with the most legal review. Selecting Malayalam for
+the will shows a clear in-app notice that it's a draft translation pending
+review by a Malayalam-speaking lawyer before anyone signs it. This is a
+deliberate scope choice, not a technical limitation: the underlying
+per-key-fallback i18n architecture makes flipping the default just as easy
+once the Malayalam legal text has been professionally reviewed.
+
 ## Development
 
 ```bash

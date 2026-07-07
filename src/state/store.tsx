@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useReducer, type ReactNode } from 'react';
 import type { AppState, Person } from '../engine/types';
+import type { Locale } from '../i18n';
 import { graph } from '../data/graph';
 import { loadDraft, saveDraft, clearDraft } from './persistence';
 import { ITEM_END, addMoreScreenId } from '../engine/repeaters';
@@ -17,7 +18,8 @@ export type Action =
   | { type: 'START' }
   | { type: 'RESET' }
   | { type: 'LOAD_STATE'; state: AppState }
-  | { type: 'RETURN_TO_REVIEW' };
+  | { type: 'RETURN_TO_REVIEW' }
+  | { type: 'SET_LOCALE'; locale: Locale };
 
 export function initialState(): AppState {
   const now = new Date().toISOString();
@@ -323,6 +325,9 @@ export function reducer(state: AppState, action: Action): AppState {
 
     case 'LOAD_STATE':
       return touch(action.state);
+
+    case 'SET_LOCALE':
+      return touch({ ...state, meta: { ...state.meta, locale: action.locale } });
 
     case 'RETURN_TO_REVIEW': {
       // purgeUnreachable replays from the top regardless of where the

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { clauseBlocks } from '../data/clauses';
 import { renderWill, willToText } from '../template/render';
-import { t } from '../i18n';
+import { t, hasLocale, type Locale } from '../i18n';
 import { useStore } from '../state/store';
 import { SigningInstructions } from './SigningInstructions';
 import { getChecklist } from '../template/checklist';
@@ -9,22 +9,26 @@ import { getChecklist } from '../template/checklist';
 export function WillPreview() {
   const { state } = useStore();
   const locale = state.meta.locale;
-  const blocks = renderWill(clauseBlocks, state, locale);
+  // the operative legal text has its own language choice, independent of
+  // the interview locale, and always defaults to English — see the
+  // "Will language" toggle below for why (docs/05-roadmap.md Phase 5)
+  const [willLocale, setWillLocale] = useState<Locale>('en');
+  const blocks = renderWill(clauseBlocks, state, willLocale);
   const checklist = getChecklist(state);
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
     const witnessBlock = [
       '',
-      `${t('ui.will.testatorSignature', locale)}: ________________________`,
-      `${state.answers['personal.full_name'] ?? ''} ${t('ui.will.testator', locale)}`,
+      `${t('ui.will.testatorSignature', willLocale)}: ________________________`,
+      `${state.answers['personal.full_name'] ?? ''} ${t('ui.will.testator', willLocale)}`,
       '',
       ...[1, 2].flatMap((n) => [
-        `${t('ui.will.witness', locale)} ${n}:`,
-        `  ${t('ui.will.witnessName', locale)}: ________________________`,
-        `  ${t('ui.will.witnessAddress', locale)}: ________________________`,
-        `  ${t('ui.will.witnessOccupation', locale)}: ________________________`,
-        `  ${t('ui.will.witnessSignature', locale)}: ________________________`,
+        `${t('ui.will.witness', willLocale)} ${n}:`,
+        `  ${t('ui.will.witnessName', willLocale)}: ________________________`,
+        `  ${t('ui.will.witnessAddress', willLocale)}: ________________________`,
+        `  ${t('ui.will.witnessOccupation', willLocale)}: ________________________`,
+        `  ${t('ui.will.witnessSignature', willLocale)}: ________________________`,
         '',
       ]),
     ].join('\n');
@@ -44,7 +48,22 @@ export function WillPreview() {
         </button>
       </div>
 
-      <div className="sheet">
+      {hasLocale('ml') && (
+        <div className="will-lang-picker no-print">
+          <span>{t('ui.will.langLabel', locale)}</span>
+          <div className="lang-toggle">
+            <button className={willLocale === 'en' ? 'active' : ''} onClick={() => setWillLocale('en')}>
+              {t('ui.lang.toggle.en', locale)}
+            </button>
+            <button className={willLocale === 'ml' ? 'active' : ''} onClick={() => setWillLocale('ml')}>
+              {t('ui.lang.toggle.ml', locale)}
+            </button>
+          </div>
+          {willLocale === 'ml' && <p className="hint warning">{t('ui.will.langDraftNotice', locale)}</p>}
+        </div>
+      )}
+
+      <div className="sheet" lang={willLocale}>
         {blocks.map((b) => {
           if (b.kind === 'title') return <h1 key={b.id} className="will-title">{b.text}</h1>;
           if (b.kind === 'heading') return <h2 key={b.id} className="will-heading">{b.text}</h2>;
@@ -61,7 +80,7 @@ export function WillPreview() {
           <div className="sig-line">
             <span className="rule" />
             <span className="sig-caption">
-              {String(state.answers['personal.full_name'] ?? '')} {t('ui.will.testator', locale)}
+              {String(state.answers['personal.full_name'] ?? '')} {t('ui.will.testator', willLocale)}
             </span>
           </div>
         </div>
@@ -69,11 +88,11 @@ export function WillPreview() {
         <div className="witnesses">
           {[1, 2].map((n) => (
             <div key={n} className="witness">
-              <p className="witness-title">{t('ui.will.witness', locale)} {n}</p>
+              <p className="witness-title">{t('ui.will.witness', willLocale)} {n}</p>
               {(['witnessName', 'witnessAddress', 'witnessOccupation', 'witnessSignature'] as const).map(
                 (k) => (
                   <p key={k} className="witness-field">
-                    {t(`ui.will.${k}`, locale)}: <span className="rule short" />
+                    {t(`ui.will.${k}`, willLocale)}: <span className="rule short" />
                   </p>
                 ),
               )}

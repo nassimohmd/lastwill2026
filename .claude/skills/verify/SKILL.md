@@ -135,3 +135,30 @@ Selectors that matter:
   stale, without requiring the user to click/skip through every remaining
   downstream question first. Worth re-checking after any change to the
   purge/reachability logic, since this action reuses it directly.
+
+## Phase 5: Malayalam locale
+
+- Two independent language choices, don't conflate them: `.lang-toggle` in
+  the landing page and header switches `state.meta.locale` (drives the
+  interview + all UI chrome); `.will-lang-picker` on the will screen only
+  (a local `useState`, not app state) switches the *generated document's*
+  language, always defaulting to English regardless of the interview
+  locale, with a `.hint.warning` disclaimer shown when set to Malayalam
+  ("draft translation, needs review by a Malayalam-speaking lawyer").
+- Switching either toggle never loses progress — every key falls back to
+  English per-key (see `src/i18n/malayalam.test.ts`, which asserts full
+  key-for-key coverage and placeholder-token parity between `locales/en/*`
+  and `locales/ml/*` — run that test after touching any locale file, it's
+  the fast way to catch a missed translation or a broken `{{placeholder}}`).
+- `.sheet[lang="ml"]` gets `text-align: left` (not `justify` — Malayalam's
+  spacing metrics make justified text produce ugly, uneven gaps; caught by
+  screenshotting the actual will, not by unit tests) and taller
+  `line-height` (Malayalam glyphs need more vertical room than Latin at the
+  same font-size).
+- The English clause templates bake an ordinal ("7th day of...") into
+  `{{today.day}}`; the Malayalam templates supply their own grammatical
+  suffix in the template text itself (e.g. `{{today.day}}-ന്`) — so
+  `resolveVar` must emit a bare number for `locale==='ml'`, not the English
+  ordinal, or you get "7th-ന്" nonsense. Verify by generating a will in
+  Malayalam and reading the date in the declaration, not just by reading
+  the code.

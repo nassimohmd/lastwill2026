@@ -186,7 +186,13 @@ function resolveVar(
     const age = computeAge(answers['personal.dob']);
     return age === null ? '____' : String(age);
   }
-  if (expr === 'today.day') return ordinal(new Date().getDate());
+  if (expr === 'today.day') {
+    const day = new Date().getDate();
+    // Malayalam clause templates append their own grammatical suffix
+    // (e.g. "{{today.day}}-ന്") — an English "7th"-style ordinal would
+    // collide with that, so only English gets the ordinal suffix here.
+    return locale === 'ml' ? String(day) : ordinal(day);
+  }
   if (expr === 'today.month') return new Date().toLocaleString(locale === 'ml' ? 'ml-IN' : 'en-IN', { month: 'long' });
   if (expr === 'today.year') return String(new Date().getFullYear());
   if (expr === 'familyList') return familyList(state);

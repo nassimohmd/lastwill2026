@@ -81,8 +81,6 @@
   "ui.blocked.underage": "You told us you are under 18 — a person must be 18 or older to make a valid will in India.",
   "ui.blocked.soundMind": "The sound-mind confirmation is required. Go back and confirm it to generate your will.",
 
-  "ui.lang.mlSoon": "മലയാളം — coming soon",
-
   "ui.disclaimer": "This is a document-drafting aid, not legal advice.",
 
   "ui.will.witness": "Witness",
@@ -128,5 +126,10 @@
   "ui.landing.export": "Export my draft",
   "ui.landing.import": "Import a draft",
   "ui.import.confirmOverwrite": "This will replace your current answers with the imported draft. Continue?",
-  "ui.import.error": "That file doesn't look like a LastWill draft."
+  "ui.import.error": "That file doesn't look like a LastWill draft.",
+
+  "ui.lang.toggle.en": "English",
+  "ui.lang.toggle.ml": "മലയാളം",
+  "ui.will.langLabel": "Will language:",
+  "ui.will.langDraftNotice": "This Malayalam legal text is a draft translation and should be reviewed by a Malayalam-speaking lawyer before signing. The English version has had more legal review."
 }

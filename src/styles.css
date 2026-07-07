@@ -115,7 +115,20 @@ footer {
 .landing .tagline { color: var(--accent); font-size: 1.1rem; margin-top: 0; }
 .landing .lead { max-width: 30rem; margin: 1.5rem auto; color: var(--tx-2); }
 .landing .privacy { font-size: 0.85rem; color: var(--tx-3); }
-.landing .lang-note { font-size: 0.8rem; color: var(--tx-3); margin-top: 2.5rem; }
+.landing .lang-toggle { margin-top: 2.5rem; justify-content: center; }
+
+.lang-toggle { display: inline-flex; gap: 0.25rem; }
+.lang-toggle button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.82rem;
+  background: transparent;
+  color: var(--tx-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.lang-toggle button.active { border-color: var(--accent); color: var(--accent); }
+.lang-toggle button:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ---------- progress ---------- */
 
@@ -284,17 +297,32 @@ button.link:hover { color: var(--accent); }
 .blocked h2 { color: var(--danger); }
 .preview-actions { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; }
 
+.will-lang-picker {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--tx-2);
+}
+.will-lang-picker .hint.warning { flex-basis: 100%; margin: 0; }
+
 .sheet {
   background: var(--sheet-bg);
   color: var(--sheet-fg);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 3rem 2.75rem;
-  font-family: Charter, Georgia, 'Times New Roman', serif;
+  font-family: Charter, Georgia, 'Times New Roman', 'Noto Sans Malayalam', 'Manjari', serif;
   font-size: 1rem;
   line-height: 1.7;
   box-shadow: 0 1px 2px rgba(16, 15, 15, 0.06);
 }
+/* Malayalam script needs more vertical room than Latin at the same font-size,
+   and justify-stretching reads poorly with its spacing metrics */
+.sheet[lang="ml"] { line-height: 1.95; }
+.sheet[lang="ml"] .will-clause, .sheet[lang="ml"] .will-plain { text-align: left; }
 
 .will-title {
   font-size: 1.15rem;

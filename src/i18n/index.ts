@@ -1,6 +1,9 @@
 import enQuestions from '../locales/en/questions.json';
 import enUi from '../locales/en/ui.json';
 import enClauses from '../locales/en/clauses.json';
+import mlQuestions from '../locales/ml/questions.json';
+import mlUi from '../locales/ml/ui.json';
+import mlClauses from '../locales/ml/clauses.json';
 
 export type Locale = 'en' | 'ml';
 
@@ -8,9 +11,9 @@ type Dict = Record<string, string>;
 
 const en: Dict = { ...enQuestions, ...enUi, ...enClauses };
 
-// Malayalam ships later; every key falls back to English per key
-// (docs/01-architecture.md §8). Drop ml/*.json files in and register here.
-const ml: Dict = {};
+// Every key falls back to English per key (docs/01-architecture.md §8), so
+// Malayalam can ship incomplete without breaking anything.
+const ml: Dict = { ...mlQuestions, ...mlUi, ...mlClauses };
 
 const dictionaries: Record<Locale, Dict> = { en, ml };
 

@@ -10,6 +10,7 @@ import { ReviewScreen } from './ReviewScreen';
 import { generationBlockers } from '../template/render';
 import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 import { exportDraft, parseImportedDraft } from '../state/persistence';
+import { LanguageToggle } from './LanguageToggle';
 
 export function App() {
   const { state, dispatch } = useStore();
@@ -93,7 +94,7 @@ export function App() {
             }}
           />
         </div>
-        <p className="lang-note">{t('ui.lang.mlSoon', locale)}</p>
+        <LanguageToggle />
       </div>
     );
   } else if (finished) {
@@ -154,6 +155,7 @@ export function App() {
               {t('ui.landing.startOver', locale)}
             </button>
           )}
+          {started && <LanguageToggle />}
         </div>
       </header>
       {inProgress && started && (
