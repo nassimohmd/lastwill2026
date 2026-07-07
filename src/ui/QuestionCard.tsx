@@ -238,7 +238,9 @@ export function QuestionCard({ question }: { question: Question }) {
           </button>
         )}
         <span className="spacer" />
-        {skippable && (
+        {/* info cards already advance via "Understood" — a Skip link beside it
+            is a second CTA for the same action */}
+        {skippable && question.type !== 'info' && (
           <button className="link" onClick={() => dispatch({ type: 'SKIP', qid: question.id })}>
             {t('ui.skip', locale)} →
           </button>

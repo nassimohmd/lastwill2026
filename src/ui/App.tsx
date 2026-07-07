@@ -29,6 +29,11 @@ export function App() {
     if (inProgress) setShowWill(false);
   }, [inProgress]);
 
+  // keep the document language in sync so screen readers switch voices
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
+
   const startOver = () => {
     if (window.confirm(t('ui.startOver.confirm', locale))) {
       dispatch({ type: 'RESET' });

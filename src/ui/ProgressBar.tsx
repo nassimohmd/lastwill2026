@@ -33,6 +33,11 @@ export function ProgressBar() {
           {chapter ? t(chapter.title, locale) : ''}
           {currentSection ? ` — ${t(currentSection.title, locale)}` : ''}
         </span>
+        {currentSection && (
+          <span className="progress-count">
+            {currentSectionIdx + 1} / {sections.length}
+          </span>
+        )}
       </div>
       <div className="progress-track">
         {sections.map((s, i) => (

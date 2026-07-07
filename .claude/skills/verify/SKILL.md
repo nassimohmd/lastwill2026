@@ -98,6 +98,16 @@ Selectors that matter:
   `chip.getAttribute('class')` after a short wait, not visually mid-render).
 - Theme check: launch a `browser.newContext({ colorScheme: 'light' | 'dark' })`
   — the app has no in-app toggle, it follows `prefers-color-scheme` only.
+- The UI is strict monochrome (no accent/danger hues) — selected options are
+  double-black-border + grey fill, selected chips are inverted (black bg),
+  warnings differ by border weight not color. When screenshotting option
+  states, remember Playwright leaves a hover state on the last-moused
+  element, which in this design also draws a black border — check for the
+  `.selected` class, not just the visual.
+- Layout regression worth guarding: `.witness` blocks must render
+  side-by-side inside the sheet (compare their `getBoundingClientRect().top`
+  values) — the flex `min-width` is tuned to the sheet's inner width, and
+  padding/max-width changes can silently wrap them into a vertical stack.
 
 ## Phase 4: review screen, checklist, export/import, CSP
 

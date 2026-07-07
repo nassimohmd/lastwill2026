@@ -63,9 +63,12 @@ jewellery, and IP each collapsed to a single beneficiary pick rather than an
 itemised list. These are straightforward to expand later using the same
 `makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
 
-UI theme: [Flexoki](https://stephango.com/flexoki) (Kepano), light/dark via
-`prefers-color-scheme`. The generated will itself always renders in Flexoki's
-paper tone regardless of app theme, since it represents a printed document.
+UI theme: strict monochrome — pure black/white/grey, light and dark via
+`prefers-color-scheme`, with a system serif stack for display headings and
+the will text (no webfonts, keeping the CSP and privacy guarantees intact).
+Severity is conveyed through weight and border treatment rather than color.
+The generated will always renders as black ink on a white sheet regardless
+of app theme, since it represents a printed document.
 
 Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
 a Review screen with per-section status and jump-to-fix warnings (missing
