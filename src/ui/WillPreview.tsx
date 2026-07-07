@@ -3,11 +3,14 @@ import { clauseBlocks } from '../data/clauses';
 import { renderWill, willToText } from '../template/render';
 import { t } from '../i18n';
 import { useStore } from '../state/store';
+import { SigningInstructions } from './SigningInstructions';
+import { getChecklist } from '../template/checklist';
 
 export function WillPreview() {
   const { state } = useStore();
   const locale = state.meta.locale;
   const blocks = renderWill(clauseBlocks, state, locale);
+  const checklist = getChecklist(state);
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -78,6 +81,21 @@ export function WillPreview() {
           ))}
         </div>
       </div>
+
+      <div className="signing-page-wrap">
+        <SigningInstructions locale={locale} />
+      </div>
+
+      {checklist.length > 0 && (
+        <div className="signing-page-wrap">
+          <h2>{t('ui.review.checklist.title', locale)}</h2>
+          <ul>
+            {checklist.map((c) => (
+              <li key={c.id}>{t(c.text, locale, c.vars)}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

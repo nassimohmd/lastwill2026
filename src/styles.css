@@ -324,6 +324,71 @@ button.link:hover { color: var(--accent); }
 .witness-title { font-weight: 600; margin-bottom: 0.5rem; }
 .witness-field { margin: 0.4rem 0; font-size: 0.9rem; }
 
+/* ---------- signing instructions & checklist pages ---------- */
+
+.signing-page-wrap {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px dashed var(--border-strong);
+}
+.signing-page h2, .signing-page-wrap > h2 { font-size: 1.1rem; margin: 0 0 1rem; }
+.signing-page ol { padding-left: 1.25rem; margin: 0 0 1rem; }
+.signing-page li, .signing-page-wrap li { margin-bottom: 0.6rem; line-height: 1.5; }
+.signing-page-wrap ul { padding-left: 1.25rem; margin: 0; }
+
+/* ---------- review screen ---------- */
+
+.review h2 { font-size: 1.45rem; margin: 0 0 0.5rem; }
+.lead-text { color: var(--tx-2); margin: 0 0 1.5rem; }
+
+.warnings { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; }
+.warning-card {
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--tx-3);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  background: var(--surface);
+}
+.warning-card p { margin: 0 0 0.4rem; }
+.warning-card.strong { border-left-color: var(--danger); }
+.warning-card.strong p { color: var(--danger); }
+
+.review-sections { list-style: none; padding: 0; margin: 0 0 2rem; }
+.review-section-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.review-section-row > div:first-child { flex: 1; display: flex; flex-direction: column; }
+.review-section-title { font-size: 0.98rem; }
+.review-section-chapter { font-size: 0.78rem; color: var(--tx-3); }
+.status-pill {
+  font-size: 0.76rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  color: var(--tx-2);
+  white-space: nowrap;
+}
+.status-pill.done { border-color: var(--accent); color: var(--accent); }
+
+.checklist { margin-bottom: 2rem; }
+.checklist h3 { font-size: 1.05rem; margin: 0 0 0.35rem; }
+.checklist ul { padding-left: 1.25rem; margin: 0; }
+.checklist li { margin-bottom: 0.5rem; color: var(--tx-2); }
+
+.landing-links { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem; }
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
 /* ---------- print ---------- */
 
 @media print {
@@ -339,4 +404,15 @@ button.link:hover { color: var(--accent); }
     background: #fff;
   }
   .witnesses, .signature-block { break-inside: avoid; }
+  .signing-page-wrap { break-before: page; border-top: none; padding-top: 0; margin-top: 0; }
+}
+
+/* ---------- mobile ---------- */
+
+@media (max-width: 480px) {
+  .app { padding: 1rem 1rem 2rem; }
+  .sheet { padding: 1.75rem 1.25rem; }
+  .landing { padding-top: 8vh; }
+  .landing h1 { font-size: 1.9rem; }
+  .review-section-row { flex-wrap: wrap; }
 }

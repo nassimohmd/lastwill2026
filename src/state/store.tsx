@@ -15,7 +15,8 @@ export type Action =
   | { type: 'BACK' }
   | { type: 'GOTO'; qid: string }
   | { type: 'START' }
-  | { type: 'RESET' };
+  | { type: 'RESET' }
+  | { type: 'LOAD_STATE'; state: AppState };
 
 export function initialState(): AppState {
   const now = new Date().toISOString();
@@ -318,6 +319,9 @@ export function reducer(state: AppState, action: Action): AppState {
     case 'RESET':
       clearDraft();
       return initialState();
+
+    case 'LOAD_STATE':
+      return touch(action.state);
 
     default:
       return state;

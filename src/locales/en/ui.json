@@ -91,5 +91,41 @@
   "ui.will.witnessOccupation": "Occupation",
   "ui.will.witnessSignature": "Signature",
   "ui.will.testatorSignature": "Signature of Testator",
-  "ui.will.testator": "(Testator)"
+  "ui.will.testator": "(Testator)",
+
+  "ui.review.title": "Review your answers",
+  "ui.review.lead": "Check the summary below, then generate your will. Tap any section to go back and change it.",
+  "ui.review.section.done": "Answered",
+  "ui.review.section.skipped": "Skipped",
+  "ui.review.section.review": "Review",
+  "ui.review.checklist.title": "Before you finish",
+  "ui.review.checklist.lead": "A few things a will alone can't finish:",
+  "ui.review.generate": "Generate my will",
+  "ui.review.fix": "Fix this",
+
+  "ui.warning.noResiduary": "You haven't set a residuary clause — anything not specifically listed in your will is governed by inheritance law, not your wishes.",
+  "ui.warning.muslimThird": "As a Muslim testator, bequests beyond one-third of your net estate need your heirs' consent — your will already includes a clause reflecting this.",
+
+  "ui.checklist.nomination": "Align the nomination on {asset} with this will.",
+  "ui.checklist.accessNote": "Set up an access note for {asset} — without it, this wish may stall.",
+  "ui.checklist.digitalAccess": "Create a digital access note (a sealed envelope or password manager's emergency access) — without it, most digital wishes stall.",
+  "ui.checklist.legacyTools": "Set up each platform's own legacy tools now (Facebook Legacy Contact, Google Inactive Account Manager) — they act faster than a will.",
+  "ui.checklist.tellExecutor": "Tell your executor they have been named, and where the signed will is kept.",
+  "ui.checklist.organRegister": "Register your organ donor pledge (e.g. with NOTTO) and tell your family now — the will is usually read after the window for donation.",
+  "ui.checklist.bodyDonation": "Body donation needs prior registration and family cooperation — arrange this now, not only in the will.",
+
+  "ui.signing.title": "Signing & next steps",
+  "ui.signing.step1": "Print single-sided, then sign every page.",
+  "ui.signing.step2": "Sign in full at the end, before two adult witnesses who are not beneficiaries (and ideally not your executor).",
+  "ui.signing.step3": "Both witnesses should sign in your presence and in each other's presence, at the same time.",
+  "ui.signing.step4": "A doctor's fitness certificate is optional but recommended for older testators — it helps pre-empt a sound-mind challenge later.",
+  "ui.signing.step5": "Registration at the Sub-Registrar's office is optional, but strengthens the will as evidence.",
+  "ui.signing.step6": "Store the signed original safely, and tell your executor exactly where it is.",
+  "ui.signing.step7": "Review this will again after major life events — marriage, divorce, a birth, or a large purchase.",
+  "ui.signing.note": "Stamp paper and notarisation are not required for a will in India.",
+
+  "ui.landing.export": "Export my draft",
+  "ui.landing.import": "Import a draft",
+  "ui.import.confirmOverwrite": "This will replace your current answers with the imported draft. Continue?",
+  "ui.import.error": "That file doesn't look like a LastWill draft."
 }

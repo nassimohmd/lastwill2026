@@ -98,3 +98,34 @@ Selectors that matter:
   `chip.getAttribute('class')` after a short wait, not visually mid-render).
 - Theme check: launch a `browser.newContext({ colorScheme: 'light' | 'dark' })`
   — the app has no in-app toggle, it follows `prefers-color-scheme` only.
+
+## Phase 4: review screen, checklist, export/import, CSP
+
+- Finishing the interview lands on **Review** (`h2` "Review your answers"),
+  not straight on the will — `button.primary` "Generate my will" is the
+  transition. "Back to questions" from the will screen returns to Review,
+  not the interview (an effect in App.tsx resets `showWill` whenever
+  `currentQuestionId` goes non-null, so editing an answer also re-lands on
+  Review afterward, not straight back to the will).
+- Warnings render as `.warning-card` (`.strong` variant for blocking-style
+  issues, e.g. missing residuary clause); each has an optional `button.link`
+  "Fix this" that dispatches GOTO to the relevant question.
+- **Editing an early answer does not auto-replay already-answered
+  downstream questions** — every question after the edit point must be
+  clicked/skipped through again on the way back to Review, even ones whose
+  answer is unaffected. This is existing navigation behavior, not a Phase 4
+  regression; don't mistake it for a bug when a verification script's
+  "return to Review" step needs more steps than expected.
+- Checklist (`.checklist`) and warnings are pure functions of current state
+  (`src/template/checklist.ts`) — if you skip/re-answer a question that
+  originally triggered a checklist item, the item correctly disappears. When
+  scripting a "checklist item survives a round trip" check, re-affirm the
+  same answer on the way back, don't just skip through it.
+- Export downloads via a real browser download event
+  (`page.waitForEvent('download')` + `download.saveAs(path)`); import is a
+  plain `<input type=file>` — drive it with `page.setInputFiles(...)`.
+- CSP: `npm run build` should produce `dist/index.html` with
+  `connect-src 'none'`; the dev-mode `index.html` source keeps
+  `connect-src 'self'` (Vite HMR needs it) — don't flag that as a
+  regression, it's swapped only at build time by the `strict-production-csp`
+  Vite plugin.

@@ -67,6 +67,16 @@ UI theme: [Flexoki](https://stephango.com/flexoki) (Kepano), light/dark via
 `prefers-color-scheme`. The generated will itself always renders in Flexoki's
 paper tone regardless of app theme, since it represents a printed document.
 
+Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
+a Review screen with per-section status and jump-to-fix warnings (missing
+residuary clause, the Muslim one-third rule) between finishing the interview
+and generating the will; a personal checklist derived from the answers
+(nomination mismatches, unset digital access notes, "tell your executor");
+a signing-instructions page appended to the generated will; JSON export/
+import for moving a draft between devices without a backend; and a strict
+`connect-src 'none'` CSP on the production build (dev keeps `'self'` for
+Vite's HMR websocket).
+
 ## Development
 
 ```bash
