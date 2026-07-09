@@ -13,15 +13,15 @@ const STEPS = [
 export function SigningInstructions({ locale }: { locale: Locale }) {
   return (
     <div className="signing-page">
-      <h2 className="mb-4 text-lg font-light text-neutral-900 dark:text-white">{t('ui.signing.title', locale)}</h2>
+      <h2 className="mb-4 text-lg font-light text-foreground">{t('ui.signing.title', locale)}</h2>
       <ol className="list-decimal pl-5">
         {STEPS.map((key, i) => (
-          <li key={i} className="mb-2.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
+          <li key={i} className="mb-2.5 text-sm leading-relaxed text-muted-foreground">
             {t(key, locale)}
           </li>
         ))}
       </ol>
-      <p className="hint mt-3 text-sm text-neutral-500">{t('ui.signing.note', locale)}</p>
+      <p className="hint mt-3 text-sm text-muted-foreground">{t('ui.signing.note', locale)}</p>
     </div>
   );
 }

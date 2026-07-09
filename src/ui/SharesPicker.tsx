@@ -3,7 +3,11 @@ import type { Question, SharesAnswer } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { RELATIONS } from '../data/relations';
 import { useStore } from '../state/store';
-import { btnPrimary, hint, hintWarning, inputBase, option, optionSelected } from './classes';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { hint, hintWarning, option, optionSelected } from './classes';
 
 export function SharesPicker({ question }: { question: Question }) {
   const { state, dispatch } = useStore();
@@ -47,11 +51,10 @@ export function SharesPicker({ question }: { question: Question }) {
         <div className="freeform mt-5 flex flex-col gap-4">
           {people.map((p) => (
             <div key={p.id} className="field">
-              <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+              <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 {p.name} — {t(RELATIONS.find((r) => r.id === p.relation)?.label ?? 'q.relation.other', locale)}
-              </label>
-              <input
-                className={inputBase}
+              </Label>
+              <Input
                 type="number"
                 min={0}
                 max={100}
@@ -64,26 +67,26 @@ export function SharesPicker({ question }: { question: Question }) {
             {t('ui.shares.percentTotal', locale, { n: String(total) })}
             {total !== 100 ? ` — ${t('ui.shares.percentWarning', locale)}` : ''}
           </p>
-          <button
-            className={`${btnPrimary} self-start`}
+          <Button
+            className="primary self-start"
             disabled={total !== 100}
             onClick={() => submit({ mode: 'percentage', splits })}
           >
             {t('ui.continue', locale)}
-          </button>
+          </Button>
         </div>
       )}
 
       {mode === 'describe' && (
         <div className="freeform mt-5 flex flex-col gap-3">
-          <textarea className={inputBase} rows={3} value={text} onChange={(e) => setText(e.target.value)} />
-          <button
-            className={`${btnPrimary} self-start`}
+          <Textarea rows={3} value={text} onChange={(e) => setText(e.target.value)} />
+          <Button
+            className="primary self-start"
             disabled={!text.trim()}
             onClick={() => submit({ mode: 'describe', text: text.trim() })}
           >
             {t('ui.continue', locale)}
-          </button>
+          </Button>
         </div>
       )}
     </div>

@@ -3,7 +3,10 @@ import type { Question } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { RELATIONS, newPersonId } from '../data/relations';
 import { useStore } from '../state/store';
-import { btnPrimary, chip, chipSelected, hint, inputBase, option } from './classes';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { chip, chipSelected, hint, option } from './classes';
 
 export function PersonPicker({ question }: { question: Question }) {
   const { state, dispatch } = useStore();
@@ -46,15 +49,15 @@ export function PersonPicker({ question }: { question: Question }) {
       {adding && (
         <div className="freeform mt-7 flex flex-col gap-4">
           <div className="field">
-            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+            <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
               {t('ui.person.name', locale)}
-            </label>
-            <input className={inputBase} type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
+            </Label>
+            <Input type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="field">
-            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+            <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
               {t('ui.person.relation', locale)}
-            </label>
+            </Label>
             <div className="chip-row flex flex-wrap gap-2">
               {RELATIONS.map((r) => (
                 <button
@@ -69,16 +72,16 @@ export function PersonPicker({ question }: { question: Question }) {
           </div>
           {question.askAddress && (
             <div className="field">
-              <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+              <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 {t('ui.person.address', locale)}
-              </label>
-              <input className={inputBase} type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+              </Label>
+              <Input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
               <p className={`${hint} mt-1.5`}>{t('ui.person.addressHint', locale)}</p>
             </div>
           )}
-          <button className={`${btnPrimary} self-start`} disabled={!name.trim() || !relation} onClick={submitNew}>
+          <Button className="primary self-start" disabled={!name.trim() || !relation} onClick={submitNew}>
             {t('ui.continue', locale)}
-          </button>
+          </Button>
         </div>
       )}
     </div>

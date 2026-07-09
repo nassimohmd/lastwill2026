@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { t, hasLocale, type Locale } from '../i18n';
 import { useStore } from '../state/store';
 
@@ -7,40 +7,31 @@ import { useStore } from '../state/store';
 export function LanguageToggle() {
   const { state, dispatch } = useStore();
   const locale = state.meta.locale;
-  const set = (l: Locale) => dispatch({ type: 'SET_LOCALE', locale: l });
-
-  const tabs: { id: Locale; label: string; disabled?: boolean }[] = [
-    { id: 'en', label: t('ui.lang.toggle.en', locale) },
-    { id: 'ml', label: t('ui.lang.toggle.ml', locale), disabled: !hasLocale('ml') },
-  ];
 
   return (
-    <div
-      className="lang-toggle inline-flex gap-1 rounded-full border border-neutral-300 bg-neutral-100/60 p-1 dark:border-neutral-800 dark:bg-neutral-900/60"
-      role="group"
+    <ToggleGroup
+      type="single"
+      spacing={1}
+      value={locale}
+      onValueChange={(value) => {
+        if (value) dispatch({ type: 'SET_LOCALE', locale: value as Locale });
+      }}
+      className="lang-toggle rounded-full border border-border bg-muted/40 p-1"
       aria-label="Language"
     >
-      {tabs.map((tab) => (
-        <button
-          key={tab.id}
-          className={`relative rounded-full px-4 py-1.5 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-            locale === tab.id
-              ? 'active text-neutral-900 dark:text-white'
-              : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
-          }`}
-          disabled={tab.disabled}
-          onClick={() => set(tab.id)}
-        >
-          {locale === tab.id && (
-            <motion.div
-              layoutId="langToggleActive"
-              className="absolute inset-0 -z-10 rounded-full bg-white dark:bg-neutral-800/80"
-              transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
-            />
-          )}
-          {tab.label}
-        </button>
-      ))}
-    </div>
+      <ToggleGroupItem
+        value="en"
+        className="rounded-full px-4 text-sm text-muted-foreground data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm"
+      >
+        {t('ui.lang.toggle.en', locale)}
+      </ToggleGroupItem>
+      <ToggleGroupItem
+        value="ml"
+        disabled={!hasLocale('ml')}
+        className="rounded-full px-4 text-sm text-muted-foreground data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm"
+      >
+        {t('ui.lang.toggle.ml', locale)}
+      </ToggleGroupItem>
+    </ToggleGroup>
   );
 }

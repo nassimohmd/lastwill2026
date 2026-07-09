@@ -4,7 +4,10 @@ import { t, type Locale } from '../i18n';
 import { RELATIONS, newPersonId } from '../data/relations';
 import { useStore } from '../state/store';
 import type { Person } from '../engine/types';
-import { btnPrimary, btnSecondary, chip, chipSelected, hint, inputBase } from './classes';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { chip, chipSelected, hint } from './classes';
 
 export function PersonMultiPicker({ question }: { question: Question }) {
   const { state, dispatch } = useStore();
@@ -59,22 +62,22 @@ export function PersonMultiPicker({ question }: { question: Question }) {
       </div>
 
       {!adding && (
-        <button className={`${btnSecondary} mt-4`} onClick={() => setAdding(true)}>
+        <Button variant="outline" className="secondary mt-4" onClick={() => setAdding(true)}>
           {t('ui.person.someoneElse', locale)}
-        </button>
+        </Button>
       )}
       {adding && (
         <div className="freeform mt-4 flex flex-col gap-4">
           <div className="field">
-            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+            <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
               {t('ui.person.name', locale)}
-            </label>
-            <input className={inputBase} type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
+            </Label>
+            <Input type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="field">
-            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+            <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
               {t('ui.person.relation', locale)}
-            </label>
+            </Label>
             <div className="chip-row flex flex-wrap gap-2">
               {RELATIONS.map((r) => (
                 <button
@@ -87,18 +90,18 @@ export function PersonMultiPicker({ question }: { question: Question }) {
               ))}
             </div>
           </div>
-          <button className={`${btnSecondary} self-start`} disabled={!name.trim() || !relation} onClick={addNew}>
+          <Button variant="outline" className="secondary self-start" disabled={!name.trim() || !relation} onClick={addNew}>
             {t('ui.addAnother', locale)}
-          </button>
+          </Button>
         </div>
       )}
 
       {selected.length < min && (
         <p className={`${hint} mt-4`}>{t('ui.personMulti.min', locale, { n: String(min) })}</p>
       )}
-      <button className={`${btnPrimary} mt-4`} disabled={selected.length < min} onClick={submit}>
+      <Button className="primary mt-4" disabled={selected.length < min} onClick={submit}>
         {t('ui.continue', locale)}
-      </button>
+      </Button>
     </div>
   );
 }

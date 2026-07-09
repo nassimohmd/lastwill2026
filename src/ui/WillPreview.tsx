@@ -5,7 +5,9 @@ import { t, hasLocale, type Locale } from '../i18n';
 import { useStore } from '../state/store';
 import { SigningInstructions } from './SigningInstructions';
 import { getChecklist } from '../template/checklist';
-import { btnPrimary, btnSecondary, hintWarning } from './classes';
+import { Button } from '@/components/ui/button';
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
+import { hintWarning } from './classes';
 
 export function WillPreview() {
   const { state } = useStore();
@@ -41,41 +43,44 @@ export function WillPreview() {
   return (
     <div className="preview-wrap">
       <div className="preview-actions no-print mb-6 flex gap-3">
-        <button className={btnPrimary} onClick={copy}>
+        <Button className="primary" onClick={copy}>
           {copied ? t('ui.done.copied', locale) : t('ui.done.copy', locale)}
-        </button>
-        <button className={btnSecondary} onClick={() => window.print()}>
+        </Button>
+        <Button variant="outline" className="secondary" onClick={() => window.print()}>
           {t('ui.done.print', locale)}
-        </button>
+        </Button>
       </div>
 
       {hasLocale('ml') && (
-        <div className="will-lang-picker no-print mb-6 flex flex-wrap items-center gap-3 text-sm text-neutral-500 dark:text-neutral-400">
+        <div className="will-lang-picker no-print mb-6 flex flex-wrap items-center gap-3 text-sm text-muted-foreground">
           <span>{t('ui.will.langLabel', locale)}</span>
-          <div className="lang-toggle inline-flex gap-1">
-            <button
-              className={`rounded-full px-3 py-1 text-sm transition-colors ${willLocale === 'en' ? 'active border border-neutral-400 text-neutral-900 dark:border-neutral-700 dark:text-white' : 'border border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200'}`}
-              onClick={() => setWillLocale('en')}
+          <ToggleGroup
+            type="single"
+            spacing={1}
+            value={willLocale}
+            onValueChange={(value) => value && setWillLocale(value as Locale)}
+            className="lang-toggle rounded-full border border-border bg-muted/40 p-1"
+          >
+            <ToggleGroupItem
+              value="en"
+              className="rounded-full px-3 text-sm text-muted-foreground data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm"
             >
               {t('ui.lang.toggle.en', locale)}
-            </button>
-            <button
-              className={`rounded-full px-3 py-1 text-sm transition-colors ${willLocale === 'ml' ? 'active border border-neutral-400 text-neutral-900 dark:border-neutral-700 dark:text-white' : 'border border-transparent text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-200'}`}
-              onClick={() => setWillLocale('ml')}
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value="ml"
+              className="rounded-full px-3 text-sm text-muted-foreground data-[state=on]:bg-background data-[state=on]:text-foreground data-[state=on]:shadow-sm"
             >
               {t('ui.lang.toggle.ml', locale)}
-            </button>
-          </div>
+            </ToggleGroupItem>
+          </ToggleGroup>
           {willLocale === 'ml' && (
             <p className={`${hintWarning} basis-full italic`}>{t('ui.will.langDraftNotice', locale)}</p>
           )}
         </div>
       )}
 
-      <div
-        className="sheet rounded-lg border border-neutral-200 px-6 py-10 dark:border-neutral-800 sm:px-12 sm:py-14"
-        lang={willLocale}
-      >
+      <div className="sheet rounded-lg border border-border px-6 py-10 sm:px-12 sm:py-14" lang={willLocale}>
         {blocks.map((b) => {
           if (b.kind === 'title') return <h1 key={b.id} className="will-title">{b.text}</h1>;
           if (b.kind === 'heading') return <h2 key={b.id} className="will-heading">{b.text}</h2>;
@@ -113,18 +118,16 @@ export function WillPreview() {
         </div>
       </div>
 
-      <div className="signing-page-wrap mt-9 border-t border-dashed border-neutral-200 pt-9 dark:border-neutral-800">
+      <div className="signing-page-wrap mt-9 border-t border-dashed border-border pt-9">
         <SigningInstructions locale={locale} />
       </div>
 
       {checklist.length > 0 && (
-        <div className="signing-page-wrap mt-9 border-t border-dashed border-neutral-200 pt-9 dark:border-neutral-800">
-          <h2 className="text-lg font-light text-neutral-900 dark:text-white">
-            {t('ui.review.checklist.title', locale)}
-          </h2>
+        <div className="signing-page-wrap mt-9 border-t border-dashed border-border pt-9">
+          <h2 className="text-lg font-light text-foreground">{t('ui.review.checklist.title', locale)}</h2>
           <ul className="mt-3 list-disc pl-5">
             {checklist.map((c) => (
-              <li key={c.id} className="mb-2 text-sm text-neutral-500 dark:text-neutral-400">
+              <li key={c.id} className="mb-2 text-sm text-muted-foreground">
                 {t(c.text, locale, c.vars)}
               </li>
             ))}

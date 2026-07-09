@@ -13,7 +13,8 @@ import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 import { exportDraft, parseImportedDraft } from '../state/persistence';
 import { LanguageToggle } from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
-import { btnLink, btnPrimaryBig, easeOut, navLink } from './classes';
+import { Button } from '@/components/ui/button';
+import { btnLink, easeOut, navLink } from './classes';
 
 export function App() {
   const { state, dispatch } = useStore();
@@ -65,23 +66,22 @@ export function App() {
     viewKey = 'landing';
     view = (
       <div className="landing pt-[10vh] text-center">
-        <h1 className="text-5xl font-light tracking-tight text-neutral-900 dark:text-white sm:text-6xl">
+        <h1 className="text-5xl font-light tracking-tight text-foreground sm:text-6xl">
           {t('ui.appName', locale)}
         </h1>
-        <p className="tagline mt-3 text-lg text-neutral-500 dark:text-neutral-400">{t('ui.tagline', locale)}</p>
-        <p className="lead mx-auto mt-7 max-w-md text-sm text-neutral-500 dark:text-neutral-400">
-          {t('ui.landing.lead', locale)}
-        </p>
-        <p className="privacy mt-5 text-xs text-neutral-400 dark:text-neutral-600">{t('ui.landing.privacy', locale)}</p>
-        <button
-          className={`${btnPrimaryBig} mt-8`}
+        <p className="tagline mt-3 text-lg text-muted-foreground">{t('ui.tagline', locale)}</p>
+        <p className="lead mx-auto mt-7 max-w-md text-sm text-muted-foreground">{t('ui.landing.lead', locale)}</p>
+        <p className="privacy mt-5 text-xs text-muted-foreground/70">{t('ui.landing.privacy', locale)}</p>
+        <Button
+          size="lg"
+          className="primary big mt-8 px-8"
           onClick={() => {
             if (fresh) dispatch({ type: 'START' });
             setStarted(true);
           }}
         >
           {inProgress ? t('ui.landing.resume', locale) : t('ui.landing.start', locale)}
-        </button>
+        </Button>
         <div className="landing-links mt-4 flex flex-col items-center gap-2">
           {inProgress && (
             <button className={btnLink} onClick={startOver}>
@@ -124,22 +124,23 @@ export function App() {
       viewKey = 'blocked';
       view = (
         <div className="blocked pt-[8vh] text-center">
-          <h2 className="text-xl font-light text-neutral-900 dark:text-white">{t('ui.blocked.title', locale)}</h2>
+          <h2 className="text-xl font-light text-foreground">{t('ui.blocked.title', locale)}</h2>
           {blockers.includes('underage') && (
-            <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">{t('ui.blocked.underage', locale)}</p>
+            <p className="mt-3 text-sm text-muted-foreground">{t('ui.blocked.underage', locale)}</p>
           )}
           {blockers.includes('sound_mind') && (
             <>
-              <p className="mt-3 text-sm text-neutral-500 dark:text-neutral-400">{t('ui.blocked.soundMind', locale)}</p>
-              <button
-                className={`${btnPrimaryBig} mt-6`}
+              <p className="mt-3 text-sm text-muted-foreground">{t('ui.blocked.soundMind', locale)}</p>
+              <Button
+                size="lg"
+                className="primary big mt-6 px-8"
                 onClick={() => {
                   setShowWill(false);
                   dispatch({ type: 'GOTO', qid: 'personal.sound_mind' });
                 }}
               >
                 {t('ui.done.back', locale)}
-              </button>
+              </Button>
             </>
           )}
         </div>
@@ -149,8 +150,8 @@ export function App() {
       view = (
         <div className="done">
           <div className="done-header no-print mb-6">
-            <h2 className="text-xl font-light text-neutral-900 dark:text-white">{t('ui.done.title', locale)}</h2>
-            <p className="mt-1 text-sm text-neutral-500 dark:text-neutral-400">{t('ui.done.lead', locale)}</p>
+            <h2 className="text-xl font-light text-foreground">{t('ui.done.title', locale)}</h2>
+            <p className="mt-1 text-sm text-muted-foreground">{t('ui.done.lead', locale)}</p>
             <button className={`${btnLink} mt-2`} onClick={() => setShowWill(false)}>
               ← {t('ui.done.back', locale)}
             </button>
@@ -183,8 +184,8 @@ export function App() {
     <MotionConfig reducedMotion="user">
       <div className="app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16">
         {showHeader && (
-          <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-neutral-200 py-5 dark:border-neutral-800/60">
-            <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-neutral-900 dark:text-white">
+          <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border py-5">
+            <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-foreground">
               {t('ui.appName', locale)}
             </span>
             <div className="header-links flex flex-wrap items-center gap-3 sm:gap-4">
@@ -220,7 +221,7 @@ export function App() {
             </motion.div>
           </AnimatePresence>
         </main>
-        <footer className="no-print mt-14 text-center text-xs text-neutral-400 dark:text-neutral-600">
+        <footer className="no-print mt-14 text-center text-xs text-muted-foreground/70">
           {t('ui.disclaimer', locale)}
         </footer>
       </div>

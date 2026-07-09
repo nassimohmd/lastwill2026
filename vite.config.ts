@@ -18,6 +18,11 @@ function strictProductionCsp(): Plugin {
 
 export default defineConfig({
   plugins: [react(), tailwindcss(), strictProductionCsp()],
+  resolve: {
+    alias: {
+      '@': `${import.meta.dirname}/src`,
+    },
+  },
   test: {
     environment: 'node',
     include: ['src/**/*.test.ts'],

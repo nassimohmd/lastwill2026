@@ -129,39 +129,58 @@ Selectors that matter:
   ignores keys while an input/textarea has focus — probe that by focusing
   the date field and pressing a digit; the question must not advance.
 
-## Memoria redesign: Tailwind + Motion, light + dark
+## UI stack: shadcn/ui + Tailwind, strictly monochrome
 
-- The UI was rebuilt on the **Memoria design system** (Tailwind CSS v4 via
-  `@tailwindcss/vite`, `motion` for animation, `lucide-react` for the
-  functional icons in use). The source doc is dark-first and doesn't
-  specify a light variant, so the light theme is a structural mirror (same
-  borders/weights/tracking, inverted neutral scale) rather than anything
-  the doc states literally. `.sheet` (the generated will) is unaffected by
-  either theme: it's still forced white-bg/black-ink/serif regardless,
-  styled with plain CSS in `src/styles.css`, not Tailwind utilities — it's
-  a printed document, not a Memoria surface.
+- The UI runs on **shadcn/ui** — Radix primitives (`radix-ui` npm package)
+  + `class-variance-authority` + Tailwind CSS v4, with components copied
+  into the repo at `src/components/ui/*.tsx` (button, input, textarea,
+  label, card, badge, alert, progress, separator, toggle, toggle-group) —
+  not an npm dependency, so edit those files directly rather than looking
+  for a package to bump. `src/lib/utils.ts` has the `cn()` helper
+  (clsx + tailwind-merge) every component uses to merge classes.
+  `components.json` + the `@/*` path alias (`tsconfig.json`,
+  `vite.config.ts`) are shadcn's own scaffolding, kept so `npx shadcn add
+  <component>` still works if you need another primitive later — **but
+  ui.shadcn.com is blocked by this environment's egress policy**; fetch
+  component source from `raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/registry/new-york-v4/...`
+  instead (that host is reachable) and wire imports/paths in by hand.
+- **Theming is CSS-variable based, not per-component `dark:` classes.**
+  Every color in `src/styles.css` (`--background`, `--foreground`,
+  `--card`, `--primary`, `--muted`, `--accent`, `--destructive`, `--border`,
+  etc.) is `oklch(... 0 0)` — zero chroma, including `--destructive`
+  (shadcn ships that one red by default; here it's just a heavier
+  black/white weight, kept monochrome on purpose). `:root` holds the light
+  values, `.dark` overrides them; components use semantic Tailwind classes
+  (`bg-card`, `text-foreground`, `border-border`, ...) that resolve
+  differently per theme automatically — **don't add `dark:` variants to
+  new UI**, that pattern was retired with the Tailwind-only version. If a
+  color looks wrong in one theme, fix the variable in `src/styles.css`,
+  not the component.
 - **Theme mechanics**: a `.dark` class on `<html>`, toggled by
-  `src/ui/ThemeToggle.tsx` and read/written via `src/ui/theme.ts`
-  (`lastwill.theme` in localStorage; falls back to
-  `prefers-color-scheme` on first visit). Tailwind's `dark:` variant is
-  wired to that class via `@custom-variant dark (&:where(.dark, .dark *));`
-  in `src/styles.css`, not the default media-query strategy. The class is
-  applied in `main.tsx` before `ReactDOM.render` (not in a `useEffect`) to
-  avoid a flash of the wrong theme — CSP forbids an inline blocking
-  `<script>` in `index.html`, so this is the earliest available hook.
-  Every shared recipe in `src/ui/classes.ts` and every inline `className`
-  across `src/ui/*.tsx` carries both a light default and a `dark:` variant;
-  when adding new UI, do the same rather than hardcoding one theme's colors.
+  `src/ui/ThemeToggle.tsx` (a shadcn `Button`) and read/written via
+  `src/ui/theme.ts` (`lastwill.theme` in localStorage; falls back to
+  `prefers-color-scheme` on first visit). Wired via
+  `@custom-variant dark (&:is(.dark *));` in `src/styles.css`. Applied in
+  `main.tsx` before `ReactDOM.render` (not in a `useEffect`) to avoid a
+  flash of the wrong theme — CSP forbids an inline blocking `<script>` in
+  `index.html`, so this is the earliest available hook.
+- `.sheet` (the generated will) is unaffected by either theme: it's still
+  forced white-bg/black-ink/serif regardless, styled with plain CSS in
+  `src/styles.css`, not Tailwind/shadcn — it's a printed document, not an
+  app-chrome surface.
 - **Selector contract preserved on purpose**: every component still carries
   its old bare marker class (`button.option`, `button.chip` + `.selected`,
   `button.primary`/`.secondary`/`.link`, `.freeform`, `.chip-row`, `.items`,
   `.item-form`, `.field`, `.repeater-actions`, `.question-card`, `.hint` +
   `.warning`, `.status-pill` + `.done`, `.progress-chapter` + `.current`,
   `.chapter-label`, `.progress-count`, `.header-links`, `.card-footer`,
-  etc.) alongside the Tailwind utility classes — see `src/ui/classes.ts`,
-  where each shared recipe string starts with the marker class. Don't drop
-  these when touching a component; the selectors above (and this whole
-  file) depend on them, not on the utility classes.
+  etc.) alongside the Tailwind/shadcn utility classes — see
+  `src/ui/classes.ts` for the bespoke recipes (option/chip/hint), and every
+  `<Button>`/`<Badge>`/`<Alert>` usage passes the marker class through its
+  own `className` prop (e.g. `<Button className="primary">`,
+  `<Badge className="status-pill done">`). Don't drop these when touching a
+  component; the selectors above (and this whole file) depend on them, not
+  on the shadcn component names.
 - **Page transitions add real latency to a skip-through walk.** Every view
   swap (question → question, question → Review, Review → will) goes through
   one `AnimatePresence mode="wait"` blur-cross-fade in `App.tsx` — exit

@@ -6,17 +6,12 @@ import { useStore } from '../state/store';
 import { PersonPicker } from './PersonPicker';
 import { PersonMultiPicker } from './PersonMultiPicker';
 import { SharesPicker } from './SharesPicker';
-import {
-  btnLink,
-  btnPrimary,
-  btnSecondary,
-  chip,
-  chipSelected,
-  hint,
-  inputBase,
-  option,
-  optionSelected,
-} from './classes';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { btnLink, chip, chipSelected, hint, option, optionSelected } from './classes';
 
 interface ItemRecord {
   [field: string]: string;
@@ -105,7 +100,7 @@ export function QuestionCard({ question }: { question: Question }) {
                 onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })}
               >
                 {i < 9 && (
-                  <span className="option-key mr-2 inline-block min-w-[1.15rem] text-xs tabular-nums text-neutral-400 [@media(hover:none)]:hidden dark:text-neutral-600">
+                  <span className="option-key mr-2 inline-block min-w-[1.15rem] text-xs tabular-nums text-muted-foreground [@media(hover:none)]:hidden">
                     {i + 1}
                   </span>
                 )}
@@ -131,24 +126,24 @@ export function QuestionCard({ question }: { question: Question }) {
                 </button>
               ))}
             </div>
-            <button
-              className={`${btnPrimary} self-start`}
+            <Button
+              className="primary self-start"
               disabled={selected.length === 0}
               onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: selected })}
             >
               {t('ui.continue', locale)}
-            </button>
+            </Button>
           </div>
         );
 
       case 'info':
         return (
-          <button
-            className={`${btnPrimary} mt-7`}
+          <Button
+            className="primary mt-7"
             onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: true })}
           >
             {t('ui.understood', locale)}
-          </button>
+          </Button>
         );
 
       case 'text':
@@ -158,16 +153,9 @@ export function QuestionCard({ question }: { question: Question }) {
         return (
           <div className="freeform mt-7 flex flex-col gap-3">
             {question.type === 'longtext' ? (
-              <textarea
-                className={inputBase}
-                value={text}
-                rows={3}
-                autoFocus
-                onChange={(e) => setText(e.target.value)}
-              />
+              <Textarea value={text} rows={3} autoFocus onChange={(e) => setText(e.target.value)} />
             ) : (
-              <input
-                className={inputBase}
+              <Input
                 type={question.type === 'number' ? 'number' : question.type === 'date' ? 'date' : 'text'}
                 value={text}
                 autoFocus
@@ -176,13 +164,13 @@ export function QuestionCard({ question }: { question: Question }) {
               />
             )}
             {question.optional && <p className={hint}>{t('ui.optionalHint', locale)}</p>}
-            <button
-              className={`${btnPrimary} self-start`}
+            <Button
+              className="primary self-start"
               disabled={!text.trim() && !question.optional && !skippable}
               onClick={submitText}
             >
               {t('ui.continue', locale)}
-            </button>
+            </Button>
           </div>
         );
 
@@ -194,9 +182,9 @@ export function QuestionCard({ question }: { question: Question }) {
                 {items.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900/50"
+                    className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3"
                   >
-                    <span className="text-sm text-neutral-700 dark:text-neutral-200">
+                    <span className="text-sm text-foreground">
                       {question.fields
                         ?.map((f) => {
                           const v = item[f.id];
@@ -219,12 +207,11 @@ export function QuestionCard({ question }: { question: Question }) {
             <div className="item-form flex flex-col gap-4">
               {question.fields?.map((f) => (
                 <div key={f.id} className="field">
-                  <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+                  <Label className="mb-1.5 text-xs font-medium uppercase tracking-widest text-muted-foreground">
                     {t(f.label, locale)}
-                  </label>
+                  </Label>
                   {f.type === 'text' ? (
-                    <input
-                      className={inputBase}
+                    <Input
                       type="text"
                       value={draftItem[f.id] ?? ''}
                       onChange={(e) => setDraftItem({ ...draftItem, [f.id]: e.target.value })}
@@ -246,11 +233,11 @@ export function QuestionCard({ question }: { question: Question }) {
               ))}
             </div>
             <div className="repeater-actions mt-7 flex gap-3">
-              <button className={btnSecondary} disabled={!draftComplete} onClick={addDraft}>
+              <Button variant="outline" className="secondary" disabled={!draftComplete} onClick={addDraft}>
                 {t(question.addMore ?? 'ui.addAnother', locale)}
-              </button>
-              <button
-                className={btnPrimary}
+              </Button>
+              <Button
+                className="primary"
                 disabled={items.length === 0 && !draftComplete}
                 onClick={() => {
                   const finalItems = draftComplete ? addDraft() : items;
@@ -259,7 +246,7 @@ export function QuestionCard({ question }: { question: Question }) {
                 }}
               >
                 {t('ui.doneAdding', locale)}
-              </button>
+              </Button>
             </div>
           </div>
         );
@@ -270,18 +257,13 @@ export function QuestionCard({ question }: { question: Question }) {
   };
 
   return (
-    <div
-      className="question-card rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40 sm:p-8"
-      key={question.id}
-    >
-      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-neutral-900 dark:text-white sm:text-3xl">
+    <Card className="question-card gap-0 p-6 sm:p-8" key={question.id}>
+      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-foreground sm:text-3xl">
         {t(question.text, locale)}
       </h2>
-      {question.help && (
-        <p className="help mt-2 text-sm text-neutral-500 dark:text-neutral-400">{t(question.help, locale)}</p>
-      )}
+      {question.help && <p className="help mt-2 text-sm text-muted-foreground">{t(question.help, locale)}</p>}
       {body()}
-      <div className="card-footer mt-11 flex items-center border-t border-neutral-200 pt-4 dark:border-neutral-800/60">
+      <div className="card-footer mt-11 flex items-center border-t border-border pt-4">
         {state.history.length > 0 && (
           <button className={btnLink} onClick={() => dispatch({ type: 'BACK' })}>
             ← {t('ui.back', locale)}
@@ -296,6 +278,6 @@ export function QuestionCard({ question }: { question: Question }) {
           </button>
         )}
       </div>
-    </div>
+    </Card>
   );
 }

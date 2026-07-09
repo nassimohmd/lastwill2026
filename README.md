@@ -63,21 +63,23 @@ jewellery, and IP each collapsed to a single beneficiary pick rather than an
 itemised list. These are straightforward to expand later using the same
 `makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
 
-UI design system: **Memoria** — a monochromatic interface built with
-Tailwind CSS and `motion` (Framer Motion). No accent colors, no gradients,
-no bold-for-emphasis; hierarchy comes entirely from size, weight, and
-opacity (large light-weight numbers/titles, tiny uppercase widely-tracked
-labels, subtle borders and selected states). Screens wake up with a
-sequential blur-to-clear reveal on transition, and options/chips stagger in
-on entry. The source design doc is written dark-only; the app extends the
-same structural rules to a light theme (same borders/weights/tracking, an
-inverted neutral scale) and ships both, toggled manually (`.dark` class on
-`<html>`, `src/ui/ThemeToggle.tsx` + `src/ui/theme.ts`, persisted in
-`localStorage` with the OS preference as the first-visit default). The
-generated will (`.sheet`) is a separate artifact from the app chrome — it
-always renders as black serif ink on a white page regardless of theme,
-since it represents a document meant to be printed and signed, not a
-Memoria surface. No webfonts anywhere (CSP + privacy).
+UI: built on **shadcn/ui** (Radix primitives + `class-variance-authority`)
+and Tailwind CSS v4, with `motion` (Framer Motion) for animation. Components
+are copied into the repo at `src/components/ui/*` (shadcn's own model — you
+own the code, not an installed dependency), themed with a strictly
+**monochrome** CSS-variable palette in `src/styles.css` (`oklch(... 0 0)` —
+zero chroma for every color, including the destructive/error state, which
+is a heavier black/white weight rather than red). Light and dark both ship,
+toggled manually (`.dark` class on `<html>`, `src/ui/ThemeToggle.tsx` +
+`src/ui/theme.ts`, persisted in `localStorage` with the OS preference as the
+first-visit default) — colors are semantic tokens (`bg-card`,
+`text-foreground`, `border-border`, ...) that resolve differently per theme
+automatically, so components don't carry `dark:` variants. Screens wake up
+with a sequential blur-to-clear reveal on transition, and options/chips
+stagger in on entry. The generated will (`.sheet`) is a separate artifact
+from the app chrome — it always renders as black serif ink on a white page
+regardless of theme, since it represents a document meant to be printed and
+signed, not an app-chrome surface. No webfonts anywhere (CSP + privacy).
 
 Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
 a Review screen with per-section status and jump-to-fix warnings (missing

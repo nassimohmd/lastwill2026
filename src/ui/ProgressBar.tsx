@@ -35,13 +35,13 @@ export function ProgressBar() {
   return (
     <div className="progress mb-8">
       <div className="progress-labels mb-2.5 flex items-baseline justify-between gap-4">
-        <span className="chapter-label text-[11px] uppercase tracking-wider text-neutral-500">
+        <span className="chapter-label text-[11px] uppercase tracking-wider text-muted-foreground">
           {chapter ? t(chapter.title, locale) : ''}
           {chapterSections.length > 1 ? ` (${chapterPos}/${chapterSections.length})` : ''}
           {currentSection ? ` — ${t(currentSection.title, locale)}` : ''}
         </span>
         {currentSection && (
-          <span className="progress-count whitespace-nowrap text-[11px] tracking-wide text-neutral-600">
+          <span className="progress-count whitespace-nowrap text-[11px] tracking-wide text-muted-foreground/80">
             {currentSectionIdx + 1} / {sections.length}
           </span>
         )}
@@ -64,10 +64,10 @@ export function ProgressBar() {
                 return (
                   <div
                     key={s.id}
-                    className={`progress-seg h-[3px] flex-1 overflow-hidden rounded-sm ${isCurrent ? 'bg-neutral-300 dark:bg-neutral-700' : 'bg-neutral-200 dark:bg-neutral-800'}`}
+                    className={`progress-seg h-[3px] flex-1 overflow-hidden rounded-sm ${isCurrent ? 'bg-accent' : 'bg-muted'}`}
                   >
                     <motion.div
-                      className="progress-fill h-full bg-neutral-700 dark:bg-neutral-300"
+                      className="progress-fill h-full bg-foreground"
                       initial={false}
                       animate={{ width: `${pct}%` }}
                       transition={{ duration: 0.6, ease: easeQuestion }}
