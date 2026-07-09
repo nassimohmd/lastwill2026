@@ -129,16 +129,29 @@ Selectors that matter:
   ignores keys while an input/textarea has focus — probe that by focusing
   the date field and pressing a digit; the question must not advance.
 
-## Memoria redesign: Tailwind + Motion, dark-only
+## Memoria redesign: Tailwind + Motion, light + dark
 
 - The UI was rebuilt on the **Memoria design system** (Tailwind CSS v4 via
-  `@tailwindcss/vite`, `motion` for animation, `lucide-react` for the one
-  functional icon in use). It's dark-only — no `prefers-color-scheme`
-  branching in the app chrome anymore, since the source design doc is
-  written dark-first and doesn't specify a light variant. `.sheet` (the
-  generated will) is unaffected: it's still forced white-bg/black-ink/serif
-  regardless of theme, styled with plain CSS in `src/styles.css`, not
-  Tailwind utilities — it's a printed document, not a Memoria surface.
+  `@tailwindcss/vite`, `motion` for animation, `lucide-react` for the
+  functional icons in use). The source doc is dark-first and doesn't
+  specify a light variant, so the light theme is a structural mirror (same
+  borders/weights/tracking, inverted neutral scale) rather than anything
+  the doc states literally. `.sheet` (the generated will) is unaffected by
+  either theme: it's still forced white-bg/black-ink/serif regardless,
+  styled with plain CSS in `src/styles.css`, not Tailwind utilities — it's
+  a printed document, not a Memoria surface.
+- **Theme mechanics**: a `.dark` class on `<html>`, toggled by
+  `src/ui/ThemeToggle.tsx` and read/written via `src/ui/theme.ts`
+  (`lastwill.theme` in localStorage; falls back to
+  `prefers-color-scheme` on first visit). Tailwind's `dark:` variant is
+  wired to that class via `@custom-variant dark (&:where(.dark, .dark *));`
+  in `src/styles.css`, not the default media-query strategy. The class is
+  applied in `main.tsx` before `ReactDOM.render` (not in a `useEffect`) to
+  avoid a flash of the wrong theme — CSP forbids an inline blocking
+  `<script>` in `index.html`, so this is the earliest available hook.
+  Every shared recipe in `src/ui/classes.ts` and every inline `className`
+  across `src/ui/*.tsx` carries both a light default and a `dark:` variant;
+  when adding new UI, do the same rather than hardcoding one theme's colors.
 - **Selector contract preserved on purpose**: every component still carries
   its old bare marker class (`button.option`, `button.chip` + `.selected`,
   `button.primary`/`.secondary`/`.link`, `.freeform`, `.chip-row`, `.items`,
@@ -169,6 +182,23 @@ Selectors that matter:
   verify this after touching header markup, since a missing `whitespace-nowrap`
   makes "Review answers" / "Start over" wrap mid-word instead of moving the
   whole button down.
+- **The `<header>` doesn't render at all on the landing screen** (`App.tsx`'s
+  `showHeader = started || finished`) — the landing page has its own hero/
+  lead/language-and-theme toggle, so a near-empty top bar above it (just the
+  wordmark) was cut. It appears once the user has clicked past landing
+  (`started`) or on a resumed already-finished session. Check `header`
+  count is 0 on landing, 1 everywhere else.
+- **Review always renders even with generation blockers outstanding**
+  (unconfirmed sound-mind, underage). `App.tsx` only calls
+  `generationBlockers()` when `showWill` is true (i.e. the user clicked
+  "Generate my will"), not just because `finished` is true — so landing on
+  Review (via natural completion or `RETURN_TO_REVIEW`) never shows the bare
+  `.blocked` wall. Instead `getWarnings()` in `src/template/checklist.ts`
+  surfaces the same blockers as `.warning-card.strong` rows with a "Fix
+  this" jump link, same as the residuary-clause warning. If you add a new
+  blocker to `generationBlockers()` in `src/template/render.ts`, mirror it
+  in `getWarnings()` too, or it'll only surface after the user already
+  clicked Generate.
 - Fresh screenshots taken **immediately** after a state-changing click can
   catch the view mid-animation (opacity/blur not yet settled, or — once
   observed — an apparently "blank" card) purely from timing, not a real bug;

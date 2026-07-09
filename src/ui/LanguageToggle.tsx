@@ -16,7 +16,7 @@ export function LanguageToggle() {
 
   return (
     <div
-      className="lang-toggle inline-flex gap-1 rounded-full border border-neutral-800 bg-neutral-900/60 p-1"
+      className="lang-toggle inline-flex gap-1 rounded-full border border-neutral-300 bg-neutral-100/60 p-1 dark:border-neutral-800 dark:bg-neutral-900/60"
       role="group"
       aria-label="Language"
     >
@@ -24,7 +24,9 @@ export function LanguageToggle() {
         <button
           key={tab.id}
           className={`relative rounded-full px-4 py-1.5 text-sm transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-            locale === tab.id ? 'active text-white' : 'text-neutral-400 hover:text-neutral-200'
+            locale === tab.id
+              ? 'active text-neutral-900 dark:text-white'
+              : 'text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200'
           }`}
           disabled={tab.disabled}
           onClick={() => set(tab.id)}
@@ -32,7 +34,7 @@ export function LanguageToggle() {
           {locale === tab.id && (
             <motion.div
               layoutId="langToggleActive"
-              className="absolute inset-0 -z-10 rounded-full bg-neutral-800/80"
+              className="absolute inset-0 -z-10 rounded-full bg-white dark:bg-neutral-800/80"
               transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
             />
           )}

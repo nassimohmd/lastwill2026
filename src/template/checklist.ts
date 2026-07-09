@@ -1,4 +1,5 @@
 import type { AppState } from '../engine/types';
+import { generationBlockers } from './render';
 
 /**
  * Personal to-dos derived from the interview answers — things a will alone
@@ -28,6 +29,22 @@ function asArray(v: unknown): Record<string, unknown>[] {
 export function getWarnings(state: AppState): ReviewWarning[] {
   const a = state.answers;
   const warnings: ReviewWarning[] = [];
+
+  // surfaced first — these block will generation outright, so the user
+  // should see and fix them here rather than discovering it after clicking
+  // "Generate my will"
+  const blockers = generationBlockers(state);
+  if (blockers.includes('sound_mind')) {
+    warnings.push({
+      id: 'sound-mind-unconfirmed',
+      severity: 'strong',
+      text: 'ui.blocked.soundMind',
+      jumpTo: 'personal.sound_mind',
+    });
+  }
+  if (blockers.includes('underage')) {
+    warnings.push({ id: 'underage', severity: 'strong', text: 'ui.blocked.underage' });
+  }
 
   if (!a['residuary.primary']) {
     warnings.push({ id: 'no-residuary', severity: 'strong', text: 'ui.warning.noResiduary', jumpTo: 'residuary.primary' });

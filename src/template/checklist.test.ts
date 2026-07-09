@@ -9,20 +9,34 @@ function stateWith(answers: Record<string, unknown>): AppState {
 
 describe('getWarnings', () => {
   it('warns when residuary is unanswered, with a jump target', () => {
-    const w = getWarnings(stateWith({}));
+    const w = getWarnings(stateWith({ 'personal.sound_mind': 'confirm' }));
     expect(w).toHaveLength(1);
     expect(w[0]).toMatchObject({ id: 'no-residuary', severity: 'strong', jumpTo: 'residuary.primary' });
   });
 
   it('does not warn once residuary is set', () => {
-    const w = getWarnings(stateWith({ 'residuary.primary': 'spouse' }));
+    const w = getWarnings(stateWith({ 'personal.sound_mind': 'confirm', 'residuary.primary': 'spouse' }));
     expect(w.find((x) => x.id === 'no-residuary')).toBeUndefined();
   });
 
   it('adds an informational note for Muslim testators', () => {
-    const w = getWarnings(stateWith({ 'residuary.primary': 'spouse', 'personal.religion': 'muslim' }));
+    const w = getWarnings(
+      stateWith({ 'personal.sound_mind': 'confirm', 'residuary.primary': 'spouse', 'personal.religion': 'muslim' }),
+    );
     expect(w).toHaveLength(1);
     expect(w[0]).toMatchObject({ id: 'muslim-third', severity: 'info' });
+  });
+
+  it('warns with a jump target when sound-mind is not yet confirmed', () => {
+    const w = getWarnings(stateWith({ 'residuary.primary': 'spouse' }));
+    expect(w).toContainEqual(
+      expect.objectContaining({ id: 'sound-mind-unconfirmed', severity: 'strong', jumpTo: 'personal.sound_mind' }),
+    );
+  });
+
+  it('does not warn about sound-mind once confirmed', () => {
+    const w = getWarnings(stateWith({ 'personal.sound_mind': 'confirm', 'residuary.primary': 'spouse' }));
+    expect(w.find((x) => x.id === 'sound-mind-unconfirmed')).toBeUndefined();
   });
 });
 

@@ -21,17 +21,23 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
 
   return (
     <div className="review">
-      <h2 className="text-2xl font-light tracking-tight text-white">{t('ui.review.title', locale)}</h2>
-      <p className="lead-text mt-1.5 mb-7 text-sm text-neutral-400">{t('ui.review.lead', locale)}</p>
+      <h2 className="text-2xl font-light tracking-tight text-neutral-900 dark:text-white">
+        {t('ui.review.title', locale)}
+      </h2>
+      <p className="lead-text mt-1.5 mb-7 text-sm text-neutral-500 dark:text-neutral-400">
+        {t('ui.review.lead', locale)}
+      </p>
 
       {warnings.length > 0 && (
         <div className="warnings mb-8 flex flex-col gap-2.5">
           {warnings.map((w) => (
             <div
               key={w.id}
-              className={`warning-card ${w.severity} rounded-r-lg border border-l-2 border-neutral-800 bg-neutral-900/50 px-4 py-3.5 ${w.severity === 'strong' ? 'border-l-neutral-400' : 'border-l-neutral-700'}`}
+              className={`warning-card ${w.severity} rounded-r-lg border border-l-2 border-neutral-200 bg-neutral-50 px-4 py-3.5 dark:border-neutral-800 dark:bg-neutral-900/50 ${w.severity === 'strong' ? 'border-l-neutral-500 dark:border-l-neutral-400' : 'border-l-neutral-300 dark:border-l-neutral-700'}`}
             >
-              <p className={`text-sm ${w.severity === 'strong' ? 'font-medium text-neutral-100' : 'text-neutral-400'}`}>
+              <p
+                className={`text-sm ${w.severity === 'strong' ? 'font-medium text-neutral-900 dark:text-neutral-100' : 'text-neutral-500 dark:text-neutral-400'}`}
+              >
                 {t(w.text, locale)}
               </p>
               {w.jumpTo && (
@@ -52,14 +58,16 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
           return (
             <li
               key={s.id}
-              className="review-section-row group flex items-center gap-3 border-b border-neutral-800/50 py-3.5 last:border-b-0"
+              className="review-section-row group flex items-center gap-3 border-b border-neutral-200/70 py-3.5 last:border-b-0 dark:border-neutral-800/50"
             >
               <div className="flex flex-1 flex-col">
-                <span className="review-section-title text-[15px] text-neutral-200">{t(s.title, locale)}</span>
+                <span className="review-section-title text-[15px] text-neutral-700 dark:text-neutral-200">
+                  {t(s.title, locale)}
+                </span>
                 {summary ? (
                   <span className="review-section-summary mt-0.5 text-sm text-neutral-500">{summary}</span>
                 ) : (
-                  <span className="review-section-chapter mt-0.5 text-xs uppercase tracking-wider text-neutral-600">
+                  <span className="review-section-chapter mt-0.5 text-xs uppercase tracking-wider text-neutral-400 dark:text-neutral-600">
                     {chapter ? t(chapter.title, locale) : ''}
                   </span>
                 )}
@@ -84,11 +92,15 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
 
       {checklist.length > 0 && (
         <div className="checklist mb-9">
-          <h3 className="text-lg font-light text-white">{t('ui.review.checklist.title', locale)}</h3>
-          <p className="lead-text mt-1 mb-3 text-sm text-neutral-400">{t('ui.review.checklist.lead', locale)}</p>
+          <h3 className="text-lg font-light text-neutral-900 dark:text-white">
+            {t('ui.review.checklist.title', locale)}
+          </h3>
+          <p className="lead-text mt-1 mb-3 text-sm text-neutral-500 dark:text-neutral-400">
+            {t('ui.review.checklist.lead', locale)}
+          </p>
           <ul className="list-disc pl-5">
             {checklist.map((c) => (
-              <li key={c.id} className="mb-2 text-sm text-neutral-400">
+              <li key={c.id} className="mb-2 text-sm text-neutral-500 dark:text-neutral-400">
                 {t(c.text, locale, c.vars)}
               </li>
             ))}

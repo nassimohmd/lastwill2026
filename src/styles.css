@@ -2,17 +2,22 @@
 
 /*
   Memoria design system, applied to LastWill's app chrome (landing, the
-  question interview, review, and the surrounding will screen). The doc is
-  dark-first and monochrome by rule, so the app runs one theme — dark —
-  rather than adapting the system to a light variant it never specifies.
+  question interview, review, and the surrounding will screen). The source
+  doc is dark-first and monochrome by rule; the app extends the same
+  structural rules (opacity-layered neutral scale, light font weights,
+  uppercase tracked labels, subtle selected/hover states) to a light theme,
+  toggled manually (`.dark` class on <html>, applied in main.tsx before
+  React mounts) rather than tied only to `prefers-color-scheme`.
 
   The generated will document itself (`.sheet` below) is a different
   artifact: a legal paper meant to be printed and signed. It has stayed a
   literal white page with black serif ink since Phase 3, independent of
-  whatever theme the app chrome uses — that's a product requirement, not a
-  presentation default, and it's the same kind of deliberate exception the
-  Memoria doc itself makes for its entity graph.
+  whichever theme the app chrome is in — that's a product requirement, not
+  a presentation default, and it's the same kind of deliberate exception
+  the Memoria doc itself makes for its entity graph.
 */
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
   * {
@@ -20,16 +25,21 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light dark;
   }
 
   body {
     margin: 0;
-    background: #0a0a0a;
-    color: #fff;
+    background: #fff;
+    color: #171717;
     font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+  }
+
+  html.dark body {
+    background: #0a0a0a;
+    color: #fff;
   }
 
   button {

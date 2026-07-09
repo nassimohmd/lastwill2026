@@ -105,7 +105,7 @@ export function QuestionCard({ question }: { question: Question }) {
                 onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })}
               >
                 {i < 9 && (
-                  <span className="option-key mr-2 inline-block min-w-[1.15rem] text-xs tabular-nums text-neutral-600 [@media(hover:none)]:hidden">
+                  <span className="option-key mr-2 inline-block min-w-[1.15rem] text-xs tabular-nums text-neutral-400 [@media(hover:none)]:hidden dark:text-neutral-600">
                     {i + 1}
                   </span>
                 )}
@@ -194,9 +194,9 @@ export function QuestionCard({ question }: { question: Question }) {
                 {items.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center justify-between rounded-xl border border-neutral-800 bg-neutral-900/50 px-4 py-3"
+                    className="flex items-center justify-between rounded-xl border border-neutral-200 bg-white px-4 py-3 dark:border-neutral-800 dark:bg-neutral-900/50"
                   >
-                    <span className="text-sm text-neutral-200">
+                    <span className="text-sm text-neutral-700 dark:text-neutral-200">
                       {question.fields
                         ?.map((f) => {
                           const v = item[f.id];
@@ -270,13 +270,18 @@ export function QuestionCard({ question }: { question: Question }) {
   };
 
   return (
-    <div className="question-card rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 sm:p-8" key={question.id}>
-      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-white sm:text-3xl">
+    <div
+      className="question-card rounded-2xl border border-neutral-200 bg-neutral-50 p-6 dark:border-neutral-800 dark:bg-neutral-900/40 sm:p-8"
+      key={question.id}
+    >
+      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-neutral-900 dark:text-white sm:text-3xl">
         {t(question.text, locale)}
       </h2>
-      {question.help && <p className="help mt-2 text-sm text-neutral-400">{t(question.help, locale)}</p>}
+      {question.help && (
+        <p className="help mt-2 text-sm text-neutral-500 dark:text-neutral-400">{t(question.help, locale)}</p>
+      )}
       {body()}
-      <div className="card-footer mt-11 flex items-center border-t border-neutral-800/60 pt-4">
+      <div className="card-footer mt-11 flex items-center border-t border-neutral-200 pt-4 dark:border-neutral-800/60">
         {state.history.length > 0 && (
           <button className={btnLink} onClick={() => dispatch({ type: 'BACK' })}>
             ← {t('ui.back', locale)}

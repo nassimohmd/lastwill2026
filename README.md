@@ -63,18 +63,20 @@ jewellery, and IP each collapsed to a single beneficiary pick rather than an
 itemised list. These are straightforward to expand later using the same
 `makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
 
-UI design system: **Memoria** — a dark-first, monochromatic interface built
-with Tailwind CSS and `motion` (Framer Motion). No accent colors, no
-gradients, no bold-for-emphasis; hierarchy comes entirely from size, weight,
-and opacity (large light-weight numbers/titles, tiny uppercase widely-tracked
-labels, subtle `neutral-800`/`neutral-700` borders and selected states).
-Screens wake up with a sequential blur-to-clear reveal on transition, and
-options/chips stagger in on entry. The one deliberate departure from the
-source design doc: it's written dark-only, so the app runs a single dark
-theme rather than adapting to `prefers-color-scheme` as earlier versions did.
-The generated will (`.sheet`) is a separate artifact from the app chrome —
-it always renders as black serif ink on a white page regardless of the app
-theme, since it represents a document meant to be printed and signed, not a
+UI design system: **Memoria** — a monochromatic interface built with
+Tailwind CSS and `motion` (Framer Motion). No accent colors, no gradients,
+no bold-for-emphasis; hierarchy comes entirely from size, weight, and
+opacity (large light-weight numbers/titles, tiny uppercase widely-tracked
+labels, subtle borders and selected states). Screens wake up with a
+sequential blur-to-clear reveal on transition, and options/chips stagger in
+on entry. The source design doc is written dark-only; the app extends the
+same structural rules to a light theme (same borders/weights/tracking, an
+inverted neutral scale) and ships both, toggled manually (`.dark` class on
+`<html>`, `src/ui/ThemeToggle.tsx` + `src/ui/theme.ts`, persisted in
+`localStorage` with the OS preference as the first-visit default). The
+generated will (`.sheet`) is a separate artifact from the app chrome — it
+always renders as black serif ink on a white page regardless of theme,
+since it represents a document meant to be printed and signed, not a
 Memoria surface. No webfonts anywhere (CSP + privacy).
 
 Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
