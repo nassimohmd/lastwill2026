@@ -63,12 +63,19 @@ jewellery, and IP each collapsed to a single beneficiary pick rather than an
 itemised list. These are straightforward to expand later using the same
 `makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
 
-UI theme: strict monochrome — pure black/white/grey, light and dark via
-`prefers-color-scheme`, with a system serif stack for display headings and
-the will text (no webfonts, keeping the CSP and privacy guarantees intact).
-Severity is conveyed through weight and border treatment rather than color.
-The generated will always renders as black ink on a white sheet regardless
-of app theme, since it represents a printed document.
+UI design system: **Memoria** — a dark-first, monochromatic interface built
+with Tailwind CSS and `motion` (Framer Motion). No accent colors, no
+gradients, no bold-for-emphasis; hierarchy comes entirely from size, weight,
+and opacity (large light-weight numbers/titles, tiny uppercase widely-tracked
+labels, subtle `neutral-800`/`neutral-700` borders and selected states).
+Screens wake up with a sequential blur-to-clear reveal on transition, and
+options/chips stagger in on entry. The one deliberate departure from the
+source design doc: it's written dark-only, so the app runs a single dark
+theme rather than adapting to `prefers-color-scheme` as earlier versions did.
+The generated will (`.sheet`) is a separate artifact from the app chrome —
+it always renders as black serif ink on a white page regardless of the app
+theme, since it represents a document meant to be printed and signed, not a
+Memoria surface. No webfonts anywhere (CSP + privacy).
 
 Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
 a Review screen with per-section status and jump-to-fix warnings (missing

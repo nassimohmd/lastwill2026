@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, MotionConfig } from 'motion/react';
 import { useStore } from '../state/store';
 import { graph } from '../data/graph';
 import { t } from '../i18n';
@@ -11,6 +12,7 @@ import { generationBlockers } from '../template/render';
 import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 import { exportDraft, parseImportedDraft } from '../state/persistence';
 import { LanguageToggle } from './LanguageToggle';
+import { btnLink, btnPrimaryBig, easeOut } from './classes';
 
 export function App() {
   const { state, dispatch } = useStore();
@@ -57,15 +59,19 @@ export function App() {
   };
 
   let view;
+  let viewKey: string;
   if (!started && !finished) {
+    viewKey = 'landing';
     view = (
-      <div className="landing">
-        <h1>{t('ui.appName', locale)}</h1>
-        <p className="tagline">{t('ui.tagline', locale)}</p>
-        <p className="lead">{t('ui.landing.lead', locale)}</p>
-        <p className="privacy">{t('ui.landing.privacy', locale)}</p>
+      <div className="landing pt-[10vh] text-center">
+        <h1 className="text-5xl font-light tracking-tight text-white sm:text-6xl">
+          {t('ui.appName', locale)}
+        </h1>
+        <p className="tagline mt-3 text-lg text-neutral-400">{t('ui.tagline', locale)}</p>
+        <p className="lead mx-auto mt-7 max-w-md text-sm text-neutral-400">{t('ui.landing.lead', locale)}</p>
+        <p className="privacy mt-5 text-xs text-neutral-600">{t('ui.landing.privacy', locale)}</p>
         <button
-          className="primary big"
+          className={`${btnPrimaryBig} mt-8`}
           onClick={() => {
             if (fresh) dispatch({ type: 'START' });
             setStarted(true);
@@ -73,18 +79,18 @@ export function App() {
         >
           {inProgress ? t('ui.landing.resume', locale) : t('ui.landing.start', locale)}
         </button>
-        <div className="landing-links">
+        <div className="landing-links mt-4 flex flex-col items-center gap-2">
           {inProgress && (
-            <button className="link" onClick={startOver}>
+            <button className={btnLink} onClick={startOver}>
               {t('ui.landing.startOver', locale)}
             </button>
           )}
           {inProgress && (
-            <button className="link" onClick={() => exportDraft(state)}>
+            <button className={btnLink} onClick={() => exportDraft(state)}>
               {t('ui.landing.export', locale)}
             </button>
           )}
-          <button className="link" onClick={() => fileInput.current?.click()}>
+          <button className={btnLink} onClick={() => fileInput.current?.click()}>
             {t('ui.landing.import', locale)}
           </button>
           <input
@@ -99,21 +105,26 @@ export function App() {
             }}
           />
         </div>
-        <LanguageToggle />
+        <div className="mt-11 flex justify-center">
+          <LanguageToggle />
+        </div>
       </div>
     );
   } else if (finished) {
     const blockers = generationBlockers(state);
-    view =
-      blockers.length > 0 ? (
-        <div className="blocked">
-          <h2>{t('ui.blocked.title', locale)}</h2>
-          {blockers.includes('underage') && <p>{t('ui.blocked.underage', locale)}</p>}
+    if (blockers.length > 0) {
+      viewKey = 'blocked';
+      view = (
+        <div className="blocked pt-[8vh] text-center">
+          <h2 className="text-xl font-light text-white">{t('ui.blocked.title', locale)}</h2>
+          {blockers.includes('underage') && (
+            <p className="mt-3 text-sm text-neutral-400">{t('ui.blocked.underage', locale)}</p>
+          )}
           {blockers.includes('sound_mind') && (
             <>
-              <p>{t('ui.blocked.soundMind', locale)}</p>
+              <p className="mt-3 text-sm text-neutral-400">{t('ui.blocked.soundMind', locale)}</p>
               <button
-                className="primary"
+                className={`${btnPrimaryBig} mt-6`}
                 onClick={() => dispatch({ type: 'GOTO', qid: 'personal.sound_mind' })}
               >
                 {t('ui.done.back', locale)}
@@ -121,55 +132,79 @@ export function App() {
             </>
           )}
         </div>
-      ) : showWill ? (
+      );
+    } else if (showWill) {
+      viewKey = 'will';
+      view = (
         <div className="done">
-          <div className="done-header no-print">
-            <h2>{t('ui.done.title', locale)}</h2>
-            <p>{t('ui.done.lead', locale)}</p>
-            <button className="link" onClick={() => setShowWill(false)}>
+          <div className="done-header no-print mb-6">
+            <h2 className="text-xl font-light text-white">{t('ui.done.title', locale)}</h2>
+            <p className="mt-1 text-sm text-neutral-400">{t('ui.done.lead', locale)}</p>
+            <button className={`${btnLink} mt-2`} onClick={() => setShowWill(false)}>
               ← {t('ui.done.back', locale)}
             </button>
           </div>
           <WillPreview />
         </div>
-      ) : (
-        <ReviewScreen onGenerate={() => setShowWill(true)} />
       );
+    } else {
+      viewKey = 'review';
+      view = <ReviewScreen onGenerate={() => setShowWill(true)} />;
+    }
   } else {
     const repeaterId = state.currentQuestionId ? repeaterIdFromAddMoreScreen(state.currentQuestionId) : null;
     if (repeaterId) {
+      viewKey = `addmore-${repeaterId}`;
       view = <RepeaterAddMore repeaterId={repeaterId} />;
     } else {
       const q = state.currentQuestionId ? graph.get(state.currentQuestionId) : null;
+      viewKey = state.currentQuestionId ?? 'blank';
       view = q ? <QuestionCard question={q} /> : null;
     }
   }
 
   return (
-    <div className="app">
-      <header className="no-print">
-        <span className="brand">{t('ui.appName', locale)}</span>
-        <div className="header-links">
-          {inProgress && started && (
-            <button className="link" onClick={() => dispatch({ type: 'RETURN_TO_REVIEW' })}>
-              {t('ui.review.backLink', locale)}
-            </button>
-          )}
-          {(inProgress || finished) && started && (
-            <button className="link" onClick={startOver}>
-              {t('ui.landing.startOver', locale)}
-            </button>
-          )}
-          {started && <LanguageToggle />}
-        </div>
-      </header>
-      {inProgress && started && (
-        <div className="no-print">
-          <ProgressBar />
-        </div>
-      )}
-      <main>{view}</main>
-      <footer className="no-print">{t('ui.disclaimer', locale)}</footer>
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16">
+        <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-neutral-800/60 py-5">
+          <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-white">
+            {t('ui.appName', locale)}
+          </span>
+          <div className="header-links flex flex-wrap items-center gap-3 sm:gap-4">
+            {inProgress && started && (
+              <button className={`${btnLink} whitespace-nowrap`} onClick={() => dispatch({ type: 'RETURN_TO_REVIEW' })}>
+                {t('ui.review.backLink', locale)}
+              </button>
+            )}
+            {(inProgress || finished) && started && (
+              <button className={`${btnLink} whitespace-nowrap`} onClick={startOver}>
+                {t('ui.landing.startOver', locale)}
+              </button>
+            )}
+            {started && <LanguageToggle />}
+          </div>
+        </header>
+        {inProgress && started && (
+          <div className="no-print pt-7">
+            <ProgressBar />
+          </div>
+        )}
+        <main className="flex-1 pt-2">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={viewKey}
+              initial={{ opacity: 0, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, filter: 'blur(0px)', transition: { duration: 0.3, ease: easeOut } }}
+              exit={{ opacity: 0, filter: 'blur(4px)', transition: { duration: 0.15, ease: easeOut } }}
+            >
+              {view}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        <footer className="no-print mt-14 text-center text-xs text-neutral-600">
+          {t('ui.disclaimer', locale)}
+        </footer>
+      </div>
+    </MotionConfig>
   );
 }

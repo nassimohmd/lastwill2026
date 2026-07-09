@@ -129,6 +129,52 @@ Selectors that matter:
   ignores keys while an input/textarea has focus — probe that by focusing
   the date field and pressing a digit; the question must not advance.
 
+## Memoria redesign: Tailwind + Motion, dark-only
+
+- The UI was rebuilt on the **Memoria design system** (Tailwind CSS v4 via
+  `@tailwindcss/vite`, `motion` for animation, `lucide-react` for the one
+  functional icon in use). It's dark-only — no `prefers-color-scheme`
+  branching in the app chrome anymore, since the source design doc is
+  written dark-first and doesn't specify a light variant. `.sheet` (the
+  generated will) is unaffected: it's still forced white-bg/black-ink/serif
+  regardless of theme, styled with plain CSS in `src/styles.css`, not
+  Tailwind utilities — it's a printed document, not a Memoria surface.
+- **Selector contract preserved on purpose**: every component still carries
+  its old bare marker class (`button.option`, `button.chip` + `.selected`,
+  `button.primary`/`.secondary`/`.link`, `.freeform`, `.chip-row`, `.items`,
+  `.item-form`, `.field`, `.repeater-actions`, `.question-card`, `.hint` +
+  `.warning`, `.status-pill` + `.done`, `.progress-chapter` + `.current`,
+  `.chapter-label`, `.progress-count`, `.header-links`, `.card-footer`,
+  etc.) alongside the Tailwind utility classes — see `src/ui/classes.ts`,
+  where each shared recipe string starts with the marker class. Don't drop
+  these when touching a component; the selectors above (and this whole
+  file) depend on them, not on the utility classes.
+- **Page transitions add real latency to a skip-through walk.** Every view
+  swap (question → question, question → Review, Review → will) goes through
+  one `AnimatePresence mode="wait"` blur-cross-fade in `App.tsx` — exit
+  0.15s then enter 0.3s, so budget ~450ms between a click and the next
+  question actually being in the DOM. A tight `waitForTimeout(20)` skip-loop
+  will race the exit animation and either double-click a detached element
+  or get stuck reading stale content; use ~450-500ms between steps, or poll
+  for the specific next state instead of a blind short sleep.
+- **Info/notice and "Confirm: …" branches have no Skip link.** Any question
+  with `type: 'info'`, or a single-choice "Confirm: I acknowledge…" gate
+  (e.g. the Muslim one-third-rule notice), only advances via its own
+  "Understood" / "I confirm" button — a generic skip-loop needs a fallback
+  that looks for `button.option` matching `/confirm/i` or `button.primary`
+  matching `/understood/i` before concluding it's stuck.
+- Mobile header (`≤390px` viewports): brand and the link/toggle group wrap
+  onto two rows (`flex-wrap` on both `header` and `.header-links`, with
+  `whitespace-nowrap` on each link) rather than squeezing onto one line —
+  verify this after touching header markup, since a missing `whitespace-nowrap`
+  makes "Review answers" / "Start over" wrap mid-word instead of moving the
+  whole button down.
+- Fresh screenshots taken **immediately** after a state-changing click can
+  catch the view mid-animation (opacity/blur not yet settled, or — once
+  observed — an apparently "blank" card) purely from timing, not a real bug;
+  re-shoot after the ~450ms transition window before treating it as a
+  regression.
+
 ## Chapter progress + English-only chrome
 
 - The progress track is two-level: 8 `.progress-chapter` groups (wider

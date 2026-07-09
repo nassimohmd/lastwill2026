@@ -1,8 +1,10 @@
+import { motion } from 'motion/react';
 import { sections, chapters } from '../data/graph';
 import { t } from '../i18n';
 import { useStore } from '../state/store';
 import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 import { repeaterRegistry } from '../data/repeaters';
+import { easeQuestion } from './classes';
 
 export function ProgressBar() {
   const { state } = useStore();
@@ -31,43 +33,44 @@ export function ProgressBar() {
   const chapterPos = currentSection ? chapterSections.indexOf(currentSection) + 1 : 0;
 
   return (
-    <div className="progress">
-      <div className="progress-labels">
-        <span className="chapter-label">
+    <div className="progress mb-8">
+      <div className="progress-labels mb-2.5 flex items-baseline justify-between gap-4">
+        <span className="chapter-label text-[11px] uppercase tracking-[0.2em] text-neutral-500">
           {chapter ? t(chapter.title, locale) : ''}
           {chapterSections.length > 1 ? ` (${chapterPos}/${chapterSections.length})` : ''}
           {currentSection ? ` — ${t(currentSection.title, locale)}` : ''}
         </span>
         {currentSection && (
-          <span className="progress-count">
+          <span className="progress-count whitespace-nowrap text-[11px] tracking-wide text-neutral-600">
             {currentSectionIdx + 1} / {sections.length}
           </span>
         )}
       </div>
-      <div className="progress-track">
+      <div className="progress-track flex gap-2.5">
         {chapters.map((c) => {
           const secs = sections.filter((s) => s.chapter === c.id);
           if (secs.length === 0) return null;
+          const isCurrent = chapter?.id === c.id;
           return (
             <div
               key={c.id}
-              className={`progress-chapter ${chapter?.id === c.id ? 'current' : ''}`}
+              className={`progress-chapter flex gap-[3px] ${isCurrent ? 'current' : ''}`}
               style={{ flexGrow: secs.length }}
             >
               {secs.map((s) => {
                 const i = sections.indexOf(s);
+                const pct =
+                  i < currentSectionIdx ? 100 : i === currentSectionIdx ? Math.round(withinSection * 100) : 0;
                 return (
-                  <div key={s.id} className="progress-seg">
-                    <div
-                      className="progress-fill"
-                      style={{
-                        width:
-                          i < currentSectionIdx
-                            ? '100%'
-                            : i === currentSectionIdx
-                              ? `${Math.round(withinSection * 100)}%`
-                              : '0%',
-                      }}
+                  <div
+                    key={s.id}
+                    className={`progress-seg h-[3px] flex-1 overflow-hidden rounded-sm ${isCurrent ? 'bg-neutral-700' : 'bg-neutral-800'}`}
+                  >
+                    <motion.div
+                      className="progress-fill h-full bg-neutral-300"
+                      initial={false}
+                      animate={{ width: `${pct}%` }}
+                      transition={{ duration: 0.6, ease: easeQuestion }}
                     />
                   </div>
                 );

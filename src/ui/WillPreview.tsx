@@ -5,6 +5,7 @@ import { t, hasLocale, type Locale } from '../i18n';
 import { useStore } from '../state/store';
 import { SigningInstructions } from './SigningInstructions';
 import { getChecklist } from '../template/checklist';
+import { btnPrimary, btnSecondary, hintWarning } from './classes';
 
 export function WillPreview() {
   const { state } = useStore();
@@ -39,31 +40,39 @@ export function WillPreview() {
 
   return (
     <div className="preview-wrap">
-      <div className="preview-actions no-print">
-        <button className="primary" onClick={copy}>
+      <div className="preview-actions no-print mb-6 flex gap-3">
+        <button className={btnPrimary} onClick={copy}>
           {copied ? t('ui.done.copied', locale) : t('ui.done.copy', locale)}
         </button>
-        <button className="secondary" onClick={() => window.print()}>
+        <button className={btnSecondary} onClick={() => window.print()}>
           {t('ui.done.print', locale)}
         </button>
       </div>
 
       {hasLocale('ml') && (
-        <div className="will-lang-picker no-print">
+        <div className="will-lang-picker no-print mb-6 flex flex-wrap items-center gap-3 text-sm text-neutral-400">
           <span>{t('ui.will.langLabel', locale)}</span>
-          <div className="lang-toggle">
-            <button className={willLocale === 'en' ? 'active' : ''} onClick={() => setWillLocale('en')}>
+          <div className="lang-toggle inline-flex gap-1">
+            <button
+              className={`rounded-full px-3 py-1 text-sm transition-colors ${willLocale === 'en' ? 'active border border-neutral-700 text-white' : 'border border-transparent text-neutral-500 hover:text-neutral-200'}`}
+              onClick={() => setWillLocale('en')}
+            >
               {t('ui.lang.toggle.en', locale)}
             </button>
-            <button className={willLocale === 'ml' ? 'active' : ''} onClick={() => setWillLocale('ml')}>
+            <button
+              className={`rounded-full px-3 py-1 text-sm transition-colors ${willLocale === 'ml' ? 'active border border-neutral-700 text-white' : 'border border-transparent text-neutral-500 hover:text-neutral-200'}`}
+              onClick={() => setWillLocale('ml')}
+            >
               {t('ui.lang.toggle.ml', locale)}
             </button>
           </div>
-          {willLocale === 'ml' && <p className="hint warning">{t('ui.will.langDraftNotice', locale)}</p>}
+          {willLocale === 'ml' && (
+            <p className={`${hintWarning} basis-full italic`}>{t('ui.will.langDraftNotice', locale)}</p>
+          )}
         </div>
       )}
 
-      <div className="sheet" lang={willLocale}>
+      <div className="sheet rounded-lg border border-neutral-800 px-6 py-10 sm:px-12 sm:py-14" lang={willLocale}>
         {blocks.map((b) => {
           if (b.kind === 'title') return <h1 key={b.id} className="will-title">{b.text}</h1>;
           if (b.kind === 'heading') return <h2 key={b.id} className="will-heading">{b.text}</h2>;
@@ -101,16 +110,18 @@ export function WillPreview() {
         </div>
       </div>
 
-      <div className="signing-page-wrap">
+      <div className="signing-page-wrap mt-9 border-t border-dashed border-neutral-800 pt-9">
         <SigningInstructions locale={locale} />
       </div>
 
       {checklist.length > 0 && (
-        <div className="signing-page-wrap">
-          <h2>{t('ui.review.checklist.title', locale)}</h2>
-          <ul>
+        <div className="signing-page-wrap mt-9 border-t border-dashed border-neutral-800 pt-9">
+          <h2 className="text-lg font-light text-white">{t('ui.review.checklist.title', locale)}</h2>
+          <ul className="mt-3 list-disc pl-5">
             {checklist.map((c) => (
-              <li key={c.id}>{t(c.text, locale, c.vars)}</li>
+              <li key={c.id} className="mb-2 text-sm text-neutral-400">
+                {t(c.text, locale, c.vars)}
+              </li>
             ))}
           </ul>
         </div>

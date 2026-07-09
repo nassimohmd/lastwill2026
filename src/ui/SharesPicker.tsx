@@ -3,6 +3,7 @@ import type { Question, SharesAnswer } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { RELATIONS } from '../data/relations';
 import { useStore } from '../state/store';
+import { btnPrimary, hint, hintWarning, inputBase, option, optionSelected } from './classes';
 
 export function SharesPicker({ question }: { question: Question }) {
   const { state, dispatch } = useStore();
@@ -23,27 +24,34 @@ export function SharesPicker({ question }: { question: Question }) {
   };
 
   return (
-    <div className="shares-picker">
-      <div className="options">
-        <button className={`option ${mode === 'equal' ? 'selected' : ''}`} onClick={() => submit({ mode: 'equal' })}>
+    <div className="shares-picker mt-7">
+      <div className="options flex flex-col gap-2">
+        <button className={`${option} ${mode === 'equal' ? optionSelected : ''}`} onClick={() => submit({ mode: 'equal' })}>
           {t('ui.shares.equal', locale)}
         </button>
-        <button className={`option ${mode === 'percentage' ? 'selected' : ''}`} onClick={() => setMode('percentage')}>
+        <button
+          className={`${option} ${mode === 'percentage' ? optionSelected : ''}`}
+          onClick={() => setMode('percentage')}
+        >
           {t('ui.shares.percentage', locale)}
         </button>
-        <button className={`option ${mode === 'describe' ? 'selected' : ''}`} onClick={() => setMode('describe')}>
+        <button
+          className={`${option} ${mode === 'describe' ? optionSelected : ''}`}
+          onClick={() => setMode('describe')}
+        >
           {t('ui.shares.describe', locale)}
         </button>
       </div>
 
       {mode === 'percentage' && (
-        <div className="freeform">
+        <div className="freeform mt-5 flex flex-col gap-4">
           {people.map((p) => (
             <div key={p.id} className="field">
-              <label>
+              <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
                 {p.name} — {t(RELATIONS.find((r) => r.id === p.relation)?.label ?? 'q.relation.other', locale)}
               </label>
               <input
+                className={inputBase}
                 type="number"
                 min={0}
                 max={100}
@@ -52,20 +60,28 @@ export function SharesPicker({ question }: { question: Question }) {
               />
             </div>
           ))}
-          <p className={`hint ${total === 100 ? '' : 'warning'}`}>
+          <p className={total === 100 ? hint : hintWarning}>
             {t('ui.shares.percentTotal', locale, { n: String(total) })}
             {total !== 100 ? ` — ${t('ui.shares.percentWarning', locale)}` : ''}
           </p>
-          <button className="primary" disabled={total !== 100} onClick={() => submit({ mode: 'percentage', splits })}>
+          <button
+            className={`${btnPrimary} self-start`}
+            disabled={total !== 100}
+            onClick={() => submit({ mode: 'percentage', splits })}
+          >
             {t('ui.continue', locale)}
           </button>
         </div>
       )}
 
       {mode === 'describe' && (
-        <div className="freeform">
-          <textarea rows={3} value={text} onChange={(e) => setText(e.target.value)} />
-          <button className="primary" disabled={!text.trim()} onClick={() => submit({ mode: 'describe', text: text.trim() })}>
+        <div className="freeform mt-5 flex flex-col gap-3">
+          <textarea className={inputBase} rows={3} value={text} onChange={(e) => setText(e.target.value)} />
+          <button
+            className={`${btnPrimary} self-start`}
+            disabled={!text.trim()}
+            onClick={() => submit({ mode: 'describe', text: text.trim() })}
+          >
             {t('ui.continue', locale)}
           </button>
         </div>

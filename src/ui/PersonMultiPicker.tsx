@@ -4,6 +4,7 @@ import { t, type Locale } from '../i18n';
 import { RELATIONS, newPersonId } from '../data/relations';
 import { useStore } from '../state/store';
 import type { Person } from '../engine/types';
+import { btnPrimary, btnSecondary, chip, chipSelected, hint, inputBase } from './classes';
 
 export function PersonMultiPicker({ question }: { question: Question }) {
   const { state, dispatch } = useStore();
@@ -44,12 +45,12 @@ export function PersonMultiPicker({ question }: { question: Question }) {
   };
 
   return (
-    <div className="person-picker">
-      <div className="chip-row">
+    <div className="person-picker mt-7">
+      <div className="chip-row flex flex-wrap gap-2">
         {allPeople.map((p) => (
           <button
             key={p.id}
-            className={`chip ${selected.includes(p.id) ? 'selected' : ''}`}
+            className={`${chip} ${selected.includes(p.id) ? chipSelected : ''}`}
             onClick={() => toggle(p.id)}
           >
             {p.name} — {t(RELATIONS.find((r) => r.id === p.relation)?.label ?? 'q.relation.other', locale)}
@@ -58,23 +59,27 @@ export function PersonMultiPicker({ question }: { question: Question }) {
       </div>
 
       {!adding && (
-        <button className="secondary" onClick={() => setAdding(true)}>
+        <button className={`${btnSecondary} mt-4`} onClick={() => setAdding(true)}>
           {t('ui.person.someoneElse', locale)}
         </button>
       )}
       {adding && (
-        <div className="freeform">
+        <div className="freeform mt-4 flex flex-col gap-4">
           <div className="field">
-            <label>{t('ui.person.name', locale)}</label>
-            <input type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
+            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+              {t('ui.person.name', locale)}
+            </label>
+            <input className={inputBase} type="text" autoFocus value={name} onChange={(e) => setName(e.target.value)} />
           </div>
           <div className="field">
-            <label>{t('ui.person.relation', locale)}</label>
-            <div className="chip-row">
+            <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+              {t('ui.person.relation', locale)}
+            </label>
+            <div className="chip-row flex flex-wrap gap-2">
               {RELATIONS.map((r) => (
                 <button
                   key={r.id}
-                  className={`chip ${relation === r.id ? 'selected' : ''}`}
+                  className={`${chip} ${relation === r.id ? chipSelected : ''}`}
                   onClick={() => setRelation(r.id)}
                 >
                   {t(r.label, locale)}
@@ -82,14 +87,16 @@ export function PersonMultiPicker({ question }: { question: Question }) {
               ))}
             </div>
           </div>
-          <button className="secondary" disabled={!name.trim() || !relation} onClick={addNew}>
+          <button className={`${btnSecondary} self-start`} disabled={!name.trim() || !relation} onClick={addNew}>
             {t('ui.addAnother', locale)}
           </button>
         </div>
       )}
 
-      {selected.length < min && <p className="hint">{t('ui.personMulti.min', locale, { n: String(min) })}</p>}
-      <button className="primary" disabled={selected.length < min} onClick={submit}>
+      {selected.length < min && (
+        <p className={`${hint} mt-4`}>{t('ui.personMulti.min', locale, { n: String(min) })}</p>
+      )}
+      <button className={`${btnPrimary} mt-4`} disabled={selected.length < min} onClick={submit}>
         {t('ui.continue', locale)}
       </button>
     </div>

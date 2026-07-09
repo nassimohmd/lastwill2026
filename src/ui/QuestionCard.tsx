@@ -1,10 +1,22 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import type { Question } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { useStore } from '../state/store';
 import { PersonPicker } from './PersonPicker';
 import { PersonMultiPicker } from './PersonMultiPicker';
 import { SharesPicker } from './SharesPicker';
+import {
+  btnLink,
+  btnPrimary,
+  btnSecondary,
+  chip,
+  chipSelected,
+  hint,
+  inputBase,
+  option,
+  optionSelected,
+} from './classes';
 
 interface ItemRecord {
   [field: string]: string;
@@ -58,8 +70,7 @@ export function QuestionCard({ question }: { question: Question }) {
     dispatch({ type: 'ANSWER', qid: question.id, value });
   };
 
-  const draftComplete =
-    question.fields?.every((f) => (draftItem[f.id] ?? '').trim() !== '') ?? false;
+  const draftComplete = question.fields?.every((f) => (draftItem[f.id] ?? '').trim() !== '') ?? false;
 
   const addDraft = (): ItemRecord[] => {
     if (!draftComplete) return items;
@@ -82,30 +93,36 @@ export function QuestionCard({ question }: { question: Question }) {
 
       case 'single':
         return (
-          <div className="options">
+          <div className="options mt-7 flex flex-col gap-2">
             {question.options?.map((o, i) => (
-              <button
+              <motion.button
                 key={o.id}
-                className={`option ${existing === o.id ? 'selected' : ''}`}
-                onClick={() =>
-                  dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })
-                }
+                className={`${option} ${existing === o.id ? optionSelected : ''}`}
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: i * 0.05 }}
+                whileHover={{ scale: 1.01 }}
+                onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })}
               >
-                {i < 9 && <span className="option-key">{i + 1}</span>}
+                {i < 9 && (
+                  <span className="option-key mr-2 inline-block min-w-[1.15rem] text-xs tabular-nums text-neutral-600 [@media(hover:none)]:hidden">
+                    {i + 1}
+                  </span>
+                )}
                 {t(o.label, locale)}
-              </button>
+              </motion.button>
             ))}
           </div>
         );
 
       case 'multi':
         return (
-          <div className="freeform">
-            <div className="chip-row">
+          <div className="freeform mt-7 flex flex-col gap-3">
+            <div className="chip-row flex flex-wrap gap-2">
               {question.options?.map((o) => (
                 <button
                   key={o.id}
-                  className={`chip ${selected.includes(o.id) ? 'selected' : ''}`}
+                  className={`${chip} ${selected.includes(o.id) ? chipSelected : ''}`}
                   onClick={() =>
                     setSelected((s) => (s.includes(o.id) ? s.filter((x) => x !== o.id) : [...s, o.id]))
                   }
@@ -115,7 +132,7 @@ export function QuestionCard({ question }: { question: Question }) {
               ))}
             </div>
             <button
-              className="primary"
+              className={`${btnPrimary} self-start`}
               disabled={selected.length === 0}
               onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: selected })}
             >
@@ -127,7 +144,7 @@ export function QuestionCard({ question }: { question: Question }) {
       case 'info':
         return (
           <button
-            className="primary"
+            className={`${btnPrimary} mt-7`}
             onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: true })}
           >
             {t('ui.understood', locale)}
@@ -139,9 +156,10 @@ export function QuestionCard({ question }: { question: Question }) {
       case 'date':
       case 'longtext':
         return (
-          <div className="freeform">
+          <div className="freeform mt-7 flex flex-col gap-3">
             {question.type === 'longtext' ? (
               <textarea
+                className={inputBase}
                 value={text}
                 rows={3}
                 autoFocus
@@ -149,6 +167,7 @@ export function QuestionCard({ question }: { question: Question }) {
               />
             ) : (
               <input
+                className={inputBase}
                 type={question.type === 'number' ? 'number' : question.type === 'date' ? 'date' : 'text'}
                 value={text}
                 autoFocus
@@ -156,9 +175,9 @@ export function QuestionCard({ question }: { question: Question }) {
                 onKeyDown={(e) => e.key === 'Enter' && submitText()}
               />
             )}
-            {question.optional && <p className="hint">{t('ui.optionalHint', locale)}</p>}
+            {question.optional && <p className={hint}>{t('ui.optionalHint', locale)}</p>}
             <button
-              className="primary"
+              className={`${btnPrimary} self-start`}
               disabled={!text.trim() && !question.optional && !skippable}
               onClick={submitText}
             >
@@ -169,47 +188,53 @@ export function QuestionCard({ question }: { question: Question }) {
 
       case 'repeater':
         return (
-          <div className="repeater">
+          <div className="repeater mt-7">
             {items.length > 0 && (
-              <ul className="items">
+              <ul className="items mb-5 flex flex-col gap-2">
                 {items.map((item, i) => (
-                  <li key={i}>
-                    <span>
-                      {question.fields?.map((f) => {
-                        const v = item[f.id];
-                        const label =
-                          f.type === 'single'
-                            ? t(f.options?.find((o) => o.id === v)?.label ?? '', locale)
-                            : v;
-                        return label;
-                      }).filter(Boolean).join(' · ')}
+                  <li
+                    key={i}
+                    className="flex items-center justify-between rounded-xl border border-neutral-800 bg-neutral-900/50 px-4 py-3"
+                  >
+                    <span className="text-sm text-neutral-200">
+                      {question.fields
+                        ?.map((f) => {
+                          const v = item[f.id];
+                          const l =
+                            f.type === 'single'
+                              ? t(f.options?.find((o) => o.id === v)?.label ?? '', locale)
+                              : v;
+                          return l;
+                        })
+                        .filter(Boolean)
+                        .join(' · ')}
                     </span>
-                    <button
-                      className="link"
-                      onClick={() => setItems(items.filter((_, j) => j !== i))}
-                    >
+                    <button className={btnLink} onClick={() => setItems(items.filter((_, j) => j !== i))}>
                       {t('ui.remove', locale)}
                     </button>
                   </li>
                 ))}
               </ul>
             )}
-            <div className="item-form">
+            <div className="item-form flex flex-col gap-4">
               {question.fields?.map((f) => (
                 <div key={f.id} className="field">
-                  <label>{t(f.label, locale)}</label>
+                  <label className="mb-1.5 block text-xs uppercase tracking-widest text-neutral-500">
+                    {t(f.label, locale)}
+                  </label>
                   {f.type === 'text' ? (
                     <input
+                      className={inputBase}
                       type="text"
                       value={draftItem[f.id] ?? ''}
                       onChange={(e) => setDraftItem({ ...draftItem, [f.id]: e.target.value })}
                     />
                   ) : (
-                    <div className="chip-row">
+                    <div className="chip-row flex flex-wrap gap-2">
                       {f.options?.map((o) => (
                         <button
                           key={o.id}
-                          className={`chip ${draftItem[f.id] === o.id ? 'selected' : ''}`}
+                          className={`${chip} ${draftItem[f.id] === o.id ? chipSelected : ''}`}
                           onClick={() => setDraftItem({ ...draftItem, [f.id]: o.id })}
                         >
                           {t(o.label, locale)}
@@ -220,12 +245,12 @@ export function QuestionCard({ question }: { question: Question }) {
                 </div>
               ))}
             </div>
-            <div className="repeater-actions">
-              <button className="secondary" disabled={!draftComplete} onClick={addDraft}>
+            <div className="repeater-actions mt-7 flex gap-3">
+              <button className={btnSecondary} disabled={!draftComplete} onClick={addDraft}>
                 {t(question.addMore ?? 'ui.addAnother', locale)}
               </button>
               <button
-                className="primary"
+                className={btnPrimary}
                 disabled={items.length === 0 && !draftComplete}
                 onClick={() => {
                   const finalItems = draftComplete ? addDraft() : items;
@@ -245,21 +270,23 @@ export function QuestionCard({ question }: { question: Question }) {
   };
 
   return (
-    <div className="question-card" key={question.id}>
-      <h2 className="question-text">{t(question.text, locale)}</h2>
-      {question.help && <p className="help">{t(question.help, locale)}</p>}
+    <div className="question-card rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 sm:p-8" key={question.id}>
+      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-white sm:text-3xl">
+        {t(question.text, locale)}
+      </h2>
+      {question.help && <p className="help mt-2 text-sm text-neutral-400">{t(question.help, locale)}</p>}
       {body()}
-      <div className="card-footer">
+      <div className="card-footer mt-11 flex items-center border-t border-neutral-800/60 pt-4">
         {state.history.length > 0 && (
-          <button className="link" onClick={() => dispatch({ type: 'BACK' })}>
+          <button className={btnLink} onClick={() => dispatch({ type: 'BACK' })}>
             ← {t('ui.back', locale)}
           </button>
         )}
-        <span className="spacer" />
+        <span className="flex-1" />
         {/* info cards already advance via "Understood" — a Skip link beside it
             is a second CTA for the same action */}
         {skippable && question.type !== 'info' && (
-          <button className="link" onClick={() => dispatch({ type: 'SKIP', qid: question.id })}>
+          <button className={btnLink} onClick={() => dispatch({ type: 'SKIP', qid: question.id })}>
             {t('ui.skip', locale)} →
           </button>
         )}
