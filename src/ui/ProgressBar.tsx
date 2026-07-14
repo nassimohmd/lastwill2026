@@ -1,10 +1,8 @@
-import { motion } from 'motion/react';
 import { sections, chapters } from '../data/graph';
 import { t } from '../i18n';
 import { useStore } from '../state/store';
 import { repeaterIdFromAddMoreScreen } from '../engine/repeaters';
 import { repeaterRegistry } from '../data/repeaters';
-import { easeQuestion } from './classes';
 
 export function ProgressBar() {
   const { state } = useStore();
@@ -66,12 +64,7 @@ export function ProgressBar() {
                     key={s.id}
                     className={`progress-seg h-[3px] flex-1 overflow-hidden rounded-sm ${isCurrent ? 'bg-accent' : 'bg-muted'}`}
                   >
-                    <motion.div
-                      className="progress-fill h-full bg-foreground"
-                      initial={false}
-                      animate={{ width: `${pct}%` }}
-                      transition={{ duration: 0.6, ease: easeQuestion }}
-                    />
+                    <div className="progress-fill h-full bg-foreground" style={{ width: `${pct}%` }} />
                   </div>
                 );
               })}

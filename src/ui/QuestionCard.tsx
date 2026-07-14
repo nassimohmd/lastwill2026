@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
 import type { Question } from '../engine/types';
 import { t, type Locale } from '../i18n';
 import { useStore } from '../state/store';
@@ -90,13 +89,9 @@ export function QuestionCard({ question }: { question: Question }) {
         return (
           <div className="options mt-7 flex flex-col gap-2">
             {question.options?.map((o, i) => (
-              <motion.button
+              <button
                 key={o.id}
                 className={`${option} ${existing === o.id ? optionSelected : ''}`}
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.05 }}
-                whileHover={{ scale: 1.01 }}
                 onClick={() => dispatch({ type: 'ANSWER', qid: question.id, value: o.id, optionId: o.id })}
               >
                 {i < 9 && (
@@ -105,7 +100,7 @@ export function QuestionCard({ question }: { question: Question }) {
                   </span>
                 )}
                 {t(o.label, locale)}
-              </motion.button>
+              </button>
             ))}
           </div>
         );

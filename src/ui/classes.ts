@@ -14,11 +14,11 @@
 // its Playwright scripts key off those bare class names, not the utilities.
 
 export const option =
-  'option w-full rounded-lg border border-border bg-card p-4 text-left text-[15px] text-foreground transition-colors hover:border-foreground/30 hover:bg-accent/50';
+  'option w-full rounded-lg border border-border bg-card p-4 text-left text-[15px] text-foreground hover:border-foreground/30 hover:bg-accent/50';
 export const optionSelected = 'selected border-primary bg-accent';
 
 export const chip =
-  'chip rounded-full border border-border px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground';
+  'chip rounded-full border border-border px-4 py-2 text-sm text-muted-foreground hover:border-foreground/40 hover:text-foreground';
 export const chipSelected = 'selected border-primary bg-primary text-primary-foreground hover:text-primary-foreground';
 
 export const hint = 'hint text-sm text-muted-foreground';
@@ -28,9 +28,6 @@ export const hintWarning = 'hint warning text-sm font-medium text-foreground';
 // deliberately not the shadcn Button "link" variant, which underlines on
 // hover; these read as quiet in-flow actions, not calls to action
 export const btnLink =
-  'link text-sm text-muted-foreground transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40';
+  'link text-sm text-muted-foreground hover:text-foreground disabled:pointer-events-none disabled:opacity-40';
 export const navLink =
-  'link whitespace-nowrap text-sm font-medium text-foreground/70 transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40';
-
-export const easeOut = [0.25, 0.46, 0.45, 0.94] as const;
-export const easeQuestion = [0.25, 0.1, 0.25, 1] as const;
+  'link whitespace-nowrap text-sm font-medium text-foreground/70 hover:text-foreground disabled:pointer-events-none disabled:opacity-40';

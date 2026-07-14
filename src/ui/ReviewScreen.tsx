@@ -75,10 +75,7 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
                 onClick={() => dispatch({ type: 'GOTO', qid: s.order[0] })}
               >
                 {t('ui.review.section.review', locale)}
-                <ChevronRight
-                  className="h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100"
-                  aria-hidden="true"
-                />
+                <ChevronRight className="h-4 w-4 opacity-0 group-hover:opacity-100" aria-hidden="true" />
               </button>
             </li>
           );

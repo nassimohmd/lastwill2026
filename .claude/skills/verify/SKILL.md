@@ -134,9 +134,11 @@ Selectors that matter:
 - The UI runs on **shadcn/ui** — Radix primitives (`radix-ui` npm package)
   + `class-variance-authority` + Tailwind CSS v4, with components copied
   into the repo at `src/components/ui/*.tsx` (button, input, textarea,
-  label, card, badge, alert, progress, separator, toggle, toggle-group) —
-  not an npm dependency, so edit those files directly rather than looking
-  for a package to bump. `src/lib/utils.ts` has the `cn()` helper
+  label, card, badge, alert, toggle, toggle-group — only what's actually
+  used; unused ones like `progress`/`separator` were deleted rather than
+  left as dead scaffolding) — not an npm dependency, so edit those files
+  directly rather than looking for a package to bump. `src/lib/utils.ts`
+  has the `cn()` helper
   (clsx + tailwind-merge) every component uses to merge classes.
   `components.json` + the `@/*` path alias (`tsconfig.json`,
   `vite.config.ts`) are shadcn's own scaffolding, kept so `npx shadcn add
@@ -181,14 +183,17 @@ Selectors that matter:
   `<Badge className="status-pill done">`). Don't drop these when touching a
   component; the selectors above (and this whole file) depend on them, not
   on the shadcn component names.
-- **Page transitions add real latency to a skip-through walk.** Every view
-  swap (question → question, question → Review, Review → will) goes through
-  one `AnimatePresence mode="wait"` blur-cross-fade in `App.tsx` — exit
-  0.15s then enter 0.3s, so budget ~450ms between a click and the next
-  question actually being in the DOM. A tight `waitForTimeout(20)` skip-loop
-  will race the exit animation and either double-click a detached element
-  or get stuck reading stale content; use ~450-500ms between steps, or poll
-  for the specific next state instead of a blind short sleep.
+- **No animation library, no transitions, anywhere — deliberate.** `motion`
+  (Framer Motion) was removed entirely; view swaps (question → question,
+  question → Review, Review → will) are plain conditional rendering in
+  `App.tsx` with no `AnimatePresence`/blur/fade, and the shadcn primitives
+  in `src/components/ui/*.tsx` have had their `transition-*` classes
+  stripped from the upstream source. A click's effect (new question, new
+  theme, progress-bar fill) is in the DOM on the next render — no
+  `waitForTimeout` budget needed between steps in a driving script; a
+  present-immediately check is enough. If you add new UI, don't reach for
+  `motion` or Tailwind `transition-*`/`animate-*` classes — that's a
+  reintroduction of exactly what this pass removed.
 - **Info/notice and "Confirm: …" branches have no Skip link.** Any question
   with `type: 'info'`, or a single-choice "Confirm: I acknowledge…" gate
   (e.g. the Muslim one-third-rule notice), only advances via its own

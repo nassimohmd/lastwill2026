@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion, MotionConfig } from 'motion/react';
 import { useStore } from '../state/store';
 import { graph } from '../data/graph';
 import { t } from '../i18n';
@@ -14,7 +13,7 @@ import { exportDraft, parseImportedDraft } from '../state/persistence';
 import { LanguageToggle } from './LanguageToggle';
 import { ThemeToggle } from './ThemeToggle';
 import { Button } from '@/components/ui/button';
-import { btnLink, easeOut, navLink } from './classes';
+import { btnLink, navLink } from './classes';
 
 export function App() {
   const { state, dispatch } = useStore();
@@ -61,9 +60,7 @@ export function App() {
   };
 
   let view;
-  let viewKey: string;
   if (!started && !finished) {
-    viewKey = 'landing';
     view = (
       <div className="landing pt-[10vh] text-center">
         <h1 className="text-5xl font-light tracking-tight text-foreground sm:text-6xl">
@@ -121,7 +118,6 @@ export function App() {
     // "review my answers" always shows the review list, never a wall
     const blockers = showWill ? generationBlockers(state) : [];
     if (blockers.length > 0) {
-      viewKey = 'blocked';
       view = (
         <div className="blocked pt-[8vh] text-center">
           <h2 className="text-xl font-light text-foreground">{t('ui.blocked.title', locale)}</h2>
@@ -146,7 +142,6 @@ export function App() {
         </div>
       );
     } else if (showWill) {
-      viewKey = 'will';
       view = (
         <div className="done">
           <div className="done-header no-print mb-6">
@@ -160,17 +155,14 @@ export function App() {
         </div>
       );
     } else {
-      viewKey = 'review';
       view = <ReviewScreen onGenerate={() => setShowWill(true)} />;
     }
   } else {
     const repeaterId = state.currentQuestionId ? repeaterIdFromAddMoreScreen(state.currentQuestionId) : null;
     if (repeaterId) {
-      viewKey = `addmore-${repeaterId}`;
       view = <RepeaterAddMore repeaterId={repeaterId} />;
     } else {
       const q = state.currentQuestionId ? graph.get(state.currentQuestionId) : null;
-      viewKey = state.currentQuestionId ?? 'blank';
       view = q ? <QuestionCard question={q} /> : null;
     }
   }
@@ -181,50 +173,37 @@ export function App() {
   const showHeader = started || finished;
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16">
-        {showHeader && (
-          <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border py-5">
-            <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-foreground">
-              {t('ui.appName', locale)}
-            </span>
-            <div className="header-links flex flex-wrap items-center gap-3 sm:gap-4">
-              {inProgress && (
-                <button className={navLink} onClick={() => dispatch({ type: 'RETURN_TO_REVIEW' })}>
-                  {t('ui.review.backLink', locale)}
-                </button>
-              )}
-              {(inProgress || finished) && (
-                <button className={navLink} onClick={startOver}>
-                  {t('ui.landing.startOver', locale)}
-                </button>
-              )}
-              <LanguageToggle />
-              <ThemeToggle />
-            </div>
-          </header>
-        )}
-        {inProgress && started && (
-          <div className="no-print pt-7">
-            <ProgressBar />
+    <div className="app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16">
+      {showHeader && (
+        <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border py-5">
+          <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-foreground">
+            {t('ui.appName', locale)}
+          </span>
+          <div className="header-links flex flex-wrap items-center gap-3 sm:gap-4">
+            {inProgress && (
+              <button className={navLink} onClick={() => dispatch({ type: 'RETURN_TO_REVIEW' })}>
+                {t('ui.review.backLink', locale)}
+              </button>
+            )}
+            {(inProgress || finished) && (
+              <button className={navLink} onClick={startOver}>
+                {t('ui.landing.startOver', locale)}
+              </button>
+            )}
+            <LanguageToggle />
+            <ThemeToggle />
           </div>
-        )}
-        <main className="flex-1 pt-2">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={viewKey}
-              initial={{ opacity: 0, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, filter: 'blur(0px)', transition: { duration: 0.3, ease: easeOut } }}
-              exit={{ opacity: 0, filter: 'blur(4px)', transition: { duration: 0.15, ease: easeOut } }}
-            >
-              {view}
-            </motion.div>
-          </AnimatePresence>
-        </main>
-        <footer className="no-print mt-14 text-center text-xs text-muted-foreground/70">
-          {t('ui.disclaimer', locale)}
-        </footer>
-      </div>
-    </MotionConfig>
+        </header>
+      )}
+      {inProgress && started && (
+        <div className="no-print pt-7">
+          <ProgressBar />
+        </div>
+      )}
+      <main className="flex-1 pt-2">{view}</main>
+      <footer className="no-print mt-14 text-center text-xs text-muted-foreground/70">
+        {t('ui.disclaimer', locale)}
+      </footer>
+    </div>
   );
 }

@@ -64,19 +64,20 @@ itemised list. These are straightforward to expand later using the same
 `makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
 
 UI: built on **shadcn/ui** (Radix primitives + `class-variance-authority`)
-and Tailwind CSS v4, with `motion` (Framer Motion) for animation. Components
-are copied into the repo at `src/components/ui/*` (shadcn's own model — you
-own the code, not an installed dependency), themed with a strictly
-**monochrome** CSS-variable palette in `src/styles.css` (`oklch(... 0 0)` —
-zero chroma for every color, including the destructive/error state, which
-is a heavier black/white weight rather than red). Light and dark both ship,
-toggled manually (`.dark` class on `<html>`, `src/ui/ThemeToggle.tsx` +
+and Tailwind CSS v4. Components are copied into the repo at
+`src/components/ui/*` (shadcn's own model — you own the code, not an
+installed dependency), themed with a strictly **monochrome** CSS-variable
+palette in `src/styles.css` (`oklch(... 0 0)` — zero chroma for every
+color, including the destructive/error state, which is a heavier
+black/white weight rather than red). Light and dark both ship, toggled
+manually (`.dark` class on `<html>`, `src/ui/ThemeToggle.tsx` +
 `src/ui/theme.ts`, persisted in `localStorage` with the OS preference as the
 first-visit default) — colors are semantic tokens (`bg-card`,
 `text-foreground`, `border-border`, ...) that resolve differently per theme
-automatically, so components don't carry `dark:` variants. Screens wake up
-with a sequential blur-to-clear reveal on transition, and options/chips
-stagger in on entry. The generated will (`.sheet`) is a separate artifact
+automatically, so components don't carry `dark:` variants. **No animation
+library and no CSS transitions anywhere** — view swaps, hover/selected
+states, and the progress bar are all plain, instant style changes; this is
+deliberate, not a gap. The generated will (`.sheet`) is a separate artifact
 from the app chrome — it always renders as black serif ink on a white page
 regardless of theme, since it represents a document meant to be printed and
 signed, not an app-chrome surface. No webfonts anywhere (CSP + privacy).
