@@ -28,6 +28,17 @@ describe('will rendering', () => {
     expect(decl.text).toMatch(/aged \d+ years/);
   });
 
+  it('omits the relation fragment when the name was skipped, rather than leaving a dangling comma', () => {
+    const blocks = renderWill(
+      clauseBlocks,
+      stateWith({ ...base, 'personal.relation_name': undefined }),
+    );
+    const decl = blocks.find((b) => b.id === 'declaration')!;
+    expect(decl.text).not.toContain('son of');
+    expect(decl.text).not.toMatch(/,\s*,/); // no adjacent-comma blank left behind
+    expect(decl.text).toContain('I, Nassim Mohammed,');
+  });
+
   it('omits fragments for unanswered questions', () => {
     const blocks = renderWill(
       clauseBlocks,

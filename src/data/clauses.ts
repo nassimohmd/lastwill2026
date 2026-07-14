@@ -26,11 +26,26 @@ export const clauseBlocks: ClauseBlock[] = [
     kind: 'plain',
     text: 'clause.declaration',
     fragments: {
+      // the relation-name follow-up question is skippable, so gate on it
+      // being filled too — otherwise a skipped name leaves a dangling
+      // "son of ," in the declaration
       relation: [
-        { when: { eq: ['personal.relation_line', 'son_of'] }, text: 'frag.decl.relation.son_of' },
-        { when: { eq: ['personal.relation_line', 'daughter_of'] }, text: 'frag.decl.relation.daughter_of' },
-        { when: { eq: ['personal.relation_line', 'wife_of'] }, text: 'frag.decl.relation.wife_of' },
-        { when: { eq: ['personal.relation_line', 'husband_of'] }, text: 'frag.decl.relation.husband_of' },
+        {
+          when: { and: [{ eq: ['personal.relation_line', 'son_of'] }, { notEmpty: 'personal.relation_name' }] },
+          text: 'frag.decl.relation.son_of',
+        },
+        {
+          when: { and: [{ eq: ['personal.relation_line', 'daughter_of'] }, { notEmpty: 'personal.relation_name' }] },
+          text: 'frag.decl.relation.daughter_of',
+        },
+        {
+          when: { and: [{ eq: ['personal.relation_line', 'wife_of'] }, { notEmpty: 'personal.relation_name' }] },
+          text: 'frag.decl.relation.wife_of',
+        },
+        {
+          when: { and: [{ eq: ['personal.relation_line', 'husband_of'] }, { notEmpty: 'personal.relation_name' }] },
+          text: 'frag.decl.relation.husband_of',
+        },
       ],
       age: [{ when: { notEmpty: 'personal.dob' }, text: 'frag.decl.age' }],
       occupation: [{ when: { notEmpty: 'personal.occupation' }, text: 'frag.decl.occupation' }],
