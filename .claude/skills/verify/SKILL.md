@@ -129,7 +129,7 @@ Selectors that matter:
   ignores keys while an input/textarea has focus — probe that by focusing
   the date field and pressing a digit; the question must not advance.
 
-## UI stack: shadcn/ui + Tailwind, strictly monochrome
+## UI stack: shadcn/ui + Tailwind, themed to match Cal.com (coss.com/ui)
 
 - The UI runs on **shadcn/ui** — Radix primitives (`radix-ui` npm package)
   + `class-variance-authority` + Tailwind CSS v4, with components copied
@@ -138,26 +138,43 @@ Selectors that matter:
   used; unused ones like `progress`/`separator` were deleted rather than
   left as dead scaffolding) — not an npm dependency, so edit those files
   directly rather than looking for a package to bump. `src/lib/utils.ts`
-  has the `cn()` helper
-  (clsx + tailwind-merge) every component uses to merge classes.
-  `components.json` + the `@/*` path alias (`tsconfig.json`,
-  `vite.config.ts`) are shadcn's own scaffolding, kept so `npx shadcn add
-  <component>` still works if you need another primitive later — **but
-  ui.shadcn.com is blocked by this environment's egress policy**; fetch
-  component source from `raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/registry/new-york-v4/...`
+  has the `cn()` helper (clsx + tailwind-merge) every component uses to
+  merge classes. `components.json` + the `@/*` path alias
+  (`tsconfig.json`, `vite.config.ts`) are shadcn's own scaffolding, kept
+  so `npx shadcn add <component>` still works if you need another
+  primitive later — **but ui.shadcn.com is blocked by this environment's
+  egress policy**; fetch component source from
+  `raw.githubusercontent.com/shadcn-ui/ui/main/apps/v4/registry/new-york-v4/...`
   instead (that host is reachable) and wire imports/paths in by hand.
+- **Visual design is modeled on Cal.com's own design system**
+  (coss.com/ui, github.com/cosscom/coss — also blocked at the apex
+  domain, same fix: `raw.githubusercontent.com/cosscom/coss/main/...`
+  works). Deliberately *not* migrated onto their actual stack (Base UI +
+  `@coss/ui`): that package is **AGPL-3.0**, and copying its component
+  source into a web-served app would pull the whole thing under AGPL's
+  copyleft. Instead, the *token values* — colors, radii — were re-derived
+  from their published `packages/ui/src/styles/globals.css` (not
+  copyrightable the way source files are) and applied to our existing
+  MIT-licensed Radix/shadcn components, which were rewritten in our own
+  words to get a comparable look (soft embossed cards/buttons, alpha-
+  blended neutral overlays, `rounded-lg`/`rounded-2xl` radii, semantic
+  destructive/success/warning/info accent colors) without copying their
+  `.tsx` files. If you want to go further with this system, re-derive
+  values/behavior from their source rather than pasting it in verbatim —
+  same reasoning applies to any other AGPL/GPL dependency.
 - **Theming is CSS-variable based, not per-component `dark:` classes.**
   Every color in `src/styles.css` (`--background`, `--foreground`,
-  `--card`, `--primary`, `--muted`, `--accent`, `--destructive`, `--border`,
-  etc.) is `oklch(... 0 0)` — zero chroma, including `--destructive`
-  (shadcn ships that one red by default; here it's just a heavier
-  black/white weight, kept monochrome on purpose). `:root` holds the light
-  values, `.dark` overrides them; components use semantic Tailwind classes
-  (`bg-card`, `text-foreground`, `border-border`, ...) that resolve
-  differently per theme automatically — **don't add `dark:` variants to
-  new UI**, that pattern was retired with the Tailwind-only version. If a
-  color looks wrong in one theme, fix the variable in `src/styles.css`,
-  not the component.
+  `--card`, `--primary`, `--muted`, `--accent`, `--destructive`,
+  `--success`, `--warning`, `--info`, `--border`, etc.) is defined once in
+  `:root` (light) and overridden in `.dark`; components use semantic
+  Tailwind classes (`bg-card`, `text-foreground`, `border-border`, ...)
+  that resolve differently per theme automatically — **don't add `dark:`
+  variants to new UI**, that pattern was retired with the Tailwind-only
+  version. If a color looks wrong in one theme, fix the variable in
+  `src/styles.css`, not the component. Unlike the prior monochrome pass,
+  this theme **does use color** (red destructive, amber warning, emerald
+  success, blue info) — that's intentional fidelity to Cal.com's actual
+  palette, not a regression of an earlier "strictly monochrome" request.
 - **Theme mechanics**: a `.dark` class on `<html>`, toggled by
   `src/ui/ThemeToggle.tsx` (a shadcn `Button`) and read/written via
   `src/ui/theme.ts` (`lastwill.theme` in localStorage; falls back to

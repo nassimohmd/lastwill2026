@@ -253,7 +253,7 @@ export function QuestionCard({ question }: { question: Question }) {
 
   return (
     <Card className="question-card gap-0 p-6 sm:p-8" key={question.id}>
-      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-foreground sm:text-3xl">
+      <h2 className="question-text text-2xl font-semibold leading-snug tracking-tight text-foreground sm:text-3xl">
         {t(question.text, locale)}
       </h2>
       {question.help && <p className="help mt-2 text-sm text-muted-foreground">{t(question.help, locale)}</p>}

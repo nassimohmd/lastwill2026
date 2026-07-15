@@ -13,7 +13,7 @@ const STEPS = [
 export function SigningInstructions({ locale }: { locale: Locale }) {
   return (
     <div className="signing-page">
-      <h2 className="mb-4 text-lg font-light text-foreground">{t('ui.signing.title', locale)}</h2>
+      <h2 className="mb-4 text-lg font-semibold text-foreground">{t('ui.signing.title', locale)}</h2>
       <ol className="list-decimal pl-5">
         {STEPS.map((key, i) => (
           <li key={i} className="mb-2.5 text-sm leading-relaxed text-muted-foreground">

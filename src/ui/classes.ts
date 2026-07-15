@@ -4,9 +4,10 @@
 // (@/components/ui/button, /card, /input, /textarea, /badge, /alert).
 //
 // All colors are shadcn theme tokens (bg-card, text-foreground,
-// border-border, ...) defined in src/styles.css as oklch(... 0 0) —
-// zero-chroma, so light/dark both stay strictly monochrome and flip
-// automatically via the `.dark` class without any component-level
+// border-border, ...) defined in src/styles.css, themed to match Cal.com's
+// coss.com/ui palette (neutral-800 foreground, alpha-blended borders/
+// accents, semantic destructive/success/warning colors) — light/dark both
+// flip automatically via the `.dark` class without any component-level
 // `dark:` variants.
 //
 // Each recipe keeps its old semantic marker class (option/chip/selected/
@@ -14,11 +15,11 @@
 // its Playwright scripts key off those bare class names, not the utilities.
 
 export const option =
-  'option w-full rounded-lg border border-border bg-card p-4 text-left text-[15px] text-foreground hover:border-foreground/30 hover:bg-accent/50';
-export const optionSelected = 'selected border-primary bg-accent';
+  'option w-full rounded-xl border border-border bg-card p-4 text-left text-[15px] text-foreground shadow-xs hover:border-ring/60 hover:bg-accent/50';
+export const optionSelected = 'selected border-primary bg-accent shadow-none';
 
 export const chip =
-  'chip rounded-full border border-border px-4 py-2 text-sm text-muted-foreground hover:border-foreground/40 hover:text-foreground';
+  'chip rounded-full border border-border px-4 py-2 text-sm text-muted-foreground hover:border-ring/60 hover:text-foreground';
 export const chipSelected = 'selected border-primary bg-primary text-primary-foreground hover:text-primary-foreground';
 
 export const hint = 'hint text-sm text-muted-foreground';

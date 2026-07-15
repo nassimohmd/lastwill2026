@@ -24,7 +24,7 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
 
   return (
     <div className="review">
-      <h2 className="text-2xl font-light tracking-tight text-foreground">{t('ui.review.title', locale)}</h2>
+      <h2 className="text-2xl font-semibold tracking-tight text-foreground">{t('ui.review.title', locale)}</h2>
       <p className="lead-text mt-1.5 mb-7 text-sm text-muted-foreground">{t('ui.review.lead', locale)}</p>
 
       {warnings.length > 0 && (
@@ -84,7 +84,7 @@ export function ReviewScreen({ onGenerate }: { onGenerate: () => void }) {
 
       {checklist.length > 0 && (
         <div className="checklist mb-9">
-          <h3 className="text-lg font-light text-foreground">{t('ui.review.checklist.title', locale)}</h3>
+          <h3 className="text-lg font-semibold text-foreground">{t('ui.review.checklist.title', locale)}</h3>
           <p className="lead-text mt-1 mb-3 text-sm text-muted-foreground">{t('ui.review.checklist.lead', locale)}</p>
           <ul className="list-disc pl-5">
             {checklist.map((c) => (

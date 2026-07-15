@@ -124,7 +124,7 @@ export function WillPreview() {
 
       {checklist.length > 0 && (
         <div className="signing-page-wrap mt-9 border-t border-dashed border-border pt-9">
-          <h2 className="text-lg font-light text-foreground">{t('ui.review.checklist.title', locale)}</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t('ui.review.checklist.title', locale)}</h2>
           <ul className="mt-3 list-disc pl-5">
             {checklist.map((c) => (
               <li key={c.id} className="mb-2 text-sm text-muted-foreground">

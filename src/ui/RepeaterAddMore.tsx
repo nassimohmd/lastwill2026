@@ -14,7 +14,7 @@ export function RepeaterAddMore({ repeaterId }: { repeaterId: string }) {
 
   return (
     <Card className="question-card gap-0 p-6 sm:p-8">
-      <h2 className="question-text text-2xl font-light leading-snug tracking-tight text-foreground sm:text-3xl">
+      <h2 className="question-text text-2xl font-semibold leading-snug tracking-tight text-foreground sm:text-3xl">
         {t(def.addMoreLabel, locale, { n: String(items.length) })}
       </h2>
       {items.length > 0 && (

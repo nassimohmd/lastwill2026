@@ -1,14 +1,21 @@
 @import "tailwindcss";
 
 /*
-  UI built on shadcn/ui (Radix primitives + class-variance-authority) with a
-  strictly monochrome theme — every CSS variable below is oklch(... 0 0),
-  zero chroma, including --destructive (shadcn ships that one red by
-  default; here it's just a heavier black/white weight instead, so the
-  Remove/destructive affordance stays part of the same grayscale, not a
-  one-off accent color). Light is the default; `.dark` on <html> (toggled
-  in src/ui/theme.ts, applied in main.tsx before React mounts to avoid a
-  flash) switches to the dark set.
+  UI built on shadcn/ui (Radix primitives + class-variance-authority),
+  themed to match Cal.com's own design system (coss.com/ui — Cal.com's
+  open design language, github.com/cosscom/coss). The token *values* below
+  are re-derived from that system's published globals.css (neutral-800
+  foreground rather than pure black, alpha-blended secondary/muted/accent/
+  border instead of solid grays, a background that's not quite black in
+  dark mode) — the component *code* in src/components/ui/*.tsx is our own
+  writing, not copied from theirs, since @coss/ui ships under AGPL-3.0 and
+  this app doesn't want that copyleft obligation. Colors and spacing
+  values aren't copyrightable the way source files are, so re-implementing
+  the look from the published tokens is the clean way to "stick to" it.
+
+  Light is the default; `.dark` on <html> (toggled in src/ui/theme.ts,
+  applied in main.tsx before React mounts to avoid a flash) switches to
+  the dark set.
 
   The generated will document itself (`.sheet` below) is a different
   artifact: a legal paper meant to be printed and signed. It has stayed a
@@ -36,6 +43,12 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -43,51 +56,64 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.94 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.205 0 0);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.9 0 0);
-  --ring: oklch(0.556 0 0);
+  --background: var(--color-white);
+  --foreground: var(--color-neutral-800);
+  --card: var(--color-white);
+  --card-foreground: var(--color-neutral-800);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-neutral-800);
+  --primary: var(--color-neutral-800);
+  --primary-foreground: var(--color-neutral-50);
+  --secondary: color-mix(in srgb, var(--color-black) 4%, transparent);
+  --secondary-foreground: var(--color-neutral-800);
+  --muted: color-mix(in srgb, var(--color-black) 4%, transparent);
+  --muted-foreground: color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-black));
+  --accent: color-mix(in srgb, var(--color-black) 4%, transparent);
+  --accent-foreground: var(--color-neutral-800);
+  --destructive: var(--color-red-500);
+  --destructive-foreground: var(--color-red-700);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-700);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-700);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-700);
+  --border: color-mix(in srgb, var(--color-black) 8%, transparent);
+  --input: color-mix(in srgb, var(--color-black) 10%, transparent);
+  --ring: var(--color-neutral-400);
 }
 
 .dark {
-  --background: oklch(0.09 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.16 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.16 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.24 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.24 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.3 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.85 0 0);
-  --destructive-foreground: oklch(0.145 0 0);
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.556 0 0);
+  --background: color-mix(in srgb, var(--color-neutral-950) 96%, var(--color-white));
+  --foreground: var(--color-neutral-100);
+  --card: color-mix(in srgb, var(--background) 98%, var(--color-white));
+  --card-foreground: var(--color-neutral-100);
+  --popover: color-mix(in srgb, var(--background) 96%, var(--color-white));
+  --popover-foreground: var(--color-neutral-100);
+  --primary: var(--color-neutral-100);
+  --primary-foreground: var(--color-neutral-800);
+  --secondary: color-mix(in srgb, var(--color-white) 4%, transparent);
+  --secondary-foreground: var(--color-neutral-100);
+  --muted: color-mix(in srgb, var(--color-white) 4%, transparent);
+  --muted-foreground: color-mix(in srgb, var(--color-neutral-500) 90%, var(--color-white));
+  --accent: color-mix(in srgb, var(--color-white) 4%, transparent);
+  --accent-foreground: var(--color-neutral-100);
+  --destructive: color-mix(in srgb, var(--color-red-500) 90%, var(--color-white));
+  --destructive-foreground: var(--color-red-400);
+  --info: var(--color-blue-500);
+  --info-foreground: var(--color-blue-400);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-400);
+  --warning: var(--color-amber-500);
+  --warning-foreground: var(--color-amber-400);
+  --border: color-mix(in srgb, var(--color-white) 6%, transparent);
+  --input: color-mix(in srgb, var(--color-white) 8%, transparent);
+  --ring: var(--color-neutral-500);
 }
 
 @layer base {

@@ -63,7 +63,7 @@ export function App() {
   if (!started && !finished) {
     view = (
       <div className="landing pt-[10vh] text-center">
-        <h1 className="text-5xl font-light tracking-tight text-foreground sm:text-6xl">
+        <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
           {t('ui.appName', locale)}
         </h1>
         <p className="tagline mt-3 text-lg text-muted-foreground">{t('ui.tagline', locale)}</p>
@@ -120,7 +120,7 @@ export function App() {
     if (blockers.length > 0) {
       view = (
         <div className="blocked pt-[8vh] text-center">
-          <h2 className="text-xl font-light text-foreground">{t('ui.blocked.title', locale)}</h2>
+          <h2 className="text-xl font-semibold text-foreground">{t('ui.blocked.title', locale)}</h2>
           {blockers.includes('underage') && (
             <p className="mt-3 text-sm text-muted-foreground">{t('ui.blocked.underage', locale)}</p>
           )}
@@ -145,7 +145,7 @@ export function App() {
       view = (
         <div className="done">
           <div className="done-header no-print mb-6">
-            <h2 className="text-xl font-light text-foreground">{t('ui.done.title', locale)}</h2>
+            <h2 className="text-xl font-semibold text-foreground">{t('ui.done.title', locale)}</h2>
             <p className="mt-1 text-sm text-muted-foreground">{t('ui.done.lead', locale)}</p>
             <button className={`${btnLink} mt-2`} onClick={() => setShowWill(false)}>
               ← {t('ui.done.back', locale)}

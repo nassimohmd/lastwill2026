@@ -66,21 +66,28 @@ itemised list. These are straightforward to expand later using the same
 UI: built on **shadcn/ui** (Radix primitives + `class-variance-authority`)
 and Tailwind CSS v4. Components are copied into the repo at
 `src/components/ui/*` (shadcn's own model — you own the code, not an
-installed dependency), themed with a strictly **monochrome** CSS-variable
-palette in `src/styles.css` (`oklch(... 0 0)` — zero chroma for every
-color, including the destructive/error state, which is a heavier
-black/white weight rather than red). Light and dark both ship, toggled
-manually (`.dark` class on `<html>`, `src/ui/ThemeToggle.tsx` +
-`src/ui/theme.ts`, persisted in `localStorage` with the OS preference as the
-first-visit default) — colors are semantic tokens (`bg-card`,
-`text-foreground`, `border-border`, ...) that resolve differently per theme
-automatically, so components don't carry `dark:` variants. **No animation
-library and no CSS transitions anywhere** — view swaps, hover/selected
-states, and the progress bar are all plain, instant style changes; this is
-deliberate, not a gap. The generated will (`.sheet`) is a separate artifact
-from the app chrome — it always renders as black serif ink on a white page
-regardless of theme, since it represents a document meant to be printed and
-signed, not an app-chrome surface. No webfonts anywhere (CSP + privacy).
+installed dependency). The visual design is modeled on **Cal.com's design
+system** (coss.com/ui) — soft-embossed cards and buttons, alpha-blended
+neutral overlays for secondary/muted/accent surfaces, a warm off-black
+foreground rather than pure black, and semantic accent colors (red
+destructive, amber warning, emerald success, blue info) layered on an
+otherwise neutral palette. The actual `@coss/ui` package is AGPL-3.0
+licensed, so rather than adopting their Base UI stack or copying their
+component source, the CSS-variable *values* were re-derived from their
+published theme and applied to our own MIT-licensed shadcn components,
+rewritten independently in `src/styles.css` and `src/components/ui/*`.
+Light and dark both ship, toggled manually (`.dark` class on `<html>`,
+`src/ui/ThemeToggle.tsx` + `src/ui/theme.ts`, persisted in `localStorage`
+with the OS preference as the first-visit default) — colors are semantic
+tokens (`bg-card`, `text-foreground`, `border-border`, ...) that resolve
+differently per theme automatically, so components don't carry `dark:`
+variants. **No animation library and no CSS transitions anywhere** — view
+swaps, hover/selected states, and the progress bar are all plain, instant
+style changes; this is deliberate, not a gap. The generated will
+(`.sheet`) is a separate artifact from the app chrome — it always renders
+as black serif ink on a white page regardless of theme, since it
+represents a document meant to be printed and signed, not an app-chrome
+surface. No webfonts anywhere (CSP + privacy).
 
 Output/review polish (Phase 4 of [docs/05-roadmap.md](docs/05-roadmap.md)):
 a Review screen with per-section status and jump-to-fix warnings (missing
