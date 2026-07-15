@@ -1,0 +1,199 @@
+{
+  "id": "executors",
+  "title": {
+    "en": "Executors",
+    "ml": "എക്സിക്യൂട്ടർമാർ"
+  },
+  "chapter": "incharge",
+  "questions": [
+    {
+      "id": "executors.physical.primary",
+      "section": "executors",
+      "type": "person",
+      "text": {
+        "en": "Who should be your executor?",
+        "ml": "നിങ്ങളുടെ എക്സിക്യൂട്ടർ ആരായിരിക്കണം?"
+      },
+      "help": {
+        "en": "Your executor carries out this will — collects assets, pays debts, distributes property. Choose someone you trust.",
+        "ml": "നിങ്ങളുടെ എക്സിക്യൂട്ടർ ഈ വിൽപത്രം നടപ്പിലാക്കുന്നു — സ്വത്ത് ശേഖരിക്കുന്നു, കടങ്ങൾ വീട്ടുന്നു, സ്വത്ത് വിതരണം ചെയ്യുന്നു. നിങ്ങൾ വിശ്വസിക്കുന്ന ഒരാളെ തിരഞ്ഞെടുക്കുക."
+      },
+      "next": "executors.physical.secondary",
+      "askAddress": true
+    },
+    {
+      "id": "executors.physical.secondary",
+      "section": "executors",
+      "type": "person",
+      "text": {
+        "en": "If they can't act, who steps in?",
+        "ml": "അവർക്ക് കഴിയില്ലെങ്കിൽ, ആര് ചുമതലയേൽക്കണം?"
+      },
+      "next": "executors.digital.same",
+      "askAddress": true
+    },
+    {
+      "id": "executors.digital.same",
+      "section": "executors",
+      "type": "single",
+      "text": {
+        "en": "And your digital life — same executor?",
+        "ml": "നിങ്ങളുടെ ഡിജിറ്റൽ ജീവിതത്തിനും — അതേ എക്സിക്യൂട്ടർ തന്നെയോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes, the same person(s)",
+            "ml": "അതെ, അതേ ആൾ/ആളുകൾ"
+          }
+        },
+        {
+          "id": "other",
+          "label": {
+            "en": "Someone else for digital",
+            "ml": "ഡിജിറ്റലിന് വേറൊരാൾ"
+          },
+          "next": "executors.digital.primary"
+        }
+      ],
+      "next": "executors.powers"
+    },
+    {
+      "id": "executors.digital.primary",
+      "section": "executors",
+      "type": "person",
+      "text": {
+        "en": "Digital executor?",
+        "ml": "ഡിജിറ്റൽ എക്സിക്യൂട്ടർ?"
+      },
+      "help": {
+        "en": "Pick whoever is actually good with technology.",
+        "ml": "സാങ്കേതികവിദ്യയിൽ മികവുള്ള ഒരാളെ തിരഞ്ഞെടുക്കുക."
+      },
+      "next": "executors.digital.secondary",
+      "askAddress": true
+    },
+    {
+      "id": "executors.digital.secondary",
+      "section": "executors",
+      "type": "person",
+      "text": {
+        "en": "Backup digital executor?",
+        "ml": "ബാക്കപ്പ് ഡിജിറ്റൽ എക്സിക്യൂട്ടർ?"
+      },
+      "next": "executors.powers",
+      "askAddress": true
+    },
+    {
+      "id": "executors.powers",
+      "section": "executors",
+      "type": "single",
+      "text": {
+        "en": "Give your executor standard powers?",
+        "ml": "എക്സിക്യൂട്ടർക്ക് സാധാരണ അധികാരങ്ങൾ നൽകണോ?"
+      },
+      "help": {
+        "en": "Sell assets to pay debts, sign documents, hire a lawyer/accountant, settle claims.",
+        "ml": "കടങ്ങൾ വീട്ടാൻ സ്വത്ത് വിൽക്കുക, രേഖകളിൽ ഒപ്പിടുക, അഭിഭാഷകനെ/അക്കൗണ്ടന്റിനെ നിയമിക്കുക, അവകാശവാദങ്ങൾ പരിഹരിക്കുക."
+      },
+      "options": [
+        {
+          "id": "standard",
+          "label": {
+            "en": "Yes, standard powers",
+            "ml": "അതെ, സാധാരണ അധികാരങ്ങൾ"
+          }
+        },
+        {
+          "id": "notes",
+          "label": {
+            "en": "Standard powers, plus my notes",
+            "ml": "സാധാരണ അധികാരങ്ങൾ, കൂടെ എന്റെ കുറിപ്പുകളും"
+          },
+          "next": "executors.powers_notes"
+        }
+      ],
+      "next": "executors.compensation"
+    },
+    {
+      "id": "executors.powers_notes",
+      "section": "executors",
+      "type": "longtext",
+      "text": {
+        "en": "Your notes?",
+        "ml": "നിങ്ങളുടെ കുറിപ്പുകൾ?"
+      },
+      "next": "executors.compensation"
+    },
+    {
+      "id": "executors.compensation",
+      "section": "executors",
+      "type": "single",
+      "text": {
+        "en": "Payment for the executor?",
+        "ml": "എക്സിക്യൂട്ടർക്ക് പ്രതിഫലം വേണോ?"
+      },
+      "options": [
+        {
+          "id": "none",
+          "label": {
+            "en": "No payment — but all expenses reimbursed",
+            "ml": "പ്രതിഫലം വേണ്ട — എല്ലാ ചെലവുകളും തിരികെ നൽകും"
+          }
+        },
+        {
+          "id": "fixed",
+          "label": {
+            "en": "A fixed amount",
+            "ml": "ഒരു നിശ്ചിത തുക"
+          },
+          "next": "executors.compensation_amount"
+        },
+        {
+          "id": "reasonable",
+          "label": {
+            "en": "Reasonable compensation from the estate",
+            "ml": "ആസ്തിയിൽ നിന്ന് ന്യായമായ പ്രതിഫലം"
+          }
+        }
+      ],
+      "next": "executors.informed"
+    },
+    {
+      "id": "executors.compensation_amount",
+      "section": "executors",
+      "type": "number",
+      "text": {
+        "en": "The amount, in rupees?",
+        "ml": "തുക, രൂപയിൽ?"
+      },
+      "next": "executors.informed"
+    },
+    {
+      "id": "executors.informed",
+      "section": "executors",
+      "type": "single",
+      "text": {
+        "en": "Does your executor know they're named?",
+        "ml": "നിങ്ങളുടെ എക്സിക്യൂട്ടർക്ക് താൻ നിയമിതനായ വിവരം അറിയാമോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ]
+    }
+  ]
+}

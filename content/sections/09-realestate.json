@@ -1,0 +1,441 @@
+{
+  "id": "realestate",
+  "title": {
+    "en": "Real estate",
+    "ml": "സ്ഥാവര സ്വത്ത്"
+  },
+  "chapter": "money",
+  "questions": [
+    {
+      "id": "realestate.gate",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Do you own any land or buildings?",
+        "ml": "നിങ്ങൾക്ക് ഭൂമിയോ കെട്ടിടങ്ങളോ ഉണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "realestate.item.type"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "vehicles.gate"
+    },
+    {
+      "id": "realestate.item.type",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Type of property?",
+        "ml": "സ്വത്തിന്റെ തരം?"
+      },
+      "options": [
+        {
+          "id": "house",
+          "label": {
+            "en": "House",
+            "ml": "വീട്"
+          }
+        },
+        {
+          "id": "flat",
+          "label": {
+            "en": "Flat / apartment",
+            "ml": "ഫ്ലാറ്റ് / അപ്പാർട്ട്മെന്റ്"
+          }
+        },
+        {
+          "id": "plot",
+          "label": {
+            "en": "House plot",
+            "ml": "വീട് വെക്കാനുള്ള പ്ലോട്ട്"
+          }
+        },
+        {
+          "id": "agricultural",
+          "label": {
+            "en": "Agricultural land",
+            "ml": "കൃഷിഭൂമി"
+          }
+        },
+        {
+          "id": "commercial",
+          "label": {
+            "en": "Commercial property",
+            "ml": "വാണിജ്യ സ്വത്ത്"
+          }
+        },
+        {
+          "id": "ancestral_share",
+          "label": {
+            "en": "A share in family/ancestral property",
+            "ml": "കുടുംബ/പൈതൃക സ്വത്തിലെ വിഹിതം"
+          }
+        }
+      ],
+      "next": "realestate.item.desc"
+    },
+    {
+      "id": "realestate.item.desc",
+      "section": "realestate",
+      "type": "longtext",
+      "text": {
+        "en": "Describe it",
+        "ml": "വിവരണം നൽകുക"
+      },
+      "help": {
+        "en": "Enough detail that a stranger could identify it — address, survey number, extent.",
+        "ml": "ഒരു അപരിചിതന് പോലും തിരിച്ചറിയാൻ പോന്ന വിശദാംശങ്ങൾ — വിലാസം, സർവേ നമ്പർ, വിസ്തീർണ്ണം."
+      },
+      "next": "realestate.item.ownership"
+    },
+    {
+      "id": "realestate.item.ownership",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Ownership?",
+        "ml": "ഉടമസ്ഥാവകാശം?"
+      },
+      "options": [
+        {
+          "id": "sole",
+          "label": {
+            "en": "Only mine",
+            "ml": "എന്റേത് മാത്രം"
+          }
+        },
+        {
+          "id": "joint",
+          "label": {
+            "en": "Joint",
+            "ml": "സംയുക്തം"
+          },
+          "next": "realestate.item.ownership.coowner"
+        },
+        {
+          "id": "ancestral",
+          "label": {
+            "en": "Ancestral / inherited share",
+            "ml": "പൈതൃക / അനന്തരാവകാശ വിഹിതം"
+          },
+          "next": "realestate.item.ownership.ancestral_notice"
+        }
+      ],
+      "next": "realestate.item.action"
+    },
+    {
+      "id": "realestate.item.ownership.coowner",
+      "section": "realestate",
+      "type": "person",
+      "text": {
+        "en": "Who is the co-owner?",
+        "ml": "സഹ ഉടമ ആര്?"
+      },
+      "next": "realestate.item.action"
+    },
+    {
+      "id": "realestate.item.ownership.ancestral_notice",
+      "section": "realestate",
+      "type": "info",
+      "text": {
+        "en": "You can only will away your own share of ancestral property. This will be worded as your share, right, title and interest.",
+        "ml": "പൈതൃക സ്വത്തിൽ നിങ്ങളുടെ സ്വന്തം വിഹിതം മാത്രമേ വിൽപത്രത്തിലൂടെ നൽകാൻ കഴിയൂ. ഇത് \"എന്റെ വിഹിതം, അവകാശം, ഉടമസ്ഥത\" എന്ന് രേഖപ്പെടുത്തും."
+      },
+      "next": "realestate.item.action"
+    },
+    {
+      "id": "realestate.item.action",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "What should happen to it?",
+        "ml": "ഇതിന് എന്ത് സംഭവിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "Give it to one person",
+            "ml": "ഒരാൾക്ക് നൽകുക"
+          },
+          "next": "realestate.item.ben.person"
+        },
+        {
+          "id": "divide",
+          "label": {
+            "en": "Divide it among people",
+            "ml": "പലർക്കുമായി വീതിക്കുക"
+          },
+          "next": "realestate.item.ben.people"
+        },
+        {
+          "id": "life_interest",
+          "label": {
+            "en": "Let someone live there for life, then pass it on",
+            "ml": "ഒരാൾക്ക് ജീവിതകാലം താമസിക്കാൻ അനുവദിച്ച ശേഷം കൈമാറുക"
+          },
+          "next": "realestate.item.life.occupant"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it and distribute the money",
+            "ml": "വിറ്റ് പണം വീതിക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "realestate.item.rented"
+    },
+    {
+      "id": "realestate.item.ben.person",
+      "section": "realestate",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "realestate.item.ben.contingent.mode"
+    },
+    {
+      "id": "realestate.item.ben.people",
+      "section": "realestate",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "realestate.item.ben.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "realestate.item.ben.shares",
+      "section": "realestate",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "realestate.item.ben.contingent.group_mode",
+      "peopleSource": "realestate.item.ben.people"
+    },
+    {
+      "id": "realestate.item.ben.contingent.mode",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "realestate.item.ben.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "realestate.item.rented"
+    },
+    {
+      "id": "realestate.item.ben.contingent.person",
+      "section": "realestate",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "realestate.item.rented"
+    },
+    {
+      "id": "realestate.item.ben.contingent.group_mode",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "realestate.item.rented"
+    },
+    {
+      "id": "realestate.item.life.occupant",
+      "section": "realestate",
+      "type": "person",
+      "text": {
+        "en": "Who should be able to live there for their lifetime?",
+        "ml": "ജീവിതകാലം അവിടെ താമസിക്കാൻ ആർക്ക് അനുവാദം നൽകണം?"
+      },
+      "next": "realestate.item.life.remainder"
+    },
+    {
+      "id": "realestate.item.life.remainder",
+      "section": "realestate",
+      "type": "person",
+      "text": {
+        "en": "And after them, who should it pass to?",
+        "ml": "അവർക്ക് ശേഷം അത് ആർക്ക് പോകണം?"
+      },
+      "next": "realestate.item.rented"
+    },
+    {
+      "id": "realestate.item.rented",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Is it rented out or occupied by someone?",
+        "ml": "ഇത് വാടകയ്ക്ക് നൽകിയതോ ആരെങ്കിലും താമസിക്കുന്നതോ ആണോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "realestate.item.rented.instructions"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "realestate.item.loan"
+    },
+    {
+      "id": "realestate.item.rented.instructions",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Instructions?",
+        "ml": "നിർദ്ദേശങ്ങൾ?"
+      },
+      "options": [
+        {
+          "id": "continue_tenancy",
+          "label": {
+            "en": "Continue the tenancy, rent to the new owner",
+            "ml": "വാടക തുടരട്ടെ, വാടക പുതിയ ഉടമയ്ക്ക്"
+          }
+        },
+        {
+          "id": "new_owner_decides",
+          "label": {
+            "en": "New owner decides",
+            "ml": "പുതിയ ഉടമ തീരുമാനിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "custom",
+          "label": {
+            "en": "I have specific instructions",
+            "ml": "എനിക്ക് പ്രത്യേക നിർദ്ദേശങ്ങളുണ്ട്"
+          },
+          "next": "realestate.item.rented.instructions_text"
+        }
+      ],
+      "next": "realestate.item.loan"
+    },
+    {
+      "id": "realestate.item.rented.instructions_text",
+      "section": "realestate",
+      "type": "text",
+      "text": {
+        "en": "Your instructions?",
+        "ml": "നിങ്ങളുടെ നിർദ്ദേശങ്ങൾ?"
+      },
+      "next": "realestate.item.loan"
+    },
+    {
+      "id": "realestate.item.loan",
+      "section": "realestate",
+      "type": "single",
+      "text": {
+        "en": "Is there a loan against it?",
+        "ml": "ഇതിന് മേൽ വായ്പയുണ്ടോ?"
+      },
+      "help": {
+        "en": "This links to what you told us under Debts, if you covered that section.",
+        "ml": "കടങ്ങൾ വിഭാഗത്തിൽ പറഞ്ഞതുമായി ഇത് ബന്ധപ്പെട്ടിരിക്കുന്നു, അത് പൂരിപ്പിച്ചെങ്കിൽ."
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    }
+  ]
+}

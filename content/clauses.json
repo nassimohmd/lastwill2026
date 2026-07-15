@@ -1,0 +1,3026 @@
+[
+  {
+    "id": "title",
+    "kind": "title",
+    "text": {
+      "en": "LAST WILL AND TESTAMENT OF {{personal.full_name}}",
+      "ml": "{{personal.full_name}}-ന്റെ അന്ത്യവിൽപത്രം"
+    }
+  },
+  {
+    "id": "declaration",
+    "kind": "plain",
+    "text": {
+      "en": "I, {{personal.full_name}}{{frag:relation}}{{frag:age}}{{frag:occupation}}{{frag:residence}}{{frag:id}}, do hereby declare this to be my LAST WILL AND TESTAMENT, made on this {{today.day}} day of {{today.month}}, {{today.year}} at ____________________.",
+      "ml": "ഞാൻ, {{personal.full_name}}{{frag:relation}}{{frag:age}}{{frag:occupation}}{{frag:residence}}{{frag:id}}, ഇത് എന്റെ അന്ത്യവിൽപത്രമായി {{today.year}}-ലെ {{today.month}} മാസം {{today.day}}-ന് ____________________-ൽ വച്ച് പ്രഖ്യാപിക്കുന്നു."
+    },
+    "fragments": {
+      "relation": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "personal.relation_line",
+                  "son_of"
+                ]
+              },
+              {
+                "notEmpty": "personal.relation_name"
+              }
+            ]
+          },
+          "text": {
+            "en": ", son of {{personal.relation_name}}",
+            "ml": ", {{personal.relation_name}}-ന്റെ മകൻ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "personal.relation_line",
+                  "daughter_of"
+                ]
+              },
+              {
+                "notEmpty": "personal.relation_name"
+              }
+            ]
+          },
+          "text": {
+            "en": ", daughter of {{personal.relation_name}}",
+            "ml": ", {{personal.relation_name}}-ന്റെ മകൾ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "personal.relation_line",
+                  "wife_of"
+                ]
+              },
+              {
+                "notEmpty": "personal.relation_name"
+              }
+            ]
+          },
+          "text": {
+            "en": ", wife of {{personal.relation_name}}",
+            "ml": ", {{personal.relation_name}}-ന്റെ ഭാര്യ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "personal.relation_line",
+                  "husband_of"
+                ]
+              },
+              {
+                "notEmpty": "personal.relation_name"
+              }
+            ]
+          },
+          "text": {
+            "en": ", husband of {{personal.relation_name}}",
+            "ml": ", {{personal.relation_name}}-ന്റെ ഭർത്താവ്"
+          }
+        }
+      ],
+      "age": [
+        {
+          "when": {
+            "notEmpty": "personal.dob"
+          },
+          "text": {
+            "en": ", aged {{age}} years",
+            "ml": ", പ്രായം {{age}} വയസ്സ്"
+          }
+        }
+      ],
+      "occupation": [
+        {
+          "when": {
+            "notEmpty": "personal.occupation"
+          },
+          "text": {
+            "en": ", {{personal.occupation}} by occupation",
+            "ml": ", തൊഴിൽ {{personal.occupation}}"
+          }
+        }
+      ],
+      "residence": [
+        {
+          "when": {
+            "notEmpty": "personal.address"
+          },
+          "text": {
+            "en": ", residing at {{personal.address}}",
+            "ml": ", {{personal.address}}-ൽ താമസിക്കുന്ന"
+          }
+        }
+      ],
+      "id": [
+        {
+          "when": {
+            "and": [
+              {
+                "notEmpty": "personal.id_value"
+              },
+              {
+                "not": {
+                  "eq": [
+                    "personal.id_type",
+                    "none"
+                  ]
+                }
+              }
+            ]
+          },
+          "text": {
+            "en": ", holding {{label:personal.id_type}} No. {{personal.id_value}}",
+            "ml": ", {{label:personal.id_type}} നമ്പർ {{personal.id_value}} കൈവശമുള്ള"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "soundmind",
+    "kind": "clause",
+    "text": {
+      "en": "I declare that I am of sound mind, memory and understanding, and that I make this Will voluntarily, of my own free will, without any coercion, fraud or undue influence from any person.",
+      "ml": "ഞാൻ പൂർണ്ണ മാനസികാരോഗ്യത്തോടെയും ഓർമ്മശക്തിയോടെയും ഗ്രഹണശക്തിയോടെയും ആണെന്നും, ആരുടെയും നിർബന്ധമോ വഞ്ചനയോ അനാവശ്യ സ്വാധീനമോ കൂടാതെ എന്റെ സ്വന്തം ഇഷ്ടപ്രകാരം സ്വമേധയാ ഈ വിൽപത്രം എഴുതുന്നു എന്നും പ്രഖ്യാപിക്കുന്നു."
+    }
+  },
+  {
+    "id": "revocation",
+    "kind": "clause",
+    "text": {
+      "en": "I hereby revoke all Wills and Codicils heretofore made by me, and declare this to be my last Will.",
+      "ml": "ഇതിനുമുൻപ് ഞാൻ എഴുതിയ എല്ലാ വിൽപത്രങ്ങളും കോഡിസിലുകളും ഇതിനാൽ ഞാൻ റദ്ദാക്കുന്നു, ഇത് എന്റെ അവസാനത്തെ വിൽപത്രമായി പ്രഖ്യാപിക്കുന്നു."
+    }
+  },
+  {
+    "id": "family",
+    "kind": "clause",
+    "when": {
+      "or": [
+        {
+          "notEmpty": "personal.spouse_name"
+        },
+        {
+          "in": [
+            "personal.relation_line",
+            [
+              "wife_of",
+              "husband_of"
+            ]
+          ]
+        },
+        {
+          "notEmpty": "personal.children"
+        }
+      ]
+    },
+    "text": {
+      "en": "My family consists of {{familyList}}.",
+      "ml": "എന്റെ കുടുംബത്തിൽ {{familyList}} ഉൾപ്പെടുന്നു."
+    }
+  },
+  {
+    "id": "executor.physical",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "executors.physical.primary"
+    },
+    "text": {
+      "en": "I appoint {{person:executors.physical.primary}} as the Executor of this Will.{{frag:secondary}}",
+      "ml": "ഈ വിൽപത്രത്തിന്റെ എക്സിക്യൂട്ടറായി ഞാൻ {{person:executors.physical.primary}}-നെ നിയമിക്കുന്നു.{{frag:secondary}}"
+    },
+    "fragments": {
+      "secondary": [
+        {
+          "when": {
+            "notEmpty": "executors.physical.secondary"
+          },
+          "text": {
+            "en": " If they are unable or unwilling to act, I appoint {{person:executors.physical.secondary}} as Executor in their place.",
+            "ml": " അവർക്ക് പ്രവർത്തിക്കാൻ കഴിയാതെയോ മനസ്സില്ലാതെയോ വന്നാൽ, പകരം ഞാൻ {{person:executors.physical.secondary}}-നെ എക്സിക്യൂട്ടറായി നിയമിക്കുന്നു."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "executor.digital",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "executors.digital.same",
+            "other"
+          ]
+        },
+        {
+          "notEmpty": "executors.digital.primary"
+        }
+      ]
+    },
+    "text": {
+      "en": "I appoint {{person:executors.digital.primary}} as my Digital Executor, to deal with my digital assets and online accounts as directed in this Will, and I direct my Executor to extend all necessary cooperation and authority to them.{{frag:secondary}}",
+      "ml": "എന്റെ ഡിജിറ്റൽ ആസ്തികളും ഓൺലൈൻ അക്കൗണ്ടുകളും ഈ വിൽപത്രത്തിൽ നിർദ്ദേശിച്ചപ്രകാരം കൈകാര്യം ചെയ്യാൻ ഞാൻ {{person:executors.digital.primary}}-നെ എന്റെ ഡിജിറ്റൽ എക്സിക്യൂട്ടറായി നിയമിക്കുന്നു, കൂടാതെ ആവശ്യമായ എല്ലാ സഹകരണവും അധികാരവും അവർക്ക് നൽകാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു.{{frag:secondary}}"
+    },
+    "fragments": {
+      "secondary": [
+        {
+          "when": {
+            "notEmpty": "executors.digital.secondary"
+          },
+          "text": {
+            "en": " If they are unable to act, {{person:executors.digital.secondary}} shall act in their place.",
+            "ml": " അവർക്ക് പ്രവർത്തിക്കാൻ കഴിയാതെ വന്നാൽ, {{person:executors.digital.secondary}} പകരം പ്രവർത്തിക്കും."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "executor.powers",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "executors.physical.primary"
+    },
+    "text": {
+      "en": "My Executor shall have full power to collect and realise my assets, to sell or convert any asset where necessary to give effect to this Will or to pay debts, to sign all documents, to engage professional assistance, to compromise claims, and to do all things necessary for the administration of my estate.{{frag:notes}}",
+      "ml": "എന്റെ ആസ്തി കൈകാര്യം ചെയ്യുന്നതിന് ആവശ്യമായ എല്ലാ കാര്യങ്ങളും ചെയ്യാൻ — എന്റെ ആസ്തി ശേഖരിക്കാനും വിറ്റഴിക്കാനും, ഈ വിൽപത്രം നടപ്പിലാക്കാനോ കടം വീട്ടാനോ ആവശ്യമെങ്കിൽ ഏതെങ്കിലും ആസ്തി വിൽക്കാനോ മാറ്റാനോ, എല്ലാ രേഖകളിലും ഒപ്പിടാനും, പ്രൊഫഷണൽ സഹായം തേടാനും, അവകാശവാദങ്ങളിൽ ഒത്തുതീർപ്പിലെത്താനും — എന്റെ എക്സിക്യൂട്ടർക്ക് പൂർണ്ണ അധികാരം ഉണ്ടായിരിക്കും.{{frag:notes}}"
+    },
+    "fragments": {
+      "notes": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "executors.powers",
+                  "notes"
+                ]
+              },
+              {
+                "notEmpty": "executors.powers_notes"
+              }
+            ]
+          },
+          "text": {
+            "en": " In addition: {{executors.powers_notes}}",
+            "ml": " കൂടാതെ: {{executors.powers_notes}}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "executor.compensation",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "executors.compensation"
+    },
+    "text": {
+      "en": "{{frag:comp}}",
+      "ml": "{{frag:comp}}"
+    },
+    "fragments": {
+      "comp": [
+        {
+          "when": {
+            "eq": [
+              "executors.compensation",
+              "none"
+            ]
+          },
+          "text": {
+            "en": "My Executor shall receive no remuneration for acting as Executor, but shall be reimbursed all reasonable expenses incurred in the administration of my estate.",
+            "ml": "എന്റെ എക്സിക്യൂട്ടർക്ക് പ്രതിഫലം ലഭിക്കില്ല, പക്ഷേ ആസ്തി കൈകാര്യം ചെയ്യുന്നതിൽ വന്ന ന്യായമായ എല്ലാ ചെലവുകളും തിരികെ ലഭിക്കും."
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "executors.compensation",
+                  "fixed"
+                ]
+              },
+              {
+                "notEmpty": "executors.compensation_amount"
+              }
+            ]
+          },
+          "text": {
+            "en": "My Executor shall be paid {{inr:executors.compensation_amount}} from my estate for acting as Executor.",
+            "ml": "എക്സിക്യൂട്ടറായി പ്രവർത്തിക്കുന്നതിന് എന്റെ ആസ്തിയിൽ നിന്ന് {{inr:executors.compensation_amount}} എന്റെ എക്സിക്യൂട്ടർക്ക് നൽകും."
+          }
+        },
+        {
+          "text": {
+            "en": "My Executor shall be entitled to reasonable compensation from my estate for acting as Executor.",
+            "ml": "എക്സിക്യൂട്ടറായി പ്രവർത്തിക്കുന്നതിന് എന്റെ ആസ്തിയിൽ നിന്ന് ന്യായമായ പ്രതിഫലം എന്റെ എക്സിക്യൂട്ടർക്ക് ലഭിക്കും."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "debts.first",
+    "kind": "clause",
+    "text": {
+      "en": "I direct my Executor to first pay from my estate my funeral expenses, all my just debts, taxes and liabilities, and the costs of administering my estate.",
+      "ml": "എന്റെ ആസ്തിയിൽ നിന്ന് ആദ്യം എന്റെ സംസ്കാര ചെലവുകളും, എന്റെ ന്യായമായ എല്ലാ കടങ്ങളും നികുതികളും ബാധ്യതകളും, ആസ്തി കൈകാര്യം ചെയ്യുന്നതിന്റെ ചെലവുകളും അടയ്ക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+    }
+  },
+  {
+    "id": "debts.item",
+    "kind": "clause",
+    "text": {
+      "en": "I owe {{frag:amount}}to {{item.lender}} ({{label:item.kind}}).{{frag:insured}}{{frag:strategy}}",
+      "ml": "{{item.lender}}-ന് ({{label:item.kind}}) ഞാൻ {{frag:amount}}കടപ്പെട്ടിരിക്കുന്നു.{{frag:insured}}{{frag:strategy}}"
+    },
+    "fragments": {
+      "amount": [
+        {
+          "when": {
+            "notEmpty": "item.amount"
+          },
+          "text": {
+            "en": "approximately {{inr:item.amount}} ",
+            "ml": "ഏകദേശം {{inr:item.amount}} "
+          }
+        },
+        {
+          "text": {
+            "en": "money ",
+            "ml": "ഒരു തുക "
+          }
+        }
+      ],
+      "insured": [
+        {
+          "when": {
+            "eq": [
+              "item.insured",
+              "yes"
+            ]
+          },
+          "text": {
+            "en": " This is covered by loan insurance; I direct my Executor to first pursue that cover.",
+            "ml": " ഇത് ലോൺ ഇൻഷുറൻസ് പരിരക്ഷിക്കുന്നു; ആദ്യം ആ പരിരക്ഷ ഉപയോഗിക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+          }
+        }
+      ],
+      "strategy": [
+        {
+          "when": {
+            "eq": [
+              "item.secured_strategy",
+              "sell_asset"
+            ]
+          },
+          "text": {
+            "en": " If necessary, the asset securing this debt may be sold to discharge it.",
+            "ml": " ആവശ്യമെങ്കിൽ, ഈ കടത്തിന് ജാമ്യമായുള്ള ആസ്തി വിറ്റ് ഇത് തീർക്കാം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.secured_strategy",
+              "keep_asset"
+            ]
+          },
+          "text": {
+            "en": " I direct that the secured asset be preserved and this debt discharged from my other assets so far as possible.",
+            "ml": " ജാമ്യമായുള്ള ആസ്തി നിലനിർത്തി, കഴിയുന്നത്ര മറ്റ് ആസ്തികളിൽ നിന്ന് ഈ കടം വീട്ടണം എന്ന് ഞാൻ നിർദ്ദേശിക്കുന്നു."
+          }
+        }
+      ]
+    },
+    "each": "debts.items",
+    "itemKeyPrefix": "debts.item"
+  },
+  {
+    "id": "part.wishes",
+    "kind": "heading",
+    "when": {
+      "notEmpty": "funeral.method"
+    },
+    "text": {
+      "en": "MY WISHES REGARDING MY REMAINS",
+      "ml": "എന്റെ മൃതശരീരം സംബന്ധിച്ച ആഗ്രഹങ്ങൾ"
+    }
+  },
+  {
+    "id": "funeral.donation",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "funeral.method",
+        "donate_science"
+      ]
+    },
+    "text": {
+      "en": "I desire and direct that my body be donated for medical education or research{{frag:institution}}. If the donation cannot be accepted for any reason, {{frag:fallback}}",
+      "ml": "എന്റെ ശരീരം വൈദ്യശാസ്ത്ര പഠനത്തിനോ ഗവേഷണത്തിനോ ദാനം ചെയ്യണം{{frag:institution}} എന്ന് ഞാൻ ആഗ്രഹിക്കുകയും നിർദ്ദേശിക്കുകയും ചെയ്യുന്നു. ഏതെങ്കിലും കാരണത്താൽ ദാനം സ്വീകരിക്കാൻ കഴിഞ്ഞില്ലെങ്കിൽ, {{frag:fallback}}"
+    },
+    "fragments": {
+      "institution": [
+        {
+          "when": {
+            "notEmpty": "funeral.body_donation.institution_name"
+          },
+          "text": {
+            "en": ", preferably to {{funeral.body_donation.institution_name}}",
+            "ml": ", കഴിയുമെങ്കിൽ {{funeral.body_donation.institution_name}}-ന്"
+          }
+        },
+        {
+          "text": {
+            "en": ", to an institution my Executor selects",
+            "ml": ", എന്റെ എക്സിക്യൂട്ടർ തിരഞ്ഞെടുക്കുന്ന ഒരു സ്ഥാപനത്തിന്"
+          }
+        }
+      ],
+      "fallback": [
+        {
+          "when": {
+            "eq": [
+              "funeral.body_donation.fallback",
+              "burial"
+            ]
+          },
+          "text": {
+            "en": "the burial directions below shall apply.",
+            "ml": "താഴെയുള്ള ഖബറടക്ക നിർദ്ദേശങ്ങൾ ബാധകമാകും."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.body_donation.fallback",
+              "cremation"
+            ]
+          },
+          "text": {
+            "en": "the cremation directions below shall apply.",
+            "ml": "താഴെയുള്ള ദഹിപ്പിക്കൽ നിർദ്ദേശങ്ങൾ ബാധകമാകും."
+          }
+        },
+        {
+          "text": {
+            "en": "my family shall decide the arrangements.",
+            "ml": "ക്രമീകരണങ്ങൾ എന്റെ കുടുംബം തീരുമാനിക്കും."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "funeral.burial",
+    "kind": "clause",
+    "when": {
+      "or": [
+        {
+          "eq": [
+            "funeral.method",
+            "burial"
+          ]
+        },
+        {
+          "eq": [
+            "funeral.body_donation.fallback",
+            "burial"
+          ]
+        }
+      ]
+    },
+    "text": {
+      "en": "I desire and direct that my body be buried at {{frag:place}}{{frag:rites}}.",
+      "ml": "എന്റെ ശരീരം {{frag:place}}-ൽ ഖബറടക്കണം{{frag:rites}} എന്ന് ഞാൻ ആഗ്രഹിക്കുകയും നിർദ്ദേശിക്കുകയും ചെയ്യുന്നു."
+    },
+    "fragments": {
+      "place": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.burial.place",
+                  "family_ground"
+                ]
+              },
+              {
+                "notEmpty": "funeral.burial.place_detail"
+              }
+            ]
+          },
+          "text": {
+            "en": "our family burial ground at {{funeral.burial.place_detail}}",
+            "ml": "{{funeral.burial.place_detail}}-ലുള്ള ഞങ്ങളുടെ കുടുംബ ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.place",
+              "family_ground"
+            ]
+          },
+          "text": {
+            "en": "our family burial ground",
+            "ml": "ഞങ്ങളുടെ കുടുംബ ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.burial.place",
+                  "mosque"
+                ]
+              },
+              {
+                "notEmpty": "funeral.burial.place_detail"
+              }
+            ]
+          },
+          "text": {
+            "en": "the burial ground (qabristan) of {{funeral.burial.place_detail}}",
+            "ml": "{{funeral.burial.place_detail}}-ന്റെ ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.place",
+              "mosque"
+            ]
+          },
+          "text": {
+            "en": "the burial ground (qabristan) of the mosque my family selects",
+            "ml": "കുടുംബം തിരഞ്ഞെടുക്കുന്ന പള്ളിയുടെ ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.burial.place",
+                  "church"
+                ]
+              },
+              {
+                "notEmpty": "funeral.burial.place_detail"
+              }
+            ]
+          },
+          "text": {
+            "en": "the cemetery of {{funeral.burial.place_detail}}",
+            "ml": "{{funeral.burial.place_detail}}-ന്റെ സെമിത്തേരി"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.place",
+              "church"
+            ]
+          },
+          "text": {
+            "en": "the cemetery of the church my family selects",
+            "ml": "കുടുംബം തിരഞ്ഞെടുക്കുന്ന പള്ളിയുടെ സെമിത്തേരി"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.place",
+              "public"
+            ]
+          },
+          "text": {
+            "en": "a public burial ground near my residence",
+            "ml": "എന്റെ താമസസ്ഥലത്തിനടുത്തുള്ള പൊതു ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.burial.place",
+                  "specific"
+                ]
+              },
+              {
+                "notEmpty": "funeral.burial.place_detail"
+              }
+            ]
+          },
+          "text": {
+            "en": "{{funeral.burial.place_detail}}",
+            "ml": "{{funeral.burial.place_detail}}"
+          }
+        },
+        {
+          "text": {
+            "en": "a place convenient to my family",
+            "ml": "കുടുംബത്തിന് സൗകര്യപ്രദമായ സ്ഥലം"
+          }
+        }
+      ],
+      "rites": [
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.rites",
+              "customs"
+            ]
+          },
+          "text": {
+            "en": ", with the customary rites of my faith",
+            "ml": ", എന്റെ വിശ്വാസത്തിന്റെ പതിവ് ചടങ്ങുകളോടെ"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.burial.rites",
+              "simple"
+            ]
+          },
+          "text": {
+            "en": ", with a simple ceremony and without elaborate ritual",
+            "ml": ", ലളിതമായ ചടങ്ങോടെ, വലിയ ആചാരങ്ങളില്ലാതെ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.burial.rites",
+                  "custom"
+                ]
+              },
+              {
+                "notEmpty": "funeral.burial.rites_custom"
+              }
+            ]
+          },
+          "text": {
+            "en": ", observing the following: {{funeral.burial.rites_custom}}",
+            "ml": ", ഇനിപ്പറയുന്നവ പാലിച്ചുകൊണ്ട്: {{funeral.burial.rites_custom}}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "funeral.cremation",
+    "kind": "clause",
+    "when": {
+      "or": [
+        {
+          "eq": [
+            "funeral.method",
+            "cremation"
+          ]
+        },
+        {
+          "eq": [
+            "funeral.body_donation.fallback",
+            "cremation"
+          ]
+        }
+      ]
+    },
+    "text": {
+      "en": "I desire and direct that my body be cremated at {{frag:place}}{{frag:rites}}.{{frag:ashes}}",
+      "ml": "എന്റെ ശരീരം {{frag:place}}-ൽ ദഹിപ്പിക്കണം{{frag:rites}} എന്ന് ഞാൻ ആഗ്രഹിക്കുകയും നിർദ്ദേശിക്കുകയും ചെയ്യുന്നു.{{frag:ashes}}"
+    },
+    "fragments": {
+      "place": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.cremation.place",
+                  "specific"
+                ]
+              },
+              {
+                "notEmpty": "funeral.cremation.place_detail"
+              }
+            ]
+          },
+          "text": {
+            "en": "{{funeral.cremation.place_detail}}",
+            "ml": "{{funeral.cremation.place_detail}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.place",
+              "practical"
+            ]
+          },
+          "text": {
+            "en": "a place convenient to my family",
+            "ml": "കുടുംബത്തിന് സൗകര്യപ്രദമായ സ്ഥലം"
+          }
+        },
+        {
+          "text": {
+            "en": "the local crematorium",
+            "ml": "അടുത്തുള്ള ശ്മശാനം"
+          }
+        }
+      ],
+      "rites": [
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.rites",
+              "customs"
+            ]
+          },
+          "text": {
+            "en": ", with the customary rites of my faith",
+            "ml": ", എന്റെ വിശ്വാസത്തിന്റെ പതിവ് ചടങ്ങുകളോടെ"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.rites",
+              "simple"
+            ]
+          },
+          "text": {
+            "en": ", with a simple ceremony and without elaborate ritual",
+            "ml": ", ലളിതമായ ചടങ്ങോടെ, വലിയ ആചാരങ്ങളില്ലാതെ"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.cremation.rites",
+                  "custom"
+                ]
+              },
+              {
+                "notEmpty": "funeral.cremation.rites_custom"
+              }
+            ]
+          },
+          "text": {
+            "en": ", observing the following: {{funeral.cremation.rites_custom}}",
+            "ml": ", ഇനിപ്പറയുന്നവ പാലിച്ചുകൊണ്ട്: {{funeral.cremation.rites_custom}}"
+          }
+        }
+      ],
+      "ashes": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.cremation.ashes",
+                  "immerse"
+                ]
+              },
+              {
+                "notEmpty": "funeral.cremation.ashes_place"
+              }
+            ]
+          },
+          "text": {
+            "en": " My ashes shall be immersed at {{funeral.cremation.ashes_place}}.",
+            "ml": " എന്റെ ചിതാഭസ്മം {{funeral.cremation.ashes_place}}-ൽ ഒഴുക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.ashes",
+              "immerse"
+            ]
+          },
+          "text": {
+            "en": " My ashes shall be immersed as my family sees fit.",
+            "ml": " എന്റെ ചിതാഭസ്മം കുടുംബം ഉചിതമെന്ന് കരുതുന്നിടത്ത് ഒഴുക്കണം."
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "funeral.cremation.ashes",
+                  "scatter"
+                ]
+              },
+              {
+                "notEmpty": "funeral.cremation.ashes_place"
+              }
+            ]
+          },
+          "text": {
+            "en": " My ashes shall be scattered at {{funeral.cremation.ashes_place}}.",
+            "ml": " എന്റെ ചിതാഭസ്മം {{funeral.cremation.ashes_place}}-ൽ വിതറണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.ashes",
+              "scatter"
+            ]
+          },
+          "text": {
+            "en": " My ashes shall be scattered at a place my family selects.",
+            "ml": " എന്റെ ചിതാഭസ്മം കുടുംബം തിരഞ്ഞെടുക്കുന്ന സ്ഥലത്ത് വിതറണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cremation.ashes",
+              "kept"
+            ]
+          },
+          "text": {
+            "en": " My ashes shall be kept by my family.",
+            "ml": " എന്റെ ചിതാഭസ്മം കുടുംബം സൂക്ഷിക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "funeral.family_decides",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "funeral.method",
+        "family_decides"
+      ]
+    },
+    "text": {
+      "en": "I desire that the arrangements for my remains be as my family decides.",
+      "ml": "എന്റെ മൃതശരീരത്തിനുള്ള ക്രമീകരണങ്ങൾ എന്റെ കുടുംബം തീരുമാനിക്കുന്നതായിരിക്കണം എന്ന് ഞാൻ ആഗ്രഹിക്കുന്നു."
+    }
+  },
+  {
+    "id": "funeral.memorial",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "funeral.memorial"
+    },
+    "text": {
+      "en": "As to any memorial, I wish for {{frag:memorial}}.",
+      "ml": "അനുസ്മരണം സംബന്ധിച്ച്, എനിക്ക് {{frag:memorial}} ആഗ്രഹമുണ്ട്."
+    },
+    "fragments": {
+      "memorial": [
+        {
+          "when": {
+            "eq": [
+              "funeral.memorial",
+              "customs"
+            ]
+          },
+          "text": {
+            "en": "observances according to the customs of my faith",
+            "ml": "എന്റെ വിശ്വാസത്തിന്റെ ആചാരപ്രകാരമുള്ള അനുസ്മരണം"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.memorial",
+              "simple"
+            ]
+          },
+          "text": {
+            "en": "a simple gathering, without formal ceremony",
+            "ml": "ഔപചാരികമല്ലാത്ത ഒരു ലളിതമായ ഒത്തുചേരൽ"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.memorial",
+              "none"
+            ]
+          },
+          "text": {
+            "en": "no ceremony",
+            "ml": "ചടങ്ങുകളൊന്നും വേണ്ട"
+          }
+        },
+        {
+          "text": {
+            "en": "whatever my family decides",
+            "ml": "എന്റെ കുടുംബം തീരുമാനിക്കുന്നത് എന്തും"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "funeral.cost",
+    "kind": "clause",
+    "when": {
+      "or": [
+        {
+          "in": [
+            "funeral.cost",
+            [
+              "modest",
+              "customary"
+            ]
+          ]
+        },
+        {
+          "and": [
+            {
+              "eq": [
+                "funeral.cost",
+                "limit"
+              ]
+            },
+            {
+              "notEmpty": "funeral.cost_amount"
+            }
+          ]
+        }
+      ]
+    },
+    "text": {
+      "en": "My funeral expenses shall {{frag:cost}}.",
+      "ml": "എന്റെ സംസ്കാര ചെലവ് {{frag:cost}}."
+    },
+    "fragments": {
+      "cost": [
+        {
+          "when": {
+            "eq": [
+              "funeral.cost",
+              "modest"
+            ]
+          },
+          "text": {
+            "en": "be kept modest",
+            "ml": "ലളിതമായി നിലനിർത്തണം"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "funeral.cost",
+              "limit"
+            ]
+          },
+          "text": {
+            "en": "not exceed {{inr:funeral.cost_amount}}",
+            "ml": "{{inr:funeral.cost_amount}} കവിയരുത്"
+          }
+        },
+        {
+          "text": {
+            "en": "be as is customary",
+            "ml": "പതിവുപോലെയാകാം"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "funeral.notes",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "funeral.notes"
+    },
+    "text": {
+      "en": "I further wish that: {{funeral.notes}}",
+      "ml": "കൂടാതെ, എനിക്ക് ഈ ആഗ്രഹം കൂടിയുണ്ട്: {{funeral.notes}}"
+    }
+  },
+  {
+    "id": "organ",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "organ.gate"
+    },
+    "text": {
+      "en": "{{frag:wish}}",
+      "ml": "{{frag:wish}}"
+    },
+    "fragments": {
+      "wish": [
+        {
+          "when": {
+            "eq": [
+              "organ.gate",
+              "yes_any"
+            ]
+          },
+          "text": {
+            "en": "I wish to donate all organs and tissues that may benefit others upon my death, and I request my family and physicians to give effect to this wish without delay.{{frag:registered}}",
+            "ml": "എന്റെ മരണശേഷം മറ്റുള്ളവർക്ക് പ്രയോജനപ്പെടുന്ന എല്ലാ അവയവങ്ങളും കലകളും ദാനം ചെയ്യാൻ ഞാൻ ആഗ്രഹിക്കുന്നു, ഇത് വൈകാതെ നടപ്പിലാക്കാൻ എന്റെ കുടുംബത്തോടും ഡോക്ടർമാരോടും അഭ്യർത്ഥിക്കുന്നു.{{frag:registered}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "organ.gate",
+              "yes_specific"
+            ]
+          },
+          "text": {
+            "en": "I wish to donate the following upon my death: {{labelList:organ.specific}}, and I request my family and physicians to give effect to this wish without delay.{{frag:registered}}",
+            "ml": "എന്റെ മരണശേഷം ഇനിപ്പറയുന്നവ ദാനം ചെയ്യാൻ ഞാൻ ആഗ്രഹിക്കുന്നു: {{labelList:organ.specific}}, ഇത് വൈകാതെ നടപ്പിലാക്കാൻ എന്റെ കുടുംബത്തോടും ഡോക്ടർമാരോടും അഭ്യർത്ഥിക്കുന്നു.{{frag:registered}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "organ.gate",
+              "no"
+            ]
+          },
+          "text": {
+            "en": "I do not wish to donate my organs.",
+            "ml": "എന്റെ അവയവങ്ങൾ ദാനം ചെയ്യാൻ ഞാൻ ആഗ്രഹിക്കുന്നില്ല."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "organ.gate",
+              "family_decides"
+            ]
+          },
+          "text": {
+            "en": "I leave the decision on organ donation to my family.",
+            "ml": "അവയവദാനം സംബന്ധിച്ച തീരുമാനം ഞാൻ എന്റെ കുടുംബത്തിന് വിടുന്നു."
+          }
+        }
+      ],
+      "registered": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "organ.registered",
+                  "yes"
+                ]
+              },
+              {
+                "notEmpty": "organ.registered_details"
+              }
+            ]
+          },
+          "text": {
+            "en": " I am a registered organ donor ({{organ.registered_details}}).",
+            "ml": " ഞാൻ ഒരു രജിസ്റ്റർ ചെയ്ത അവയവദാതാവാണ് ({{organ.registered_details}})."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "organ.registered",
+              "yes"
+            ]
+          },
+          "text": {
+            "en": " I am a registered organ donor.",
+            "ml": " ഞാൻ ഒരു രജിസ്റ്റർ ചെയ്ത അവയവദാതാവാണ്."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "organ.registered",
+              "no"
+            ]
+          },
+          "text": {
+            "en": " I have not yet registered as an organ donor, though I record this wish here.",
+            "ml": " ഞാൻ ഇതുവരെ അവയവദാതാവായി രജിസ്റ്റർ ചെയ്തിട്ടില്ല, എങ്കിലും ഈ ആഗ്രഹം ഇവിടെ രേഖപ്പെടുത്തുന്നു."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "guardianship.minors",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "guardianship.primary"
+    },
+    "text": {
+      "en": "I appoint {{person:guardianship.primary}} as the guardian of the person of my minor children, in the event my spouse does not survive me or is unable to act.{{frag:alt}}",
+      "ml": "എന്റെ ജീവിതപങ്കാളി എനിക്ക് മുൻപ് മരിക്കുകയോ പ്രവർത്തിക്കാൻ കഴിയാതെ വരികയോ ചെയ്താൽ, എന്റെ പ്രായപൂർത്തിയാകാത്ത മക്കളുടെ സംരക്ഷണത്തിനുള്ള രക്ഷിതാവായി ഞാൻ {{person:guardianship.primary}}-നെ നിയമിക്കുന്നു.{{frag:alt}}"
+    },
+    "fragments": {
+      "alt": [
+        {
+          "when": {
+            "notEmpty": "guardianship.alternate"
+          },
+          "text": {
+            "en": " If they are unable or unwilling to act, I appoint {{person:guardianship.alternate}} in their place.",
+            "ml": " അവർക്ക് പ്രവർത്തിക്കാൻ കഴിയാതെയോ മനസ്സില്ലാതെയോ വന്നാൽ, പകരം ഞാൻ {{person:guardianship.alternate}}-നെ നിയമിക്കുന്നു."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "guardianship.property",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "guardianship.until_age"
+    },
+    "text": {
+      "en": "All property my minor children take under this Will shall be held and applied by {{frag:who}} for their maintenance, education and benefit until each attains the age of {{guardianship.until_age}} years, whereupon the remainder shall be transferred to them absolutely.",
+      "ml": "എന്റെ പ്രായപൂർത്തിയാകാത്ത മക്കൾക്ക് ഈ വിൽപത്രപ്രകാരം ലഭിക്കുന്ന എല്ലാ സ്വത്തും, അവർ ഓരോരുത്തരും {{guardianship.until_age}} വയസ്സ് തികയുന്നതുവരെ അവരുടെ സംരക്ഷണത്തിനും വിദ്യാഭ്യാസത്തിനും പ്രയോജനത്തിനുമായി {{frag:who}} കൈകാര്യം ചെയ്യണം, അതിനുശേഷം ബാക്കിയുള്ളത് അവർക്ക് പൂർണ്ണമായി കൈമാറണം."
+    },
+    "fragments": {
+      "who": [
+        {
+          "when": {
+            "eq": [
+              "guardianship.property_guardian",
+              "different"
+            ]
+          },
+          "text": {
+            "en": "{{person:guardianship.property_guardian.person}}",
+            "ml": "{{person:guardianship.property_guardian.person}}"
+          }
+        },
+        {
+          "text": {
+            "en": "their guardian",
+            "ml": "അവരുടെ രക്ഷിതാവ്"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "guardianship.upbringing",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "guardianship.upbringing"
+    },
+    "text": {
+      "en": "It is my wish that {{guardianship.upbringing}}.",
+      "ml": "{{guardianship.upbringing}} എന്നത് എന്റെ ആഗ്രഹമാണ്."
+    }
+  },
+  {
+    "id": "guardianship.provision",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "guardianship.provision",
+            "amount"
+          ]
+        },
+        {
+          "notEmpty": "guardianship.provision_amount"
+        }
+      ]
+    },
+    "text": {
+      "en": "I direct my Executor to set apart {{inr:guardianship.provision_amount}}{{frag:source}} for the care and benefit of my minor children.",
+      "ml": "എന്റെ പ്രായപൂർത്തിയാകാത്ത മക്കളുടെ സംരക്ഷണത്തിനും പ്രയോജനത്തിനുമായി {{inr:guardianship.provision_amount}}{{frag:source}} മാറ്റിവെക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+    },
+    "fragments": {
+      "source": [
+        {
+          "when": {
+            "eq": [
+              "guardianship.provision_source",
+              "bank"
+            ]
+          },
+          "text": {
+            "en": " from my bank balances",
+            "ml": " എന്റെ ബാങ്ക് ബാലൻസിൽ നിന്ന്"
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "guardianship.provision_source",
+                  "asset_sale"
+                ]
+              },
+              {
+                "notEmpty": "guardianship.provision_source_desc"
+              }
+            ]
+          },
+          "text": {
+            "en": " from the sale of {{guardianship.provision_source_desc}}",
+            "ml": " {{guardianship.provision_source_desc}} വിറ്റ്"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "guardianship.provision_source",
+              "asset_sale"
+            ]
+          },
+          "text": {
+            "en": " from the sale of an asset",
+            "ml": " ഒരു ആസ്തി വിറ്റ്"
+          }
+        },
+        {
+          "text": {
+            "en": "",
+            "ml": ""
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "guardianship.dependent",
+    "kind": "clause",
+    "text": {
+      "en": "I direct that {{person:item.person}} be cared for by {{person:item.carer}}. If they are unable to act, {{person:item.alt_carer}} shall do so.{{frag:provision}}{{frag:instructions}}",
+      "ml": "{{person:item.person}}-നെ {{person:item.carer}} പരിപാലിക്കണം എന്ന് ഞാൻ നിർദ്ദേശിക്കുന്നു. അവർക്ക് പ്രവർത്തിക്കാൻ കഴിയാതെ വന്നാൽ, {{person:item.alt_carer}} അത് ചെയ്യണം.{{frag:provision}}{{frag:instructions}}"
+    },
+    "fragments": {
+      "provision": [
+        {
+          "when": {
+            "eq": [
+              "item.provision",
+              "yes"
+            ]
+          },
+          "text": {
+            "en": " I direct my Executor to set apart {{inr:item.provision_amount}} for their care.",
+            "ml": " അവരുടെ സംരക്ഷണത്തിനായി {{inr:item.provision_amount}} മാറ്റിവെക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+          }
+        }
+      ],
+      "instructions": [
+        {
+          "when": {
+            "notEmpty": "item.instructions"
+          },
+          "text": {
+            "en": " {{item.instructions}}",
+            "ml": " {{item.instructions}}"
+          }
+        }
+      ]
+    },
+    "each": "guardianship.dependents",
+    "itemKeyPrefix": "guardianship.dependents.item"
+  },
+  {
+    "id": "realestate.item",
+    "kind": "clause",
+    "text": {
+      "en": "I give and bequeath {{frag:ownership}} {{item.desc}}{{frag:action}}{{frag:rented}}{{frag:loan}}",
+      "ml": "{{frag:ownership}} {{item.desc}} ഞാൻ ദാനം ചെയ്യുന്നു{{frag:action}}{{frag:rented}}{{frag:loan}}"
+    },
+    "fragments": {
+      "ownership": [
+        {
+          "when": {
+            "eq": [
+              "item.ownership",
+              "sole"
+            ]
+          },
+          "text": {
+            "en": "my property, namely",
+            "ml": "എന്റെ സ്വത്തായ"
+          }
+        },
+        {
+          "text": {
+            "en": "my share, right, title and interest in",
+            "ml": "ഇതിലെ എന്റെ വിഹിതം, അവകാശം, ഉടമസ്ഥത എന്നിവ —"
+          }
+        }
+      ],
+      "action": [
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:ben}}",
+            "ml": " {{helper:beneficiaryTailOne:ben}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "divide"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:ben}}",
+            "ml": " {{helper:beneficiaryTailSeveral:ben}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "life_interest"
+            ]
+          },
+          "text": {
+            "en": ". {{helper:lifeInterestTail:life}}",
+            "ml": ". {{helper:lifeInterestTail:life}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be sold and the net proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ],
+      "rented": [
+        {
+          "when": {
+            "eq": [
+              "item.rented.instructions",
+              "continue_tenancy"
+            ]
+          },
+          "text": {
+            "en": " The existing tenancy shall continue, with rent accruing to the new owner.",
+            "ml": " നിലവിലുള്ള വാടക തുടരണം, വാടക പുതിയ ഉടമയ്ക്ക് ലഭിക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.rented.instructions",
+              "new_owner_decides"
+            ]
+          },
+          "text": {
+            "en": " The new owner shall decide on the tenancy.",
+            "ml": " വാടക സംബന്ധിച്ച് പുതിയ ഉടമ തീരുമാനിക്കും."
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "item.rented.instructions",
+                  "custom"
+                ]
+              },
+              {
+                "notEmpty": "item.rented.instructions_text"
+              }
+            ]
+          },
+          "text": {
+            "en": " {{item.rented.instructions_text}}",
+            "ml": " {{item.rented.instructions_text}}"
+          }
+        }
+      ],
+      "loan": [
+        {
+          "when": {
+            "eq": [
+              "item.loan",
+              "yes"
+            ]
+          },
+          "text": {
+            "en": " This bequest passes subject to any loan secured on the property being settled by my Executor.",
+            "ml": " ഈ ദാനം, സ്വത്തിന്മേലുള്ള ഏതെങ്കിലും വായ്പ എന്റെ എക്സിക്യൂട്ടർ തീർപ്പാക്കുന്നതിന് വിധേയമായിരിക്കും."
+          }
+        }
+      ]
+    },
+    "each": "realestate.items",
+    "itemKeyPrefix": "realestate.item"
+  },
+  {
+    "id": "bank.all",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "bank.mode",
+        "all"
+      ]
+    },
+    "text": {
+      "en": "I bequeath the balance standing to my credit in all my bank accounts{{frag:tail}}",
+      "ml": "എന്റെ എല്ലാ ബാങ്ക് അക്കൗണ്ടുകളിലുമുള്ള ബാലൻസ് ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "bank.all.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:bank.all}}",
+            "ml": " {{helper:beneficiaryTailOne:bank.all}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.all.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:bank.all}}",
+            "ml": " {{helper:beneficiaryTailSeveral:bank.all}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.all.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "bank.account",
+    "kind": "clause",
+    "text": {
+      "en": "I bequeath the balance in my {{label:item.type}} account with {{item.bank_name}}{{frag:branch}}{{frag:last4}}{{frag:joint}}{{frag:tail}}",
+      "ml": "{{item.bank_name}} ബാങ്കിലെ എന്റെ {{label:item.type}} അക്കൗണ്ടിലെ ബാലൻസ്{{frag:branch}}{{frag:last4}}{{frag:joint}} ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "branch": [
+        {
+          "when": {
+            "notEmpty": "item.branch"
+          },
+          "text": {
+            "en": ", {{item.branch}} branch",
+            "ml": ", {{item.branch}} ബ്രാഞ്ച്"
+          }
+        }
+      ],
+      "last4": [
+        {
+          "when": {
+            "notEmpty": "item.last4"
+          },
+          "text": {
+            "en": " (No. ending {{item.last4}})",
+            "ml": " (നമ്പർ അവസാനിക്കുന്നത് {{item.last4}})"
+          }
+        }
+      ],
+      "joint": [
+        {
+          "when": {
+            "eq": [
+              "item.type",
+              "joint"
+            ]
+          },
+          "text": {
+            "en": ", to the extent of my share therein",
+            "ml": ", അതിലെ എന്റെ വിഹിതം മാത്രം"
+          }
+        }
+      ],
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    },
+    "each": "bank.accounts",
+    "itemKeyPrefix": "bank.account"
+  },
+  {
+    "id": "bank.locker",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "bank.locker.bank"
+    },
+    "text": {
+      "en": "I bequeath the contents of my locker at {{bank.locker.bank}}{{frag:tail}}",
+      "ml": "{{bank.locker.bank}}-ലെ എന്റെ ലോക്കറിലെ ഉള്ളടക്കം ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "bank.locker.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:bank.locker.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:bank.locker.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.locker.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:bank.locker.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:bank.locker.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.locker.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "bank.cash",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "bank.cash.gate",
+        "yes"
+      ]
+    },
+    "text": {
+      "en": "I bequeath any cash held at my residence or otherwise in my possession{{frag:tail}}",
+      "ml": "എന്റെ താമസസ്ഥലത്തോ മറ്റെവിടെയെങ്കിലുമോ എന്റെ കൈവശമുള്ള പണം ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "bank.cash.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:bank.cash.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:bank.cash.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.cash.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:bank.cash.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:bank.cash.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "bank.cash.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "invest.item",
+    "kind": "clause",
+    "text": {
+      "en": "I bequeath my interest in {{item.desc}} ({{label:item.type}}){{frag:tail}}",
+      "ml": "{{item.desc}} ({{label:item.type}}) എന്നതിലെ എന്റെ വിഹിതം ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "item.type",
+              "insurance"
+            ]
+          },
+          "text": {
+            "en": " — the proceeds of this policy are payable to its nominee under insurance law; I direct my Executor to notify the insurer and assist with the claim.",
+            "ml": " — ഈ പോളിസിയുടെ തുക ഇൻഷുറൻസ് നിയമപ്രകാരം അതിന്റെ നോമിനിക്ക് ലഭിക്കും; ഇൻഷുറൻസ് കമ്പനിയെ അറിയിച്ച് ക്ലെയിമിൽ സഹായിക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    },
+    "each": "invest.items",
+    "itemKeyPrefix": "invest.item"
+  },
+  {
+    "id": "receivables.item",
+    "kind": "clause",
+    "text": {
+      "en": "{{frag:action}}",
+      "ml": "{{frag:action}}"
+    },
+    "fragments": {
+      "action": [
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "collect_person"
+            ]
+          },
+          "text": {
+            "en": "The sum of {{inr:item.amount}} due to me from {{item.who}} shall be recovered and paid {{helper:beneficiaryTailOne:}}",
+            "ml": "{{item.who}}-ൽ നിന്ന് എനിക്ക് ലഭിക്കാനുള്ള {{inr:item.amount}} പിരിച്ചെടുത്ത് {{helper:beneficiaryTailOne:}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "forgive"
+            ]
+          },
+          "text": {
+            "en": "I forgive and release the debt of {{inr:item.amount}} owed to me by {{item.who}}, and direct that no claim be made in respect of it.",
+            "ml": "{{item.who}} എനിക്ക് കടപ്പെട്ടിരിക്കുന്ന {{inr:item.amount}} ഞാൻ ഇളവ് ചെയ്ത് ഒഴിവാക്കുന്നു, ഇത് സംബന്ധിച്ച് ഒരു അവകാശവാദവും ഉന്നയിക്കരുതെന്ന് നിർദ്ദേശിക്കുന്നു."
+          }
+        },
+        {
+          "text": {
+            "en": "The sum of {{inr:item.amount}} due to me from {{item.who}} shall be recovered and added to my estate.",
+            "ml": "{{item.who}}-ൽ നിന്ന് എനിക്ക് ലഭിക്കാനുള്ള {{inr:item.amount}} പിരിച്ചെടുത്ത് എന്റെ ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    },
+    "each": "receivables.items",
+    "itemKeyPrefix": "receivables.item"
+  },
+  {
+    "id": "vehicles.item",
+    "kind": "clause",
+    "text": {
+      "en": "I bequeath my {{item.desc}}{{frag:action}}{{frag:loan}}",
+      "ml": "എന്റെ {{item.desc}} ഞാൻ ദാനം ചെയ്യുന്നു{{frag:action}}{{frag:loan}}"
+    },
+    "fragments": {
+      "action": [
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "person"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:}}",
+            "ml": " {{helper:beneficiaryTailOne:}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "item.action",
+              "family_decides"
+            ]
+          },
+          "text": {
+            "en": ", as my family decides.",
+            "ml": ", എന്റെ കുടുംബം തീരുമാനിക്കുന്നതുപോലെ."
+          }
+        }
+      ],
+      "loan": [
+        {
+          "when": {
+            "eq": [
+              "item.loan",
+              "yes"
+            ]
+          },
+          "text": {
+            "en": " This bequest passes subject to any loan secured on it being settled by my Executor.",
+            "ml": " ഈ ദാനം, ഇതിന്മേലുള്ള ഏതെങ്കിലും വായ്പ എന്റെ എക്സിക്യൂട്ടർ തീർപ്പാക്കുന്നതിന് വിധേയമായിരിക്കും."
+          }
+        }
+      ]
+    },
+    "each": "vehicles.items",
+    "itemKeyPrefix": "vehicles.item"
+  },
+  {
+    "id": "collect",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "collect.beneficiary.mode"
+    },
+    "text": {
+      "en": "I bequeath my collections and valuables{{frag:tail}}",
+      "ml": "എന്റെ ശേഖരങ്ങളും വിലപിടിപ്പുള്ള വസ്തുക്കളും ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "collect.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:collect.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:collect.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "collect.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:collect.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:collect.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "collect.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "jewellery",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "jewellery.beneficiary.mode"
+    },
+    "text": {
+      "en": "I bequeath my jewellery{{frag:tail}}",
+      "ml": "എന്റെ ആഭരണങ്ങൾ ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "jewellery.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:jewellery.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:jewellery.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "jewellery.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:jewellery.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:jewellery.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "jewellery.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "jewellery.streedhan",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "notEmpty": "jewellery.beneficiary.mode"
+        },
+        {
+          "or": [
+            {
+              "in": [
+                "personal.relation_line",
+                [
+                  "wife_of",
+                  "husband_of"
+                ]
+              ]
+            },
+            {
+              "notEmpty": "personal.spouse_name"
+            }
+          ]
+        }
+      ]
+    },
+    "text": {
+      "en": "For clarity, jewellery and articles belonging to my spouse are theirs alone and do not form part of my estate.",
+      "ml": "വ്യക്തതയ്ക്കായി രേഖപ്പെടുത്തുന്നു: എന്റെ ജീവിതപങ്കാളിയുടേതായ ആഭരണങ്ങളും വസ്തുക്കളും അവരുടേത് മാത്രമാണ്, അവ എന്റെ ആസ്തിയുടെ ഭാഗമല്ല."
+    }
+  },
+  {
+    "id": "ip",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "ip.beneficiary.mode"
+    },
+    "text": {
+      "en": "I bequeath all my rights, title and interest in {{ip.desc}}, including all copyrights, patent rights, trademark rights and related royalties and future income,{{frag:tail}}{{frag:wishes}}",
+      "ml": "{{ip.desc}}-ലുള്ള പകർപ്പവകാശം, പേറ്റന്റ് അവകാശം, ട്രേഡ്മാർക്ക് അവകാശം എന്നിവയും അനുബന്ധ റോയൽറ്റിയും ഭാവി വരുമാനവും ഉൾപ്പെടെ എന്റെ എല്ലാ അവകാശങ്ങളും ഉടമസ്ഥതയും താൽപര്യവും ഞാൻ ദാനം ചെയ്യുന്നു{{frag:tail}}{{frag:wishes}}"
+    },
+    "fragments": {
+      "tail": [
+        {
+          "when": {
+            "eq": [
+              "ip.beneficiary.mode",
+              "one"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailOne:ip.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailOne:ip.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "ip.beneficiary.mode",
+              "several"
+            ]
+          },
+          "text": {
+            "en": " {{helper:beneficiaryTailSeveral:ip.beneficiary}}",
+            "ml": " {{helper:beneficiaryTailSeveral:ip.beneficiary}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "ip.beneficiary.mode",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": ", to be realised and the proceeds added to my residuary estate.",
+            "ml": ", ഇത് വിറ്റ് കിട്ടുന്ന തുക എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": ", to be added to the rest of my estate.",
+            "ml": ", ഇത് എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        }
+      ],
+      "wishes": [
+        {
+          "when": {
+            "notEmpty": "ip.wishes"
+          },
+          "text": {
+            "en": " It is my wish that {{ip.wishes}}.",
+            "ml": " {{ip.wishes}} എന്നത് എന്റെ ആഗ്രഹമാണ്."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "diaries.action",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "diaries.action"
+    },
+    "text": {
+      "en": "{{frag:action}}",
+      "ml": "{{frag:action}}"
+    },
+    "fragments": {
+      "action": [
+        {
+          "when": {
+            "eq": [
+              "diaries.action",
+              "give_to_person"
+            ]
+          },
+          "text": {
+            "en": "I bequeath my personal diaries and journals {{helper:beneficiaryTailOne:diaries.action}}",
+            "ml": "എന്റെ വ്യക്തിഗത ഡയറികളും കുറിപ്പുകളും ഞാൻ ദാനം ചെയ്യുന്നു {{helper:beneficiaryTailOne:diaries.action}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "diaries.action",
+              "destroy"
+            ]
+          },
+          "text": {
+            "en": "I direct my Executor to destroy my personal diaries and journals unread.",
+            "ml": "എന്റെ വ്യക്തിഗത ഡയറികളും കുറിപ്പുകളും വായിക്കാതെ നശിപ്പിക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "diaries.action",
+              "read_first"
+            ]
+          },
+          "text": {
+            "en": "I direct that {{person:diaries.action.reader}} review my personal diaries and journals first, and decide on their disposal.",
+            "ml": "എന്റെ വ്യക്തിഗത ഡയറികളും കുറിപ്പുകളും {{person:diaries.action.reader}} ആദ്യം പരിശോധിച്ച് അവയുടെ വിനിയോഗം തീരുമാനിക്കണം എന്ന് ഞാൻ നിർദ്ദേശിക്കുന്നു."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "diaries.action",
+              "keep_with_family"
+            ]
+          },
+          "text": {
+            "en": "My personal diaries and journals shall be kept by my family.",
+            "ml": "എന്റെ വ്യക്തിഗത ഡയറികളും കുറിപ്പുകളും കുടുംബം സൂക്ഷിക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "diaries.action",
+              "family_decides"
+            ]
+          },
+          "text": {
+            "en": "The disposal of my personal diaries and journals shall be as my family decides.",
+            "ml": "എന്റെ വ്യക്തിഗത ഡയറികളുടെയും കുറിപ്പുകളുടെയും വിനിയോഗം എന്റെ കുടുംബം തീരുമാനിക്കുന്നതായിരിക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "diaries.notes",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "diaries.notes"
+    },
+    "text": {
+      "en": "As to my diaries and journals, I further note: {{diaries.notes}}",
+      "ml": "എന്റെ ഡയറികളും കുറിപ്പുകളും സംബന്ധിച്ച്, ഞാൻ ഇത് കൂടി രേഖപ്പെടുത്തുന്നു: {{diaries.notes}}"
+    }
+  },
+  {
+    "id": "gadgets.action",
+    "kind": "clause",
+    "when": {
+      "in": [
+        "gadgets.gate",
+        [
+          "wipe_give_family",
+          "sell",
+          "recycle",
+          "family_decides"
+        ]
+      ]
+    },
+    "text": {
+      "en": "{{frag:action}}",
+      "ml": "{{frag:action}}"
+    },
+    "fragments": {
+      "action": [
+        {
+          "when": {
+            "eq": [
+              "gadgets.gate",
+              "wipe_give_family"
+            ]
+          },
+          "text": {
+            "en": "My devices shall be wiped of personal data and given to my family.",
+            "ml": "എന്റെ ഉപകരണങ്ങളിലെ വ്യക്തിഗത വിവരങ്ങൾ മായ്ച്ച് കുടുംബത്തിന് നൽകണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "gadgets.gate",
+              "sell"
+            ]
+          },
+          "text": {
+            "en": "My devices shall be sold, with the proceeds added to my estate.",
+            "ml": "എന്റെ ഉപകരണങ്ങൾ വിറ്റ്, കിട്ടുന്ന തുക എന്റെ ആസ്തിയിലേക്ക് ചേർക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "gadgets.gate",
+              "recycle"
+            ]
+          },
+          "text": {
+            "en": "My devices shall be recycled responsibly.",
+            "ml": "എന്റെ ഉപകരണങ്ങൾ ഉത്തരവാദിത്തത്തോടെ പുനരുപയോഗിക്കണം."
+          }
+        },
+        {
+          "text": {
+            "en": "The disposal of my devices shall be as my family decides.",
+            "ml": "എന്റെ ഉപകരണങ്ങളുടെ വിനിയോഗം എന്റെ കുടുംബം തീരുമാനിക്കുന്നതായിരിക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "gadgets.item",
+    "kind": "clause",
+    "text": {
+      "en": "I bequeath my {{item.desc}} {{helper:beneficiaryTailOne:}}",
+      "ml": "എന്റെ {{item.desc}} ഞാൻ ദാനം ചെയ്യുന്നു {{helper:beneficiaryTailOne:}}"
+    },
+    "each": "gadgets.items",
+    "itemKeyPrefix": "gadgets.item"
+  },
+  {
+    "id": "gadgets.data",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "gadgets.data"
+    },
+    "text": {
+      "en": "{{frag:data}}",
+      "ml": "{{frag:data}}"
+    },
+    "fragments": {
+      "data": [
+        {
+          "when": {
+            "eq": [
+              "gadgets.data",
+              "backup_then_wipe"
+            ]
+          },
+          "text": {
+            "en": "Before any device is given away or sold, its data shall be backed up and then wiped.",
+            "ml": "ഏതെങ്കിലും ഉപകരണം നൽകുകയോ വിൽക്കുകയോ ചെയ്യുന്നതിന് മുൻപ്, അതിലെ വിവരങ്ങൾ ബാക്കപ്പ് ചെയ്ത ശേഷം മായ്ക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "gadgets.data",
+              "wipe_no_backup"
+            ]
+          },
+          "text": {
+            "en": "Before any device is given away or sold, its data shall be wiped without backup.",
+            "ml": "ഏതെങ്കിലും ഉപകരണം നൽകുകയോ വിൽക്കുകയോ ചെയ്യുന്നതിന് മുൻപ്, അതിലെ വിവരങ്ങൾ ബാക്കപ്പ് ഇല്ലാതെ മായ്ക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "gadgets.data",
+              "handed_as_is"
+            ]
+          },
+          "text": {
+            "en": "My devices may be handed over as-is, with their data intact.",
+            "ml": "എന്റെ ഉപകരണങ്ങൾ അതിലെ വിവരങ്ങൾ സഹിതം അതേപടി കൈമാറാം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "part.digital",
+    "kind": "heading",
+    "when": {
+      "eq": [
+        "digital.gate",
+        "yes"
+      ]
+    },
+    "text": {
+      "en": "MY DIGITAL ASSETS",
+      "ml": "എന്റെ ഡിജിറ്റൽ ആസ്തികൾ"
+    }
+  },
+  {
+    "id": "digital.intro",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "digital.gate",
+        "yes"
+      ]
+    },
+    "text": {
+      "en": "I direct my Executor to deal with my digital assets, accounts and records as follows, to the extent permitted by applicable law and the terms of the relevant services.",
+      "ml": "ബാധകമായ നിയമവും അതത് സേവനങ്ങളുടെ നിബന്ധനകളും അനുവദിക്കുന്ന പരിധിവരെ, എന്റെ ഡിജിറ്റൽ ആസ്തികളും അക്കൗണ്ടുകളും രേഖകളും താഴെപ്പറയുംപ്രകാരം കൈകാര്യം ചെയ്യാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+    }
+  },
+  {
+    "id": "digital.subs",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "digital.gate",
+        "yes"
+      ]
+    },
+    "text": {
+      "en": "{{frag:subs}}",
+      "ml": "{{frag:subs}}"
+    },
+    "fragments": {
+      "subs": [
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "digital.subs",
+                  "cancel_with_exceptions"
+                ]
+              },
+              {
+                "notEmpty": "digital.subs.exceptions"
+              }
+            ]
+          },
+          "text": {
+            "en": "My recurring subscriptions and memberships shall be cancelled, except: {{digital.subs.exceptions}}",
+            "ml": "എന്റെ ആവർത്തന സബ്സ്ക്രിപ്ഷനുകളും അംഗത്വങ്ങളും റദ്ദാക്കണം, ഇവയൊഴികെ: {{digital.subs.exceptions}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.subs",
+              "family_decides"
+            ]
+          },
+          "text": {
+            "en": "My family shall decide on my recurring subscriptions and memberships.",
+            "ml": "എന്റെ ആവർത്തന സബ്സ്ക്രിപ്ഷനുകളും അംഗത്വങ്ങളും സംബന്ധിച്ച് എന്റെ കുടുംബം തീരുമാനിക്കും."
+          }
+        },
+        {
+          "text": {
+            "en": "My recurring subscriptions and memberships shall be cancelled, and any refunds claimed for my estate.",
+            "ml": "എന്റെ ആവർത്തന സബ്സ്ക്രിപ്ഷനുകളും അംഗത്വങ്ങളും റദ്ദാക്കണം, റീഫണ്ട് വല്ലതും ഉണ്ടെങ്കിൽ എന്റെ ആസ്തിക്കായി വാങ്ങിക്കണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.statements",
+    "kind": "clause",
+    "when": {
+      "in": [
+        "digital.statements",
+        [
+          "full_consent",
+          "narrow_consent"
+        ]
+      ]
+    },
+    "text": {
+      "en": "{{frag:statements}}",
+      "ml": "{{frag:statements}}"
+    },
+    "fragments": {
+      "statements": [
+        {
+          "when": {
+            "eq": [
+              "digital.statements",
+              "full_consent"
+            ]
+          },
+          "text": {
+            "en": "I authorise my Executor to obtain from any bank or financial institution my statements of account and transaction history.",
+            "ml": "ഏതെങ്കിലും ബാങ്കിൽ നിന്നോ സാമ്പത്തിക സ്ഥാപനത്തിൽ നിന്നോ എന്റെ അക്കൗണ്ട് സ്റ്റേറ്റ്മെന്റുകളും ഇടപാട് ചരിത്രവും ലഭിക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടർക്ക് അധികാരം നൽകുന്നു."
+          }
+        },
+        {
+          "text": {
+            "en": "I authorise my Executor to obtain my bank statements and transaction history so far as required to close my accounts and settle my liabilities.",
+            "ml": "എന്റെ അക്കൗണ്ടുകൾ അടയ്ക്കാനും ബാധ്യതകൾ തീർപ്പാക്കാനും ആവശ്യമായ പരിധിവരെ, എന്റെ ബാങ്ക് സ്റ്റേറ്റ്മെന്റുകളും ഇടപാട് ചരിത്രവും ലഭിക്കാൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടർക്ക് അധികാരം നൽകുന്നു."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.social",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.social"
+        }
+      ]
+    },
+    "text": {
+      "en": "{{frag:social}}",
+      "ml": "{{frag:social}}"
+    },
+    "fragments": {
+      "social": [
+        {
+          "when": {
+            "eq": [
+              "digital.social",
+              "delete_all"
+            ]
+          },
+          "text": {
+            "en": "My social media accounts shall be deleted.",
+            "ml": "എന്റെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.social",
+              "memorialise"
+            ]
+          },
+          "text": {
+            "en": "My social media accounts shall be memorialised where the platform permits, and deleted otherwise.",
+            "ml": "പ്ലാറ്റ്ഫോം അനുവദിക്കുന്നിടത്ത് എന്റെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ സ്മാരകമാക്കണം, അല്ലാത്തവ ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.social",
+              "archive_then_delete"
+            ]
+          },
+          "text": {
+            "en": "My social media content shall be downloaded and delivered to {{person:digital.social.recipient}}, and the accounts then deleted.",
+            "ml": "എന്റെ സോഷ്യൽ മീഡിയ ഉള്ളടക്കം ഡൗൺലോഡ് ചെയ്ത് {{person:digital.social.recipient}}-ന് നൽകിയ ശേഷം അക്കൗണ്ടുകൾ ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.social",
+              "leave_as_is"
+            ]
+          },
+          "text": {
+            "en": "My social media accounts shall be left as they are.",
+            "ml": "എന്റെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ ഉള്ളതുപോലെ വിടണം."
+          }
+        },
+        {
+          "when": {
+            "and": [
+              {
+                "eq": [
+                  "digital.social",
+                  "per_platform"
+                ]
+              },
+              {
+                "notEmpty": "digital.social.notes"
+              }
+            ]
+          },
+          "text": {
+            "en": "My social media accounts shall be dealt with as follows: {{digital.social.notes}}",
+            "ml": "എന്റെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ ഇപ്രകാരം കൈകാര്യം ചെയ്യണം: {{digital.social.notes}}"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.email",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.email"
+        }
+      ]
+    },
+    "text": {
+      "en": "{{frag:email}}",
+      "ml": "{{frag:email}}"
+    },
+    "fragments": {
+      "email": [
+        {
+          "when": {
+            "eq": [
+              "digital.email",
+              "keep_briefly"
+            ]
+          },
+          "text": {
+            "en": "My email accounts shall be kept accessible for estate administration for a reasonable period, then closed.",
+            "ml": "ആസ്തി കാര്യങ്ങൾക്കായി എന്റെ ഇമെയിൽ അക്കൗണ്ടുകൾ ന്യായമായ ഒരു കാലയളവ് ലഭ്യമായി നിലനിർത്തി, പിന്നീട് അടയ്ക്കണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.email",
+              "delete"
+            ]
+          },
+          "text": {
+            "en": "My email accounts shall be deleted.",
+            "ml": "എന്റെ ഇമെയിൽ അക്കൗണ്ടുകൾ ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.email",
+              "hand_over"
+            ]
+          },
+          "text": {
+            "en": "My email accounts shall be handed over to {{person:digital.email.recipient}}.",
+            "ml": "എന്റെ ഇമെയിൽ അക്കൗണ്ടുകൾ {{person:digital.email.recipient}}-ന് കൈമാറണം."
+          }
+        },
+        {
+          "text": {
+            "en": "My email accounts shall be left as they are.",
+            "ml": "എന്റെ ഇമെയിൽ അക്കൗണ്ടുകൾ ഉള്ളതുപോലെ വിടണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.storage",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.storage"
+        }
+      ]
+    },
+    "text": {
+      "en": "{{frag:storage}}",
+      "ml": "{{frag:storage}}"
+    },
+    "fragments": {
+      "storage": [
+        {
+          "when": {
+            "eq": [
+              "digital.storage",
+              "trusted_review"
+            ]
+          },
+          "text": {
+            "en": "My files and cloud storage shall be reviewed by {{person:digital.storage.reviewer}}, who shall preserve what is of value to my family and delete the rest.",
+            "ml": "എന്റെ ഫയലുകളും ക്ലൗഡ് സ്റ്റോറേജും {{person:digital.storage.reviewer}} പരിശോധിച്ച്, കുടുംബത്തിന് പ്രധാനപ്പെട്ടത് സൂക്ഷിച്ച്, ബാക്കി ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.storage",
+              "copy_for_family"
+            ]
+          },
+          "text": {
+            "en": "My files and cloud storage shall be copied and delivered to {{person:digital.storage.recipient}}.",
+            "ml": "എന്റെ ഫയലുകളും ക്ലൗഡ് സ്റ്റോറേജും പകർത്തി {{person:digital.storage.recipient}}-ന് നൽകണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.storage",
+              "delete_all"
+            ]
+          },
+          "text": {
+            "en": "My files and cloud storage shall be deleted.",
+            "ml": "എന്റെ ഫയലുകളും ക്ലൗഡ് സ്റ്റോറേജും ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "text": {
+            "en": "My files and cloud storage shall be dealt with as my family decides.",
+            "ml": "എന്റെ ഫയലുകളും ക്ലൗഡ് സ്റ്റോറേജും എന്റെ കുടുംബം തീരുമാനിക്കുംപ്രകാരം കൈകാര്യം ചെയ്യണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.photos",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.photos"
+        }
+      ]
+    },
+    "text": {
+      "en": "{{frag:photos}}",
+      "ml": "{{frag:photos}}"
+    },
+    "fragments": {
+      "photos": [
+        {
+          "when": {
+            "eq": [
+              "digital.photos",
+              "share_with_family"
+            ]
+          },
+          "text": {
+            "en": "My photographs shall be shared with my family.",
+            "ml": "എന്റെ ഫോട്ടോകൾ കുടുംബവുമായി പങ്കിടണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.photos",
+              "one_person"
+            ]
+          },
+          "text": {
+            "en": "My photographs shall be given to {{person:digital.photos.recipient}}.",
+            "ml": "എന്റെ ഫോട്ടോകൾ {{person:digital.photos.recipient}}-ന് നൽകണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.photos",
+              "review_first"
+            ]
+          },
+          "text": {
+            "en": "My photographs shall first be reviewed by {{person:digital.photos.reviewer}}, who shall delete what is private.",
+            "ml": "എന്റെ ഫോട്ടോകൾ ആദ്യം {{person:digital.photos.reviewer}} പരിശോധിച്ച്, സ്വകാര്യമായത് ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.photos",
+              "delete_all"
+            ]
+          },
+          "text": {
+            "en": "My photographs shall be deleted.",
+            "ml": "എന്റെ ഫോട്ടോകൾ ഡിലീറ്റ് ചെയ്യണം."
+          }
+        },
+        {
+          "text": {
+            "en": "My photographs shall be dealt with as my family decides.",
+            "ml": "എന്റെ ഫോട്ടോകൾ എന്റെ കുടുംബം തീരുമാനിക്കുംപ്രകാരം കൈകാര്യം ചെയ്യണം."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.backup",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.backup"
+        },
+        {
+          "notEmpty": "digital.backup.recipient"
+        }
+      ]
+    },
+    "text": {
+      "en": "Before any account is closed, the following shall be preserved and delivered to {{person:digital.backup.recipient}}: {{labelList:digital.backup}}.",
+      "ml": "ഏതെങ്കിലും അക്കൗണ്ട് അടയ്ക്കുന്നതിന് മുൻപ്, ഇനിപ്പറയുന്നവ സൂക്ഷിച്ച് {{person:digital.backup.recipient}}-ന് നൽകണം: {{labelList:digital.backup}}."
+    }
+  },
+  {
+    "id": "digital.access",
+    "kind": "clause",
+    "when": {
+      "and": [
+        {
+          "eq": [
+            "digital.gate",
+            "yes"
+          ]
+        },
+        {
+          "notEmpty": "digital.access"
+        }
+      ]
+    },
+    "text": {
+      "en": "{{frag:access}}",
+      "ml": "{{frag:access}}"
+    },
+    "fragments": {
+      "access": [
+        {
+          "when": {
+            "eq": [
+              "digital.access",
+              "sealed_envelope"
+            ]
+          },
+          "text": {
+            "en": "Instructions for access are kept in a sealed envelope with my important papers.",
+            "ml": "ആക്സസ് നിർദ്ദേശങ്ങൾ എന്റെ പ്രധാന രേഖകൾക്കൊപ്പം അടച്ച കവറിൽ സൂക്ഷിച്ചിരിക്കുന്നു."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.access",
+              "password_manager"
+            ]
+          },
+          "text": {
+            "en": "Instructions for access are kept via my password manager's emergency access.",
+            "ml": "ആക്സസ് നിർദ്ദേശങ്ങൾ എന്റെ പാസ്‌വേഡ് മാനേജറിന്റെ എമർജൻസി ആക്സസിൽ സൂക്ഷിച്ചിരിക്കുന്നു."
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "digital.access",
+              "trusted_person"
+            ]
+          },
+          "text": {
+            "en": "Instructions for access are known to {{person:digital.access.person}}.",
+            "ml": "ആക്സസ് നിർദ്ദേശങ്ങൾ {{person:digital.access.person}}-ന് അറിയാം."
+          }
+        },
+        {
+          "text": {
+            "en": "Instructions for access have not yet been set up; I direct my Executor to make reasonable efforts to locate my accounts.",
+            "ml": "ആക്സസ് നിർദ്ദേശങ്ങൾ ഇതുവരെ ക്രമീകരിച്ചിട്ടില്ല; എന്റെ അക്കൗണ്ടുകൾ കണ്ടെത്താൻ ന്യായമായ ശ്രമങ്ങൾ നടത്താൻ ഞാൻ എന്റെ എക്സിക്യൂട്ടറോട് നിർദ്ദേശിക്കുന്നു."
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "digital.access.footer",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "digital.gate",
+        "yes"
+      ]
+    },
+    "text": {
+      "en": "No password or key forms part of this Will.",
+      "ml": "ഒരു പാസ്‌വേഡോ കീയോ ഈ വിൽപത്രത്തിന്റെ ഭാഗമല്ല."
+    }
+  },
+  {
+    "id": "residuary",
+    "kind": "clause",
+    "when": {
+      "notEmpty": "residuary.primary"
+    },
+    "text": {
+      "en": "All the rest and residue of my estate, whether movable or immovable, present or future, including any property not specifically dealt with in this Will and any bequest that fails, I give and bequeath {{frag:primary}}. If none of the above survive me, my residuary estate shall pass to {{frag:contingent}}.",
+      "ml": "ഈ വിൽപത്രത്തിൽ പ്രത്യേകം പരാമർശിക്കാത്തതും പരാജയപ്പെടുന്ന ഏതൊരു ദാനവും ഉൾപ്പെടെ, ജംഗമമോ സ്ഥാവരമോ, ഇപ്പോഴുള്ളതോ ഭാവിയിലുള്ളതോ ആയ എന്റെ ആസ്തിയുടെ ബാക്കി മുഴുവൻ ഭാഗവും ഞാൻ {{frag:primary}} ദാനം ചെയ്യുന്നു. ഇവരാരും നിലനിൽക്കുന്നില്ലെങ്കിൽ, എന്റെ ബാക്കി ആസ്തി {{frag:contingent}}-ന് കൈമാറും."
+    },
+    "fragments": {
+      "primary": [
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "spouse"
+            ]
+          },
+          "text": {
+            "en": "to my spouse",
+            "ml": "എന്റെ ജീവിതപങ്കാളിക്ക്"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "children"
+            ]
+          },
+          "text": {
+            "en": "to my children, in equal shares",
+            "ml": "എന്റെ മക്കൾക്ക്, തുല്യമായി"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "spouse_children"
+            ]
+          },
+          "text": {
+            "en": "to my spouse and children, in equal shares",
+            "ml": "എന്റെ ജീവിതപങ്കാളിക്കും മക്കൾക്കും, തുല്യമായി"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "one_person"
+            ]
+          },
+          "text": {
+            "en": "to {{person:residuary.primary.person}}",
+            "ml": "{{person:residuary.primary.person}}-ന്"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "several_people"
+            ]
+          },
+          "text": {
+            "en": "to {{helper:namesWithShares:residuary.primary}}",
+            "ml": "{{helper:namesWithShares:residuary.primary}}-ന്"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.primary",
+              "charity"
+            ]
+          },
+          "text": {
+            "en": "to {{residuary.primary.charity}}, for its general purposes",
+            "ml": "{{residuary.primary.charity}}-ന്, അതിന്റെ പൊതു ആവശ്യങ്ങൾക്കായി"
+          }
+        }
+      ],
+      "contingent": [
+        {
+          "when": {
+            "eq": [
+              "residuary.contingent",
+              "alt_person"
+            ]
+          },
+          "text": {
+            "en": "{{person:residuary.contingent.person}}",
+            "ml": "{{person:residuary.contingent.person}}"
+          }
+        },
+        {
+          "when": {
+            "eq": [
+              "residuary.contingent",
+              "alt_charity"
+            ]
+          },
+          "text": {
+            "en": "{{residuary.contingent.charity}}",
+            "ml": "{{residuary.contingent.charity}}"
+          }
+        },
+        {
+          "text": {
+            "en": "my legal heirs, in accordance with the law applicable to me",
+            "ml": "എനിക്ക് ബാധകമായ നിയമപ്രകാരമുള്ള എന്റെ അവകാശികൾ"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "muslim",
+    "kind": "clause",
+    "when": {
+      "eq": [
+        "personal.religion",
+        "muslim"
+      ]
+    },
+    "text": {
+      "en": "I am aware that under the Muslim personal law applicable to me, bequests exceeding one-third of my net estate, and bequests in favour of my legal heirs, take effect only with the consent of my heirs. The bequests in this Will are intended to operate within that rule, and to the extent any bequest exceeds it, it shall take effect only so far as my heirs consent after my death; the remainder of my estate shall devolve upon my heirs in accordance with that law.",
+      "ml": "എനിക്ക് ബാധകമായ മുസ്ലിം വ്യക്തിനിയമപ്രകാരം, എന്റെ ആസ്തിയുടെ മൂന്നിലൊന്നിൽ കൂടുതലുള്ള ദാനങ്ങളും, എന്റെ നിയമപരമായ അവകാശികൾക്ക് അനുകൂലമായ ദാനങ്ങളും, എന്റെ അവകാശികളുടെ സമ്മതത്തോടെ മാത്രമേ പ്രാബല്യത്തിൽ വരികയുള്ളൂ എന്ന് ഞാൻ ബോധവാനാണ്. ഈ വിൽപത്രത്തിലെ ദാനങ്ങൾ ആ നിയമത്തിനുള്ളിൽ പ്രവർത്തിക്കാൻ ഉദ്ദേശിച്ചുള്ളതാണ്, ഏതെങ്കിലും ദാനം അതിൽ കൂടുതലാണെങ്കിൽ, എന്റെ മരണശേഷം എന്റെ അവകാശികൾ സമ്മതിക്കുന്ന പരിധി വരെ മാത്രമേ അത് പ്രാബല്യത്തിൽ വരികയുള്ളൂ; എന്റെ ആസ്തിയുടെ ബാക്കി ഭാഗം ആ നിയമപ്രകാരം എന്റെ അവകാശികളിലേക്ക് കൈമാറും."
+    }
+  },
+  {
+    "id": "general.single",
+    "kind": "clause",
+    "text": {
+      "en": "This Will is executed in a single original. Any photocopy or draft shall not be treated as my Will. If any provision of this Will is held invalid, the remaining provisions shall continue in full force.",
+      "ml": "ഈ വിൽപത്രം ഒരൊറ്റ ഒറിജിനലായി തയ്യാറാക്കിയതാണ്. ഒരു ഫോട്ടോകോപ്പിയോ കരടോ എന്റെ വിൽപത്രമായി കണക്കാക്കരുത്. ഈ വിൽപത്രത്തിലെ ഏതെങ്കിലും വ്യവസ്ഥ അസാധുവായി കണക്കാക്കിയാൽ, ബാക്കിയുള്ള വ്യവസ്ഥകൾ പൂർണ്ണമായി പ്രാബല്യത്തിൽ തുടരും."
+    }
+  },
+  {
+    "id": "testimonium",
+    "kind": "plain",
+    "text": {
+      "en": "IN WITNESS WHEREOF I, {{personal.full_name}}, have signed this Will on this {{today.day}} day of {{today.month}}, {{today.year}} at ____________________, in the joint presence of the witnesses below, who have attested it in my presence and in the presence of each other.",
+      "ml": "ഇതിന്റെ സാക്ഷ്യമായി, ഞാൻ {{personal.full_name}}, ഈ വിൽപത്രം {{today.year}}-ലെ {{today.month}} മാസം {{today.day}}-ന് ____________________-ൽ വച്ച്, താഴെയുള്ള സാക്ഷികളുടെ സംയുക്ത സാന്നിധ്യത്തിൽ ഒപ്പിട്ടിരിക്കുന്നു; അവർ എന്റെ സാന്നിധ്യത്തിലും പരസ്പര സാന്നിധ്യത്തിലും ഇത് സാക്ഷ്യപ്പെടുത്തിയിരിക്കുന്നു."
+    }
+  },
+  {
+    "id": "attestation",
+    "kind": "plain",
+    "text": {
+      "en": "ATTESTATION: Signed by the above-named Testator as the Testator's Last Will and Testament in our joint presence, and signed by us as witnesses in the Testator's presence and in the presence of each other, all being present at the same time. We believe the Testator to be of sound mind, memory and understanding.",
+      "ml": "സാക്ഷ്യപത്രം: മേൽപറഞ്ഞ വിൽപത്രകർത്താവ് ഇത് തന്റെ അന്ത്യവിൽപത്രമായി ഞങ്ങളുടെ സംയുക്ത സാന്നിധ്യത്തിൽ ഒപ്പിട്ടതും, ഞങ്ങൾ സാക്ഷികൾ വിൽപത്രകർത്താവിന്റെ സാന്നിധ്യത്തിലും പരസ്പര സാന്നിധ്യത്തിലും, എല്ലാവരും ഒരേസമയം ഹാജരായി ഒപ്പിട്ടതുമാണ്. വിൽപത്രകർത്താവ് പൂർണ്ണ മാനസികാരോഗ്യത്തോടെയും ഓർമ്മശക്തിയോടെയും ഗ്രഹണശക്തിയോടെയും ആണെന്ന് ഞങ്ങൾ വിശ്വസിക്കുന്നു."
+    }
+  }
+]

@@ -1,0 +1,234 @@
+# Pages CMS configuration (https://pagescms.org) — lets the site owner edit
+# every interview question, answer option, help text, and generated-will
+# clause (English + Malayalam) through a web form that commits straight to
+# this repo. A push here triggers the normal Vercel deploy; the `prebuild`
+# script (see package.json / src/content/validate.ts) fails that deploy with
+# a readable error if an edit breaks something, so the live site can't go
+# down from a bad edit — the last good build just stays up.
+#
+# See content/README.md for the plain-English editing guide. The "Routing"
+# fields on each question (`next` / `nextRules` / `when`) are the one
+# technical corner: they're edited as raw JSON, because branching logic
+# doesn't map cleanly onto a form field. Everything else here is just text
+# and dropdowns.
+
+media:
+  input: content/media
+  output: /content/media
+
+content:
+  - name: sections
+    label: "Interview: sections & questions"
+    type: collection
+    path: content/sections
+    view:
+      fields: [id, title, chapter]
+      primary: id
+    fields:
+      - { name: id, label: "Section ID (don't change — code refers to this)", type: string, required: true }
+      - name: title
+        label: Section title (shown in the progress bar)
+        type: object
+        fields:
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
+      - { name: chapter, label: "Chapter ID (don't change — code refers to this)", type: string, required: true }
+      - name: questions
+        label: Questions (in the order they're asked)
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Question ID (don't change — routing refers to this)", type: string, required: true }
+          - { name: section, label: "Section ID (must match this file's section)", type: string, required: true }
+          - name: type
+            label: Question type
+            type: select
+            options: [single, multi, text, longtext, number, date, info, repeater, person, personMulti, shares]
+            required: true
+          - name: text
+            label: Question text
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }
+          - name: help
+            label: Help text (optional, shown under the question in smaller type)
+            type: object
+            fields:
+              - { name: en, label: English, type: string }
+              - { name: ml, label: Malayalam, type: string }
+          - { name: skippable, label: "Can this question be skipped?", type: boolean, default: true }
+          - { name: gate, label: "Gate question (answering \"no\" skips the rest of this section)?", type: boolean }
+          - { name: optional, label: "Free-text answer may be left blank?", type: boolean }
+          - name: options
+            label: "Answer options (for type: single / multi)"
+            type: object
+            list: true
+            fields:
+              - { name: id, label: "Option ID (don't change — routing/will text refers to this)", type: string, required: true }
+              - name: label
+                label: Option text
+                type: object
+                fields:
+                  - { name: en, label: English, type: string, required: true }
+                  - { name: ml, label: Malayalam, type: string }
+              - { name: next, label: "Jump to this question ID when chosen (leave blank for the normal order)", type: string }
+          - name: fields
+            label: "Item fields (only for type: repeater)"
+            type: object
+            list: true
+            fields:
+              - { name: id, label: Field ID, type: string, required: true }
+              - name: type
+                label: Field type
+                type: select
+                options: [text, single]
+              - name: label
+                label: Field label
+                type: object
+                fields:
+                  - { name: en, label: English, type: string, required: true }
+                  - { name: ml, label: Malayalam, type: string }
+              - { name: optional, label: "May be left blank?", type: boolean }
+              - name: options
+                label: "Choices (only for type: single)"
+                type: object
+                list: true
+                fields:
+                  - { name: id, label: Option ID, type: string, required: true }
+                  - name: label
+                    label: Option text
+                    type: object
+                    fields:
+                      - { name: en, label: English, type: string, required: true }
+                      - { name: ml, label: Malayalam, type: string }
+          - name: addMore
+            label: "\"Add another?\" prompt (only for type: repeater)"
+            type: object
+            fields:
+              - { name: en, label: English, type: string }
+              - { name: ml, label: Malayalam, type: string }
+          - { name: askAddress, label: "Ask for an address when adding someone new (person/personMulti)?", type: boolean }
+          - { name: minPeople, label: "Minimum people required (personMulti only)", type: number }
+          - { name: peopleSource, label: "Answer key holding the people to split between (shares only)", type: string }
+          - { name: next, label: "Default next question ID (leave blank to fall through to the section order)", type: string }
+          - name: nextRules
+            label: "Routing — technical, raw JSON (leave as [] if none apply)"
+            type: code
+            options: { format: json }
+          - name: when
+            label: "Visibility condition — technical, raw JSON (delete the field entirely if always visible)"
+            type: code
+            options: { format: json }
+
+  - name: clauses
+    label: "Generated will: clauses"
+    type: file
+    path: content/clauses.json
+    fields:
+      - name: clauses
+        label: Clause blocks (in the order they appear in the will)
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Clause ID (don't change)", type: string, required: true }
+          - name: kind
+            label: Kind
+            type: select
+            options: [title, heading, clause, plain]
+            required: true
+          - name: when
+            label: "Visibility condition — technical, raw JSON (delete the field entirely if always included)"
+            type: code
+            options: { format: json }
+          - name: text
+            label: Clause text
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }
+          - name: fragments
+            label: "Conditional inserts referenced by {{frag:name}} in the text above — technical, raw JSON"
+            type: code
+            options: { format: json }
+          - { name: each, label: "Repeat once per item in this answer array (leave blank for a normal single clause)", type: string }
+          - { name: itemKeyPrefix, label: "Answer-key prefix stripped from each item's fields (only used with \"each\")", type: string }
+
+  - name: helpers
+    label: "Generated will: shared sentence templates"
+    type: file
+    path: content/helpers.json
+    fields:
+      - name: helpers
+        label: Templates
+        type: object
+        list: true
+        fields:
+          - { name: key, label: "Template key (don't change)", type: string, required: true }
+          - name: text
+            label: Template text (with {placeholders} filled in by the app)
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }
+
+  - name: repeaters
+    label: "Interview: \"add another?\" list settings"
+    type: file
+    path: content/repeaters.json
+    fields:
+      - name: repeaters
+        label: Lists
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Repeater ID (don't change)", type: string, required: true }
+          - { name: keyPrefix, label: "Answer-key prefix for each item (don't change)", type: string, required: true }
+          - { name: entryId, label: "First question ID of the item chain (don't change)", type: string, required: true }
+          - { name: afterId, label: "Question ID to continue to once done (don't change)", type: string, required: true }
+          - name: addMoreLabel
+            label: "\"Add another?\" heading ({n} is replaced with the count so far)"
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }
+          - name: summarize
+            label: "How a completed item is summarised in the list — technical, raw JSON"
+            type: code
+            options: { format: json }
+
+  - name: relations
+    label: "Interview: relationship choices"
+    type: file
+    path: content/relations.json
+    fields:
+      - name: relations
+        label: Relationships (offered whenever the interview asks "how are they related to you?")
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Relation ID (don't change)", type: string, required: true }
+          - name: label
+            label: Relation label
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }
+
+  - name: chapters
+    label: "Interview: chapters"
+    type: file
+    path: content/chapters.json
+    fields:
+      - name: chapters
+        label: Chapters (the top-level groups shown in the progress bar)
+        type: object
+        list: true
+        fields:
+          - { name: id, label: "Chapter ID (don't change — sections refer to this)", type: string, required: true }
+          - name: title
+            label: Chapter title
+            type: object
+            fields:
+              - { name: en, label: English, type: string, required: true }
+              - { name: ml, label: Malayalam, type: string }

@@ -1,0 +1,86 @@
+[
+  {
+    "id": "wife",
+    "label": {
+      "en": "Wife",
+      "ml": "ഭാര്യ"
+    }
+  },
+  {
+    "id": "husband",
+    "label": {
+      "en": "Husband",
+      "ml": "ഭർത്താവ്"
+    }
+  },
+  {
+    "id": "son",
+    "label": {
+      "en": "Son",
+      "ml": "മകൻ"
+    }
+  },
+  {
+    "id": "daughter",
+    "label": {
+      "en": "Daughter",
+      "ml": "മകൾ"
+    }
+  },
+  {
+    "id": "father",
+    "label": {
+      "en": "Father",
+      "ml": "അച്ഛൻ"
+    }
+  },
+  {
+    "id": "mother",
+    "label": {
+      "en": "Mother",
+      "ml": "അമ്മ"
+    }
+  },
+  {
+    "id": "brother",
+    "label": {
+      "en": "Brother",
+      "ml": "സഹോദരൻ"
+    }
+  },
+  {
+    "id": "sister",
+    "label": {
+      "en": "Sister",
+      "ml": "സഹോദരി"
+    }
+  },
+  {
+    "id": "grandchild",
+    "label": {
+      "en": "Grandchild",
+      "ml": "പേരക്കുട്ടി"
+    }
+  },
+  {
+    "id": "other_relative",
+    "label": {
+      "en": "Other relative",
+      "ml": "മറ്റ് ബന്ധുക്കൾ"
+    }
+  },
+  {
+    "id": "friend",
+    "label": {
+      "en": "Friend",
+      "ml": "സുഹൃത്ത്"
+    }
+  },
+  {
+    "id": "other",
+    "label": {
+      "en": "Other",
+      "ml": "മറ്റുള്ളവർ"
+    }
+  }
+]

@@ -1,0 +1,217 @@
+{
+  "id": "diaries",
+  "title": {
+    "en": "Diaries & journals",
+    "ml": "ഡയറികളും കുറിപ്പുകളും"
+  },
+  "chapter": "belongings",
+  "questions": [
+    {
+      "id": "diaries.gate",
+      "section": "diaries",
+      "type": "single",
+      "text": {
+        "en": "Do you keep personal diaries, journals or letters?",
+        "ml": "നിങ്ങൾ വ്യക്തിഗത ഡയറികളോ കുറിപ്പുകളോ കത്തുകളോ സൂക്ഷിക്കുന്നുണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "diaries.action"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "gadgets.gate"
+    },
+    {
+      "id": "diaries.action",
+      "section": "diaries",
+      "type": "single",
+      "text": {
+        "en": "What should happen to them?",
+        "ml": "അവയ്ക്ക് എന്ത് സംഭവിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "give_to_person",
+          "label": {
+            "en": "Give them to someone",
+            "ml": "ഒരാൾക്ക് നൽകുക"
+          },
+          "next": "diaries.action.person"
+        },
+        {
+          "id": "destroy",
+          "label": {
+            "en": "Destroy them unread",
+            "ml": "വായിക്കാതെ നശിപ്പിക്കുക"
+          }
+        },
+        {
+          "id": "read_first",
+          "label": {
+            "en": "Let someone read them first, then decide",
+            "ml": "ആദ്യം ഒരാൾ വായിച്ച ശേഷം തീരുമാനിക്കട്ടെ"
+          },
+          "next": "diaries.action.reader"
+        },
+        {
+          "id": "keep_with_family",
+          "label": {
+            "en": "Keep them with the family",
+            "ml": "കുടുംബം സൂക്ഷിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "diaries.notes"
+    },
+    {
+      "id": "diaries.action.person",
+      "section": "diaries",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "diaries.action.contingent.mode"
+    },
+    {
+      "id": "diaries.action.people",
+      "section": "diaries",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "diaries.action.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "diaries.action.shares",
+      "section": "diaries",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "diaries.action.contingent.group_mode",
+      "peopleSource": "diaries.action.people"
+    },
+    {
+      "id": "diaries.action.contingent.mode",
+      "section": "diaries",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "diaries.action.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "diaries.notes"
+    },
+    {
+      "id": "diaries.action.contingent.person",
+      "section": "diaries",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "diaries.notes"
+    },
+    {
+      "id": "diaries.action.contingent.group_mode",
+      "section": "diaries",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "diaries.notes"
+    },
+    {
+      "id": "diaries.action.reader",
+      "section": "diaries",
+      "type": "person",
+      "text": {
+        "en": "Who should read them first?",
+        "ml": "ആദ്യം ആര് വായിക്കണം?"
+      },
+      "next": "diaries.notes"
+    },
+    {
+      "id": "diaries.notes",
+      "section": "diaries",
+      "type": "longtext",
+      "text": {
+        "en": "Anything specific — certain volumes, letters, or people who should or shouldn't see them?",
+        "ml": "പ്രത്യേകമായി എന്തെങ്കിലും — ചില വാല്യങ്ങൾ, കത്തുകൾ, അല്ലെങ്കിൽ കാണേണ്ടതോ കാണരുതാത്തതോ ആയ ആളുകൾ?"
+      },
+      "optional": true,
+      "next": "gadgets.gate"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "id": "debts",
+  "title": {
+    "en": "Debts & liabilities",
+    "ml": "കടങ്ങളും ബാധ്യതകളും"
+  },
+  "chapter": "money",
+  "questions": [
+    {
+      "id": "debts.gate",
+      "section": "debts",
+      "type": "single",
+      "text": {
+        "en": "Do you currently owe money to anyone — banks or people?",
+        "ml": "നിലവിൽ ആർക്കെങ്കിലും പണം കടപ്പെട്ടിട്ടുണ്ടോ — ബാങ്കുകൾക്കോ വ്യക്തികൾക്കോ?"
+      },
+      "help": {
+        "en": "Your executor can discover and settle debts either way; listing what you remember helps.",
+        "ml": "ഏത് സാഹചര്യത്തിലും കടങ്ങൾ കണ്ടെത്തി തീർക്കാൻ എക്സിക്യൂട്ടർക്ക് കഴിയും; ഓർമ്മയുള്ളവ പട്ടികപ്പെടുത്തുന്നത് സഹായകമാകും."
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "debts.item.kind"
+        },
+        {
+          "id": "not_sure",
+          "label": {
+            "en": "Not sure",
+            "ml": "ഉറപ്പില്ല"
+          },
+          "next": "debts.item.kind"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "bank.gate"
+    },
+    {
+      "id": "debts.item.kind",
+      "section": "debts",
+      "type": "single",
+      "text": {
+        "en": "What kind of debt?",
+        "ml": "ഏത് തരം കടം?"
+      },
+      "options": [
+        {
+          "id": "home_loan",
+          "label": {
+            "en": "Home loan",
+            "ml": "ഭവന വായ്പ"
+          }
+        },
+        {
+          "id": "vehicle_loan",
+          "label": {
+            "en": "Vehicle loan",
+            "ml": "വാഹന വായ്പ"
+          }
+        },
+        {
+          "id": "personal_loan",
+          "label": {
+            "en": "Personal loan",
+            "ml": "വ്യക്തിഗത വായ്പ"
+          }
+        },
+        {
+          "id": "gold_loan",
+          "label": {
+            "en": "Gold loan",
+            "ml": "സ്വർണ്ണ വായ്പ"
+          }
+        },
+        {
+          "id": "credit_card",
+          "label": {
+            "en": "Credit card",
+            "ml": "ക്രെഡിറ്റ് കാർഡ്"
+          }
+        },
+        {
+          "id": "person_debt",
+          "label": {
+            "en": "Money borrowed from a person",
+            "ml": "ഒരു വ്യക്തിയിൽ നിന്ന് വാങ്ങിയ പണം"
+          }
+        },
+        {
+          "id": "other",
+          "label": {
+            "en": "Other / EMI",
+            "ml": "മറ്റുള്ളവ / EMI"
+          }
+        }
+      ],
+      "next": "debts.item.lender"
+    },
+    {
+      "id": "debts.item.lender",
+      "section": "debts",
+      "type": "text",
+      "text": {
+        "en": "Lender, or who you owe?",
+        "ml": "കടം നൽകിയത് ആര്?"
+      },
+      "next": "debts.item.amount"
+    },
+    {
+      "id": "debts.item.amount",
+      "section": "debts",
+      "type": "number",
+      "text": {
+        "en": "Roughly how much?",
+        "ml": "ഏകദേശം എത്ര?"
+      },
+      "optional": true,
+      "next": "debts.item.insured"
+    },
+    {
+      "id": "debts.item.insured",
+      "section": "debts",
+      "type": "single",
+      "text": {
+        "en": "Is it covered by loan insurance?",
+        "ml": "ഇതിന് ലോൺ ഇൻഷുറൻസ് ഉണ്ടോ?"
+      },
+      "help": {
+        "en": "Many home/vehicle loans carry loan-cover insurance that repays on death.",
+        "ml": "പല ഭവന/വാഹന വായ്പകൾക്കും മരണശേഷം തിരിച്ചടയ്ക്കുന്ന ലോൺ കവർ ഇൻഷുറൻസ് ഉണ്ടാകും."
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        },
+        {
+          "id": "not_sure",
+          "label": {
+            "en": "Not sure",
+            "ml": "ഉറപ്പില്ല"
+          }
+        }
+      ],
+      "next": "debts.item.secured_strategy"
+    },
+    {
+      "id": "debts.item.secured_strategy",
+      "section": "debts",
+      "type": "single",
+      "text": {
+        "en": "If the estate's cash can't cover it:",
+        "ml": "ആസ്തിയിലെ പണം മതിയാകില്ലെങ്കിൽ:"
+      },
+      "help": {
+        "en": "Only relevant if the loan is secured against an asset (e.g. a home or vehicle loan).",
+        "ml": "വായ്പ ഒരു ആസ്തിക്കെതിരെ (ഭവന/വാഹന വായ്പ പോലെ) സുരക്ഷിതമാണെങ്കിൽ മാത്രം ബാധകം."
+      },
+      "options": [
+        {
+          "id": "sell_asset",
+          "label": {
+            "en": "Sell the pledged/mortgaged asset if needed",
+            "ml": "ആവശ്യമെങ്കിൽ പണയപ്പെടുത്തിയ ആസ്തി വിൽക്കുക"
+          }
+        },
+        {
+          "id": "keep_asset",
+          "label": {
+            "en": "Try to keep the asset — pay from other assets first",
+            "ml": "ആസ്തി നിലനിർത്താൻ ശ്രമിക്കുക — ആദ്യം മറ്റ് ആസ്തികളിൽ നിന്ന് അടയ്ക്കുക"
+          }
+        },
+        {
+          "id": "executor_decides",
+          "label": {
+            "en": "Executor decides",
+            "ml": "എക്സിക്യൂട്ടർ തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    }
+  ]
+}

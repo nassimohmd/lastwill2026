@@ -6,16 +6,12 @@ import { initialState } from '../state/store';
 import type { AppState } from '../engine/types';
 
 import enUi from '../locales/en/ui.json';
-import enQuestions from '../locales/en/questions.json';
-import enClauses from '../locales/en/clauses.json';
 import mlUi from '../locales/ml/ui.json';
-import mlQuestions from '../locales/ml/questions.json';
-import mlClauses from '../locales/ml/clauses.json';
+import { contentEn, contentMl } from '../content/load';
 
 const pairs: [string, Record<string, string>, Record<string, string>][] = [
   ['ui.json', enUi, mlUi],
-  ['questions.json', enQuestions, mlQuestions],
-  ['clauses.json', enClauses, mlClauses],
+  ['content', contentEn, contentMl],
 ];
 
 function stateWith(answers: Record<string, unknown>): AppState {

@@ -254,13 +254,18 @@ Selectors that matter:
   "CHAPTER (2/6) — SECTION" for multi-section chapters (no counter when a
   chapter has one section) with the overall "N / 18" on the right.
 - **Language rule**: only content localizes — keys under `q.*`, `clause.*`,
-  `frag.*`, `part.*`, `ui.will.*`, plus the exact keys `ui.yes`/`ui.no`
-  (they live in the ui namespace but are answer options). Everything else
-  is pinned to English inside `t()` itself regardless of locale. When
-  verifying Malayalam, assert the question/options are Malayalam while the
-  Skip link, header links, progress label, and review pills stay English.
-  Watch for the ui.yes/ui.no class of bug: a key's namespace doesn't
-  determine whether it's chrome — where it renders does.
+  `frag.*`, `part.*`, `ui.will.*`, `chap.*`, `sec.*`, `rep.*`, plus the
+  exact keys `ui.yes`/`ui.no` (they live in the ui namespace but are answer
+  options). Everything else is pinned to English inside `t()` itself
+  regardless of locale. When verifying Malayalam, assert the question/
+  options *and* the chapter/section titles in the progress bar are
+  Malayalam, while the Skip link, header links, and review pills stay
+  English. Watch for the ui.yes/ui.no class of bug: a key's namespace
+  doesn't determine whether it's chrome — where it renders does.
+  Chapter/section titles and repeater "add another?" prompts moved from
+  `ui.json` (pinned English) into `content/` as part of the content-layer
+  migration below — they now localize too, which is a deliberate change
+  from earlier phases, not a regression.
 
 ## Phase 4: review screen, checklist, export/import, CSP
 
@@ -325,3 +330,50 @@ Selectors that matter:
   ordinal, or you get "7th-ന്" nonsense. Verify by generating a will in
   Malayalam and reading the date in the declaration, not just by reading
   the code.
+
+## Phase 6: content layer (owner-editable via Pages CMS)
+
+- All interview/will wording and structure now lives in `content/*.json`
+  (plain JSON, `{en, ml?}` inline per question/option/fragment — no i18n-key
+  indirection), not in `src/data/*.ts`. `src/content/load.ts` is the only
+  place that reads `content/`: it derives a unique dictionary key per
+  question/option/field/clause/fragment (`q.<id>`, `q.<id>.opt.<optId>`,
+  `clause.<id>`, `chap.<id>`, `sec.<id>`, `rep.<id>.addMore`, etc.),
+  populates `contentEn`/`contentMl`, and reconstructs the exact runtime
+  shapes (`Question`, `Section`, `Chapter`, `ClauseBlock`,
+  `FlowRepeaterDef`) the rest of the app already consumes.
+  `src/data/{graph,clauses,repeaters,relations}.ts` are now thin re-export
+  shims over the loader — the 18 old per-section files and
+  `src/engine/subflows.ts` are gone; if you're looking for where a
+  question's text lives, it's `content/sections/<nn>-<id>.json`, not a
+  `.ts` file.
+- **Content is validated at build time.** `npm run prebuild` (wired via
+  npm's implicit `pre<script>` hook, so `npm run build` always runs it
+  first) executes `scripts/validate-content.ts` →
+  `src/content/validateContent()`: checks every question id is unique,
+  every `next`/option-`next`/`nextRules.goto`/repeater `entryId`/`afterId`
+  resolves to a real question (with a Levenshtein "did you mean" hint),
+  every `Condition` shape is well-formed, no required text is empty, and —
+  reusing the same logic as `phase3.test.ts`'s skip-everything walk — that
+  every section is reachable and the whole content set still renders a
+  valid will end to end. A bad edit fails the build with a readable
+  message instead of shipping broken; verify this still works after
+  touching `content/*.json`, `src/content/load.ts`, or `src/content/
+  validate.ts` by deliberately corrupting one field (e.g. set a
+  `next` to a nonexistent id) and confirming `npm run build` exits
+  non-zero with that exact message, then revert.
+- **Pages CMS** (`.pages.yml` at repo root) is the intended editing UI —
+  a hosted form editor that commits straight to this branch. It's
+  configured but not something to test in this sandbox (no live
+  pagescms.org session here); if you change the shape of `content/*.json`
+  (add/rename/remove a field), update `.pages.yml` to match or the CMS
+  form will drift from what the loader actually reads. `content/README.md`
+  is the owner-facing editing guide — keep it in sync with any schema
+  change too.
+- A CMS form can write back an empty array/string for a field the editor
+  never touched (`"options": []`, `"help": {"en": "", "ml": ""}`) instead
+  of omitting the key — `src/content/load.ts`'s `present()`/`textPresent()`/
+  `strPresent()` helpers treat those the same as "not set". If you add a
+  new optional field to the content schema, route it through one of those
+  helpers rather than a bare truthy check, or a CMS-saved-but-untouched
+  field will silently start behaving as if it were set.

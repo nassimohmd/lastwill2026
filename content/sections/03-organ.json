@@ -1,0 +1,178 @@
+{
+  "id": "organ",
+  "title": {
+    "en": "Organ donation",
+    "ml": "അവയവദാനം"
+  },
+  "chapter": "wishes",
+  "questions": [
+    {
+      "id": "organ.gate",
+      "section": "organ",
+      "type": "single",
+      "text": {
+        "en": "Would you like to donate your organs?",
+        "ml": "നിങ്ങളുടെ അവയവങ്ങൾ ദാനം ചെയ്യാൻ താൽപര്യമുണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes_any",
+          "label": {
+            "en": "Yes — any organs and tissues that can help someone",
+            "ml": "അതെ — ആർക്കെങ്കിലും സഹായകമാകുന്ന ഏത് അവയവവും കലകളും"
+          },
+          "next": "organ.registered"
+        },
+        {
+          "id": "yes_specific",
+          "label": {
+            "en": "Yes — only specific organs",
+            "ml": "അതെ — ചില പ്രത്യേക അവയവങ്ങൾ മാത്രം"
+          },
+          "next": "organ.specific"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "when": {
+        "not": {
+          "eq": [
+            "funeral.method",
+            "donate_science"
+          ]
+        }
+      },
+      "next": "guardianship.gate"
+    },
+    {
+      "id": "organ.specific",
+      "section": "organ",
+      "type": "multi",
+      "text": {
+        "en": "Which organs?",
+        "ml": "ഏത് അവയവങ്ങൾ?"
+      },
+      "options": [
+        {
+          "id": "eyes",
+          "label": {
+            "en": "Eyes / corneas",
+            "ml": "കണ്ണുകൾ / കോർണിയ"
+          }
+        },
+        {
+          "id": "kidneys",
+          "label": {
+            "en": "Kidneys",
+            "ml": "വൃക്കകൾ"
+          }
+        },
+        {
+          "id": "heart",
+          "label": {
+            "en": "Heart",
+            "ml": "ഹൃദയം"
+          }
+        },
+        {
+          "id": "liver",
+          "label": {
+            "en": "Liver",
+            "ml": "കരൾ"
+          }
+        },
+        {
+          "id": "lungs",
+          "label": {
+            "en": "Lungs",
+            "ml": "ശ്വാസകോശങ്ങൾ"
+          }
+        },
+        {
+          "id": "pancreas",
+          "label": {
+            "en": "Pancreas",
+            "ml": "പാൻക്രിയാസ്"
+          }
+        },
+        {
+          "id": "skin",
+          "label": {
+            "en": "Skin",
+            "ml": "ചർമ്മം"
+          }
+        },
+        {
+          "id": "bones",
+          "label": {
+            "en": "Bones / tissue",
+            "ml": "അസ്ഥികൾ / കലകൾ"
+          }
+        }
+      ],
+      "next": "organ.registered"
+    },
+    {
+      "id": "organ.registered",
+      "section": "organ",
+      "type": "single",
+      "text": {
+        "en": "Are you registered as an organ donor?",
+        "ml": "നിങ്ങൾ അവയവദാതാവായി രജിസ്റ്റർ ചെയ്തിട്ടുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "organ.registered_details"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          },
+          "next": "organ.registered_notice"
+        }
+      ],
+      "next": "guardianship.gate"
+    },
+    {
+      "id": "organ.registered_details",
+      "section": "organ",
+      "type": "text",
+      "text": {
+        "en": "Pledge or registration details?",
+        "ml": "പ്രതിജ്ഞ / രജിസ്ട്രേഷൻ വിവരങ്ങൾ?"
+      },
+      "optional": true,
+      "next": "guardianship.gate"
+    },
+    {
+      "id": "organ.registered_notice",
+      "section": "organ",
+      "type": "info",
+      "text": {
+        "en": "The will is usually read after the window for donation — register a pledge (e.g. with NOTTO) and tell your family now. This wish is still recorded here.",
+        "ml": "ദാനത്തിനുള്ള സമയപരിധിക്ക് ശേഷമാവും സാധാരണയായി വിൽപത്രം വായിക്കപ്പെടുക — ഒരു പ്രതിജ്ഞ രജിസ്റ്റർ ചെയ്യുക (ഉദാ: NOTTO-യിൽ) കുടുംബത്തെ ഇപ്പോൾ തന്നെ അറിയിക്കുക. ഈ ആഗ്രഹം ഇവിടെ രേഖപ്പെടുത്തിയിട്ടുണ്ട്."
+      },
+      "next": "guardianship.gate"
+    }
+  ]
+}

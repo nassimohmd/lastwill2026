@@ -56,12 +56,12 @@ jewellery, intellectual property, diaries, gadgets, digital life, the residuary
 clause, and executors. The interview end-to-end produces a legally complete will.
 
 A few sections were intentionally simplified versus the full docs spec to keep
-the question graph maintainable (see comments in `src/data/*.ts`): per-child
-guardian choice collapsed to one guardian pair for all minors; investments'
-nine per-type mini-flows collapsed into one generic repeater; collectibles,
-jewellery, and IP each collapsed to a single beneficiary pick rather than an
-itemised list. These are straightforward to expand later using the same
-`makeBeneficiarySubflow` / flow-repeater machinery — no engine changes needed.
+the question graph maintainable: per-child guardian choice collapsed to one
+guardian pair for all minors; investments' nine per-type mini-flows collapsed
+into one generic repeater; collectibles, jewellery, and IP each collapsed to
+a single beneficiary pick rather than an itemised list. These are
+straightforward to expand later using the same flow-repeater machinery — no
+engine changes needed.
 
 UI: built on **shadcn/ui** (Radix primitives + `class-variance-authority`)
 and Tailwind CSS v4. Components are copied into the repo at
@@ -100,9 +100,10 @@ import for moving a draft between devices without a backend; and a strict
 Vite's HMR websocket).
 
 **Malayalam (Phase 5)**: the full interview, all UI chrome, and the
-generated-will clause templates are translated (`src/locales/ml/*.json`,
-809 keys, zero missing, placeholder-token parity checked by
-`src/i18n/malayalam.test.ts`). Two independent language toggles: one for
+generated-will clause templates are translated (`src/locales/ml/ui.json` +
+the `ml` half of every `content/*.json` entry, ~1,100 keys combined, zero
+missing, placeholder-token parity checked by `src/i18n/malayalam.test.ts`).
+Two independent language toggles: one for
 the interview/UI (landing page + header, sticky, switch anytime without
 losing progress), and a separate one on the will screen for the *document
 text itself*, which always defaults to English — the highest-stakes text
@@ -113,13 +114,35 @@ deliberate scope choice, not a technical limitation: the underlying
 per-key-fallback i18n architecture makes flipping the default just as easy
 once the Malayalam legal text has been professionally reviewed.
 
+## Content: editable without touching code
+
+Every question, answer option, help text, and generated-will clause (both
+languages) lives in plain JSON under [`content/`](content/README.md), not in
+`src/`. `src/content/load.ts` is the only code that reads it — it derives
+the app's internal i18n keys from the JSON at build time and reconstructs
+the same `Question`/`Section`/`ClauseBlock` shapes the engine has always
+used, so nothing downstream (the resolver, the template renderer, the UI)
+had to change. `src/data/{graph,clauses,repeaters,relations}.ts` are now
+thin re-exports of that loader.
+
+The intended editing surface is **[Pages CMS](https://pagescms.org)**
+(`.pages.yml` at the repo root) — a free, hosted form editor that commits
+straight to this branch, which Vercel auto-deploys. A content commit runs
+through `npm run prebuild` (`src/content/validate.ts`) before the build
+proceeds: dangling routing targets, duplicate ids, malformed conditions, and
+empty required text all fail the build with a plain-English message instead
+of shipping broken, so a bad edit can never take the live site down — Vercel
+just keeps serving the last build that passed. See
+[`content/README.md`](content/README.md) for the full owner-facing guide.
+
 ## Development
 
 ```bash
 npm install
-npm run dev        # local dev server
-npm run test       # unit tests (engine, template, reducer)
-npm run build      # production build
+npm run dev              # local dev server
+npm run test             # unit tests (engine, template, reducer, content validator)
+npm run validate-content # run the content build-safety check on its own
+npm run build            # production build (runs the content check first)
 ```
 
 Deployed on Vercel (static build, no server) — `npm run build` output in `dist/`.

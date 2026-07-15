@@ -1,0 +1,268 @@
+{
+  "id": "ip",
+  "title": {
+    "en": "Intellectual property",
+    "ml": "ബൗദ്ധിക സ്വത്തവകാശം"
+  },
+  "chapter": "belongings",
+  "questions": [
+    {
+      "id": "ip.gate",
+      "section": "ip",
+      "type": "single",
+      "text": {
+        "en": "Have you created anything that earns or could earn — books, music, inventions, brands, software, or online content?",
+        "ml": "വരുമാനം നൽകുന്നതോ നൽകാൻ സാധ്യതയുള്ളതോ ആയ എന്തെങ്കിലും നിങ്ങൾ സൃഷ്ടിച്ചിട്ടുണ്ടോ — പുസ്തകങ്ങൾ, സംഗീതം, കണ്ടുപിടിത്തങ്ങൾ, ബ്രാൻഡുകൾ, സോഫ്റ്റ്‌വെയർ, ഓൺലൈൻ ഉള്ളടക്കം?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "ip.types"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "diaries.gate"
+    },
+    {
+      "id": "ip.types",
+      "section": "ip",
+      "type": "multi",
+      "text": {
+        "en": "What kind?",
+        "ml": "ഏത് തരം?"
+      },
+      "options": [
+        {
+          "id": "books",
+          "label": {
+            "en": "Books / writing",
+            "ml": "പുസ്തകങ്ങൾ / എഴുത്ത്"
+          }
+        },
+        {
+          "id": "music",
+          "label": {
+            "en": "Music / art",
+            "ml": "സംഗീതം / കല"
+          }
+        },
+        {
+          "id": "patents",
+          "label": {
+            "en": "Patents / inventions",
+            "ml": "പേറ്റന്റുകൾ / കണ്ടുപിടിത്തങ്ങൾ"
+          }
+        },
+        {
+          "id": "trademarks",
+          "label": {
+            "en": "Trademarks / brand names",
+            "ml": "ട്രേഡ്മാർക്കുകൾ / ബ്രാൻഡ് പേരുകൾ"
+          }
+        },
+        {
+          "id": "software",
+          "label": {
+            "en": "Software / code",
+            "ml": "സോഫ്റ്റ്‌വെയർ / കോഡ്"
+          }
+        },
+        {
+          "id": "content",
+          "label": {
+            "en": "Monetised online content",
+            "ml": "വരുമാനമുള്ള ഓൺലൈൻ ഉള്ളടക്കം"
+          }
+        }
+      ],
+      "next": "ip.desc"
+    },
+    {
+      "id": "ip.desc",
+      "section": "ip",
+      "type": "longtext",
+      "text": {
+        "en": "What is it?",
+        "ml": "അതെന്താണ്?"
+      },
+      "help": {
+        "en": "Title, registration number, channel name, etc.",
+        "ml": "പേര്, രജിസ്ട്രേഷൻ നമ്പർ, ചാനൽ പേര് മുതലായവ."
+      },
+      "next": "ip.beneficiary.mode"
+    },
+    {
+      "id": "ip.beneficiary.mode",
+      "section": "ip",
+      "type": "single",
+      "text": {
+        "en": "Who should own the rights and future income?",
+        "ml": "അവകാശങ്ങളും ഭാവി വരുമാനവും ആർക്ക് സ്വന്തമാകണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "ip.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "ip.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "ip.wishes"
+    },
+    {
+      "id": "ip.beneficiary.person",
+      "section": "ip",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "ip.beneficiary.contingent.mode"
+    },
+    {
+      "id": "ip.beneficiary.people",
+      "section": "ip",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "ip.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "ip.beneficiary.shares",
+      "section": "ip",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "ip.beneficiary.contingent.group_mode",
+      "peopleSource": "ip.beneficiary.people"
+    },
+    {
+      "id": "ip.beneficiary.contingent.mode",
+      "section": "ip",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "ip.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "ip.wishes"
+    },
+    {
+      "id": "ip.beneficiary.contingent.person",
+      "section": "ip",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "ip.wishes"
+    },
+    {
+      "id": "ip.beneficiary.contingent.group_mode",
+      "section": "ip",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "ip.wishes"
+    },
+    {
+      "id": "ip.wishes",
+      "section": "ip",
+      "type": "text",
+      "text": {
+        "en": "Any wishes on how it's used?",
+        "ml": "ഇത് എങ്ങനെ ഉപയോഗിക്കണം എന്നതിനെക്കുറിച്ച് ആഗ്രഹങ്ങളുണ്ടോ?"
+      },
+      "optional": true,
+      "next": "diaries.gate"
+    }
+  ]
+}

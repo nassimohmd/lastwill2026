@@ -1,0 +1,172 @@
+{
+  "id": "residuary",
+  "title": {
+    "en": "Residuary clause",
+    "ml": "ബാക്കി സ്വത്ത് സംബന്ധിച്ച വ്യവസ്ഥ"
+  },
+  "chapter": "residuary",
+  "questions": [
+    {
+      "id": "residuary.primary",
+      "section": "residuary",
+      "type": "single",
+      "text": {
+        "en": "Everything else should go to:",
+        "ml": "ബാക്കിയുള്ളതെല്ലാം ആർക്ക് പോകണം:"
+      },
+      "help": {
+        "en": "This is the safety net of your will — anything not specifically given away, or any gift that fails, passes under this clause.",
+        "ml": "ഇത് നിങ്ങളുടെ വിൽപത്രത്തിന്റെ സുരക്ഷാവലയമാണ് — പ്രത്യേകം പറയാത്തതും പരാജയപ്പെടുന്ന ഏതൊരു ദാനവും ഈ വ്യവസ്ഥ പ്രകാരം കൈമാറ്റപ്പെടും."
+      },
+      "options": [
+        {
+          "id": "spouse",
+          "label": {
+            "en": "My spouse",
+            "ml": "എന്റെ ജീവിതപങ്കാളിക്ക്"
+          }
+        },
+        {
+          "id": "children",
+          "label": {
+            "en": "My children, equally",
+            "ml": "എന്റെ മക്കൾക്ക്, തുല്യമായി"
+          }
+        },
+        {
+          "id": "spouse_children",
+          "label": {
+            "en": "My spouse and children, equally",
+            "ml": "എന്റെ ജീവിതപങ്കാളിക്കും മക്കൾക്കും, തുല്യമായി"
+          }
+        },
+        {
+          "id": "one_person",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾക്ക്"
+          },
+          "next": "residuary.primary.person"
+        },
+        {
+          "id": "several_people",
+          "label": {
+            "en": "Several people",
+            "ml": "പലർക്കും"
+          },
+          "next": "residuary.primary.people"
+        },
+        {
+          "id": "charity",
+          "label": {
+            "en": "Charity",
+            "ml": "ഒരു ജീവകാരുണ്യ സ്ഥാപനത്തിന്"
+          },
+          "next": "residuary.primary.charity"
+        }
+      ],
+      "next": "residuary.contingent"
+    },
+    {
+      "id": "residuary.primary.person",
+      "section": "residuary",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "residuary.contingent"
+    },
+    {
+      "id": "residuary.primary.people",
+      "section": "residuary",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "residuary.primary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "residuary.primary.shares",
+      "section": "residuary",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "residuary.contingent",
+      "peopleSource": "residuary.primary.people"
+    },
+    {
+      "id": "residuary.primary.charity",
+      "section": "residuary",
+      "type": "text",
+      "text": {
+        "en": "Which charity?",
+        "ml": "ഏത് സ്ഥാപനം?"
+      },
+      "help": {
+        "en": "Name and place — identify it precisely.",
+        "ml": "പേരും സ്ഥലവും — കൃത്യമായി തിരിച്ചറിയുക."
+      },
+      "next": "residuary.contingent"
+    },
+    {
+      "id": "residuary.contingent",
+      "section": "residuary",
+      "type": "single",
+      "text": {
+        "en": "If none of them survive you, everything else goes to:",
+        "ml": "ഇവരാരും നിലനിൽക്കുന്നില്ലെങ്കിൽ, ബാക്കിയുള്ളതെല്ലാം ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "alt_person",
+          "label": {
+            "en": "An alternate person",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "residuary.contingent.person"
+        },
+        {
+          "id": "alt_charity",
+          "label": {
+            "en": "An alternate charity",
+            "ml": "മറ്റൊരു ജീവകാരുണ്യ സ്ഥാപനത്തിന്"
+          },
+          "next": "residuary.contingent.charity"
+        },
+        {
+          "id": "legal_heirs",
+          "label": {
+            "en": "My legal heirs, as the law provides",
+            "ml": "നിയമപ്രകാരമുള്ള എന്റെ അവകാശികൾക്ക്"
+          }
+        }
+      ],
+      "next": "executors.physical.primary"
+    },
+    {
+      "id": "residuary.contingent.person",
+      "section": "residuary",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "executors.physical.primary"
+    },
+    {
+      "id": "residuary.contingent.charity",
+      "section": "residuary",
+      "type": "text",
+      "text": {
+        "en": "Which charity?",
+        "ml": "ഏത് സ്ഥാപനം?"
+      },
+      "next": "executors.physical.primary"
+    }
+  ]
+}

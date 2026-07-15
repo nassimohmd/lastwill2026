@@ -1,0 +1,261 @@
+{
+  "id": "collect",
+  "title": {
+    "en": "Collectibles & valuables",
+    "ml": "ശേഖരങ്ങളും വിലപിടിപ്പുള്ള വസ്തുക്കളും"
+  },
+  "chapter": "belongings",
+  "questions": [
+    {
+      "id": "collect.gate",
+      "section": "collect",
+      "type": "single",
+      "text": {
+        "en": "Do you have any valuable collections or memorabilia?",
+        "ml": "വിലപിടിപ്പുള്ള ശേഖരങ്ങളോ ഓർമ്മവസ്തുക്കളോ നിങ്ങൾക്കുണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "collect.types"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "jewellery.gate"
+    },
+    {
+      "id": "collect.types",
+      "section": "collect",
+      "type": "multi",
+      "text": {
+        "en": "What kind?",
+        "ml": "ഏത് തരം?"
+      },
+      "help": {
+        "en": "Optional — helps your executor identify them. Doesn't change what happens next.",
+        "ml": "നിർബന്ധമില്ല — എക്സിക്യൂട്ടർക്ക് ഇവ തിരിച്ചറിയാൻ സഹായകമാകും. ഇത് അടുത്തതിനെ ബാധിക്കില്ല."
+      },
+      "options": [
+        {
+          "id": "art",
+          "label": {
+            "en": "Art",
+            "ml": "കല"
+          }
+        },
+        {
+          "id": "antiques",
+          "label": {
+            "en": "Antiques",
+            "ml": "പുരാവസ്തുക്കൾ"
+          }
+        },
+        {
+          "id": "watches",
+          "label": {
+            "en": "Watches",
+            "ml": "വാച്ചുകൾ"
+          }
+        },
+        {
+          "id": "coins_stamps",
+          "label": {
+            "en": "Coins / stamps",
+            "ml": "നാണയങ്ങൾ / സ്റ്റാമ്പുകൾ"
+          }
+        },
+        {
+          "id": "books",
+          "label": {
+            "en": "Books",
+            "ml": "പുസ്തകങ്ങൾ"
+          }
+        },
+        {
+          "id": "instruments",
+          "label": {
+            "en": "Musical instruments",
+            "ml": "സംഗീതോപകരണങ്ങൾ"
+          }
+        },
+        {
+          "id": "electronics",
+          "label": {
+            "en": "Electronics of value",
+            "ml": "വിലപിടിപ്പുള്ള ഇലക്ട്രോണിക്സ്"
+          }
+        },
+        {
+          "id": "other",
+          "label": {
+            "en": "Other",
+            "ml": "മറ്റുള്ളവ"
+          }
+        }
+      ],
+      "next": "collect.beneficiary.mode"
+    },
+    {
+      "id": "collect.beneficiary.mode",
+      "section": "collect",
+      "type": "single",
+      "text": {
+        "en": "Who should receive your collections and valuables?",
+        "ml": "നിങ്ങളുടെ ശേഖരങ്ങളും വിലപിടിപ്പുള്ള വസ്തുക്കളും ആർക്ക് ലഭിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "collect.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "collect.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "jewellery.gate"
+    },
+    {
+      "id": "collect.beneficiary.person",
+      "section": "collect",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "collect.beneficiary.contingent.mode"
+    },
+    {
+      "id": "collect.beneficiary.people",
+      "section": "collect",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "collect.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "collect.beneficiary.shares",
+      "section": "collect",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "collect.beneficiary.contingent.group_mode",
+      "peopleSource": "collect.beneficiary.people"
+    },
+    {
+      "id": "collect.beneficiary.contingent.mode",
+      "section": "collect",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "collect.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "jewellery.gate"
+    },
+    {
+      "id": "collect.beneficiary.contingent.person",
+      "section": "collect",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "jewellery.gate"
+    },
+    {
+      "id": "collect.beneficiary.contingent.group_mode",
+      "section": "collect",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "jewellery.gate"
+    }
+  ]
+}

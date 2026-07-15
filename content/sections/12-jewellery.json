@@ -1,0 +1,226 @@
+{
+  "id": "jewellery",
+  "title": {
+    "en": "Jewellery",
+    "ml": "ആഭരണങ്ങൾ"
+  },
+  "chapter": "belongings",
+  "questions": [
+    {
+      "id": "jewellery.gate",
+      "section": "jewellery",
+      "type": "single",
+      "text": {
+        "en": "Do you own jewellery?",
+        "ml": "നിങ്ങൾക്ക് ആഭരണങ്ങൾ ഉണ്ടോ?"
+      },
+      "help": {
+        "en": "Only your own — a spouse's jewellery, including streedhan, is theirs and doesn't belong in your will.",
+        "ml": "നിങ്ങളുടേത് മാത്രം — ജീവിതപങ്കാളിയുടെ ആഭരണങ്ങൾ (സ്ത്രീധനം ഉൾപ്പെടെ) അവരുടേതാണ്, അത് നിങ്ങളുടെ വിൽപത്രത്തിൽ ഉൾപ്പെടില്ല."
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "jewellery.kept"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "ip.gate"
+    },
+    {
+      "id": "jewellery.kept",
+      "section": "jewellery",
+      "type": "multi",
+      "text": {
+        "en": "Where is it kept?",
+        "ml": "അത് എവിടെയാണ് സൂക്ഷിച്ചിരിക്കുന്നത്?"
+      },
+      "options": [
+        {
+          "id": "home",
+          "label": {
+            "en": "At home",
+            "ml": "വീട്ടിൽ"
+          }
+        },
+        {
+          "id": "locker",
+          "label": {
+            "en": "Bank locker",
+            "ml": "ബാങ്ക് ലോക്കറിൽ"
+          }
+        },
+        {
+          "id": "family_member",
+          "label": {
+            "en": "With a family member",
+            "ml": "ഒരു കുടുംബാംഗത്തിന്റെ കൈവശം"
+          }
+        }
+      ],
+      "next": "jewellery.beneficiary.mode"
+    },
+    {
+      "id": "jewellery.beneficiary.mode",
+      "section": "jewellery",
+      "type": "single",
+      "text": {
+        "en": "How should your jewellery be given?",
+        "ml": "നിങ്ങളുടെ ആഭരണങ്ങൾ എങ്ങനെ നൽകണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "jewellery.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "jewellery.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "ip.gate"
+    },
+    {
+      "id": "jewellery.beneficiary.person",
+      "section": "jewellery",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "jewellery.beneficiary.contingent.mode"
+    },
+    {
+      "id": "jewellery.beneficiary.people",
+      "section": "jewellery",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "jewellery.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "jewellery.beneficiary.shares",
+      "section": "jewellery",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "jewellery.beneficiary.contingent.group_mode",
+      "peopleSource": "jewellery.beneficiary.people"
+    },
+    {
+      "id": "jewellery.beneficiary.contingent.mode",
+      "section": "jewellery",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "jewellery.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "ip.gate"
+    },
+    {
+      "id": "jewellery.beneficiary.contingent.person",
+      "section": "jewellery",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "ip.gate"
+    },
+    {
+      "id": "jewellery.beneficiary.contingent.group_mode",
+      "section": "jewellery",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "ip.gate"
+    }
+  ]
+}

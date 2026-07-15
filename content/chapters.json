@@ -1,0 +1,58 @@
+[
+  {
+    "id": "you",
+    "title": {
+      "en": "You & Your Family",
+      "ml": "നിങ്ങളും കുടുംബവും"
+    }
+  },
+  {
+    "id": "wishes",
+    "title": {
+      "en": "Final Wishes",
+      "ml": "അന്ത്യാഭിലാഷങ്ങൾ"
+    }
+  },
+  {
+    "id": "dependents",
+    "title": {
+      "en": "Your Dependents",
+      "ml": "ആശ്രിതർ"
+    }
+  },
+  {
+    "id": "money",
+    "title": {
+      "en": "Money & Property",
+      "ml": "പണവും സ്വത്തും"
+    }
+  },
+  {
+    "id": "belongings",
+    "title": {
+      "en": "Personal Belongings",
+      "ml": "വ്യക്തിഗത വസ്തുക്കൾ"
+    }
+  },
+  {
+    "id": "digital",
+    "title": {
+      "en": "Digital Life",
+      "ml": "ഡിജിറ്റൽ ജീവിതം"
+    }
+  },
+  {
+    "id": "residuary",
+    "title": {
+      "en": "Everything Else",
+      "ml": "ബാക്കിയുള്ളവ"
+    }
+  },
+  {
+    "id": "incharge",
+    "title": {
+      "en": "Who's In Charge",
+      "ml": "ചുമതലക്കാർ"
+    }
+  }
+]

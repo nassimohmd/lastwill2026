@@ -1,0 +1,364 @@
+{
+  "id": "guardianship",
+  "title": {
+    "en": "Guardianship",
+    "ml": "രക്ഷാകർതൃത്വം"
+  },
+  "chapter": "dependents",
+  "questions": [
+    {
+      "id": "guardianship.gate",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "Is anyone dependent on your care?",
+        "ml": "ആരെങ്കിലും നിങ്ങളെ ആശ്രയിച്ചാണോ ജീവിക്കുന്നത്?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "minors",
+          "label": {
+            "en": "Yes — my minor children",
+            "ml": "അതെ — എന്റെ പ്രായപൂർത്തിയാകാത്ത മക്കൾ"
+          },
+          "next": "guardianship.primary"
+        },
+        {
+          "id": "dependent_adult",
+          "label": {
+            "en": "Yes — a dependent adult",
+            "ml": "അതെ — ആശ്രിതനായ ഒരു മുതിർന്ന വ്യക്തി"
+          },
+          "next": "guardianship.dependents.item.person"
+        },
+        {
+          "id": "both",
+          "label": {
+            "en": "Yes — both",
+            "ml": "അതെ — രണ്ടും"
+          },
+          "next": "guardianship.primary"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "debts.gate"
+    },
+    {
+      "id": "guardianship.primary",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "Who should raise your children if neither parent can?",
+        "ml": "മാതാപിതാക്കൾക്ക് കഴിയാതെ വന്നാൽ, മക്കളെ ആര് വളർത്തണം?"
+      },
+      "next": "guardianship.alternate",
+      "askAddress": true
+    },
+    {
+      "id": "guardianship.alternate",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "And if they can't?",
+        "ml": "അവർക്കും കഴിയില്ലെങ്കിലോ?"
+      },
+      "next": "guardianship.property_guardian",
+      "askAddress": true
+    },
+    {
+      "id": "guardianship.property_guardian",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "Who should manage the money and property your children inherit until they come of age?",
+        "ml": "മക്കൾക്ക് പ്രായപൂർത്തിയാകുന്നതുവരെ അവർക്ക് ലഭിക്കുന്ന പണവും സ്വത്തും ആര് കൈകാര്യം ചെയ്യണം?"
+      },
+      "help": {
+        "en": "This can be the same guardian, or a different person — separating care from money is a common safeguard.",
+        "ml": "ഇത് അതേ രക്ഷിതാവ് തന്നെയോ വേറൊരാളോ ആകാം — സംരക്ഷണവും പണവും വേർതിരിക്കുന്നത് ഒരു സാധാരണ മുൻകരുതലാണ്."
+      },
+      "options": [
+        {
+          "id": "same",
+          "label": {
+            "en": "The same guardian",
+            "ml": "അതേ രക്ഷിതാവ്"
+          }
+        },
+        {
+          "id": "different",
+          "label": {
+            "en": "A different person",
+            "ml": "വേറൊരാൾ"
+          },
+          "next": "guardianship.property_guardian.person"
+        }
+      ],
+      "next": "guardianship.until_age"
+    },
+    {
+      "id": "guardianship.property_guardian.person",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "Who should manage it?",
+        "ml": "ആര് കൈകാര്യം ചെയ്യണം?"
+      },
+      "next": "guardianship.until_age"
+    },
+    {
+      "id": "guardianship.until_age",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "They should receive their inheritance outright at age:",
+        "ml": "ഏത് പ്രായത്തിൽ അവർക്ക് പൂർണ്ണമായി അനന്തരാവകാശം ലഭിക്കണം:"
+      },
+      "help": {
+        "en": "Until then, the property guardian holds and applies it for their benefit.",
+        "ml": "അതുവരെ, സ്വത്ത് സംരക്ഷകൻ അത് അവരുടെ പ്രയോജനത്തിനായി കൈകാര്യം ചെയ്യും."
+      },
+      "options": [
+        {
+          "id": "18",
+          "label": {
+            "en": "18",
+            "ml": "18"
+          }
+        },
+        {
+          "id": "21",
+          "label": {
+            "en": "21",
+            "ml": "21"
+          }
+        },
+        {
+          "id": "25",
+          "label": {
+            "en": "25",
+            "ml": "25"
+          }
+        }
+      ],
+      "next": "guardianship.upbringing"
+    },
+    {
+      "id": "guardianship.upbringing",
+      "section": "guardianship",
+      "type": "longtext",
+      "text": {
+        "en": "Any wishes about their upbringing?",
+        "ml": "അവരുടെ വളർത്തലിനെക്കുറിച്ച് എന്തെങ്കിലും ആഗ്രഹങ്ങളുണ്ടോ?"
+      },
+      "optional": true,
+      "next": "guardianship.provision"
+    },
+    {
+      "id": "guardianship.provision",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "Set aside money specifically for their care?",
+        "ml": "അവരുടെ സംരക്ഷണത്തിനായി പ്രത്യേകം പണം മാറ്റിവെക്കണോ?"
+      },
+      "options": [
+        {
+          "id": "amount",
+          "label": {
+            "en": "Yes, an amount",
+            "ml": "അതെ, ഒരു തുക"
+          },
+          "next": "guardianship.provision_amount"
+        },
+        {
+          "id": "general_estate",
+          "label": {
+            "en": "My general estate will cover it",
+            "ml": "എന്റെ പൊതു ആസ്തി അത് നികത്തും"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "nextRules": [
+        {
+          "when": {
+            "eq": [
+              "guardianship.gate",
+              "both"
+            ]
+          },
+          "goto": "guardianship.dependents.item.person"
+        }
+      ],
+      "next": "debts.gate"
+    },
+    {
+      "id": "guardianship.provision_amount",
+      "section": "guardianship",
+      "type": "number",
+      "text": {
+        "en": "How much, in rupees?",
+        "ml": "എത്ര രൂപ?"
+      },
+      "next": "guardianship.provision_source"
+    },
+    {
+      "id": "guardianship.provision_source",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "From where?",
+        "ml": "എവിടെ നിന്ന്?"
+      },
+      "options": [
+        {
+          "id": "bank",
+          "label": {
+            "en": "My bank balances",
+            "ml": "എന്റെ ബാങ്ക് ബാലൻസിൽ നിന്ന്"
+          }
+        },
+        {
+          "id": "asset_sale",
+          "label": {
+            "en": "Sale of an asset",
+            "ml": "ഒരു ആസ്തി വിറ്റ്"
+          },
+          "next": "guardianship.provision_source_desc"
+        },
+        {
+          "id": "executor",
+          "label": {
+            "en": "Executor decides",
+            "ml": "എക്സിക്യൂട്ടർ തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "nextRules": [
+        {
+          "when": {
+            "eq": [
+              "guardianship.gate",
+              "both"
+            ]
+          },
+          "goto": "guardianship.dependents.item.person"
+        }
+      ],
+      "next": "debts.gate"
+    },
+    {
+      "id": "guardianship.provision_source_desc",
+      "section": "guardianship",
+      "type": "text",
+      "text": {
+        "en": "Which asset?",
+        "ml": "ഏത് ആസ്തി?"
+      },
+      "nextRules": [
+        {
+          "when": {
+            "eq": [
+              "guardianship.gate",
+              "both"
+            ]
+          },
+          "goto": "guardianship.dependents.item.person"
+        }
+      ],
+      "next": "debts.gate"
+    },
+    {
+      "id": "guardianship.dependents.item.person",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "Who depends on you?",
+        "ml": "നിങ്ങളെ ആരാണ് ആശ്രയിക്കുന്നത്?"
+      },
+      "next": "guardianship.dependents.item.carer"
+    },
+    {
+      "id": "guardianship.dependents.item.carer",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "Who should look after them?",
+        "ml": "അവരെ ആര് പരിപാലിക്കണം?"
+      },
+      "next": "guardianship.dependents.item.alt_carer"
+    },
+    {
+      "id": "guardianship.dependents.item.alt_carer",
+      "section": "guardianship",
+      "type": "person",
+      "text": {
+        "en": "And if that person can't?",
+        "ml": "ആ വ്യക്തിക്ക് കഴിയില്ലെങ്കിലോ?"
+      },
+      "next": "guardianship.dependents.item.provision"
+    },
+    {
+      "id": "guardianship.dependents.item.provision",
+      "section": "guardianship",
+      "type": "single",
+      "text": {
+        "en": "Set aside money for their care?",
+        "ml": "അവരുടെ സംരക്ഷണത്തിനായി പണം മാറ്റിവെക്കണോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "guardianship.dependents.item.provision_amount"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "guardianship.dependents.item.instructions"
+    },
+    {
+      "id": "guardianship.dependents.item.provision_amount",
+      "section": "guardianship",
+      "type": "number",
+      "text": {
+        "en": "How much, in rupees?",
+        "ml": "എത്ര രൂപ?"
+      },
+      "next": "guardianship.dependents.item.instructions"
+    },
+    {
+      "id": "guardianship.dependents.item.instructions",
+      "section": "guardianship",
+      "type": "longtext",
+      "text": {
+        "en": "Any care instructions?",
+        "ml": "എന്തെങ്കിലും പരിചരണ നിർദ്ദേശങ്ങൾ?"
+      },
+      "optional": true,
+      "next": "__ITEM_END__"
+    }
+  ]
+}

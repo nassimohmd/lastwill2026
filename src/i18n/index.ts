@@ -1,30 +1,30 @@
-import enQuestions from '../locales/en/questions.json';
 import enUi from '../locales/en/ui.json';
-import enClauses from '../locales/en/clauses.json';
-import mlQuestions from '../locales/ml/questions.json';
 import mlUi from '../locales/ml/ui.json';
-import mlClauses from '../locales/ml/clauses.json';
+import { contentEn, contentMl } from '../content/load';
 
 export type Locale = 'en' | 'ml';
 
 type Dict = Record<string, string>;
 
-const en: Dict = { ...enQuestions, ...enUi, ...enClauses };
+// Question/clause/section/chapter wording is owner-edited content (see
+// content/*.json + src/content/load.ts); ui.json (buttons, nav, review
+// copy) stays developer-owned chrome.
+const en: Dict = { ...contentEn, ...enUi };
 
 // Every key falls back to English per key (docs/01-architecture.md §8), so
 // Malayalam can ship incomplete without breaking anything.
-const ml: Dict = { ...mlQuestions, ...mlUi, ...mlClauses };
+const ml: Dict = { ...contentMl, ...mlUi };
 
 const dictionaries: Record<Locale, Dict> = { en, ml };
 
 /**
- * Only *content* localizes — the questions, their options/help, and the
- * generated will (clauses + the will's own labels like "Witness"). UI
- * chrome (buttons, navigation, progress labels, review/checklist copy)
- * deliberately stays English in every language, so the product's controls
- * read the same no matter what the interview language is.
+ * Only *content* localizes — the questions, their options/help, sections,
+ * chapters, repeater prompts, and the generated will (clauses + the will's
+ * own labels like "Witness"). UI chrome (buttons, navigation, review/
+ * checklist copy) deliberately stays English in every language, so the
+ * product's controls read the same no matter what the interview language is.
  */
-const CONTENT_PREFIXES = ['q.', 'clause.', 'frag.', 'part.', 'ui.will.'];
+const CONTENT_PREFIXES = ['q.', 'clause.', 'frag.', 'part.', 'ui.will.', 'chap.', 'sec.', 'rep.'];
 // ui.yes / ui.no live in the ui namespace for reuse, but they only ever
 // appear as answer options inside questions — that makes them content
 const CONTENT_KEYS = new Set(['ui.yes', 'ui.no']);

@@ -1,0 +1,550 @@
+{
+  "id": "personal",
+  "title": {
+    "en": "Personal details",
+    "ml": "വ്യക്തിഗത വിവരങ്ങൾ"
+  },
+  "chapter": "you",
+  "questions": [
+    {
+      "id": "personal.full_name",
+      "section": "personal",
+      "type": "text",
+      "text": {
+        "en": "Your full legal name?",
+        "ml": "നിങ്ങളുടെ പൂർണ്ണമായ നിയമപരമായ പേര്?"
+      },
+      "help": {
+        "en": "As it appears on your ID. This is the one question that can't be skipped.",
+        "ml": "നിങ്ങളുടെ തിരിച്ചറിയൽ രേഖയിൽ ഉള്ളതുപോലെ. ഒഴിവാക്കാൻ കഴിയാത്ത ഒരേയൊരു ചോദ്യമാണിത്."
+      },
+      "skippable": false
+    },
+    {
+      "id": "personal.relation_line",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "This will describes you as:",
+        "ml": "വിൽപത്രത്തിൽ നിങ്ങളെ ഇങ്ങനെ വിശേഷിപ്പിക്കാം:"
+      },
+      "help": {
+        "en": "Indian wills identify the testator through a parent or spouse.",
+        "ml": "ഇന്ത്യൻ വിൽപത്രങ്ങളിൽ വിൽപത്രകർത്താവിനെ മാതാപിതാക്കളിലൂടെയോ ജീവിതപങ്കാളിയിലൂടെയോ തിരിച്ചറിയുന്നു."
+      },
+      "options": [
+        {
+          "id": "son_of",
+          "label": {
+            "en": "Son of…",
+            "ml": "മകൻ…"
+          },
+          "next": "personal.relation_name"
+        },
+        {
+          "id": "daughter_of",
+          "label": {
+            "en": "Daughter of…",
+            "ml": "മകൾ…"
+          },
+          "next": "personal.relation_name"
+        },
+        {
+          "id": "wife_of",
+          "label": {
+            "en": "Wife of…",
+            "ml": "ഭാര്യ…"
+          },
+          "next": "personal.relation_name"
+        },
+        {
+          "id": "husband_of",
+          "label": {
+            "en": "Husband of…",
+            "ml": "ഭർത്താവ്…"
+          },
+          "next": "personal.relation_name"
+        },
+        {
+          "id": "none",
+          "label": {
+            "en": "Skip this style",
+            "ml": "ഇത് ഒഴിവാക്കുക"
+          }
+        }
+      ],
+      "next": "personal.dob"
+    },
+    {
+      "id": "personal.relation_name",
+      "section": "personal",
+      "type": "text",
+      "text": {
+        "en": "Their full name?",
+        "ml": "അവരുടെ പൂർണ്ണമായ പേര്?"
+      },
+      "next": "personal.dob"
+    },
+    {
+      "id": "personal.dob",
+      "section": "personal",
+      "type": "date",
+      "text": {
+        "en": "Your date of birth?",
+        "ml": "നിങ്ങളുടെ ജനനത്തീയതി?"
+      },
+      "next": "personal.age_warning"
+    },
+    {
+      "id": "personal.age_warning",
+      "section": "personal",
+      "type": "info",
+      "text": {
+        "en": "You must be 18 or older to make a valid will in India. You can continue exploring the questions, but the will can't be generated.",
+        "ml": "ഇന്ത്യയിൽ സാധുവായ വിൽപത്രം എഴുതാൻ 18 വയസ്സോ അതിൽ കൂടുതലോ വേണം. ചോദ്യങ്ങൾ തുടർന്നും കാണാം, പക്ഷേ വിൽപത്രം തയ്യാറാക്കാൻ കഴിയില്ല."
+      },
+      "when": {
+        "eq": [
+          "personal.underage",
+          true
+        ]
+      },
+      "next": "personal.address"
+    },
+    {
+      "id": "personal.address",
+      "section": "personal",
+      "type": "longtext",
+      "text": {
+        "en": "Your current residential address?",
+        "ml": "നിങ്ങളുടെ ഇപ്പോഴത്തെ താമസസ്ഥലത്തിന്റെ വിലാസം?"
+      }
+    },
+    {
+      "id": "personal.id_type",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "An ID to identify you by?",
+        "ml": "നിങ്ങളെ തിരിച്ചറിയാൻ ഒരു തിരിച്ചറിയൽ രേഖ?"
+      },
+      "help": {
+        "en": "Optional, but makes the will harder to dispute.",
+        "ml": "നിർബന്ധമില്ല, പക്ഷേ വിൽപത്രത്തെ എതിർക്കാൻ കൂടുതൽ ബുദ്ധിമുട്ടാക്കും."
+      },
+      "options": [
+        {
+          "id": "aadhaar",
+          "label": {
+            "en": "Aadhaar",
+            "ml": "ആധാർ"
+          },
+          "next": "personal.id_value"
+        },
+        {
+          "id": "pan",
+          "label": {
+            "en": "PAN",
+            "ml": "പാൻ"
+          },
+          "next": "personal.id_value"
+        },
+        {
+          "id": "passport",
+          "label": {
+            "en": "Passport",
+            "ml": "പാസ്‌പോർട്ട്"
+          },
+          "next": "personal.id_value"
+        },
+        {
+          "id": "voter",
+          "label": {
+            "en": "Voter ID",
+            "ml": "വോട്ടർ ഐഡി"
+          },
+          "next": "personal.id_value"
+        },
+        {
+          "id": "none",
+          "label": {
+            "en": "No ID in the will",
+            "ml": "വിൽപത്രത്തിൽ ഐഡി വേണ്ട"
+          }
+        }
+      ],
+      "next": "personal.religion"
+    },
+    {
+      "id": "personal.id_value",
+      "section": "personal",
+      "type": "text",
+      "text": {
+        "en": "The number?",
+        "ml": "നമ്പർ?"
+      },
+      "help": {
+        "en": "For Aadhaar, enter only the last 4 digits.",
+        "ml": "ആധാറിന് അവസാന 4 അക്കങ്ങൾ മാത്രം നൽകുക."
+      },
+      "next": "personal.religion"
+    },
+    {
+      "id": "personal.religion",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "Your religion?",
+        "ml": "നിങ്ങളുടെ മതം?"
+      },
+      "help": {
+        "en": "Asked because inheritance law in India differs by religion. You can skip this.",
+        "ml": "ഇന്ത്യയിൽ അനന്തരാവകാശ നിയമം മതം അനുസരിച്ച് വ്യത്യാസപ്പെടുന്നതിനാൽ ചോദിക്കുന്നു. ഇത് ഒഴിവാക്കാം."
+      },
+      "options": [
+        {
+          "id": "hindu",
+          "label": {
+            "en": "Hindu",
+            "ml": "ഹിന്ദു"
+          }
+        },
+        {
+          "id": "muslim",
+          "label": {
+            "en": "Muslim",
+            "ml": "മുസ്ലിം"
+          },
+          "next": "personal.muslim_notice"
+        },
+        {
+          "id": "christian",
+          "label": {
+            "en": "Christian",
+            "ml": "ക്രിസ്ത്യൻ"
+          }
+        },
+        {
+          "id": "sikh",
+          "label": {
+            "en": "Sikh",
+            "ml": "സിഖ്"
+          }
+        },
+        {
+          "id": "jain",
+          "label": {
+            "en": "Jain",
+            "ml": "ജൈൻ"
+          }
+        },
+        {
+          "id": "buddhist",
+          "label": {
+            "en": "Buddhist",
+            "ml": "ബുദ്ധ"
+          }
+        },
+        {
+          "id": "parsi",
+          "label": {
+            "en": "Parsi",
+            "ml": "പാഴ്സി"
+          }
+        },
+        {
+          "id": "other",
+          "label": {
+            "en": "Other / prefer not to say",
+            "ml": "മറ്റുള്ളവ / പറയാൻ താൽപര്യമില്ല"
+          }
+        }
+      ],
+      "next": "personal.marital_status"
+    },
+    {
+      "id": "personal.muslim_notice",
+      "section": "personal",
+      "type": "info",
+      "text": {
+        "en": "Under Muslim personal law, bequests beyond one-third of your estate need your heirs' consent, and the rest devolves by inheritance shares. Your will can still record all your wishes — a compliance clause will be added so it works within these rules.",
+        "ml": "മുസ്ലിം വ്യക്തിനിയമപ്രകാരം, നിങ്ങളുടെ ആസ്തിയുടെ മൂന്നിലൊന്നിൽ കൂടുതലുള്ള ദാനങ്ങൾക്ക് അവകാശികളുടെ സമ്മതം വേണം, ബാക്കി അനന്തരാവകാശ വിഹിതം അനുസരിച്ച് വിതരണം ചെയ്യപ്പെടും. നിങ്ങളുടെ എല്ലാ ആഗ്രഹങ്ങളും വിൽപത്രത്തിൽ രേഖപ്പെടുത്താം — ഈ നിയമങ്ങൾക്കുള്ളിൽ പ്രവർത്തിക്കാൻ ഒരു അനുബന്ധ വ്യവസ്ഥ ചേർക്കും."
+      },
+      "next": "personal.marital_status"
+    },
+    {
+      "id": "personal.marital_status",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "Marital status?",
+        "ml": "വൈവാഹിക നില?"
+      },
+      "options": [
+        {
+          "id": "married",
+          "label": {
+            "en": "Married",
+            "ml": "വിവാഹിതൻ/വിവാഹിത"
+          },
+          "next": "personal.spouse_name"
+        },
+        {
+          "id": "unmarried",
+          "label": {
+            "en": "Unmarried",
+            "ml": "അവിവാഹിതൻ/അവിവാഹിത"
+          }
+        },
+        {
+          "id": "widowed",
+          "label": {
+            "en": "Widowed",
+            "ml": "വിധവ/വിധുരൻ"
+          }
+        },
+        {
+          "id": "divorced",
+          "label": {
+            "en": "Divorced",
+            "ml": "വിവാഹമോചിതൻ/വിവാഹമോചിത"
+          }
+        },
+        {
+          "id": "separated",
+          "label": {
+            "en": "Separated",
+            "ml": "വേർപിരിഞ്ഞ്"
+          }
+        }
+      ],
+      "next": "personal.children_gate"
+    },
+    {
+      "id": "personal.spouse_name",
+      "section": "personal",
+      "type": "text",
+      "text": {
+        "en": "Your spouse's name?",
+        "ml": "നിങ്ങളുടെ ജീവിതപങ്കാളിയുടെ പേര്?"
+      },
+      "when": {
+        "not": {
+          "in": [
+            "personal.relation_line",
+            [
+              "wife_of",
+              "husband_of"
+            ]
+          ]
+        }
+      },
+      "next": "personal.children_gate"
+    },
+    {
+      "id": "personal.children_gate",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "Do you have children?",
+        "ml": "നിങ്ങൾക്ക് മക്കളുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "personal.children"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "personal.prior_will"
+    },
+    {
+      "id": "personal.children",
+      "section": "personal",
+      "type": "repeater",
+      "text": {
+        "en": "Your children",
+        "ml": "നിങ്ങളുടെ മക്കൾ"
+      },
+      "help": {
+        "en": "Add each child. This also tells us whether guardianship questions apply.",
+        "ml": "ഓരോ കുട്ടിയെയും ചേർക്കുക. രക്ഷാകർതൃത്വ ചോദ്യങ്ങൾ ബാധകമാണോ എന്നും ഇത് സൂചിപ്പിക്കും."
+      },
+      "next": "personal.prior_will",
+      "fields": [
+        {
+          "id": "name",
+          "type": "text",
+          "label": {
+            "en": "Name",
+            "ml": "പേര്"
+          }
+        },
+        {
+          "id": "gender",
+          "type": "single",
+          "label": {
+            "en": "Son or daughter?",
+            "ml": "മകനോ മകളോ?"
+          },
+          "options": [
+            {
+              "id": "son",
+              "label": {
+                "en": "Son",
+                "ml": "മകൻ"
+              }
+            },
+            {
+              "id": "daughter",
+              "label": {
+                "en": "Daughter",
+                "ml": "മകൾ"
+              }
+            }
+          ]
+        },
+        {
+          "id": "minor",
+          "type": "single",
+          "label": {
+            "en": "Under 18?",
+            "ml": "18 വയസ്സിന് താഴെയാണോ?"
+          },
+          "options": [
+            {
+              "id": "yes",
+              "label": {
+                "en": "Yes",
+                "ml": "അതെ"
+              }
+            },
+            {
+              "id": "no",
+              "label": {
+                "en": "No",
+                "ml": "ഇല്ല"
+              }
+            }
+          ]
+        }
+      ],
+      "addMore": {
+        "en": "Add another child",
+        "ml": "ഒരു കുട്ടിയെക്കൂടി ചേർക്കുക"
+      }
+    },
+    {
+      "id": "personal.prior_will",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "Have you made a will before?",
+        "ml": "മുൻപ് വിൽപത്രം എഴുതിയിട്ടുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "personal.prior_will_action"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "personal.sound_mind"
+    },
+    {
+      "id": "personal.prior_will_action",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "What should happen to it?",
+        "ml": "അതിന് എന്ത് സംഭവിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "revoke",
+          "label": {
+            "en": "Cancel it — this will replaces it",
+            "ml": "അത് റദ്ദാക്കുക — ഈ വിൽപത്രം അതിന് പകരമാകും"
+          }
+        },
+        {
+          "id": "update",
+          "label": {
+            "en": "I meant to only update it",
+            "ml": "ഞാൻ ഉദ്ദേശിച്ചത് അത് പുതുക്കാൻ മാത്രമായിരുന്നു"
+          },
+          "next": "personal.codicil_note"
+        }
+      ],
+      "next": "personal.sound_mind"
+    },
+    {
+      "id": "personal.codicil_note",
+      "section": "personal",
+      "type": "info",
+      "text": {
+        "en": "This tool always produces a complete fresh will that supersedes earlier ones — that's safer than amending an old will with a codicil.",
+        "ml": "ഈ ഉപകരണം എപ്പോഴും മുൻപത്തെ വിൽപത്രങ്ങൾക്ക് പകരം വരുന്ന ഒരു പൂർണ്ണമായ പുതിയ വിൽപത്രമാണ് തയ്യാറാക്കുന്നത് — പഴയ വിൽപത്രം കോഡിസിൽ വഴി തിരുത്തുന്നതിനേക്കാൾ ഇത് സുരക്ഷിതമാണ്."
+      },
+      "next": "personal.sound_mind"
+    },
+    {
+      "id": "personal.sound_mind",
+      "section": "personal",
+      "type": "single",
+      "text": {
+        "en": "Confirm: you are making this will voluntarily, of your own free will, and you are of sound mind.",
+        "ml": "സ്ഥിരീകരിക്കുക: നിങ്ങൾ ഈ വിൽപത്രം സ്വമേധയാ, സ്വന്തം ഇഷ്ടപ്രകാരം എഴുതുന്നു, നിങ്ങൾ മാനസികമായി ആരോഗ്യവാനാണ്."
+      },
+      "help": {
+        "en": "Required by law — the will can't be generated without this.",
+        "ml": "നിയമപ്രകാരം ആവശ്യമാണ് — ഇതില്ലാതെ വിൽപത്രം തയ്യാറാക്കാൻ കഴിയില്ല."
+      },
+      "skippable": false,
+      "options": [
+        {
+          "id": "confirm",
+          "label": {
+            "en": "I confirm",
+            "ml": "ഞാൻ സ്ഥിരീകരിക്കുന്നു"
+          }
+        }
+      ],
+      "next": "personal.occupation"
+    },
+    {
+      "id": "personal.occupation",
+      "section": "personal",
+      "type": "text",
+      "text": {
+        "en": "Your occupation?",
+        "ml": "നിങ്ങളുടെ തൊഴിൽ?"
+      },
+      "help": {
+        "en": "Optional — used only in the identity line of the will.",
+        "ml": "നിർബന്ധമില്ല — വിൽപത്രത്തിന്റെ തിരിച്ചറിയൽ വരിയിൽ മാത്രം ഉപയോഗിക്കും."
+      },
+      "optional": true
+    }
+  ]
+}

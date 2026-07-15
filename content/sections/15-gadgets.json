@@ -1,0 +1,211 @@
+{
+  "id": "gadgets",
+  "title": {
+    "en": "Gadgets & devices",
+    "ml": "ഗാഡ്ജെറ്റുകളും ഉപകരണങ്ങളും"
+  },
+  "chapter": "belongings",
+  "questions": [
+    {
+      "id": "gadgets.gate",
+      "section": "gadgets",
+      "type": "single",
+      "text": {
+        "en": "Your devices — phone, laptop, tablet, camera — what should happen to them?",
+        "ml": "നിങ്ങളുടെ ഉപകരണങ്ങൾ — ഫോൺ, ലാപ്ടോപ്പ്, ടാബ്‌ലെറ്റ്, ക്യാമറ — ഇവയ്ക്ക് എന്ത് സംഭവിക്കണം?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "wipe_give_family",
+          "label": {
+            "en": "Wipe them and give them to family",
+            "ml": "ഡാറ്റ മായ്ച്ച് കുടുംബത്തിന് നൽകുക"
+          }
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell them; money to my estate",
+            "ml": "വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക്"
+          }
+        },
+        {
+          "id": "specific",
+          "label": {
+            "en": "Specific devices to specific people",
+            "ml": "പ്രത്യേക ഉപകരണങ്ങൾ പ്രത്യേക ആളുകൾക്ക്"
+          },
+          "next": "gadgets.item.desc"
+        },
+        {
+          "id": "recycle",
+          "label": {
+            "en": "Recycle them responsibly",
+            "ml": "ഉത്തരവാദിത്തത്തോടെ പുനരുപയോഗിക്കുക"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "gadgets.data"
+    },
+    {
+      "id": "gadgets.item.desc",
+      "section": "gadgets",
+      "type": "text",
+      "text": {
+        "en": "Which device?",
+        "ml": "ഏത് ഉപകരണം?"
+      },
+      "next": "gadgets.item.person"
+    },
+    {
+      "id": "gadgets.item.person",
+      "section": "gadgets",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "gadgets.item.contingent.mode"
+    },
+    {
+      "id": "gadgets.item.people",
+      "section": "gadgets",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "gadgets.item.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "gadgets.item.shares",
+      "section": "gadgets",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "gadgets.item.contingent.group_mode",
+      "peopleSource": "gadgets.item.people"
+    },
+    {
+      "id": "gadgets.item.contingent.mode",
+      "section": "gadgets",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "gadgets.item.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "gadgets.item.contingent.person",
+      "section": "gadgets",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "gadgets.item.contingent.group_mode",
+      "section": "gadgets",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "gadgets.data",
+      "section": "gadgets",
+      "type": "single",
+      "text": {
+        "en": "Before anything is given away or sold, the data on it should be:",
+        "ml": "എന്തെങ്കിലും നൽകുകയോ വിൽക്കുകയോ ചെയ്യുന്നതിന് മുൻപ്, അതിലെ ഡാറ്റ:"
+      },
+      "options": [
+        {
+          "id": "backup_then_wipe",
+          "label": {
+            "en": "Backed up first, then wiped",
+            "ml": "ആദ്യം ബാക്കപ്പ് ചെയ്ത ശേഷം മായ്ക്കുക"
+          }
+        },
+        {
+          "id": "wipe_no_backup",
+          "label": {
+            "en": "Wiped without backup",
+            "ml": "ബാക്കപ്പ് ഇല്ലാതെ മായ്ക്കുക"
+          }
+        },
+        {
+          "id": "handed_as_is",
+          "label": {
+            "en": "Handed over as-is",
+            "ml": "ഉള്ളതുപോലെ കൈമാറുക"
+          }
+        }
+      ],
+      "next": "digital.gate"
+    }
+  ]
+}

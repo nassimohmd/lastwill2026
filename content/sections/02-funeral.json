@@ -1,0 +1,499 @@
+{
+  "id": "funeral",
+  "title": {
+    "en": "Funeral & memorial",
+    "ml": "സംസ്കാരവും അനുസ്മരണവും"
+  },
+  "chapter": "wishes",
+  "questions": [
+    {
+      "id": "funeral.method",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "What should be done with your body?",
+        "ml": "നിങ്ങളുടെ ശരീരം എന്ത് ചെയ്യണം?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "burial",
+          "label": {
+            "en": "Burial",
+            "ml": "ഖബറടക്കം"
+          },
+          "next": "funeral.burial.place"
+        },
+        {
+          "id": "cremation",
+          "label": {
+            "en": "Cremation",
+            "ml": "ദഹിപ്പിക്കൽ"
+          },
+          "next": "funeral.cremation.place"
+        },
+        {
+          "id": "donate_science",
+          "label": {
+            "en": "Donate my body to medical science",
+            "ml": "എന്റെ ശരീരം വൈദ്യശാസ്ത്ര പഠനത്തിന് ദാനം ചെയ്യുക"
+          },
+          "next": "funeral.body_donation.institution"
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Let my family decide",
+            "ml": "എന്റെ കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.burial.place",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Where should you be buried?",
+        "ml": "നിങ്ങളെ എവിടെ ഖബറടക്കണം?"
+      },
+      "options": [
+        {
+          "id": "family_ground",
+          "label": {
+            "en": "Our family burial ground",
+            "ml": "ഞങ്ങളുടെ കുടുംബ ഖബർസ്ഥാൻ"
+          },
+          "next": "funeral.burial.place_detail"
+        },
+        {
+          "id": "mosque",
+          "label": {
+            "en": "Mosque burial ground (qabristan)",
+            "ml": "പള്ളിയുടെ ഖബർസ്ഥാൻ"
+          },
+          "next": "funeral.burial.place_detail"
+        },
+        {
+          "id": "church",
+          "label": {
+            "en": "Church cemetery",
+            "ml": "പള്ളിയുടെ സെമിത്തേരി"
+          },
+          "next": "funeral.burial.place_detail"
+        },
+        {
+          "id": "public",
+          "label": {
+            "en": "A public burial ground near my home",
+            "ml": "എന്റെ വീടിനടുത്തുള്ള പൊതു ഖബർസ്ഥാൻ"
+          }
+        },
+        {
+          "id": "specific",
+          "label": {
+            "en": "A specific place",
+            "ml": "ഒരു നിശ്ചിത സ്ഥലം"
+          },
+          "next": "funeral.burial.place_detail"
+        },
+        {
+          "id": "practical",
+          "label": {
+            "en": "Wherever is practical for my family",
+            "ml": "കുടുംബത്തിന് സൗകര്യപ്രദമായ ഇടം"
+          }
+        }
+      ],
+      "next": "funeral.burial.rites"
+    },
+    {
+      "id": "funeral.burial.place_detail",
+      "section": "funeral",
+      "type": "text",
+      "text": {
+        "en": "Which place?",
+        "ml": "ഏത് സ്ഥലം?"
+      },
+      "help": {
+        "en": "Name and location — e.g. the mosque, church, or ground. Optional.",
+        "ml": "പേരും സ്ഥലവും — ഉദാ: പള്ളി, ഖബർസ്ഥാൻ. നിർബന്ധമില്ല."
+      },
+      "optional": true,
+      "next": "funeral.burial.rites"
+    },
+    {
+      "id": "funeral.burial.rites",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Religious rites for the burial?",
+        "ml": "ഖബറടക്കത്തിനുള്ള മതപരമായ ചടങ്ങുകൾ?"
+      },
+      "options": [
+        {
+          "id": "customs",
+          "label": {
+            "en": "According to the customs of my faith",
+            "ml": "എന്റെ വിശ്വാസത്തിന്റെ ആചാരപ്രകാരം"
+          }
+        },
+        {
+          "id": "simple",
+          "label": {
+            "en": "Keep it simple — no elaborate ceremony",
+            "ml": "ലളിതമായി — വലിയ ചടങ്ങുകൾ വേണ്ട"
+          }
+        },
+        {
+          "id": "custom",
+          "label": {
+            "en": "I have specific wishes",
+            "ml": "എനിക്ക് പ്രത്യേക ആഗ്രഹങ്ങളുണ്ട്"
+          },
+          "next": "funeral.burial.rites_custom"
+        }
+      ],
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.burial.rites_custom",
+      "section": "funeral",
+      "type": "longtext",
+      "text": {
+        "en": "Your wishes for the rites?",
+        "ml": "ചടങ്ങുകൾക്കായുള്ള നിങ്ങളുടെ ആഗ്രഹങ്ങൾ?"
+      },
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.cremation.place",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Where should the cremation take place?",
+        "ml": "ദഹിപ്പിക്കൽ എവിടെ നടക്കണം?"
+      },
+      "options": [
+        {
+          "id": "local",
+          "label": {
+            "en": "The local crematorium",
+            "ml": "അടുത്തുള്ള ശ്മശാനം"
+          }
+        },
+        {
+          "id": "specific",
+          "label": {
+            "en": "A specific place",
+            "ml": "ഒരു നിശ്ചിത സ്ഥലം"
+          },
+          "next": "funeral.cremation.place_detail"
+        },
+        {
+          "id": "practical",
+          "label": {
+            "en": "Wherever is practical for my family",
+            "ml": "കുടുംബത്തിന് സൗകര്യപ്രദമായ ഇടം"
+          }
+        }
+      ],
+      "next": "funeral.cremation.rites"
+    },
+    {
+      "id": "funeral.cremation.place_detail",
+      "section": "funeral",
+      "type": "text",
+      "text": {
+        "en": "Which place?",
+        "ml": "ഏത് സ്ഥലം?"
+      },
+      "help": {
+        "en": "E.g. a particular ghat or riverside. Optional.",
+        "ml": "ഉദാ: ഒരു പ്രത്യേക ഘട്ട് അല്ലെങ്കിൽ നദീതീരം. നിർബന്ധമില്ല."
+      },
+      "optional": true,
+      "next": "funeral.cremation.rites"
+    },
+    {
+      "id": "funeral.cremation.rites",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Rites for the cremation?",
+        "ml": "ദഹിപ്പിക്കലിനുള്ള ചടങ്ങുകൾ?"
+      },
+      "options": [
+        {
+          "id": "customs",
+          "label": {
+            "en": "According to the customs of my faith",
+            "ml": "എന്റെ വിശ്വാസത്തിന്റെ ആചാരപ്രകാരം"
+          }
+        },
+        {
+          "id": "simple",
+          "label": {
+            "en": "Keep it simple — no elaborate ceremony",
+            "ml": "ലളിതമായി — വലിയ ചടങ്ങുകൾ വേണ്ട"
+          }
+        },
+        {
+          "id": "custom",
+          "label": {
+            "en": "I have specific wishes",
+            "ml": "എനിക്ക് പ്രത്യേക ആഗ്രഹങ്ങളുണ്ട്"
+          },
+          "next": "funeral.cremation.rites_custom"
+        }
+      ],
+      "next": "funeral.cremation.ashes"
+    },
+    {
+      "id": "funeral.cremation.rites_custom",
+      "section": "funeral",
+      "type": "longtext",
+      "text": {
+        "en": "Your wishes for the rites?",
+        "ml": "ചടങ്ങുകൾക്കായുള്ള നിങ്ങളുടെ ആഗ്രഹങ്ങൾ?"
+      },
+      "next": "funeral.cremation.ashes"
+    },
+    {
+      "id": "funeral.cremation.ashes",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "And your ashes?",
+        "ml": "നിങ്ങളുടെ ചിതാഭസ്മം?"
+      },
+      "options": [
+        {
+          "id": "immerse",
+          "label": {
+            "en": "Immersed",
+            "ml": "ഒഴുക്കിക്കളയുക"
+          },
+          "next": "funeral.cremation.ashes_place"
+        },
+        {
+          "id": "scatter",
+          "label": {
+            "en": "Scattered at a place",
+            "ml": "ഒരു സ്ഥലത്ത് വിതറുക"
+          },
+          "next": "funeral.cremation.ashes_place"
+        },
+        {
+          "id": "kept",
+          "label": {
+            "en": "Kept by family",
+            "ml": "കുടുംബം സൂക്ഷിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "none",
+          "label": {
+            "en": "No preference",
+            "ml": "പ്രത്യേക ഇഷ്ടമില്ല"
+          }
+        }
+      ],
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.cremation.ashes_place",
+      "section": "funeral",
+      "type": "text",
+      "text": {
+        "en": "Where?",
+        "ml": "എവിടെ?"
+      },
+      "help": {
+        "en": "E.g. \"the Bharathappuzha at Thirunavaya\". Optional.",
+        "ml": "ഉദാ: \"തിരുനാവായയിലെ ഭാരതപ്പുഴ\". നിർബന്ധമില്ല."
+      },
+      "optional": true,
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.body_donation.institution",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Do you have an institution in mind?",
+        "ml": "മനസ്സിലുള്ള ഒരു സ്ഥാപനമുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "known",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "funeral.body_donation.institution_name"
+        },
+        {
+          "id": "executor",
+          "label": {
+            "en": "No — my executor should arrange it",
+            "ml": "ഇല്ല — എന്റെ എക്സിക്യൂട്ടർ ക്രമീകരിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "funeral.body_donation.fallback"
+    },
+    {
+      "id": "funeral.body_donation.institution_name",
+      "section": "funeral",
+      "type": "text",
+      "text": {
+        "en": "Which institution?",
+        "ml": "ഏത് സ്ഥാപനം?"
+      },
+      "help": {
+        "en": "E.g. a medical college.",
+        "ml": "ഉദാ: ഒരു മെഡിക്കൽ കോളേജ്."
+      },
+      "next": "funeral.body_donation.fallback"
+    },
+    {
+      "id": "funeral.body_donation.fallback",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "If the donation can't be accepted, then:",
+        "ml": "ദാനം സ്വീകരിക്കാൻ കഴിഞ്ഞില്ലെങ്കിൽ:"
+      },
+      "help": {
+        "en": "Institutions sometimes decline. Body donation also needs prior registration and family cooperation — tell your family now; the will alone acts too late.",
+        "ml": "ചിലപ്പോൾ സ്ഥാപനങ്ങൾ നിരസിച്ചേക്കാം. ശരീരദാനത്തിന് മുൻകൂട്ടിയുള്ള രജിസ്ട്രേഷനും കുടുംബ സഹകരണവും വേണം — കുടുംബത്തെ ഇപ്പോൾ തന്നെ അറിയിക്കുക; വിൽപത്രം മാത്രം പോരാ, അത് വൈകിപ്പോകും."
+      },
+      "options": [
+        {
+          "id": "burial",
+          "label": {
+            "en": "Burial",
+            "ml": "ഖബറടക്കം"
+          },
+          "next": "funeral.burial.place"
+        },
+        {
+          "id": "cremation",
+          "label": {
+            "en": "Cremation",
+            "ml": "ദഹിപ്പിക്കൽ"
+          },
+          "next": "funeral.cremation.place"
+        },
+        {
+          "id": "family",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "funeral.memorial"
+    },
+    {
+      "id": "funeral.memorial",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "Any memorial or gathering afterwards?",
+        "ml": "പിന്നീട് ഒരു അനുസ്മരണമോ ഒത്തുചേരലോ വേണോ?"
+      },
+      "options": [
+        {
+          "id": "customs",
+          "label": {
+            "en": "According to the customs of my faith",
+            "ml": "എന്റെ വിശ്വാസത്തിന്റെ ആചാരപ്രകാരം"
+          }
+        },
+        {
+          "id": "simple",
+          "label": {
+            "en": "A simple gathering, nothing formal",
+            "ml": "ലളിതമായ ഒത്തുചേരൽ, ഔപചാരികമായത് വേണ്ട"
+          }
+        },
+        {
+          "id": "none",
+          "label": {
+            "en": "No ceremony, please",
+            "ml": "ചടങ്ങുകൾ വേണ്ട"
+          }
+        },
+        {
+          "id": "family",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "funeral.cost"
+    },
+    {
+      "id": "funeral.cost",
+      "section": "funeral",
+      "type": "single",
+      "text": {
+        "en": "A limit on funeral spending?",
+        "ml": "സംസ്കാര ചെലവിന് പരിധി വേണോ?"
+      },
+      "options": [
+        {
+          "id": "modest",
+          "label": {
+            "en": "Keep it modest",
+            "ml": "ലളിതമായി മതി"
+          }
+        },
+        {
+          "id": "customary",
+          "label": {
+            "en": "Spend whatever is customary",
+            "ml": "പതിവുപോലെ ചെലവഴിക്കാം"
+          }
+        },
+        {
+          "id": "limit",
+          "label": {
+            "en": "A specific limit",
+            "ml": "ഒരു നിശ്ചിത പരിധി"
+          },
+          "next": "funeral.cost_amount"
+        }
+      ],
+      "next": "funeral.notes"
+    },
+    {
+      "id": "funeral.cost_amount",
+      "section": "funeral",
+      "type": "number",
+      "text": {
+        "en": "The limit, in rupees?",
+        "ml": "പരിധി, രൂപയിൽ?"
+      },
+      "next": "funeral.notes"
+    },
+    {
+      "id": "funeral.notes",
+      "section": "funeral",
+      "type": "longtext",
+      "text": {
+        "en": "Anything else about your final rites?",
+        "ml": "അന്ത്യകർമ്മങ്ങളെക്കുറിച്ച് വേറെ എന്തെങ്കിലും?"
+      },
+      "help": {
+        "en": "Optional — anything your family should know.",
+        "ml": "നിർബന്ധമില്ല — കുടുംബം അറിഞ്ഞിരിക്കേണ്ട എന്തും."
+      },
+      "optional": true
+    }
+  ]
+}

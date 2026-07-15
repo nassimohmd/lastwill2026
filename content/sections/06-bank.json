@@ -1,0 +1,866 @@
+{
+  "id": "bank",
+  "title": {
+    "en": "Bank accounts & money",
+    "ml": "ബാങ്ക് അക്കൗണ്ടുകളും പണവും"
+  },
+  "chapter": "money",
+  "questions": [
+    {
+      "id": "bank.gate",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Do you have bank accounts?",
+        "ml": "നിങ്ങൾക്ക് ബാങ്ക് അക്കൗണ്ടുകൾ ഉണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "bank.mode"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "invest.gate"
+    },
+    {
+      "id": "bank.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "How do you want to deal with them?",
+        "ml": "അവ എങ്ങനെ കൈകാര്യം ചെയ്യണം?"
+      },
+      "options": [
+        {
+          "id": "all",
+          "label": {
+            "en": "All accounts together, to the same people",
+            "ml": "എല്ലാ അക്കൗണ്ടുകളും ഒരുമിച്ച്, ഒരേ ആളുകൾക്ക്"
+          },
+          "next": "bank.all.mode"
+        },
+        {
+          "id": "per_account",
+          "label": {
+            "en": "Account by account",
+            "ml": "ഓരോ അക്കൗണ്ടും വെവ്വേറെ"
+          },
+          "next": "bank.account.bank_name"
+        }
+      ],
+      "next": "bank.locker.gate"
+    },
+    {
+      "id": "bank.all.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Who should receive the money in all your bank accounts?",
+        "ml": "നിങ്ങളുടെ എല്ലാ ബാങ്ക് അക്കൗണ്ടിലെയും പണം ആർക്ക് ലഭിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "bank.all.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "bank.all.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.locker.gate"
+    },
+    {
+      "id": "bank.all.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.all.contingent.mode"
+    },
+    {
+      "id": "bank.all.people",
+      "section": "bank",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "bank.all.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "bank.all.shares",
+      "section": "bank",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "bank.all.contingent.group_mode",
+      "peopleSource": "bank.all.people"
+    },
+    {
+      "id": "bank.all.contingent.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "bank.all.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "bank.locker.gate"
+    },
+    {
+      "id": "bank.all.contingent.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.locker.gate"
+    },
+    {
+      "id": "bank.all.contingent.group_mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.locker.gate"
+    },
+    {
+      "id": "bank.account.bank_name",
+      "section": "bank",
+      "type": "text",
+      "text": {
+        "en": "Bank name?",
+        "ml": "ബാങ്കിന്റെ പേര്?"
+      },
+      "next": "bank.account.branch"
+    },
+    {
+      "id": "bank.account.branch",
+      "section": "bank",
+      "type": "text",
+      "text": {
+        "en": "Branch?",
+        "ml": "ബ്രാഞ്ച്?"
+      },
+      "optional": true,
+      "next": "bank.account.type"
+    },
+    {
+      "id": "bank.account.type",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Account type?",
+        "ml": "അക്കൗണ്ട് തരം?"
+      },
+      "options": [
+        {
+          "id": "savings",
+          "label": {
+            "en": "Savings",
+            "ml": "സേവിംഗ്സ്"
+          }
+        },
+        {
+          "id": "current",
+          "label": {
+            "en": "Current",
+            "ml": "കറന്റ്"
+          }
+        },
+        {
+          "id": "joint",
+          "label": {
+            "en": "Joint",
+            "ml": "ജോയിന്റ്"
+          },
+          "next": "bank.account.type.coholder"
+        }
+      ],
+      "next": "bank.account.last4"
+    },
+    {
+      "id": "bank.account.type.coholder",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who is the joint holder?",
+        "ml": "ജോയിന്റ് ഹോൾഡർ ആര്?"
+      },
+      "next": "bank.account.last4"
+    },
+    {
+      "id": "bank.account.last4",
+      "section": "bank",
+      "type": "text",
+      "text": {
+        "en": "Last 4 digits?",
+        "ml": "അവസാന 4 അക്കങ്ങൾ?"
+      },
+      "help": {
+        "en": "Optional — never the full account number.",
+        "ml": "നിർബന്ധമില്ല — പൂർണ്ണ അക്കൗണ്ട് നമ്പർ ഒരിക്കലും വേണ്ട."
+      },
+      "optional": true,
+      "next": "bank.account.beneficiary.mode"
+    },
+    {
+      "id": "bank.account.beneficiary.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Who should receive the money in this account?",
+        "ml": "ഈ അക്കൗണ്ടിലെ പണം ആർക്ക് ലഭിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "bank.account.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "bank.account.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.account.nomination"
+    },
+    {
+      "id": "bank.account.beneficiary.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.account.beneficiary.contingent.mode"
+    },
+    {
+      "id": "bank.account.beneficiary.people",
+      "section": "bank",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "bank.account.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "bank.account.beneficiary.shares",
+      "section": "bank",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "bank.account.beneficiary.contingent.group_mode",
+      "peopleSource": "bank.account.beneficiary.people"
+    },
+    {
+      "id": "bank.account.beneficiary.contingent.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "bank.account.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "bank.account.nomination"
+    },
+    {
+      "id": "bank.account.beneficiary.contingent.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.account.nomination"
+    },
+    {
+      "id": "bank.account.beneficiary.contingent.group_mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.account.nomination"
+    },
+    {
+      "id": "bank.account.nomination",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Does this account have a nominee?",
+        "ml": "ഈ അക്കൗണ്ടിന് നോമിനി ഉണ്ടോ?"
+      },
+      "help": {
+        "en": "The will prevails over a nominee, but a mismatch causes hassle for your family.",
+        "ml": "നോമിനിയേക്കാൾ വിൽപത്രത്തിനാണ് മുൻതൂക്കം, പക്ഷേ പൊരുത്തക്കേട് കുടുംബത്തിന് ബുദ്ധിമുട്ടുണ്ടാക്കും."
+      },
+      "options": [
+        {
+          "id": "same",
+          "label": {
+            "en": "Yes — the same person as above",
+            "ml": "അതെ — മുകളിൽ പറഞ്ഞ അതേ ആൾ"
+          }
+        },
+        {
+          "id": "different",
+          "label": {
+            "en": "Yes — someone else",
+            "ml": "അതെ — മറ്റൊരാൾ"
+          }
+        },
+        {
+          "id": "none",
+          "label": {
+            "en": "No / not sure",
+            "ml": "ഇല്ല / ഉറപ്പില്ല"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "bank.locker.gate",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Do you have a bank locker?",
+        "ml": "നിങ്ങൾക്ക് ബാങ്ക് ലോക്കർ ഉണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "bank.locker.bank"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "bank.cash.gate"
+    },
+    {
+      "id": "bank.locker.bank",
+      "section": "bank",
+      "type": "text",
+      "text": {
+        "en": "Which bank and branch?",
+        "ml": "ഏത് ബാങ്കും ബ്രാഞ്ചും?"
+      },
+      "next": "bank.locker.contents"
+    },
+    {
+      "id": "bank.locker.contents",
+      "section": "bank",
+      "type": "longtext",
+      "text": {
+        "en": "What's mostly in it?",
+        "ml": "അതിൽ കൂടുതലും എന്താണ്?"
+      },
+      "help": {
+        "en": "Optional — a short description helps your executor.",
+        "ml": "നിർബന്ധമില്ല — ചെറിയ വിവരണം എക്സിക്യൂട്ടർക്ക് സഹായകമാകും."
+      },
+      "optional": true,
+      "next": "bank.locker.beneficiary.mode"
+    },
+    {
+      "id": "bank.locker.beneficiary.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Who should receive the contents of your locker?",
+        "ml": "നിങ്ങളുടെ ലോക്കറിലെ വസ്തുക്കൾ ആർക്ക് ലഭിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "bank.locker.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "bank.locker.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.cash.gate"
+    },
+    {
+      "id": "bank.locker.beneficiary.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.locker.beneficiary.contingent.mode"
+    },
+    {
+      "id": "bank.locker.beneficiary.people",
+      "section": "bank",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "bank.locker.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "bank.locker.beneficiary.shares",
+      "section": "bank",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "bank.locker.beneficiary.contingent.group_mode",
+      "peopleSource": "bank.locker.beneficiary.people"
+    },
+    {
+      "id": "bank.locker.beneficiary.contingent.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "bank.locker.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "bank.cash.gate"
+    },
+    {
+      "id": "bank.locker.beneficiary.contingent.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.cash.gate"
+    },
+    {
+      "id": "bank.locker.beneficiary.contingent.group_mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "bank.cash.gate"
+    },
+    {
+      "id": "bank.cash.gate",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Do you keep cash at home or elsewhere?",
+        "ml": "വീട്ടിലോ മറ്റെവിടെയെങ്കിലുമോ പണം സൂക്ഷിക്കുന്നുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "bank.cash.beneficiary.mode"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "invest.gate"
+    },
+    {
+      "id": "bank.cash.beneficiary.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "Who should receive this cash?",
+        "ml": "ഈ പണം ആർക്ക് ലഭിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "one",
+          "label": {
+            "en": "One person",
+            "ml": "ഒരാൾ"
+          },
+          "next": "bank.cash.beneficiary.person"
+        },
+        {
+          "id": "several",
+          "label": {
+            "en": "More than one person",
+            "ml": "ഒന്നിലധികം പേർ"
+          },
+          "next": "bank.cash.beneficiary.people"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it, and add the money to my estate",
+            "ml": "ഇത് വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Let it pass with the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിനൊപ്പം പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "invest.gate"
+    },
+    {
+      "id": "bank.cash.beneficiary.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "bank.cash.beneficiary.contingent.mode"
+    },
+    {
+      "id": "bank.cash.beneficiary.people",
+      "section": "bank",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "bank.cash.beneficiary.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "bank.cash.beneficiary.shares",
+      "section": "bank",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "bank.cash.beneficiary.contingent.group_mode",
+      "peopleSource": "bank.cash.beneficiary.people"
+    },
+    {
+      "id": "bank.cash.beneficiary.contingent.mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "bank.cash.beneficiary.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "invest.gate"
+    },
+    {
+      "id": "bank.cash.beneficiary.contingent.person",
+      "section": "bank",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "invest.gate"
+    },
+    {
+      "id": "bank.cash.beneficiary.contingent.group_mode",
+      "section": "bank",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "invest.gate"
+    }
+  ]
+}

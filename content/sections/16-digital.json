@@ -1,0 +1,483 @@
+{
+  "id": "digital",
+  "title": {
+    "en": "Digital life",
+    "ml": "ഡിജിറ്റൽ ജീവിതം"
+  },
+  "chapter": "digital",
+  "questions": [
+    {
+      "id": "digital.gate",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Shall we go through your digital life — accounts, subscriptions, photos, files?",
+        "ml": "നിങ്ങളുടെ ഡിജിറ്റൽ ജീവിതം — അക്കൗണ്ടുകൾ, സബ്സ്ക്രിപ്ഷനുകൾ, ഫോട്ടോകൾ, ഫയലുകൾ — പരിശോധിക്കാമോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "digital.subs"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "Nothing important there",
+            "ml": "അതിൽ പ്രധാനപ്പെട്ടതൊന്നുമില്ല"
+          }
+        }
+      ],
+      "next": "residuary.primary"
+    },
+    {
+      "id": "digital.subs",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Your recurring subscriptions and memberships?",
+        "ml": "നിങ്ങളുടെ ആവർത്തന സബ്സ്ക്രിപ്ഷനുകളും അംഗത്വങ്ങളും?"
+      },
+      "options": [
+        {
+          "id": "cancel_all",
+          "label": {
+            "en": "Cancel them all; claim any refunds for my estate",
+            "ml": "എല്ലാം റദ്ദാക്കുക; റീഫണ്ട് വല്ലതും ഉണ്ടെങ്കിൽ എന്റെ ആസ്തിക്കായി വാങ്ങിക്കുക"
+          }
+        },
+        {
+          "id": "cancel_with_exceptions",
+          "label": {
+            "en": "Cancel all, but a few need care",
+            "ml": "എല്ലാം റദ്ദാക്കുക, പക്ഷേ ചിലതിന് ശ്രദ്ധ വേണം"
+          },
+          "next": "digital.subs.exceptions"
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "digital.statements"
+    },
+    {
+      "id": "digital.subs.exceptions",
+      "section": "digital",
+      "type": "longtext",
+      "text": {
+        "en": "Which ones, and what should happen to them?",
+        "ml": "ഏതൊക്കെ, അവയ്ക്ക് എന്ത് സംഭവിക്കണം?"
+      },
+      "optional": true,
+      "next": "digital.statements"
+    },
+    {
+      "id": "digital.statements",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "May your executor obtain your bank/card statements and transaction history to settle your estate?",
+        "ml": "ആസ്തി തീർപ്പാക്കാൻ നിങ്ങളുടെ ബാങ്ക്/കാർഡ് സ്റ്റേറ്റ്മെന്റുകളും ഇടപാട് ചരിത്രവും എക്സിക്യൂട്ടർക്ക് ലഭിക്കാമോ?"
+      },
+      "help": {
+        "en": "Banks ask for explicit authority; this gives your executor that authority in writing.",
+        "ml": "ബാങ്കുകൾ വ്യക്തമായ അധികാരം ആവശ്യപ്പെടും; ഇത് നിങ്ങളുടെ എക്സിക്യൂട്ടർക്ക് രേഖാമൂലം ആ അധികാരം നൽകുന്നു."
+      },
+      "options": [
+        {
+          "id": "full_consent",
+          "label": {
+            "en": "Yes — full consent",
+            "ml": "അതെ — പൂർണ്ണ സമ്മതം"
+          }
+        },
+        {
+          "id": "narrow_consent",
+          "label": {
+            "en": "Yes, but only for closing accounts and paying debts",
+            "ml": "അതെ, പക്ഷേ അക്കൗണ്ടുകൾ അടയ്ക്കാനും കടം വീട്ടാനും മാത്രം"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "digital.social"
+    },
+    {
+      "id": "digital.social",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Your social media accounts?",
+        "ml": "നിങ്ങളുടെ സോഷ്യൽ മീഡിയ അക്കൗണ്ടുകൾ?"
+      },
+      "options": [
+        {
+          "id": "delete_all",
+          "label": {
+            "en": "Delete them all",
+            "ml": "എല്ലാം ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "memorialise",
+          "label": {
+            "en": "Memorialise where possible, delete the rest",
+            "ml": "കഴിയുന്നിടത്ത് സ്മാരകമാക്കുക, ബാക്കി ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "archive_then_delete",
+          "label": {
+            "en": "Download my content for family, then delete",
+            "ml": "കുടുംബത്തിനായി എന്റെ ഉള്ളടക്കം ഡൗൺലോഡ് ചെയ്ത ശേഷം ഡിലീറ്റ് ചെയ്യുക"
+          },
+          "next": "digital.social.recipient"
+        },
+        {
+          "id": "leave_as_is",
+          "label": {
+            "en": "Leave them as they are",
+            "ml": "ഉള്ളതുപോലെ വിടുക"
+          }
+        },
+        {
+          "id": "per_platform",
+          "label": {
+            "en": "I'll describe it per platform",
+            "ml": "ഓരോ പ്ലാറ്റ്ഫോമും വെവ്വേറെ വിശദീകരിക്കാം"
+          },
+          "next": "digital.social.notes"
+        }
+      ],
+      "next": "digital.email"
+    },
+    {
+      "id": "digital.social.recipient",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.email"
+    },
+    {
+      "id": "digital.social.notes",
+      "section": "digital",
+      "type": "longtext",
+      "text": {
+        "en": "Which platforms, and what for each?",
+        "ml": "ഏതൊക്കെ പ്ലാറ്റ്ഫോമുകൾ, ഓരോന്നിനും എന്ത്?"
+      },
+      "next": "digital.email"
+    },
+    {
+      "id": "digital.email",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Your email accounts?",
+        "ml": "നിങ്ങളുടെ ഇമെയിൽ അക്കൗണ്ടുകൾ?"
+      },
+      "options": [
+        {
+          "id": "keep_briefly",
+          "label": {
+            "en": "Keep them open briefly for estate matters, then delete",
+            "ml": "ആസ്തി കാര്യങ്ങൾക്കായി കുറച്ചുകാലം തുറന്നിരിക്കട്ടെ, പിന്നീട് ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "delete",
+          "label": {
+            "en": "Delete them",
+            "ml": "ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "hand_over",
+          "label": {
+            "en": "Hand over to someone",
+            "ml": "ഒരാൾക്ക് കൈമാറുക"
+          },
+          "next": "digital.email.recipient"
+        },
+        {
+          "id": "leave_as_is",
+          "label": {
+            "en": "Leave as-is",
+            "ml": "ഉള്ളതുപോലെ വിടുക"
+          }
+        }
+      ],
+      "next": "digital.storage"
+    },
+    {
+      "id": "digital.email.recipient",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.storage"
+    },
+    {
+      "id": "digital.storage",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Files on your computer and in cloud drives?",
+        "ml": "നിങ്ങളുടെ കമ്പ്യൂട്ടറിലും ക്ലൗഡ് ഡ്രൈവുകളിലുമുള്ള ഫയലുകൾ?"
+      },
+      "options": [
+        {
+          "id": "trusted_review",
+          "label": {
+            "en": "A trusted person should review, keep what matters, delete the rest",
+            "ml": "വിശ്വസ്തനായ ഒരാൾ പരിശോധിച്ച്, പ്രധാനപ്പെട്ടത് സൂക്ഷിച്ച്, ബാക്കി ഡിലീറ്റ് ചെയ്യട്ടെ"
+          },
+          "next": "digital.storage.reviewer"
+        },
+        {
+          "id": "copy_for_family",
+          "label": {
+            "en": "Copy everything for family",
+            "ml": "എല്ലാം കുടുംബത്തിനായി പകർത്തുക"
+          },
+          "next": "digital.storage.recipient"
+        },
+        {
+          "id": "delete_all",
+          "label": {
+            "en": "Delete everything",
+            "ml": "എല്ലാം ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "digital.photos"
+    },
+    {
+      "id": "digital.storage.reviewer",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.photos"
+    },
+    {
+      "id": "digital.storage.recipient",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.photos"
+    },
+    {
+      "id": "digital.photos",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Your photos — on devices and in the cloud?",
+        "ml": "ഉപകരണങ്ങളിലും ക്ലൗഡിലുമുള്ള നിങ്ങളുടെ ഫോട്ടോകൾ?"
+      },
+      "options": [
+        {
+          "id": "share_with_family",
+          "label": {
+            "en": "Share copies with my family",
+            "ml": "കുടുംബവുമായി പങ്കിടുക"
+          }
+        },
+        {
+          "id": "one_person",
+          "label": {
+            "en": "Give them to one person",
+            "ml": "ഒരാൾക്ക് നൽകുക"
+          },
+          "next": "digital.photos.recipient"
+        },
+        {
+          "id": "review_first",
+          "label": {
+            "en": "A trusted person reviews first, deletes what's private",
+            "ml": "വിശ്വസ്തനായ ഒരാൾ ആദ്യം പരിശോധിച്ച്, സ്വകാര്യമായത് ഡിലീറ്റ് ചെയ്യട്ടെ"
+          },
+          "next": "digital.photos.reviewer"
+        },
+        {
+          "id": "delete_all",
+          "label": {
+            "en": "Delete them all",
+            "ml": "എല്ലാം ഡിലീറ്റ് ചെയ്യുക"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "digital.backup"
+    },
+    {
+      "id": "digital.photos.recipient",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.backup"
+    },
+    {
+      "id": "digital.photos.reviewer",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "digital.backup"
+    },
+    {
+      "id": "digital.backup",
+      "section": "digital",
+      "type": "multi",
+      "text": {
+        "en": "Anything else worth backing up before accounts close?",
+        "ml": "അക്കൗണ്ടുകൾ അടയ്ക്കുന്നതിന് മുൻപ് ബാക്കപ്പ് ചെയ്യേണ്ട വേറെ എന്തെങ്കിലുമുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "call_history",
+          "label": {
+            "en": "Call history",
+            "ml": "കോൾ ചരിത്രം"
+          }
+        },
+        {
+          "id": "sms",
+          "label": {
+            "en": "SMS / chat exports",
+            "ml": "SMS / ചാറ്റ് എക്സ്പോർട്ടുകൾ"
+          }
+        },
+        {
+          "id": "emails",
+          "label": {
+            "en": "Emails",
+            "ml": "ഇമെയിലുകൾ"
+          }
+        },
+        {
+          "id": "documents",
+          "label": {
+            "en": "Documents (IDs, records)",
+            "ml": "രേഖകൾ (തിരിച്ചറിയൽ, റെക്കോർഡുകൾ)"
+          }
+        },
+        {
+          "id": "contacts",
+          "label": {
+            "en": "Contacts",
+            "ml": "കോൺടാക്റ്റുകൾ"
+          }
+        }
+      ],
+      "next": "digital.backup.recipient"
+    },
+    {
+      "id": "digital.backup.recipient",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who should receive these backups?",
+        "ml": "ഈ ബാക്കപ്പുകൾ ആർക്ക് ലഭിക്കണം?"
+      },
+      "next": "digital.access"
+    },
+    {
+      "id": "digital.access",
+      "section": "digital",
+      "type": "single",
+      "text": {
+        "en": "Where will your digital executor find your access instructions?",
+        "ml": "നിങ്ങളുടെ ഡിജിറ്റൽ എക്സിക്യൂട്ടർ ആക്സസ് നിർദ്ദേശങ്ങൾ എവിടെ കണ്ടെത്തും?"
+      },
+      "help": {
+        "en": "Never typed here — a will can become a public document.",
+        "ml": "ഇവിടെ ഒരിക്കലും ടൈപ്പ് ചെയ്യരുത് — വിൽപത്രം ഒരു പൊതു രേഖയായി മാറാം."
+      },
+      "options": [
+        {
+          "id": "sealed_envelope",
+          "label": {
+            "en": "A sealed envelope with my important papers",
+            "ml": "എന്റെ പ്രധാന രേഖകൾക്കൊപ്പം അടച്ച കവറിൽ"
+          }
+        },
+        {
+          "id": "password_manager",
+          "label": {
+            "en": "My password manager's emergency access",
+            "ml": "എന്റെ പാസ്‌വേഡ് മാനേജറിന്റെ എമർജൻസി ആക്സസിൽ"
+          }
+        },
+        {
+          "id": "trusted_person",
+          "label": {
+            "en": "A trusted person knows",
+            "ml": "വിശ്വസ്തനായ ഒരാൾക്ക് അറിയാം"
+          },
+          "next": "digital.access.person"
+        },
+        {
+          "id": "not_set",
+          "label": {
+            "en": "I'll set this up later",
+            "ml": "ഞാൻ പിന്നീട് ക്രമീകരിക്കാം"
+          }
+        }
+      ],
+      "next": "residuary.primary"
+    },
+    {
+      "id": "digital.access.person",
+      "section": "digital",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "residuary.primary"
+    }
+  ]
+}

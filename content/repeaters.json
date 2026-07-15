@@ -1,0 +1,133 @@
+[
+  {
+    "id": "bank.accounts",
+    "keyPrefix": "bank.account",
+    "entryId": "bank.account.bank_name",
+    "afterId": "bank.locker.gate",
+    "addMoreLabel": {
+      "en": "Account added ({n} so far). Add another?",
+      "ml": "അക്കൗണ്ട് ചേർത്തു (ഇതുവരെ {n}). ഒന്നുകൂടി ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        "bank_name",
+        "type"
+      ]
+    }
+  },
+  {
+    "id": "realestate.items",
+    "keyPrefix": "realestate.item",
+    "entryId": "realestate.item.type",
+    "afterId": "vehicles.gate",
+    "addMoreLabel": {
+      "en": "Property added ({n} so far). Add another?",
+      "ml": "സ്വത്ത് ചേർത്തു (ഇതുവരെ {n}). ഒന്നുകൂടി ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        {
+          "key": "desc",
+          "truncateAt": 60
+        }
+      ]
+    }
+  },
+  {
+    "id": "guardianship.dependents",
+    "keyPrefix": "guardianship.dependents.item",
+    "entryId": "guardianship.dependents.item.person",
+    "afterId": "debts.gate",
+    "addMoreLabel": {
+      "en": "Added ({n} so far). Another dependent?",
+      "ml": "ചേർത്തു (ഇതുവരെ {n}). വേറെ ആശ്രിതരുണ്ടോ?"
+    },
+    "summarize": {
+      "fallbackText": {
+        "en": "A dependent",
+        "ml": "ഒരു ആശ്രിതൻ"
+      }
+    }
+  },
+  {
+    "id": "debts.items",
+    "keyPrefix": "debts.item",
+    "entryId": "debts.item.kind",
+    "afterId": "bank.gate",
+    "addMoreLabel": {
+      "en": "Debt added ({n} so far). Add another?",
+      "ml": "കടം ചേർത്തു (ഇതുവരെ {n}). ഒന്നുകൂടി ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        "lender",
+        "kind"
+      ]
+    }
+  },
+  {
+    "id": "invest.items",
+    "keyPrefix": "invest.item",
+    "entryId": "invest.item.type",
+    "afterId": "receivables.gate",
+    "addMoreLabel": {
+      "en": "Added ({n} so far). Add another investment?",
+      "ml": "ചേർത്തു (ഇതുവരെ {n}). വേറെ നിക്ഷേപം ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        {
+          "key": "desc",
+          "truncateAt": 40
+        },
+        "type"
+      ]
+    }
+  },
+  {
+    "id": "receivables.items",
+    "keyPrefix": "receivables.item",
+    "entryId": "receivables.item.who",
+    "afterId": "realestate.gate",
+    "addMoreLabel": {
+      "en": "Added ({n} so far). Does anyone else owe you money?",
+      "ml": "ചേർത്തു (ഇതുവരെ {n}). വേറെ ആരെങ്കിലും പണം തരാനുണ്ടോ?"
+    },
+    "summarize": {
+      "fields": [
+        "who"
+      ]
+    }
+  },
+  {
+    "id": "vehicles.items",
+    "keyPrefix": "vehicles.item",
+    "entryId": "vehicles.item.type",
+    "afterId": "collect.gate",
+    "addMoreLabel": {
+      "en": "Vehicle added ({n} so far). Add another?",
+      "ml": "വാഹനം ചേർത്തു (ഇതുവരെ {n}). ഒന്നുകൂടി ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        "type",
+        "desc"
+      ]
+    }
+  },
+  {
+    "id": "gadgets.items",
+    "keyPrefix": "gadgets.item",
+    "entryId": "gadgets.item.desc",
+    "afterId": "gadgets.data",
+    "addMoreLabel": {
+      "en": "Device added ({n} so far). Add another?",
+      "ml": "ഉപകരണം ചേർത്തു (ഇതുവരെ {n}). ഒന്നുകൂടി ചേർക്കണോ?"
+    },
+    "summarize": {
+      "fields": [
+        "desc"
+      ]
+    }
+  }
+]

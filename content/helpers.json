@@ -1,0 +1,93 @@
+[
+  {
+    "key": "frag.tail.one",
+    "text": {
+      "en": "to {person} absolutely. If they do not survive me, this bequest shall {contingent}",
+      "ml": "{person}-ന് പൂർണ്ണമായി നൽകുന്നു. അവർ എനിക്ക് മുൻപ് മരിച്ചാൽ, ഈ ദാനം {contingent}"
+    }
+  },
+  {
+    "key": "frag.tail.several",
+    "text": {
+      "en": "to {names}, {divide}. If any of them does not survive me, their share shall {contingent}",
+      "ml": "{names}-ന് നൽകുന്നു, {divide}. ഇവരിൽ ആരെങ്കിലും എനിക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം {contingent}"
+    }
+  },
+  {
+    "key": "frag.tail.contingent.children",
+    "text": {
+      "en": "pass to their children in equal shares.",
+      "ml": "അവരുടെ മക്കൾക്ക് തുല്യമായി കൈമാറും."
+    }
+  },
+  {
+    "key": "frag.tail.contingent.person",
+    "text": {
+      "en": "pass to {person}.",
+      "ml": "{person}-ന് കൈമാറും."
+    }
+  },
+  {
+    "key": "frag.tail.contingent.residuary",
+    "text": {
+      "en": "fall into my residuary estate.",
+      "ml": "എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേരും."
+    }
+  },
+  {
+    "key": "frag.tail.several.equal",
+    "text": {
+      "en": "in equal shares",
+      "ml": "തുല്യമായി"
+    }
+  },
+  {
+    "key": "frag.tail.several.percentage",
+    "text": {
+      "en": "in the following proportions: {list}",
+      "ml": "ഇനിപ്പറയുന്ന അനുപാതത്തിൽ: {list}"
+    }
+  },
+  {
+    "key": "frag.tail.several.describe",
+    "text": {
+      "en": "as follows: {text}",
+      "ml": "ഇപ്രകാരം: {text}"
+    }
+  },
+  {
+    "key": "frag.tail.contingent.group.children",
+    "text": {
+      "en": "pass to their children.",
+      "ml": "അവരുടെ മക്കൾക്ക് കൈമാറും."
+    }
+  },
+  {
+    "key": "frag.tail.contingent.group.others",
+    "text": {
+      "en": "be shared equally by the survivors.",
+      "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ തുല്യമായി വീതിക്കും."
+    }
+  },
+  {
+    "key": "frag.tail.contingent.group.residuary",
+    "text": {
+      "en": "fall into my residuary estate.",
+      "ml": "എന്റെ ബാക്കി ആസ്തിയിലേക്ക് ചേരും."
+    }
+  },
+  {
+    "key": "frag.tail.life",
+    "text": {
+      "en": "I give {occupant} the right to reside in and enjoy it for their lifetime, without power of sale, and upon their death it shall pass absolutely to {remainder}.",
+      "ml": "{occupant}-ന് ജീവിതകാലം അതിൽ താമസിക്കാനും അനുഭവിക്കാനുമുള്ള അവകാശം ഞാൻ നൽകുന്നു, വിൽക്കാനുള്ള അധികാരമില്ലാതെ, അവരുടെ മരണശേഷം അത് പൂർണ്ണമായി {remainder}-ന് കൈമാറും."
+    }
+  },
+  {
+    "key": "frag.names_with_shares",
+    "text": {
+      "en": "{names}, {divide}",
+      "ml": "{names}, {divide}"
+    }
+  }
+]

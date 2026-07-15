@@ -1,0 +1,268 @@
+{
+  "id": "vehicles",
+  "title": {
+    "en": "Vehicles",
+    "ml": "വാഹനങ്ങൾ"
+  },
+  "chapter": "money",
+  "questions": [
+    {
+      "id": "vehicles.gate",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "Do you own any vehicles?",
+        "ml": "നിങ്ങൾക്ക് വാഹനങ്ങൾ ഉണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "vehicles.item.type"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "collect.gate"
+    },
+    {
+      "id": "vehicles.item.type",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "Type?",
+        "ml": "തരം?"
+      },
+      "options": [
+        {
+          "id": "car",
+          "label": {
+            "en": "Car",
+            "ml": "കാർ"
+          }
+        },
+        {
+          "id": "motorcycle",
+          "label": {
+            "en": "Motorcycle / scooter",
+            "ml": "മോട്ടോർസൈക്കിൾ / സ്കൂട്ടർ"
+          }
+        },
+        {
+          "id": "commercial",
+          "label": {
+            "en": "Commercial vehicle",
+            "ml": "വാണിജ്യ വാഹനം"
+          }
+        },
+        {
+          "id": "other",
+          "label": {
+            "en": "Other",
+            "ml": "മറ്റുള്ളവ"
+          }
+        }
+      ],
+      "next": "vehicles.item.desc"
+    },
+    {
+      "id": "vehicles.item.desc",
+      "section": "vehicles",
+      "type": "text",
+      "text": {
+        "en": "Make & model?",
+        "ml": "മേക്കും മോഡലും?"
+      },
+      "next": "vehicles.item.reg"
+    },
+    {
+      "id": "vehicles.item.reg",
+      "section": "vehicles",
+      "type": "text",
+      "text": {
+        "en": "Registration number?",
+        "ml": "രജിസ്ട്രേഷൻ നമ്പർ?"
+      },
+      "optional": true,
+      "next": "vehicles.item.action"
+    },
+    {
+      "id": "vehicles.item.action",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "What should happen to it?",
+        "ml": "ഇതിന് എന്ത് സംഭവിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "person",
+          "label": {
+            "en": "Give it to a person",
+            "ml": "ഒരാൾക്ക് നൽകുക"
+          },
+          "next": "vehicles.item.person"
+        },
+        {
+          "id": "sell",
+          "label": {
+            "en": "Sell it — money joins my estate",
+            "ml": "വിറ്റ് പണം എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "family_decides",
+          "label": {
+            "en": "Family decides",
+            "ml": "കുടുംബം തീരുമാനിക്കട്ടെ"
+          }
+        }
+      ],
+      "next": "vehicles.item.loan"
+    },
+    {
+      "id": "vehicles.item.person",
+      "section": "vehicles",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "vehicles.item.contingent.mode"
+    },
+    {
+      "id": "vehicles.item.people",
+      "section": "vehicles",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "vehicles.item.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "vehicles.item.shares",
+      "section": "vehicles",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "vehicles.item.contingent.group_mode",
+      "peopleSource": "vehicles.item.people"
+    },
+    {
+      "id": "vehicles.item.contingent.mode",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "vehicles.item.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "vehicles.item.loan"
+    },
+    {
+      "id": "vehicles.item.contingent.person",
+      "section": "vehicles",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "vehicles.item.loan"
+    },
+    {
+      "id": "vehicles.item.contingent.group_mode",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "vehicles.item.loan"
+    },
+    {
+      "id": "vehicles.item.loan",
+      "section": "vehicles",
+      "type": "single",
+      "text": {
+        "en": "Is there a loan on this vehicle?",
+        "ml": "ഈ വാഹനത്തിന് വായ്പയുണ്ടോ?"
+      },
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          }
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    }
+  ]
+}

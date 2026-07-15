@@ -1,0 +1,238 @@
+{
+  "id": "receivables",
+  "title": {
+    "en": "Receivables",
+    "ml": "കിട്ടാനുള്ള തുകകൾ"
+  },
+  "chapter": "money",
+  "questions": [
+    {
+      "id": "receivables.gate",
+      "section": "receivables",
+      "type": "single",
+      "text": {
+        "en": "Does anyone owe you money?",
+        "ml": "ആരെങ്കിലും നിങ്ങൾക്ക് പണം തരാനുണ്ടോ?"
+      },
+      "gate": true,
+      "options": [
+        {
+          "id": "yes",
+          "label": {
+            "en": "Yes",
+            "ml": "അതെ"
+          },
+          "next": "receivables.item.who"
+        },
+        {
+          "id": "no",
+          "label": {
+            "en": "No",
+            "ml": "ഇല്ല"
+          }
+        }
+      ],
+      "next": "realestate.gate"
+    },
+    {
+      "id": "receivables.item.who",
+      "section": "receivables",
+      "type": "text",
+      "text": {
+        "en": "Who owes you?",
+        "ml": "ആരാണ് തരാനുള്ളത്?"
+      },
+      "next": "receivables.item.amount"
+    },
+    {
+      "id": "receivables.item.amount",
+      "section": "receivables",
+      "type": "number",
+      "text": {
+        "en": "Roughly how much?",
+        "ml": "ഏകദേശം എത്ര?"
+      },
+      "next": "receivables.item.proof"
+    },
+    {
+      "id": "receivables.item.proof",
+      "section": "receivables",
+      "type": "single",
+      "text": {
+        "en": "Any written proof?",
+        "ml": "രേഖാമൂലമുള്ള തെളിവ് വല്ലതും ഉണ്ടോ?"
+      },
+      "help": {
+        "en": "Informal loans are harder to recover, but naming them here still authorises your executor to pursue them.",
+        "ml": "അനൗപചാരിക വായ്പകൾ തിരിച്ചുപിടിക്കാൻ ബുദ്ധിമുട്ടാണ്, പക്ഷേ ഇവിടെ പേരെടുത്ത് പറയുന്നത് എക്സിക്യൂട്ടർക്ക് അത് പിന്തുടരാൻ അധികാരം നൽകും."
+      },
+      "options": [
+        {
+          "id": "written",
+          "label": {
+            "en": "Promissory note / written agreement",
+            "ml": "പ്രോമിസറി നോട്ട് / രേഖാമൂലമുള്ള കരാർ"
+          }
+        },
+        {
+          "id": "bank_transfer",
+          "label": {
+            "en": "Bank transfer records",
+            "ml": "ബാങ്ക് ട്രാൻസ്ഫർ രേഖകൾ"
+          }
+        },
+        {
+          "id": "informal",
+          "label": {
+            "en": "It's informal",
+            "ml": "അനൗപചാരികമാണ്"
+          }
+        }
+      ],
+      "next": "receivables.item.action"
+    },
+    {
+      "id": "receivables.item.action",
+      "section": "receivables",
+      "type": "single",
+      "text": {
+        "en": "What should happen?",
+        "ml": "എന്ത് സംഭവിക്കണം?"
+      },
+      "options": [
+        {
+          "id": "collect_estate",
+          "label": {
+            "en": "Collect it — it joins my estate",
+            "ml": "ഇത് പിരിച്ചെടുത്ത് എന്റെ ആസ്തിയിലേക്ക് ചേർക്കുക"
+          }
+        },
+        {
+          "id": "collect_person",
+          "label": {
+            "en": "Collect it and give it to a specific person",
+            "ml": "പിരിച്ചെടുത്ത് ഒരു പ്രത്യേക വ്യക്തിക്ക് നൽകുക"
+          },
+          "next": "receivables.item.person"
+        },
+        {
+          "id": "forgive",
+          "label": {
+            "en": "Forgive it — they owe nothing after me",
+            "ml": "ഇത് വേണ്ട — എനിക്ക് ശേഷം അവർ ഒന്നും തരേണ്ടതില്ല"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "receivables.item.person",
+      "section": "receivables",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "receivables.item.contingent.mode"
+    },
+    {
+      "id": "receivables.item.people",
+      "section": "receivables",
+      "type": "personMulti",
+      "text": {
+        "en": "Who all?",
+        "ml": "ആരെല്ലാം?"
+      },
+      "next": "receivables.item.shares",
+      "minPeople": 2
+    },
+    {
+      "id": "receivables.item.shares",
+      "section": "receivables",
+      "type": "shares",
+      "text": {
+        "en": "How should it be divided?",
+        "ml": "ഇത് എങ്ങനെ വീതിക്കണം?"
+      },
+      "next": "receivables.item.contingent.group_mode",
+      "peopleSource": "receivables.item.people"
+    },
+    {
+      "id": "receivables.item.contingent.mode",
+      "section": "receivables",
+      "type": "single",
+      "text": {
+        "en": "If they don't survive you, this should go to:",
+        "ml": "അവർ നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, ഇത് ആർക്ക് പോകണം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Their children",
+            "ml": "അവരുടെ മക്കൾക്ക്"
+          }
+        },
+        {
+          "id": "someone_else",
+          "label": {
+            "en": "Someone else",
+            "ml": "മറ്റൊരാൾക്ക്"
+          },
+          "next": "receivables.item.contingent.person"
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "The rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക്"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "receivables.item.contingent.person",
+      "section": "receivables",
+      "type": "person",
+      "text": {
+        "en": "Who?",
+        "ml": "ആര്?"
+      },
+      "next": "__ITEM_END__"
+    },
+    {
+      "id": "receivables.item.contingent.group_mode",
+      "section": "receivables",
+      "type": "single",
+      "text": {
+        "en": "If any of them passes away before you, their share should:",
+        "ml": "ഇവരിൽ ആരെങ്കിലും നിങ്ങൾക്ക് മുൻപ് മരിച്ചാൽ, അവരുടെ വിഹിതം:"
+      },
+      "options": [
+        {
+          "id": "children",
+          "label": {
+            "en": "Go to their children",
+            "ml": "അവരുടെ മക്കൾക്ക് പോകട്ടെ"
+          }
+        },
+        {
+          "id": "others",
+          "label": {
+            "en": "Be shared by the others",
+            "ml": "ബാക്കിയുള്ളവർക്കിടയിൽ വീതിക്കട്ടെ"
+          }
+        },
+        {
+          "id": "residuary",
+          "label": {
+            "en": "Go back to the rest of my estate",
+            "ml": "ബാക്കി സ്വത്തിലേക്ക് തിരികെ പോകട്ടെ"
+          }
+        }
+      ],
+      "next": "__ITEM_END__"
+    }
+  ]
+}
