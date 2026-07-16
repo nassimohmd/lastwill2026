@@ -1,0 +1,24 @@
+# Runs the content validator (plus the unit tests) on every push, so a
+# Pages CMS edit that would fail the Vercel build shows up as a red ✗ on
+# the commit in GitHub — with the validator's plain-English error in the
+# log — instead of failing silently while the live site stays stale.
+name: content-check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Validate content (question routing, conditions, required text)
+        run: npm run validate-content
+      - name: Unit tests
+        run: npm run test
