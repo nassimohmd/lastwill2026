@@ -47,14 +47,7 @@
           }
         }
       ],
-      "when": {
-        "not": {
-          "eq": [
-            "funeral.method",
-            "donate_science"
-          ]
-        }
-      },
+      "when": "{\"not\":{\"eq\":[\"funeral.method\",\"donate_science\"]}}",
       "next": "guardianship.gate"
     },
     {

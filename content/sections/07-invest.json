@@ -156,14 +156,7 @@
           }
         }
       ],
-      "when": {
-        "not": {
-          "eq": [
-            "invest.item.type",
-            "insurance"
-          ]
-        }
-      },
+      "when": "{\"not\":{\"eq\":[\"invest.item.type\",\"insurance\"]}}",
       "next": "invest.item.nomination"
     },
     {
@@ -310,17 +303,7 @@
           }
         }
       ],
-      "nextRules": [
-        {
-          "when": {
-            "eq": [
-              "invest.item.type",
-              "crypto"
-            ]
-          },
-          "goto": "invest.item.crypto_access"
-        }
-      ],
+      "nextRules": "[{\"when\":{\"eq\":[\"invest.item.type\",\"crypto\"]},\"goto\":\"invest.item.crypto_access\"}]",
       "next": "__ITEM_END__"
     },
     {

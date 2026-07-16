@@ -40,8 +40,12 @@ last version that passed. Nothing is ever half-broken in production.
   options, adding a new question, changing help text.
 - **`clauses.json`** — the will's own text, as an ordered list of clause
   blocks. Each has `text` (with `{{...}}` placeholders the app fills in
-  from the interview answers) and sometimes `fragments` — small optional
-  add-on sentences that only appear when a condition is met.
+  from the interview answers) and sometimes `fragments` — a list of small
+  conditional inserts. Each fragment has a `group` name matching a
+  `{{frag:group}}` slot in the clause text, an optional condition, and its
+  own bilingual text. Within a group, the app uses the **first** fragment
+  whose condition matches (an entry with no condition acts as the
+  fallback), so the order of fragments matters.
 - **`helpers.json`** — a handful of shared sentence templates (e.g. "to
   {person} absolutely. If they do not survive me, this bequest shall
   {contingent}") reused across several different clauses.
@@ -58,8 +62,11 @@ last version that passed. Nothing is ever half-broken in production.
 Each question can have a `next` (default next question), `nextRules`
 (conditional routing), and `when` (whether the question shows at all).
 These describe *branching logic* — "if the testator said X, jump to Y" —
-which doesn't map cleanly onto a form field, so they stay as raw JSON,
-edited in a code box in the CMS. A condition looks like:
+which doesn't map cleanly onto a form field, so they're edited as JSON
+**text** in a code box in the CMS (in the files they're stored as JSON
+strings; the app parses them, and the build check rejects invalid JSON
+with the exact location). Leaving one blank means "no condition" /
+"always". A condition looks like:
 
 ```json
 { "eq": ["personal.marital_status", "married"] }

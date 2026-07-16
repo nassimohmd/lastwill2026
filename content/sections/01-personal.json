@@ -103,12 +103,7 @@
         "en": "You must be 18 or older to make a valid will in India. You can continue exploring the questions, but the will can't be generated.",
         "ml": "ഇന്ത്യയിൽ സാധുവായ വിൽപത്രം എഴുതാൻ 18 വയസ്സോ അതിൽ കൂടുതലോ വേണം. ചോദ്യങ്ങൾ തുടർന്നും കാണാം, പക്ഷേ വിൽപത്രം തയ്യാറാക്കാൻ കഴിയില്ല."
       },
-      "when": {
-        "eq": [
-          "personal.underage",
-          true
-        ]
-      },
+      "when": "{\"eq\":[\"personal.underage\",true]}",
       "next": "personal.address"
     },
     {
@@ -328,17 +323,7 @@
         "en": "Your spouse's name?",
         "ml": "നിങ്ങളുടെ ജീവിതപങ്കാളിയുടെ പേര്?"
       },
-      "when": {
-        "not": {
-          "in": [
-            "personal.relation_line",
-            [
-              "wife_of",
-              "husband_of"
-            ]
-          ]
-        }
-      },
+      "when": "{\"not\":{\"in\":[\"personal.relation_line\",[\"wife_of\",\"husband_of\"]]}}",
       "next": "personal.children_gate"
     },
     {

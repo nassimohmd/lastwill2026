@@ -8,13 +8,24 @@
 #
 # See content/README.md for the plain-English editing guide. The "Routing"
 # fields on each question (`next` / `nextRules` / `when`) are the one
-# technical corner: they're edited as raw JSON, because branching logic
-# doesn't map cleanly onto a form field. Everything else here is just text
-# and dropdowns.
+# technical corner: they're edited as JSON *text* in a code box, because
+# branching logic doesn't map cleanly onto a form field. (In the JSON files
+# themselves those values are stored as JSON strings — Pages CMS's code
+# field can only hold a string; src/content/load.ts parses them.)
+# Everything else here is just text and dropdowns.
+#
+# IMPORTANT for future schema changes: Pages CMS DROPS any key that exists
+# in a data file but is not declared below — saving an entry deletes
+# undeclared keys. Never add a new key to content/*.json without declaring
+# a matching field here.
 
 media:
   input: content/media
   output: /content/media
+
+settings:
+  content:
+    merge: true
 
 content:
   - name: sections
@@ -113,11 +124,11 @@ content:
           - { name: peopleSource, label: "Answer key holding the people to split between (shares only)", type: string }
           - { name: next, label: "Default next question ID (leave blank to fall through to the section order)", type: string }
           - name: nextRules
-            label: "Routing — technical, raw JSON (leave as [] if none apply)"
+            label: "Conditional routing — technical, JSON as text (leave blank if none apply)"
             type: code
             options: { format: json }
           - name: when
-            label: "Visibility condition — technical, raw JSON (delete the field entirely if always visible)"
+            label: "Visibility condition — technical, JSON as text (leave blank if always visible)"
             type: code
             options: { format: json }
 
@@ -135,7 +146,7 @@ content:
         options: [title, heading, clause, plain]
         required: true
       - name: when
-        label: "Visibility condition — technical, raw JSON (delete the field entirely if always included)"
+        label: "Visibility condition — technical, JSON as text (leave blank if always included)"
         type: code
         options: { format: json }
       - name: text
@@ -145,9 +156,21 @@ content:
           - { name: en, label: English, type: string, required: true }
           - { name: ml, label: Malayalam, type: string }
       - name: fragments
-        label: "Conditional inserts referenced by {{frag:name}} in the text above — technical, raw JSON"
-        type: code
-        options: { format: json }
+        label: "Conditional inserts — each fills a {{frag:group}} slot in the clause text; within a group, the FIRST entry whose condition matches wins"
+        type: object
+        list: true
+        fields:
+          - { name: group, label: "Group name (matches {{frag:group}} in the clause text — don't change)", type: string, required: true }
+          - name: when
+            label: "Condition — technical, JSON as text (leave blank for the group's always-matches fallback)"
+            type: code
+            options: { format: json }
+          - name: text
+            label: Fragment text (may be left empty for an "add nothing" fallback)
+            type: object
+            fields:
+              - { name: en, label: English, type: string }
+              - { name: ml, label: Malayalam, type: string }
       - { name: each, label: "Repeat once per item in this answer array (leave blank for a normal single clause)", type: string }
       - { name: itemKeyPrefix, label: "Answer-key prefix stripped from each item's fields (only used with \"each\")", type: string }
 
@@ -184,7 +207,7 @@ content:
           - { name: en, label: English, type: string, required: true }
           - { name: ml, label: Malayalam, type: string }
       - name: summarize
-        label: "How a completed item is summarised in the list — technical, raw JSON"
+        label: "How a completed item is summarised in the list — technical, JSON as text"
         type: code
         options: { format: json }
 

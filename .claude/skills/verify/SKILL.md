@@ -370,6 +370,24 @@ Selectors that matter:
   form will drift from what the loader actually reads. `content/README.md`
   is the owner-facing editing guide — keep it in sync with any schema
   change too.
+- **Pages CMS hard constraints** (learned by reading its source after two
+  live breakages — don't rediscover these): (1) a `type: file` entry whose
+  JSON root is a bare array needs `list: true` at the *entry* level, with
+  `fields:` describing one item — a wrapper field inside `fields:` binds
+  nothing. (2) A `type: code` field's value must be a **string** — an
+  object crashes its CodeMirror editor with "value must be typeof string
+  but got object", and its save schema is `z.string()`. That's why every
+  condition-shaped value (`when`, `nextRules`, `summarize`) is stored in
+  content JSON as a *JSON string*, parsed by `parseJsonField()` in
+  `src/content/load.ts` (blank string = unset; bad JSON = build failure
+  with location). (3) **Pages CMS deletes any data key not declared in
+  `.pages.yml` when an entry is saved** — never add a key to a content
+  file without declaring a matching field, and never "hide" a key by
+  removing its field (that's silent data loss on the owner's next save;
+  `hidden: true` doesn't help — it still validates). (4) Clause
+  `fragments` are a **flat list** with a `group` key (not a group-keyed
+  map — the CMS can't model arbitrary map keys); `loadFragments()`
+  regroups them, preserving order within each group (first match wins).
 - A CMS form can write back an empty array/string for a field the editor
   never touched (`"options": []`, `"help": {"en": "", "ml": ""}`) instead
   of omitting the key — `src/content/load.ts`'s `present()`/`textPresent()`/

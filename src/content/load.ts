@@ -41,6 +41,14 @@ import s18 from '../../content/sections/18-executors.json';
 
 type Bi = { en: string; ml?: string };
 
+// Condition-shaped values (`when`, `nextRules`, `summarize`) are stored in
+// the content JSON as *JSON strings*, not objects — Pages CMS's `code` form
+// field can only hold a string (its editor throws on anything else, and
+// undeclared object keys are stripped on save, so real objects can't
+// round-trip through the CMS at all). The loader parses them here; plain
+// objects are still accepted for hand-edited files.
+type JsonStr<T> = string | T;
+
 interface CQOption {
   id: string;
   label: Bi;
@@ -63,8 +71,8 @@ interface CQuestion {
   gate?: true;
   options?: CQOption[];
   optional?: true;
-  when?: Condition;
-  nextRules?: NextRule[];
+  when?: JsonStr<Condition>;
+  nextRules?: JsonStr<NextRule[]>;
   next?: string;
   fields?: CQField[];
   addMore?: Bi;
@@ -94,22 +102,27 @@ interface CRepeaterDef {
   entryId: string;
   afterId: string;
   addMoreLabel: Bi;
-  summarize: CSummarizeSpec;
+  summarize: JsonStr<CSummarizeSpec>;
 }
 interface CRelation {
   id: string;
   label: Bi;
 }
+// Fragments are stored flat with a `group` key (not as a group-keyed map)
+// so Pages CMS can render each fragment as a real form entry — its `object`
+// field can't model a map with arbitrary keys. Within a group, file order
+// is evaluation order: the first fragment whose `when` matches wins.
 interface CFragment {
-  when?: Condition;
+  group: string;
+  when?: JsonStr<Condition>;
   text: Bi;
 }
 interface CClauseBlock {
   id: string;
   kind: BlockKind;
-  when?: Condition;
+  when?: JsonStr<Condition>;
   text: Bi;
-  fragments?: Record<string, CFragment[]>;
+  fragments?: CFragment[];
   each?: string;
   itemKeyPrefix?: string;
 }
@@ -142,6 +155,20 @@ function textPresent(v: Bi | undefined): v is Bi {
 }
 function strPresent(v: string | undefined): v is string {
   return v !== undefined && v.trim() !== '';
+}
+
+/** Parse a JSON-string-encoded value (see the JsonStr note above). Empty/
+ *  blank strings mean "not set". A parse failure throws with the location,
+ *  which the prebuild validator surfaces as a readable build error. */
+function parseJsonField<T>(raw: JsonStr<T> | undefined, where: string): T | undefined {
+  if (raw === undefined) return undefined;
+  if (typeof raw !== 'string') return raw;
+  if (raw.trim() === '') return undefined;
+  try {
+    return JSON.parse(raw) as T;
+  } catch (e) {
+    throw new Error(`${where}: invalid JSON in condition/rules field — ${(e as Error).message}`);
+  }
 }
 
 // The "tail" sentence templates (beneficiary/contingent/life-interest
@@ -177,6 +204,8 @@ function loadField(qid: string, f: CQField): RepeaterField {
 
 function loadQuestion(cq: CQuestion): Question {
   const qid = cq.id;
+  const when = parseJsonField(cq.when, `Question "${qid}" when`);
+  const nextRules = parseJsonField(cq.nextRules, `Question "${qid}" nextRules`);
   return {
     id: qid,
     section: cq.section,
@@ -187,13 +216,14 @@ function loadQuestion(cq: CQuestion): Question {
     ...(cq.gate ? { gate: true } : {}),
     ...(present(cq.options) ? { options: cq.options.map((o) => loadOption(qid, 'opt', o)) } : {}),
     ...(cq.optional ? { optional: true } : {}),
-    ...(cq.when ? { when: cq.when } : {}),
-    ...(present(cq.nextRules) ? { nextRules: cq.nextRules } : {}),
+    ...(when ? { when } : {}),
+    ...(present(nextRules) ? { nextRules } : {}),
     ...(strPresent(cq.next) ? { next: cq.next } : {}),
     ...(present(cq.fields) ? { fields: cq.fields.map((f) => loadField(qid, f)) } : {}),
     ...(textPresent(cq.addMore) ? { addMore: reg(`q.${qid}.addmore`, cq.addMore) } : {}),
     ...(cq.askAddress ? { askAddress: true } : {}),
-    ...(cq.minPeople !== undefined ? { minPeople: cq.minPeople } : {}),
+    // A CMS-saved empty number field can coerce to 0/null — treat those as unset.
+    ...(typeof cq.minPeople === 'number' && cq.minPeople > 0 ? { minPeople: cq.minPeople } : {}),
     ...(strPresent(cq.peopleSource) ? { peopleSource: cq.peopleSource } : {}),
   };
 }
@@ -248,7 +278,7 @@ export const repeaterDefs: FlowRepeaterDef[] = (repeatersJson as CRepeaterDef[])
   entryId: d.entryId,
   afterId: d.afterId,
   addMoreLabel: reg(`rep.${d.id}.addMore`, d.addMoreLabel),
-  summarize: buildSummarize(d.id, d.summarize),
+  summarize: buildSummarize(d.id, parseJsonField(d.summarize, `Repeater "${d.id}" summarize`) ?? {}),
 }));
 
 export const RELATIONS: { id: string; label: string }[] = (relationsJson as CRelation[]).map((r) => ({
@@ -260,27 +290,31 @@ export function relationLabel(relation: string): string {
   return RELATIONS.find((r) => r.id === relation)?.label ?? 'q.relation.other';
 }
 
-function loadFragment(blockId: string, group: string, index: number, f: CFragment): Fragment {
-  return {
-    ...(f.when ? { when: f.when } : {}),
-    text: reg(`clause.${blockId}.frag.${group}.${index}`, f.text),
-  };
+/** Regroup the flat fragment list back into the group-keyed map render.ts
+ *  consumes, preserving file order within each group (evaluation order). */
+function loadFragments(blockId: string, flat: CFragment[]): Record<string, Fragment[]> {
+  const grouped: Record<string, Fragment[]> = {};
+  for (const f of flat) {
+    const group = f.group;
+    grouped[group] ??= [];
+    const index = grouped[group].length;
+    const when = parseJsonField(f.when, `Clause "${blockId}" fragment "${group}[${index}]" when`);
+    grouped[group].push({
+      ...(when ? { when } : {}),
+      text: reg(`clause.${blockId}.frag.${group}.${index}`, f.text),
+    });
+  }
+  return grouped;
 }
 
 function loadClauseBlock(b: CClauseBlock): ClauseBlock {
-  const fragmentEntries = Object.entries(b.fragments ?? {}).filter(([, frags]) => present(frags));
+  const when = parseJsonField(b.when, `Clause "${b.id}" when`);
   return {
     id: b.id,
     kind: b.kind,
-    ...(b.when ? { when: b.when } : {}),
+    ...(when ? { when } : {}),
     text: reg(`clause.${b.id}`, b.text),
-    ...(fragmentEntries.length > 0
-      ? {
-          fragments: Object.fromEntries(
-            fragmentEntries.map(([group, frags]) => [group, frags.map((f, i) => loadFragment(b.id, group, i, f))]),
-          ),
-        }
-      : {}),
+    ...(present(b.fragments) ? { fragments: loadFragments(b.id, b.fragments) } : {}),
     ...(strPresent(b.each) ? { each: b.each } : {}),
     ...(strPresent(b.itemKeyPrefix) ? { itemKeyPrefix: b.itemKeyPrefix } : {}),
   };

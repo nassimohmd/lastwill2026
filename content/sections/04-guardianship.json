@@ -193,17 +193,7 @@
           }
         }
       ],
-      "nextRules": [
-        {
-          "when": {
-            "eq": [
-              "guardianship.gate",
-              "both"
-            ]
-          },
-          "goto": "guardianship.dependents.item.person"
-        }
-      ],
+      "nextRules": "[{\"when\":{\"eq\":[\"guardianship.gate\",\"both\"]},\"goto\":\"guardianship.dependents.item.person\"}]",
       "next": "debts.gate"
     },
     {
@@ -248,17 +238,7 @@
           }
         }
       ],
-      "nextRules": [
-        {
-          "when": {
-            "eq": [
-              "guardianship.gate",
-              "both"
-            ]
-          },
-          "goto": "guardianship.dependents.item.person"
-        }
-      ],
+      "nextRules": "[{\"when\":{\"eq\":[\"guardianship.gate\",\"both\"]},\"goto\":\"guardianship.dependents.item.person\"}]",
       "next": "debts.gate"
     },
     {
@@ -269,17 +249,7 @@
         "en": "Which asset?",
         "ml": "ഏത് ആസ്തി?"
       },
-      "nextRules": [
-        {
-          "when": {
-            "eq": [
-              "guardianship.gate",
-              "both"
-            ]
-          },
-          "goto": "guardianship.dependents.item.person"
-        }
-      ],
+      "nextRules": "[{\"when\":{\"eq\":[\"guardianship.gate\",\"both\"]},\"goto\":\"guardianship.dependents.item.person\"}]",
       "next": "debts.gate"
     },
     {
