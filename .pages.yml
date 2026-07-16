@@ -125,110 +125,95 @@ content:
     label: "Generated will: clauses"
     type: file
     path: content/clauses.json
+    format: json
+    list: true
     fields:
-      - name: clauses
-        label: Clause blocks (in the order they appear in the will)
+      - { name: id, label: "Clause ID (don't change)", type: string, required: true }
+      - name: kind
+        label: Kind
+        type: select
+        options: [title, heading, clause, plain]
+        required: true
+      - name: when
+        label: "Visibility condition — technical, raw JSON (delete the field entirely if always included)"
+        type: code
+        options: { format: json }
+      - name: text
+        label: Clause text
         type: object
-        list: true
         fields:
-          - { name: id, label: "Clause ID (don't change)", type: string, required: true }
-          - name: kind
-            label: Kind
-            type: select
-            options: [title, heading, clause, plain]
-            required: true
-          - name: when
-            label: "Visibility condition — technical, raw JSON (delete the field entirely if always included)"
-            type: code
-            options: { format: json }
-          - name: text
-            label: Clause text
-            type: object
-            fields:
-              - { name: en, label: English, type: string, required: true }
-              - { name: ml, label: Malayalam, type: string }
-          - name: fragments
-            label: "Conditional inserts referenced by {{frag:name}} in the text above — technical, raw JSON"
-            type: code
-            options: { format: json }
-          - { name: each, label: "Repeat once per item in this answer array (leave blank for a normal single clause)", type: string }
-          - { name: itemKeyPrefix, label: "Answer-key prefix stripped from each item's fields (only used with \"each\")", type: string }
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
+      - name: fragments
+        label: "Conditional inserts referenced by {{frag:name}} in the text above — technical, raw JSON"
+        type: code
+        options: { format: json }
+      - { name: each, label: "Repeat once per item in this answer array (leave blank for a normal single clause)", type: string }
+      - { name: itemKeyPrefix, label: "Answer-key prefix stripped from each item's fields (only used with \"each\")", type: string }
 
   - name: helpers
     label: "Generated will: shared sentence templates"
     type: file
     path: content/helpers.json
+    format: json
+    list: true
     fields:
-      - name: helpers
-        label: Templates
+      - { name: key, label: "Template key (don't change)", type: string, required: true }
+      - name: text
+        label: Template text (with {placeholders} filled in by the app)
         type: object
-        list: true
         fields:
-          - { name: key, label: "Template key (don't change)", type: string, required: true }
-          - name: text
-            label: Template text (with {placeholders} filled in by the app)
-            type: object
-            fields:
-              - { name: en, label: English, type: string, required: true }
-              - { name: ml, label: Malayalam, type: string }
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
 
   - name: repeaters
     label: "Interview: \"add another?\" list settings"
     type: file
     path: content/repeaters.json
+    format: json
+    list: true
     fields:
-      - name: repeaters
-        label: Lists
+      - { name: id, label: "Repeater ID (don't change)", type: string, required: true }
+      - { name: keyPrefix, label: "Answer-key prefix for each item (don't change)", type: string, required: true }
+      - { name: entryId, label: "First question ID of the item chain (don't change)", type: string, required: true }
+      - { name: afterId, label: "Question ID to continue to once done (don't change)", type: string, required: true }
+      - name: addMoreLabel
+        label: "\"Add another?\" heading ({n} is replaced with the count so far)"
         type: object
-        list: true
         fields:
-          - { name: id, label: "Repeater ID (don't change)", type: string, required: true }
-          - { name: keyPrefix, label: "Answer-key prefix for each item (don't change)", type: string, required: true }
-          - { name: entryId, label: "First question ID of the item chain (don't change)", type: string, required: true }
-          - { name: afterId, label: "Question ID to continue to once done (don't change)", type: string, required: true }
-          - name: addMoreLabel
-            label: "\"Add another?\" heading ({n} is replaced with the count so far)"
-            type: object
-            fields:
-              - { name: en, label: English, type: string, required: true }
-              - { name: ml, label: Malayalam, type: string }
-          - name: summarize
-            label: "How a completed item is summarised in the list — technical, raw JSON"
-            type: code
-            options: { format: json }
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
+      - name: summarize
+        label: "How a completed item is summarised in the list — technical, raw JSON"
+        type: code
+        options: { format: json }
 
   - name: relations
     label: "Interview: relationship choices"
     type: file
     path: content/relations.json
+    format: json
+    list: true
     fields:
-      - name: relations
-        label: Relationships (offered whenever the interview asks "how are they related to you?")
+      - { name: id, label: "Relation ID (don't change)", type: string, required: true }
+      - name: label
+        label: Relation label
         type: object
-        list: true
         fields:
-          - { name: id, label: "Relation ID (don't change)", type: string, required: true }
-          - name: label
-            label: Relation label
-            type: object
-            fields:
-              - { name: en, label: English, type: string, required: true }
-              - { name: ml, label: Malayalam, type: string }
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
 
   - name: chapters
     label: "Interview: chapters"
     type: file
     path: content/chapters.json
+    format: json
+    list: true
     fields:
-      - name: chapters
-        label: Chapters (the top-level groups shown in the progress bar)
+      - { name: id, label: "Chapter ID (don't change — sections refer to this)", type: string, required: true }
+      - name: title
+        label: Chapter title
         type: object
-        list: true
         fields:
-          - { name: id, label: "Chapter ID (don't change — sections refer to this)", type: string, required: true }
-          - name: title
-            label: Chapter title
-            type: object
-            fields:
-              - { name: en, label: English, type: string, required: true }
-              - { name: ml, label: Malayalam, type: string }
+          - { name: en, label: English, type: string, required: true }
+          - { name: ml, label: Malayalam, type: string }
