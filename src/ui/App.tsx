@@ -172,10 +172,14 @@ export function App() {
   // the header starts pulling weight once there are nav buttons to hold
   const showHeader = started || finished;
 
+  // on the landing page, a plain flex-centered main still reads as top-heavy:
+  // the footer below it eats real space, so centering main *within the
+  // leftover area above the footer* pulls the hero above true page-center.
+  // A 1fr/auto/1fr/auto grid keeps the hero exactly centered between two
+  // equal spacers no matter how tall the footer is — the footer just
+  // follows in normal flow, so it can never overlap the hero either.
   return (
-    <div
-      className={`app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16 ${showHeader ? '' : 'justify-center'}`}
-    >
+    <div className="app mx-auto flex min-h-dvh max-w-2xl flex-col px-5">
       {showHeader && (
         <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border py-5">
           <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-foreground">
@@ -202,10 +206,23 @@ export function App() {
           <ProgressBar />
         </div>
       )}
-      <main className={showHeader ? 'flex-1 pt-2' : 'pt-2'}>{view}</main>
-      <footer className="no-print mt-14 text-center text-xs text-muted-foreground/70">
-        {t('ui.disclaimer', locale)}
-      </footer>
+      {showHeader ? (
+        <>
+          <main className="flex-1 pt-2">{view}</main>
+          <footer className="no-print mt-14 pb-16 text-center text-xs text-muted-foreground/70">
+            {t('ui.disclaimer', locale)}
+          </footer>
+        </>
+      ) : (
+        <div className="grid flex-1 grid-rows-[1fr_auto_1fr_auto]">
+          <div aria-hidden="true" />
+          <main>{view}</main>
+          <div aria-hidden="true" />
+          <footer className="no-print pt-6 pb-10 text-center text-xs text-muted-foreground/70">
+            {t('ui.disclaimer', locale)}
+          </footer>
+        </div>
+      )}
     </div>
   );
 }
