@@ -62,7 +62,7 @@ export function App() {
   let view;
   if (!started && !finished) {
     view = (
-      <div className="landing pt-[10vh] text-center">
+      <div className="landing text-center">
         <h1 className="text-5xl font-semibold tracking-tight text-foreground sm:text-6xl">
           {t('ui.appName', locale)}
         </h1>
@@ -173,7 +173,9 @@ export function App() {
   const showHeader = started || finished;
 
   return (
-    <div className="app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16">
+    <div
+      className={`app mx-auto flex min-h-screen max-w-2xl flex-col px-5 pb-16 ${showHeader ? '' : 'justify-center'}`}
+    >
       {showHeader && (
         <header className="no-print flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-border py-5">
           <span className="brand whitespace-nowrap text-sm font-medium tracking-wide text-foreground">
@@ -200,7 +202,7 @@ export function App() {
           <ProgressBar />
         </div>
       )}
-      <main className="flex-1 pt-2">{view}</main>
+      <main className={showHeader ? 'flex-1 pt-2' : 'pt-2'}>{view}</main>
       <footer className="no-print mt-14 text-center text-xs text-muted-foreground/70">
         {t('ui.disclaimer', locale)}
       </footer>
